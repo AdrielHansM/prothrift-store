@@ -1,6 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User, signOut, updateProfile } from "firebase/auth";
 import firebaseApp from "./firebaseApp";
-
+import { createUser, getUser } from "./firestoreService";
 const auth = getAuth(firebaseApp);
 
 onAuthStateChanged(auth, (user) => {
@@ -17,10 +17,15 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export const signUp = async (email: string, password: string) => createUserWithEmailAndPassword(auth, email, password)
+export const signUp = async (firstName: string, lastName: string, email: string, contact : number, password: string) => createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed up
-    // ...
+    createUser(
+      userCredential.user.uid,
+      firstName,
+      lastName,
+      email,
+      contact
+    )
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -32,8 +37,8 @@ export const signUp = async (email: string, password: string) => createUserWithE
 export const signIn = async (email: string, password: string) => signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in
-    const user = userCredential.user;
-    localStorage.setItem('u', JSON.stringify(user))
+    const user = getUser(userCredential.user.uid);
+    localStorage.setItem('user', JSON.stringify(user))
   })
   
   .catch((error) => {

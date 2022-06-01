@@ -1,8 +1,8 @@
 interface User {
-  name: string;
-  kind: string;
-  age?: number;
-  description?: string;
+  firstName: string;
+  lastName: string;
+  contactNumber: number;
+  email: string;
 }
 
 export default User;

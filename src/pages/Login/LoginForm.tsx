@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signIn, signUp } from '../../services/Firebase/authentication';
+import { signIn } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
 interface LoginData {
   email: string;
@@ -34,13 +34,9 @@ export default function LoginForm(props: LoginFormProps) {
 
   const handleSubmit = (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
-    if (!!props.register) {
-      signUp(formData.email, formData.password)
-        .then(() => navigate("/login", { state: { register: true } }));
-    } else {
-      signIn(formData.email, formData.password)
-        .then(() => navigate("/profile"));
-    }
+    signIn(formData.email, formData.password)
+      .then(() => navigate("/shop"));
+    
   }
   
   return (
@@ -56,7 +52,7 @@ export default function LoginForm(props: LoginFormProps) {
           <Form.Label>Password</Form.Label>
           <Form.Control type={'password'} name="password" placeholder="Password..." value={formData.password} onChange={handleChange} />
         </Form.Group>
-        <Button type='submit' className="w-100 mt-4">{props.register ? 'Register' : 'Login' }</Button>
+        <Button type='submit' className="w-100 mt-4 mb-3">{props.register ? 'Register' : 'Login' }</Button>
       </Form>
     </>
   )

@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProfileScreen from './pages/User/Profile';
 import Shop from './pages/shop/Shop';
+import Register from './pages/Register/Register';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +19,7 @@ root.render(
         <Route path={'/'} element={<App />} >
           <Route index element={<LandingPage />} />
           <Route path={'login'} element={<Login />} />
-          <Route path={'register'} element={<Login register />} />
+          <Route path={'register'} element={<Register />} />
           <Route path={'profile'} element={<ProfileScreen />} />
           <Route path={'shop'} element={<Shop />} />
         </Route>
