@@ -4,7 +4,7 @@ import Navigation from '../Components/Navigation';
 import { getUser } from '../../services/Firebase/firestoreService';
 import { getLoggedUser } from '../../services/Firebase/authService';
 export default function Profile() {
-  const [loading, setLoading] = useState(false);
+ /* const [loading, setLoading] = useState(false);
   var loggedUser = getLoggedUser(); 
   setLoading(true);
   setTimeout("", 4000)
@@ -13,13 +13,14 @@ export default function Profile() {
   userDetails.push(getUser(loggedUser ? loggedUser.uid : ''));
   
 
-  console.log(userDetails)
+  console.log(userDetails)*/
   return (
     <>
     <Navigation />
     <div>
       <h1>Users</h1>
-      <p> 
+      <p>
+         
       </p>
     </div>
     </>

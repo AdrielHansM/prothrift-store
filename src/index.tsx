@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Profile from './pages/User/Profile';
-import Shop from './pages/Shop/Shop';
+import Shop from './pages/shop/Shop';
 import Register from './pages/Register/Register';
 import About from './pages/About/About';
 import Chat from './pages/Chat/Chat';
