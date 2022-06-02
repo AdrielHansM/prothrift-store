@@ -1,19 +1,15 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User, signOut, updateProfile } from "firebase/auth";
-import firebaseApp from "./firebaseApp";
+import { app } from "./firebaseApp";
 import { createUser, getUser } from "./firestoreService";
-const auth = getAuth(firebaseApp);
+
+//Authentication
+const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    // TODO review if all this information is needed
-    localStorage.setItem('u', JSON.stringify(user));
-    // ...
+    localStorage.setItem('user', JSON.stringify(user));
   } else {
-    // User is signed out
-    localStorage.removeItem('u');
-    // ...
+    localStorage.removeItem('user');
   }
 });
 
@@ -35,12 +31,9 @@ export const signUp = async (firstName: string, lastName: string, email: string,
   });
 
 export const signIn = async (email: string, password: string) => signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = getUser(userCredential.user.uid);
-    localStorage.setItem('user', JSON.stringify(user))
+  .then((userCredential) =>  {
+
   })
-  
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;

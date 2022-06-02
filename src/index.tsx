@@ -5,9 +5,11 @@ import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import LandingPage from './pages/LandingPage/LandingPage';
-import ProfileScreen from './pages/User/Profile';
-import Shop from './pages/shop/Shop';
+import Profile from './pages/User/Profile';
+import Shop from './pages/Shop/Shop';
 import Register from './pages/Register/Register';
+import About from './pages/About/About';
+import Chat from './pages/Chat/Chat';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,8 +22,10 @@ root.render(
           <Route index element={<LandingPage />} />
           <Route path={'login'} element={<Login />} />
           <Route path={'register'} element={<Register />} />
-          <Route path={'profile'} element={<ProfileScreen />} />
           <Route path={'shop'} element={<Shop />} />
+          <Route path={'about'} element={<About />} />
+          <Route path={'chat'} element={<Chat />} />
+          <Route path={'profile'} element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>

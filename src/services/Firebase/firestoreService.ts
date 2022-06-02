@@ -1,9 +1,23 @@
-import {getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, setDoc, updateDoc, doc, serverTimestamp, where, } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  doc,
+  getDoc,
+  query,
+  where,
+  getFirestore,
+  onSnapshot
+} from "firebase/firestore";
+import { useState } from "react";
+import { db } from "./firebaseApp";
 
-import {getStorage, ref, uploadBytesResumable, getDownloadURL,} from 'firebase/storage';
 
 export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number) => {
-  await addDoc(collection(getFirestore(), 'users'), { 
+  await addDoc(collection(db, 'users'), { 
       userId: userId,
       firstName: firstName,
       lastName: lastName,
@@ -20,5 +34,19 @@ export const createUser = async(userId: string, firstName: string, lastName: str
 }
 
 export const getUser = async(userId: string) => {
-  const user = await query(collection(getFirestore(), 'users'), where('userId', '==' ,userId));
+    const userRef = collection(db, 'users')
+    const q = query(userRef, where('userId', '==', userId))
+    const userDocs: any[] = [];
+
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        userDocs.push({...doc.data(), key: doc.id})
+      })
+    })
+
+
+    return userDocs[0]
+    
+
+    
 }

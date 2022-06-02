@@ -1,29 +1,27 @@
 import React, { ChangeEvent, useState, useEffect } from 'react'
-import { UserInfo } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import Navigation from '../Components/Navigation';
+import { getUser } from '../../services/Firebase/firestoreService';
+import { getLoggedUser } from '../../services/Firebase/authService';
+export default function Profile() {
+  const [loading, setLoading] = useState(false);
+  var loggedUser = getLoggedUser(); 
+  setLoading(true);
+  setTimeout("", 4000)
+  setLoading(false);
+  var userDetails: any[] = []
+  userDetails.push(getUser(loggedUser ? loggedUser.uid : ''));
+  
 
-function BasicUserInfo() {
-
-
-  //Verify Account implementation
-  const [user, setItems] = useState([]);
-
-  useEffect(() => {
-    // @ts-ignore
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-    setItems(user);
-    }
-  }, []);
-
+  console.log(userDetails)
   return (
+    <>
+    <Navigation />
     <div>
       <h1>Users</h1>
-      <p>
-        { user }
+      <p> 
       </p>
     </div>
+    </>
   )
 }
-
-export default BasicUserInfo
