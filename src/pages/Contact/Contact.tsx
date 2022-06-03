@@ -5,7 +5,7 @@ import { getUser } from '../../services/Firebase/firestoreService';
 import { getLoggedUser } from '../../services/Firebase/authService';
 
 
-export default function Profile() {
+export default function Contact() {
  /* const [loading, setLoading] = useState(false);
   var loggedUser = getLoggedUser(); 
   setLoading(true);
@@ -20,9 +20,9 @@ export default function Profile() {
     <>
     <Navigation />
     <div>
-      <h1>Users</h1>
+      <h1>Contact Us</h1>
       <p>
-         Lorem ipsum
+         
       </p>
     </div>
     </>

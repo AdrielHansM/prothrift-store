@@ -1,6 +1,6 @@
 .NavbarItems{
     background: linear-gradient(90deg, rgb(39, 61, 122) 0%, rgb(67, 102, 195) 100%);
-    height: 80px;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +28,7 @@
     width: 70vw;
     justify-content: end;
     margin-right: 2rem;
+    margin-top: 15px;
 }
 
 .nav-links{
@@ -46,15 +47,41 @@
     color: #fff;
 }
 
-.nav-links-mobile1{
-    display: none;
-}
-.nav-links-mobile2{
+.menu-icon{
     display: none;
 }
 
-.menu-icon{
-    display: none;
+.btnLogin{
+    display: block;
+    text-align: center;
+    padding: 9px 20px;
+    margin-right: 1rem;
+    border-radius: 4px;
+    background: #4ad9e4;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btnSign{
+    display: block;
+    text-align: center;
+    padding: 9px 20px;
+    margin-right: 1rem;
+    border-radius: 4px;
+    background: #4ad9e4;
+    text-decoration: none;
+    color: #fff;
+}
+
+.btnLogin:hover{
+    background-color: #fff;
+    color: #3a3c9b;
+    transition: 250ms;
+}
+.btnSign:hover{
+    background-color: #fff;
+    color: #6568f4;
+    transition: 250ms;
 }
 
 @media screen and (max-width: 960px) {
@@ -115,45 +142,7 @@
         color: #fff;
         font-size: 2rem;
     }
+    
+    
 
-    .nav-links-mobile1{
-        display: block;
-        text-align: center;
-        padding: 20px;
-        margin: auto;
-        border-radius: 4px;
-        width: 50%;
-        background: #4ad9e4;
-        text-decoration: none;
-        color: #fff;
-        font-size: 1.5rem;
-    }
-
-    .nav-links-mobile2{
-        display: block;
-        text-align: center;
-        padding: 20px;
-        margin: 1rem auto;
-        border-radius: 4px;
-        width: 50%;
-        background: #4ad9e4;
-        text-decoration: none;
-        color: #fff;
-        font-size: 1.5rem;
-    }
-
-    .nav-links-mobile1:hover{
-        background-color: #fff;
-        color: #6568f4;
-        transition: 250ms;
-    }
-    .nav-links-mobile2:hover{
-        background-color: #fff;
-        color: #6568f4;
-        transition: 250ms;
-    }
-
-    Button{
-        display: none;
-    }
 }
