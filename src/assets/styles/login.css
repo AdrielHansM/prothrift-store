@@ -1,7 +1,40 @@
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 1rem -1rem;
+.mainCon{
+  width: 550px;
+  margin: 25px auto;
+  padding: 50px;
+  background-color: rgb(238, 215, 215);
+  border-radius: 10px;
+}
+
+.loginCon{
+  width: auto;
+  margin: 25px auto;
+}
+
+h1{
+  text-align: center;
+}
+
+.email{
+  margin-bottom: 1rem;
+}
+
+.btnlog{
+  margin: 30px 10rem;
+  padding: 10px 25px;
+}
+
+/*Register css*/
+.mainregCon{
+  width: 40rem;
+  margin: 25px auto;
+  padding: 50px;
+  background-color: rgb(238, 215, 215);
+  border-radius: 10px;
+}
+
+.regCon{
+  width: auto;
+  margin: 25px auto;
 }
 

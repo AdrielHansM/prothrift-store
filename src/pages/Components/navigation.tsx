@@ -30,6 +30,11 @@ export default function Navigation() {
           <Button className='btnLogin' onClick={() => navigate('/login')}>Login</Button>
           <Button className='btnSign' onClick={() => navigate('/register')}>Signup</Button>
       </nav>
+      
+      <article className='bckimage'>
+          <img src='/images/backimage.jpg' alt="background" className='backimage'/>
+          <p className='bcktext'>Sustainability is the Key</p>
+      </article>
     </>  
   )
 }

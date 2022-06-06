@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import "bootstrap/dist/css/bootstrap.min.css"
 import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Components from './pages/Components/Navigation';
 import Login from './pages/Login/Login';
 import LandingPage from './pages/LandingPage/LandingPage';
 import Profile from './pages/User/Profile';

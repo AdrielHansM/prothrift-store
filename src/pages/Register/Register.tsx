@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import RegisterForm from './RegisterForm'
 import { Card, Container } from 'react-bootstrap'
+import '../../assets/styles/login.css';
+
 
 interface LoginProps {
   register?: boolean;
@@ -10,7 +12,7 @@ interface LoginProps {
 export default function Login(props: LoginProps) {
   return (
     <>
-      <Container className="w-50 mt-5 mb-5">
+      <Container className="mainregCon">
         <Card>
           <Card.Body>
           <RegisterForm register={!!props.register}/>

@@ -2,6 +2,9 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signUp } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
+import '../../assets/styles/login.css';
+
+
 interface RegisterData {
   email: string;
   password: string;
@@ -46,7 +49,7 @@ export default function RegisterForm(props: LoginFormProps) {
   
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="regCon">
         <h1>Register</h1>
         <Form.Group className='mt-3'>
           <Form.Label>First Name</Form.Label>
@@ -73,7 +76,7 @@ export default function RegisterForm(props: LoginFormProps) {
           <Form.Control type={'text'} name="contactNumber" placeholder="Contact..." value={formData.contactNumber == 0 ? "" : formData.contactNumber} onChange={handleChange} />
         </Form.Group>
 
-        <Button type='submit' className="w-100 mt-4 mb-3">{props.register ? 'Register' : 'Login' }</Button>
+        <Button type='submit' className="w-100 mt-4 mb-3">{props.register ? 'Register' : 'Signup' }</Button>
       </Form>
     </>
   )
