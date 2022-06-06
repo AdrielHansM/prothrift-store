@@ -8,7 +8,7 @@ function LandingPage() {
   return (
     <div className='landing-page'>
       <h1>Welcome to ProThrift</h1>
-      <button onClick={() => navigate('/nav')}>
+      <button onClick={() => navigate('/home')}>
         Begin
       </button>
     </div>
