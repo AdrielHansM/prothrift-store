@@ -13,6 +13,7 @@ import About from './pages/About/About';
 import Chat from './pages/Chat/Chat';
 import Contact from './pages/Contact/Contact';
 import Body from './pages/Components/Body';
+import Feedback from './pages/Feedback/Feedback';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,6 +32,7 @@ root.render(
           <Route path={'chat'} element={<Chat />} />
           <Route path={'profile'} element={<Profile />} />
           <Route path={'contact'} element={<Contact />} />
+          <Route path={'feedback'} element={<Feedback />} />
         </Route>
       </Routes>
     </BrowserRouter>

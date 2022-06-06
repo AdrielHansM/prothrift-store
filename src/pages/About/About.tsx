@@ -19,13 +19,15 @@ export default function About() {
         </div>
     </div>
     <div className="row"> 
-      <div className='teamimage'>
+      <div className='teamimage1'>
         <img src='/images/profile.png' alt="teamimage1" className='teamimg'/>
+        <p>Name1</p>
       </div>
-      <div className='teamimage'>
+      <div className='teamimage2'>
         <img src='/images/profile.png' alt="teamimage2" className='teamimg'/>
+        <p>Name2</p>
       </div>
-
+      
     </div>
     </body>
     </>

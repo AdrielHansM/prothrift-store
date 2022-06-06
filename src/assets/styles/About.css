@@ -15,18 +15,34 @@ body{
 }
 
 .teamimg {
-    position: static;
-    width: 5rem;
-    height: 5rem;
-    margin: 50px 30rem;
+    width: 100px;
+    height: 100px;
+    margin: 5px 100px;
 }
 
-.row {
-  display: flex;
-}
 
-.teamimage {
-    float: left;
+.teamimage1 {
     width: 20%;
-    padding: 15px 6rem;
+    padding: 10px 10px;
+    margin-left: 25rem;
+    float: left;
+}
+
+.teamimage2 {
+    width: 20%;
+    padding: 10px 10px;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    float: left;
+}
+
+.teamimage1 p{
+    text-align: center;
+    margin: 5px 100px;
+    padding: 0px 15px;
+}
+.teamimage2 p{
+    text-align: center;
+    margin: 5px 100px;
+    padding: 0px 15px;
 }

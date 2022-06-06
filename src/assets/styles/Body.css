@@ -1,3 +1,7 @@
+body{
+    background: rgb(223, 239, 241);
+}
+
 .bckimage {
     position: static;
     overflow: hidden;
@@ -21,21 +25,22 @@
     margin: auto;
 }
 
+.text1Con{
+    margin-top: 10rem;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
 .text1{
     font-size: 50px;
-    padding-left: 30%;
-    margin-top: 50px;
-    margin-bottom: 50px;
 }
 
 .numofpounds p{
     font-size: 100px;
-    text-align: center;
     border-style: solid;
-    padding: 5px 20px;
-    margin-left: 20rem;
-    margin-right: 20rem;
     border-radius: 9px;
+    margin-right: 20rem;
+    margin-left: 20rem;
 }
 
 .text2{
@@ -45,11 +50,80 @@
     margin-left: 10rem;
     margin-right: 10rem;
     padding: 50px 20px;
+    margin-top: 10rem;
     border-radius: 10px;
     background-color: rgb(200, 213, 217);
 }
 
-h1 textTitle{
+.textTitle{
     font-size: 50px;
     margin-bottom: 50px;
+}
+
+.testimonials{
+    text-align: center;
+    padding: 10rem;
+}
+
+.testimonials p{
+    font-size: 50px;
+}
+.testimonials h3{
+    margin-top: 50px;
+}
+
+.testimony{
+    margin-top: 50px;
+}
+
+.testimony span{
+    float: inline-end;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.feedback{
+    text-align: center;
+}
+
+.fdback{
+    font-size: 50px;
+}
+
+.fdBtn {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 20px;
+    margin: 20px 15px;
+}
+
+.fdBtn:hover {
+    background: rgba(185, 188, 189, 0.766);
+}
+
+.feedbck{
+    margin: 70px 25%;
+    padding: 20px 5%;
+}
+
+.email{
+    padding: 5px 10px;
+}
+
+.name{
+    padding: 5px 10px;
+}
+
+.msg{
+    padding: 20px 10px;
+}
+
+.msgcontent{
+    padding: 5px 5px 400px 5px;
+}
+
+.btnsubmit{
+    float: right;
+    margin: 5px 15px;
+    padding: 10px 25px;
 }
