@@ -14,6 +14,8 @@ import Chat from './pages/Chat/Chat';
 import Contact from './pages/Contact/Contact';
 import Body from './pages/Components/Body';
 import Feedback from './pages/Feedback/Feedback';
+import FirstFeat from './pages/Components/FirstFeat';
+import SecFeat from './pages/Components/SecFeat';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -27,6 +29,8 @@ root.render(
           <Route path={'home'} element={<Body />} />
           <Route path={'login'} element={<Login />} />
           <Route path={'register'} element={<Register />} />
+          <Route path={'firstfeat'} element={<FirstFeat />} />
+          <Route path={'secfeat'} element={<SecFeat />} />
           <Route path={'shop'} element={<Shop />} />
           <Route path={'about'} element={<About />} />
           <Route path={'chat'} element={<Chat />} />

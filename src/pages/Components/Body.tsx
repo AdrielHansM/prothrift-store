@@ -1,7 +1,7 @@
 import Navigation from "./Navigation"
 import '../../assets/styles/Body.css';
 import { Link } from 'react-router-dom'
-
+import { Button } from 'react-bootstrap'
 
 export default function Body() {
 
@@ -45,7 +45,7 @@ export default function Body() {
         </body>
         <footer className="feedback">
             <h1 className="fdback">Feedback!</h1>
-            <Link to={'/feedback'}><button className="fdBtn">Send us a message</button></Link>
+            <Link to={'/firstfeat'}><Button className="fdBtn">Send us a message</Button></Link>
         </footer>
         <hr/>
         </>

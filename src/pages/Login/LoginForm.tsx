@@ -37,7 +37,7 @@ export default function LoginForm(props: LoginFormProps) {
   const handleSubmit = (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
     signIn(formData.email, formData.password)
-      .then(() => navigate("/shop"));
+      .then(() => navigate("/firstfeat"));
     
   }
   
