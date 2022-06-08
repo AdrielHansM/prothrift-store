@@ -11,11 +11,18 @@ export default function ProfileBody(){
         <ProfileNav/>
 
             <div className="hero-section" style={{ backgroundImage: "url(/images/header.png)" }}>
-            <div className="content">
-            <img src="/images/ProThrift-logo.png" className="logo" alt=""/>
-            <p className="sub-heading">Best fashion collection of all time</p>
+                <div className="content">
+                    <img src="/images/ProThrift-logo.png" className="logo" alt=""/>
+                    <p className="sub-heading">Best fashion collection of all time</p>
+                </div>
             </div>
-            </div>
+            <br/>
+
+            <section>
+                <div>
+                    <h2>This is if possible to make the daily login points to collect</h2>
+                </div>
+            </section>
 
             <section className="product">
             <h2 className="product-category">best selling</h2>
@@ -26,7 +33,6 @@ export default function ProfileBody(){
             <div className="product-container">
             <div className="product-card">
                 <div className="product-image">
-                    <span className="discount-tag">50% off</span>
                     <img src="/images/card1.jpg" className="product-thumb" alt=""/>
                     <button className="card-btn">add to whislist</button>
                 </div>
@@ -86,6 +92,10 @@ export default function ProfileBody(){
             </div>
             </div>
             </section>
+            <br/><hr/>
+            <footer>
+                <h1>This is Footer</h1>
+            </footer>
         </>
     )
 }

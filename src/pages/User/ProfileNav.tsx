@@ -20,6 +20,7 @@ export default function Profile() {
       <nav className="navbar">
         <div className="nav">
           <img src="/images/ProThrift-Logo.png" className="brand-logo" alt="" onClick={() => navigate('/profilebody')}/>
+            
             <div className="nav-items">
               <div className="search">
                 <input type="text" className="search-box" placeholder="search brand, product"/>

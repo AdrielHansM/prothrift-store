@@ -1,12 +1,13 @@
 .navbar{
-    background: rgb(208, 236, 239);
+    background: rgb(208, 236, 239); 
 }
 
 .brand-logo{
-    height: 80px;
+    height: 90px;
     width: auto;
-    margin-left: 50px;
+    margin-left: 80px;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .nav{
@@ -15,12 +16,11 @@
 
 .nav-items{
     grid-template-columns: repeat(5, auto);
-    grid-gap: 15px;
+    grid-gap: 10px;
     display: grid;
     width: 60vw;
     justify-content: end;
-    margin-right: 2rem;
-    margin-top: 15px;
+    margin-top: 40px;
 }
 
 .search{
@@ -66,22 +66,24 @@
     width: 30px;
 }
 
+
 /* This is User Navbar for Home*/
 .links-container{
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
     list-style: none;
     border-top: 1px solid #d1d1d1;
+    margin-left: 34%;
 }
 
 .link{
     text-transform: capitalize;
     padding: 0 10px;
-    margin: 0 10px;
+    margin: 10px 5px;
     text-decoration: none;
     color: #121111;
     opacity: 0.5;
     transition: .5s;
+    cursor: pointer;
 }
 
 .link:hover{
@@ -90,7 +92,9 @@
 }
 
 .icon-space{
-    margin-left: 50px;
+    padding: 10px 5vw;
+    display: flex;
+    gap: 20px;
 }
 
 .medals-icon{
