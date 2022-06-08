@@ -45,7 +45,7 @@ export default function Body() {
         </body>
         <footer className="feedback">
             <h1 className="fdback">Feedback!</h1>
-            <Link to={'/firstfeat'}><Button className="fdBtn">Send us a message</Button></Link>
+            <Link to={'/feedback'}><Button className="fdBtn">Click here</Button></Link>
         </footer>
         <hr/>
         </>

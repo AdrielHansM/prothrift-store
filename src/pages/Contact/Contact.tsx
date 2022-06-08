@@ -4,6 +4,7 @@ import Navigation from '../Components/Navigation';
 import { getUser } from '../../services/Firebase/firestoreService';
 import { getLoggedUser } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
+import '../../assets/styles/Body.css';
 
 
 export default function Contact() {
@@ -23,7 +24,7 @@ export default function Contact() {
     <>
     <Navigation />
     <Form className="feedbck">
-        <h4>Get in touch</h4>
+        <p>Get in touch</p>
         <br/>
         <h2>Send us a message!</h2>
 
@@ -44,7 +45,7 @@ export default function Contact() {
 
         <Form.Group className="msg">
           <Form.Label>Message</Form.Label>
-          <Form.Control type={'message'} name="message" className="msgcontent"/>
+          <Form.Control type={'message'} name="message" placeholder='Type here' className="msgcontent"/>
         </Form.Group>
 
         <Button type='submit' className="btnsubmit">Submit</Button>
