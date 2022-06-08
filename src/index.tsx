@@ -6,8 +6,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from './pages/Login/Login';
 import LandingPage from './pages/LandingPage/LandingPage';
-import Profile from './pages/User/Profile';
-import Shop from './pages/shop/Shop';
+import Women from './pages/Shop/Women';
+import Men from './pages/Shop/Men';
+import Kids from './pages/Shop/Kids';
+import Accessories from './pages/Shop/Accessories';
 import Register from './pages/Register/Register';
 import About from './pages/About/About';
 import Chat from './pages/Chat/Chat';
@@ -16,6 +18,7 @@ import Body from './pages/Components/Body';
 import Feedback from './pages/Feedback/Feedback';
 import FirstFeat from './pages/Components/FirstFeat';
 import SecFeat from './pages/Components/SecFeat';
+import ProfileBody from './pages/User/ProfileBody';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,12 +34,15 @@ root.render(
           <Route path={'register'} element={<Register />} />
           <Route path={'firstfeat'} element={<FirstFeat />} />
           <Route path={'secfeat'} element={<SecFeat />} />
-          <Route path={'shop'} element={<Shop />} />
           <Route path={'about'} element={<About />} />
           <Route path={'chat'} element={<Chat />} />
-          <Route path={'profile'} element={<Profile />} />
+          <Route path={'profilebody'} element={<ProfileBody />} />
           <Route path={'contact'} element={<Contact />} />
           <Route path={'feedback'} element={<Feedback />} />
+          <Route path={'shop-women'} element={<Women />} />
+          <Route path={'shop-men'} element={<Men />} />
+          <Route path={'shop-kids'} element={<Kids />} />
+          <Route path={'shop-access'} element={<Accessories />} />
         </Route>
       </Routes>
     </BrowserRouter>

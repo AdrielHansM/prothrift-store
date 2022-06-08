@@ -10,7 +10,7 @@ export default function SecFeat() {
                 <h1>Collect your first Points</h1>
                 <h2>10</h2>
             </div>
-            <Link to={'/profile'}><Button className="feat2Btn">Get</Button></Link>
+            <Link to={'/profilebody'}><Button className="feat2Btn">Get</Button></Link>
             <br/>
             <div className='note-container'>
                 <h4>Note:</h4>

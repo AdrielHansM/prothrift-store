@@ -84,7 +84,7 @@
     transition: 250ms;
 }
 
-@media screen and (max-width: 960px) {
+/*@media screen and (max-width: 960px) {
     .NavbarItems{
         position: relative;
     }
@@ -142,4 +142,4 @@
         color: #fff;
         font-size: 2rem;
     }
-}
+}*/
