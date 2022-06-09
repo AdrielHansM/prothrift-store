@@ -36,7 +36,7 @@ export default function ProfileBody(){
             <div className="product-card">
                 <div className="product-image">
                     <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-                    <button className="card-btn">add to whislist</button>
+                    <button className="card-btn">add to cart</button>
                 </div>
                 <div className="product-info">
                     <h2 className="product-brand">shorts</h2>
@@ -49,7 +49,7 @@ export default function ProfileBody(){
                 <div className="product-image">
                     <span className="discount-tag">50% off</span>
                     <img src="/images/card2.jpg" className="product-thumb" alt=""/>
-                    <button className="card-btn">add to whislist</button>
+                    <button className="card-btn">add to cart</button>
                 </div>
                 <div className="product-info">
                     <h2 className="product-brand">jacket</h2>
@@ -62,7 +62,7 @@ export default function ProfileBody(){
                 <div className="product-image">
                     <span className="discount-tag">50% off</span>
                     <img src="/images/card5.png" className="product-thumb" alt=""/>
-                    <button className="card-btn">add to whislist</button>
+                    <button className="card-btn">add to cart</button>
                 </div>
                 <div className="product-info">
                     <h2 className="product-brand">brand</h2>
@@ -75,7 +75,7 @@ export default function ProfileBody(){
                 <div className="product-image">
                     <span className="discount-tag">50% off</span>
                     <img src="/images/card11.png" className="product-thumb" alt=""/>
-                    <button className="card-btn">add to whislist</button>
+                    <button className="card-btn">add to cart</button>
                 </div>
                 <div className="product-info">
                     <h2 className="product-brand">shoe brand</h2>
@@ -88,7 +88,7 @@ export default function ProfileBody(){
                 <div className="product-image">
                     <span className="discount-tag">50% off</span>
                     <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                    <button className="card-btn">add to whislist</button>
+                    <button className="card-btn">add to cart</button>
                 </div>
                 <div className="product-info">
                     <h2 className="product-brand">air jordan</h2>
@@ -106,7 +106,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>
@@ -119,7 +119,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>
@@ -132,7 +132,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>
@@ -148,7 +148,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>
@@ -161,7 +161,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>
@@ -174,7 +174,7 @@ export default function ProfileBody(){
                             <div className="product-image">
                                 <span className="discount-tag">50% off</span>
                                 <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to whislist</button>
+                                <button className="card-btn">add to cart</button>
                             </div>
                             <div className="product-info">
                                 <h2 className="product-brand">air jordan</h2>

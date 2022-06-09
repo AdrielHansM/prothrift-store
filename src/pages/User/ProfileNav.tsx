@@ -15,6 +15,7 @@ export default function Profile() {
   
 
   console.log(userDetails)*/
+
   return (
     <>
       <nav className="navbar">
