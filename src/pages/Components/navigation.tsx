@@ -11,10 +11,10 @@ export default function Navigation() {
   return (
     <>
       <nav className="NavbarItems">
-        <h1 className="navbar-logo" onClick={() => navigate('/home')}>ProThrift<i className='fab fa-react'></i></h1>
-          <div className="menu-icon">
-            <i className={'fas fa-times'}></i>
-          </div>
+        <div className="navbar-logo" onClick={() => navigate('/home')}>
+          <img src="/images/ProThrift-Logo.png" className="brand-logo" alt=""/>
+          <h3 className='logo-name'>ProThrift</h3>
+        </div>
         <ul className={'nav-menu active'}>
           {MenuItems.map((item, index) => {
             

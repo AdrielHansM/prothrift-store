@@ -102,3 +102,8 @@
     opacity: 0.5;
     text-decoration: line-through;
 }
+
+.liked-heart{
+    height: 25px;
+    width: 25px;
+}

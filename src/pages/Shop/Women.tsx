@@ -29,7 +29,7 @@ export default function Women() {
     <div className="product-container1">
       <div className="product-card">
           <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
+              <img src="/images/card4.png" className="product-thumb" alt=""/>
               <button className="card-btn">add to whislist</button>
           </div>
           <div className="product-info">
@@ -40,7 +40,7 @@ export default function Women() {
       </div>
       <div className="product-card">
           <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
+              <img src="/images/card4.png" className="product-thumb" alt=""/>
               <button className="card-btn">add to whislist</button>
           </div>
           <div className="product-info">
@@ -51,7 +51,7 @@ export default function Women() {
       </div>   
       <div className="product-card">
           <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
+              <img src="/images/card4.png" className="product-thumb" alt=""/>
               <button className="card-btn">add to whislist</button>
           </div>
           <div className="product-info">
@@ -96,6 +96,11 @@ export default function Women() {
           </div>
       </div>                    
     </div>
+
+    <br/>
+    <footer className='footer'>
+        <h1>This is Footer</h1>
+    </footer>
     </>
   )
 }

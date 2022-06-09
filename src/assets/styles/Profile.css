@@ -1,26 +1,44 @@
 .navbar{
-    background: rgb(208, 236, 239); 
-}
-
-.brand-logo{
-    height: 90px;
-    width: auto;
-    margin-left: 80px;
-    border-radius: 50px;
-    cursor: pointer;
+    background: linear-gradient(90deg, rgb(39, 61, 122) 0%, rgb(67, 102, 195) 100%);
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
 }
 
 .nav{
-    padding: 10px 10vw;
+    flex-wrap: wrap;
 }
 
+.logo-brand{
+    display: inline-flex;
+    gap: 10px;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+
+.brand-logo{
+    height: 50px;
+    width: auto;
+    margin-left: 80px;
+    border-radius: 50px;
+}
+
+.logo-name{
+    padding: 10px 0px;
+}
+
+
 .nav-items{
+    display: grid;
     grid-template-columns: repeat(5, auto);
     grid-gap: 10px;
-    display: grid;
-    width: 60vw;
+    list-style: none;
+    text-align: center;
+    width: 70vw;
     justify-content: end;
-    margin-top: 40px;
+    margin-right: 2rem;
 }
 
 .search{
@@ -30,40 +48,44 @@
 .search-box{
     width: 80%;
     height: 40px;
-    padding: 10px;
+    padding: 15px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    border: 1px solid #868585;
+    border: 1px solid #ededed;
     text-transform: capitalize;
     background: none;
-    color: #424040;
+    color: #e6e6e6;
     outline: none;
 }
 
 .search-btn{
     width: 20%;
     height: 40px;
-    padding: 10px 20px;
+    padding: 10px;
     border: none;
     outline: none;
     cursor: pointer;
-    background: #383838;
-    color: #fff;
+    background-color: rgb(41, 200, 208);
+    color: rgb(255, 255, 255);
     text-transform: capitalize;
-    font-size: 15px;
+    font-size: 16px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .search-box::placeholder{
-    color: #646464;
+    color: #eaeaea;
 }
 
 .user-logo{
     width: 30px;
+    margin-top: 5px;
+    cursor: pointer;
 }
 .cart-logo{
     width: 30px;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 
@@ -71,18 +93,19 @@
 .links-container{
     display: inline-flex;
     list-style: none;
-    border-top: 1px solid #d1d1d1;
-    margin-left: 34%;
+    margin-left: 30%;
+    border-bottom: 2px solid #d3d3d3;
 }
 
 .link{
     text-transform: capitalize;
     padding: 0 10px;
-    margin: 10px 5px;
+    margin: 30px 5px;
     text-decoration: none;
     color: #121111;
     opacity: 0.5;
     transition: .5s;
+    font-size: 18px;
     cursor: pointer;
 }
 
@@ -92,24 +115,27 @@
 }
 
 .icon-space{
-    padding: 10px 5vw;
-    display: flex;
+    padding: 20px 5vw;
+    display: inline-flex;
     gap: 20px;
 }
 
 .medals-icon{
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 .heart-icon{
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 .bell-icon{
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 /* User Contents */
@@ -141,15 +167,28 @@
     font-weight: 90;
 }
 
+.message-to-user{
+    text-align: center;
+    padding: 10% 100px;
+    font-size: 30px;
+}
+
+.message-to-user h2{
+    font-size: 60px;
+}
+
+.message-to-user p{
+    padding-top: 50px;
+}
 
 /*Product section*/
 .product{
     position: relative;
     overflow: hidden;
-    padding: 20px 0;
+    padding: 50px 0;
 }
 
-.product-category{
+.product-category1{
     padding: 30px 10vw;
     font-size: 30px;
     font-weight: 500;
@@ -160,8 +199,28 @@
 .product-container{
     padding: 0 10vw;
     display: flex;
-    overflow-x: auto;
     scroll-behavior: smooth;
+}
+
+.product-container2{
+    padding: 1% 15vw;
+    display: inline-flex;
+    gap: 100px;
+    margin-bottom: 6%;
+}
+
+.product-category2{
+    padding: 10% 10vw;
+    font-size: 50px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.product-container3{
+    padding: 1% 15vw;
+    display: inline-flex;
+    gap: 100px;
+    margin-bottom: 15%;
 }
 
 .product-container::-webkit-scrollbar{
@@ -286,4 +345,13 @@
 
 .pre-btn:hover img, .nxt-btn:hover img{
     opacity: 1;
+}
+
+.footer{
+    background: linear-gradient(90deg, rgb(39, 61, 122) 0%, rgb(67, 102, 195) 100%);
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 100px ;
 }

@@ -18,33 +18,35 @@ export default function Profile() {
   return (
     <>
       <nav className="navbar">
-        <div className="nav">
-          <img src="/images/ProThrift-Logo.png" className="brand-logo" alt="" onClick={() => navigate('/profilebody')}/>
-            
+
+          <div className='logo-brand' onClick={() => navigate('/profilebody')}>
+            <img src="/images/ProThrift-Logo.png" className="brand-logo" alt=""/>
+            <h3 className='logo-name'>ProThrift</h3>
+          </div>
             <div className="nav-items">
               <div className="search">
                 <input type="text" className="search-box" placeholder="search brand, product"/>
                 <button className="search-btn">search</button>
               </div>
                 <img src="/images/user.png" className="user-logo" alt=""/>
-                <img src="/images/cart-logo.png" className="cart-logo" alt=""/>
+                <img src="/images/cart.png" className="cart-logo" alt=""/>
             </div> 
-        </div>
+        
       </nav>
       <ul className="links-container">
-
+      
           <li className="link" onClick={() => navigate('/profilebody')}>home</li>
           <li className="link" onClick={() => navigate('/shop-women')}>women</li>
           <li className="link" onClick={() => navigate('/shop-men')}>men</li>
           <li className="link" onClick={() => navigate('/shop-kids')}>kids</li>
           <li className="link" onClick={() => navigate('/shop-access')}>accessories</li>
           <div className="icon-space">
-              <img src='/images/medals.png' className='medals-icon' alt=''/>
-              <img src='/images/heart.png' className='heart-icon' alt=''/>
+              <img src='/images/medals.png' className='medals-icon' alt='' />
+              <img src='/images/heart.png' className='heart-icon' alt='' onClick={() => navigate('/likedproducts')}/>
               <img src='/images/bell.png' className='bell-icon' alt=''/>
           </div>
       </ul>
-
+      
     </>
   )
 }
