@@ -1,11 +1,10 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, User, signOut, updateProfile } from "firebase/auth";
-import { app } from "./firebaseApp";
+import { auth } from "./firebaseApp";
 import { createUser, getUser } from "./firestoreService";
+import UserData from "../../models/User";
 
-//Authentication
-const auth = getAuth(app);
 
-onAuthStateChanged(auth, (user) => {
+
+auth.onAuthStateChanged((user) => {
   if (user) {
     localStorage.setItem('user', JSON.stringify(user));
   } else {
@@ -13,10 +12,12 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export const signUp = async (firstName: string, lastName: string, email: string, contact : number, password: string) => createUserWithEmailAndPassword(auth, email, password)
+export const signUp = async (firstName: string, lastName: string, email: string, contact : number, password: string) => await auth.createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
+    const user = userCredential.user;
     createUser(
-      userCredential.user.uid,
+      //@ts-ignore user.uid,
+      user.uid,
       firstName,
       lastName,
       email,
@@ -30,7 +31,7 @@ export const signUp = async (firstName: string, lastName: string, email: string,
     alert(errorCode + " " + errorMessage)
   });
 
-export const signIn = async (email: string, password: string) => signInWithEmailAndPassword(auth, email, password)
+export const signIn = async (email: string, password: string) => auth.signInWithEmailAndPassword(email, password)
   .then((userCredential) =>  {
 
   })
@@ -42,20 +43,13 @@ export const signIn = async (email: string, password: string) => signInWithEmail
   });
 
 export const signOutUser = async () => {
-  await signOut(auth);
-  window.location.replace('/');
-}
-
-export const updateUser = async (updatedUser: User) => {
-  auth.currentUser &&
-    updateProfile(auth.currentUser, { displayName: updatedUser.displayName, photoURL: updatedUser.photoURL })
-      .then(() => { auth.currentUser?.getIdToken(true) })
-      .catch(error => console.error("update error", error.message))
+  await auth.signOut();
+  //window.location.replace('/');
 }
 
 // UTILS to get current user data:
-export const isUserSignedIn = () => {
-  return !!auth.currentUser;
+export const isUserSignedIn = async () => {
+  return await !!auth.currentUser;
 }
 
 // TODO use a valid assets URL for the placeholder
@@ -67,7 +61,6 @@ export const getUserName = (): string | null => {
   return auth.currentUser?.displayName || "";
 }
 
-export const getLoggedUser = (): User | null => {
-  return auth.currentUser;
+export const getLoggedUser = async () => {
+  return await auth.currentUser;
 }
-

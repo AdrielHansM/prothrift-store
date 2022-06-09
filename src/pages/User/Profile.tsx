@@ -1,24 +1,40 @@
-import React, { ChangeEvent, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Navigation from '../Components/Navigation';
+import UserData from '../../models/User';
 import { getUser } from '../../services/Firebase/firestoreService';
-import { getLoggedUser } from '../../services/Firebase/authService';
-export default function Profile() {
-  const [loading, setLoading] = useState(false);
-  var loggedUser = getLoggedUser(); 
-  setLoading(true);
-  setTimeout("", 4000)
-  setLoading(false);
-  var userDetails: any[] = []
-  userDetails.push(getUser(loggedUser ? loggedUser.uid : ''));
-  
+import { auth } from '../../services/Firebase/firebaseApp';
 
-  console.log(userDetails)
+const initialUser = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  contactNumber: 0,
+  email: "",
+}
+
+export default function Profile() {
+  const [userDetails, setUserDetails] = useState<UserData>(initialUser);
+
+  useEffect(() => {
+    fetchData();
+  })
+  
+  async function fetchData() {
+    const uidIsPresent = auth.currentUser?.uid;
+    if (uidIsPresent) {
+      const user = await getUser(uidIsPresent) as UserData;
+      setUserDetails(user);
+    }
+  }
+
+
   return (
     <>
     <Navigation />
     <div>
       <h1>Users</h1>
+
       <p> 
       </p>
     </div>
