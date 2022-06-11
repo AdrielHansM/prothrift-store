@@ -88,6 +88,21 @@
     cursor: pointer;
 }
 
+.sell-btn{
+    width: 80px;
+    height: 40px;
+    background-color: rgb(41, 200, 208);
+    color: rgb(255, 255, 255);
+    text-transform: capitalize;
+    border: none;
+    border-radius: 5px;
+}
+
+.sell-btn:hover{
+    background-color: #fff;
+    color: #3a3c9b;
+    transition: 250ms;
+}
 
 /* This is User Navbar for Home*/
 .links-container{
@@ -126,9 +141,7 @@
     cursor: pointer;
 }
 
-.heart-icon{
-    width: 30px;
-    height: 30px;
+.fa-heart{
     cursor: pointer;
 }
 

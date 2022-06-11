@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Product from '../../models/Product'
-import ProfileNav from '../User/ProfileNav';
+import ProfileNav from '../User/ProfileNav'
 import '../../assets/styles/Shop.css';
 
 /*const initialProducts = {

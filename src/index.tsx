@@ -20,6 +20,7 @@ import FirstFeat from './pages/Components/FirstFeat';
 import SecFeat from './pages/Components/SecFeat';
 import ProfileBody from './pages/User/ProfileBody';
 import LikedProducts from './pages/Shop/LikedProducts';
+import AddProductForm from './pages/Shop/ProductComponents/AddProductForm';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -45,6 +46,8 @@ root.render(
           <Route path={'shop-kids'} element={<Kids />} />
           <Route path={'shop-access'} element={<Accessories />} />
           <Route path={'likedproducts'} element={<LikedProducts/>}/>
+          <Route path={'addproduct'} element={<AddProductForm/>}/>
+          
         </Route>
       </Routes>
     </BrowserRouter>

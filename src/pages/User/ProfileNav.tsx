@@ -30,8 +30,9 @@ export default function Profile() {
                 <button className="search-btn">search</button>
               </div>
                 <img src="/images/user.png" className="user-logo" alt=""/>
-                <img src="/images/cart.png" className="cart-logo" alt=""/>
+                <img src="/images/cart.png" className="cart-logo" alt=""/>  
             </div> 
+            <button className='sell-btn' onClick={() => navigate('/addproduct')}>sell</button>
         
       </nav>
       <ul className="links-container">
@@ -43,7 +44,7 @@ export default function Profile() {
           <li className="link" onClick={() => navigate('/shop-access')}>accessories</li>
           <div className="icon-space">
               <img src='/images/medals.png' className='medals-icon' alt='' />
-              <img src='/images/heart.png' className='heart-icon' alt='' onClick={() => navigate('/likedproducts')}/>
+              <div onClick={() => navigate('/likedproducts')}> <i className="fas fa-heart" style={{height: "30px", width: "30px", cursor: "pointer"}} /> </div>
               <img src='/images/bell.png' className='bell-icon' alt=''/>
           </div>
       </ul>

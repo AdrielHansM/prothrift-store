@@ -1,10 +1,14 @@
 import React from 'react'
+import { ToggleButton } from 'react-bootstrap';
+import { ButtonToggle } from 'reactstrap';
 import '../../assets/styles/Profile.css';
-import { useNavigate } from 'react-router-dom';
 import ProfileNav from './ProfileNav';
 
 export default function ProfileBody(){
-    const navigate = useNavigate();
+
+<script>
+    
+</script>
 
     return(
         <>
@@ -42,7 +46,9 @@ export default function ProfileBody(){
                     <h2 className="product-brand">shorts</h2>
                     <p className="product-short-des">a short line about the cloth..</p>
                     <span className="price">$20</span><span className="actual-price">$40</span>
-                    <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
+                        <div>
+                           <i className="fas fa-heart fa-2x"></i>
+                        </div>
                 </div>
             </div>
             <div className="product-card">

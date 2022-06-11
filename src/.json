@@ -1,0 +1,76 @@
+{
+    "User":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "first-name": "string",
+            "last-name": "string",
+            "email": "string",
+            "contact-number": "number",
+            "date-added": "timestamp",
+            "date-updated": "timestamp"
+        }
+    ],
+
+    "Material_Recycled":[
+        {
+            "material_id": "ObjectId",
+            "product_id": "ObjectId",
+            "user_id": "ObjectId",
+            "material_recycled": "double",
+            "weight_recycled": "double",
+            "date-added": "timestamp",
+            "date-updated": "timestamp"
+        }
+    ],
+
+    "Product":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "user_id": "ObjectId",
+            "product_name": "string",
+            "product_description": "string",
+            "product_price": "double",
+            "quantity": "number",
+            "contact_number": "number",
+            "is_sold": "boolean",
+            "is_deleted": "boolean",
+            "date-added": "timestamp",
+            "date-updated": "timestamp"
+        }
+    ],
+
+    "Messages_Thread":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "user_id": "ObjectId",
+            "sender_first_name": "string",
+            "sender_last_name": "string",
+            "contact_number": "number",
+            "date-added": "timestamp",
+            "date-updated": "timestamp",
+            "Messages":{
+                "_ID": {
+                    "$oid": "ObjectId"
+                },
+                "sender_id": "ObjectId",
+                "message_content": "string"
+            }
+        }
+    ],
+
+    "Materials":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "date-added": "timestamp",
+            "date-updated": "timestamp"
+        }
+    ]    
+}
