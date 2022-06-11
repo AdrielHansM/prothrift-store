@@ -15,7 +15,7 @@ export default function Login(props: LoginProps) {
       <Container className="mainregCon">
         <Card>
           <Card.Body>
-          <RegisterForm register={!!props.register}/>
+          <RegisterForm />
             <p>Already registered? <Link to={'/login'}>Login</Link></p>
           </Card.Body>
         </Card>

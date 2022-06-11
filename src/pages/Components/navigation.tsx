@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import '../../assets/styles/Navbar.css';
 import {MenuItems} from "./MenuItems";
 import { useNavigate } from 'react-router-dom';
+import UserData from '../../models/User';
 
 
 export default function Navigation() {

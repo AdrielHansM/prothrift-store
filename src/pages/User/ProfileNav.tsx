@@ -20,7 +20,7 @@ export default function Profile() {
     <>
       <nav className="navbar">
 
-          <div className='logo-brand' onClick={() => navigate('/profilebody')}>
+          <div className='logo-brand' onClick={() => navigate('/home')}>
             <img src="/images/ProThrift-Logo.png" className="brand-logo" alt=""/>
             <h3 className='logo-name'>ProThrift</h3>
           </div>

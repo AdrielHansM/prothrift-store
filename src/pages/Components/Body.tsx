@@ -1,21 +1,36 @@
 import Navigation from "./Navigation"
 import '../../assets/styles/Body.css';
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import UserData from '../../models/User';
+
+const initialUser = {
+    userId: "",
+    firstName: "",
+    lastName: "",
+    contactNumber: 0,
+    email: "",
+    isLogged: false,
+    isDeleted: false,
+    dateCreated: new Date(),
+    dateUpdated: new Date()
+  }
 
 export default function Body() {
 
+    const state = useLocation().state as UserData;
+    console.log(state)
+
+
     return(
         <>
-        <Navigation></Navigation>
-
+       
+       <Navigation />
         <article className='bckimage'>
           <img src='/images/backimage.jpg' alt="background" className='backimage'/>
           <p className='bcktext'>Sustainability is the Key</p>
         </article>
         <br/>
-        
-        <body>
             <div className="text1Con">
                 <p className="text1">Total of Users saved a Potential</p>
                     <div className="numofpounds">
@@ -42,7 +57,6 @@ export default function Body() {
                 </div>
             </div>
             <br/>
-        </body>
         <footer className="feedback">
             <h1 className="fdback">Feedback!</h1>
             <Link to={'/feedback'}><Button className="fdBtn">Click here</Button></Link>

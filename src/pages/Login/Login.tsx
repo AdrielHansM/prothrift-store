@@ -8,13 +8,13 @@ interface LoginProps {
   register?: boolean;
 }
 
-export default function Login(props: LoginProps) {
+export default function Login() {
   return (
     <>
       <Container className="mainCon">
         <Card>
           <Card.Body>
-          <LoginForm register={!!props.register}/>
+          <LoginForm/>
           <p>Don't have an account? <Link to={'/register'}>Register</Link></p>
           </Card.Body>
         </Card>

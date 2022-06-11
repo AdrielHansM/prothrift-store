@@ -1,6 +1,6 @@
 export const MenuItems = [
     {
-        title: 'Home',
+        title: 'Shop',
         url: '/profilebody',
         cName: 'nav-links'
     },
