@@ -9,10 +9,12 @@ export default function Body() {
         <>
         <Navigation></Navigation>
 
-        <article className='bckimage'>
-          <img src='/images/backimage.jpg' alt="background" className='backimage'/>
-          <p className='bcktext'>Sustainability is the Key</p>
-        </article>
+        <div className="background" style={{ backgroundImage: "url(/images/backimage.jpg)" }}>
+            <div>
+                <img src="/images/ProThrift-logo.png" className="logo" alt=""/>
+                <p className='bcktext'>Sustainability is the Key</p>
+            </div>
+        </div>
         <br/>
         
         <body>
