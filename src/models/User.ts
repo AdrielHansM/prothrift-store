@@ -1,8 +1,13 @@
-interface User {
+interface UserData {
+  userId: string;
   firstName: string;
   lastName: string;
   contactNumber: number;
   email: string;
+  isLogged: boolean;
+  isDeleted: boolean;
+  dateCreated: Date;
+  dateUpdated: Date;
 }
 
-export default User;
+export default UserData;

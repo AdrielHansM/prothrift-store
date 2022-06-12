@@ -13,10 +13,6 @@ interface RegisterData {
   lastName: string;
 }
 
-interface LoginFormProps {
-  register: boolean;
-}
-
 const initialValues = { 
   email: "", 
   password: "",
@@ -25,17 +21,9 @@ const initialValues = {
   lastName: "",
 }
 
-export default function RegisterForm(props: LoginFormProps) {
+export default function RegisterForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<RegisterData>(initialValues);
-
-  useEffect(() => {
-    resetForm();
-  }, [props.register])
-
-  const resetForm = () => {
-    setFormData(initialValues)
-  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -49,7 +37,7 @@ export default function RegisterForm(props: LoginFormProps) {
   
   return (
     <>
-      <Form onSubmit={handleSubmit} className="regCon">
+      <Form onSubmit={handleSubmit} className="registerForm">
         <h1>Register</h1>
         <Form.Group className='mt-3'>
           <Form.Label>First Name</Form.Label>
@@ -76,7 +64,7 @@ export default function RegisterForm(props: LoginFormProps) {
           <Form.Control type={'text'} name="contactNumber" placeholder="Contact..." value={formData.contactNumber == 0 ? "" : formData.contactNumber} onChange={handleChange} />
         </Form.Group>
 
-        <Button type='submit' className="w-100 mt-4 mb-3">{props.register ? 'Register' : 'Signup' }</Button>
+        <Button type='submit' className="w-100 mt-4 mb-3">{'Register'}</Button>
       </Form>
     </>
   )

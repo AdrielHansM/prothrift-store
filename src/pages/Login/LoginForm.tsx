@@ -1,8 +1,11 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate, useLocation, To, Link } from 'react-router-dom'
 import { signIn } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
 import '../../assets/styles/login.css';
+import UserData from '../../models/User';
+import { auth } from '../../services/Firebase/firebaseApp';
+import { getUser } from '../../services/Firebase/firestoreService';
 
 interface LoginData {
   email: string;
@@ -13,22 +16,27 @@ interface LoginFormProps {
   register: boolean;
 }
 
+const initialUser = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  contactNumber: 0,
+  email: "",
+  isLogged: false,
+  isDeleted: false,
+  dateCreated: new Date(),
+  dateUpdated: new Date()
+}
+
 const initialValues = { 
   email: "", 
   password: "",
 }
 
-export default function LoginForm(props: LoginFormProps) {
+export default function LoginForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<LoginData>(initialValues);
 
-  useEffect(() => {
-    resetForm();
-  }, [props.register])
-
-  const resetForm = () => {
-    setFormData(initialValues)
-  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -37,14 +45,19 @@ export default function LoginForm(props: LoginFormProps) {
   const handleSubmit = (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
     signIn(formData.email, formData.password)
-      .then(() => navigate("/firstfeat"));
-    
+      .then(async () => {
+        const uid = auth.currentUser?.uid;
+        if (uid) {
+          const user = await getUser(uid) as UserData;
+          navigate('/home', { state: user});
+        }
+    });
   }
   
   return (
     <>
       <Form onSubmit={handleSubmit} className="loginCon">
-        <h1>{props.register ? 'Register' : 'Welcome!'}</h1>
+        <h1>{'Welcome!'}</h1>
 
         <Form.Group className='email'>
           <Form.Label>Email</Form.Label>
@@ -56,7 +69,7 @@ export default function LoginForm(props: LoginFormProps) {
           <Form.Control type={'password'} name="password" placeholder="Password..." value={formData.password} onChange={handleChange} />
         </Form.Group>
 
-        <Button type='submit' className="btnlog">{props.register ? 'Register' : 'Login' }</Button>
+        <Button type='submit' className="btnlog">{ 'Login' }</Button>
       </Form>
     </>
   )

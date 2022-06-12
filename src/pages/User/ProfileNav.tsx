@@ -5,22 +5,12 @@ import '../../assets/styles/Profile.css';
 
 export default function Profile() {
   const navigate = useNavigate();
- /* const [loading, setLoading] = useState(false);
-  var loggedUser = getLoggedUser(); 
-  setLoading(true);
-  setTimeout("", 4000)
-  setLoading(false);
-  var userDetails: any[] = []
-  userDetails.push(getUser(loggedUser ? loggedUser.uid : ''));
-  
-
-  console.log(userDetails)*/
 
   return (
     <>
       <nav className="navbar">
 
-          <div className='logo-brand' onClick={() => navigate('/profilebody')}>
+          <div className='logo-brand' onClick={() => navigate('/home')}>
             <img src="/images/ProThrift-Logo.png" className="brand-logo" alt=""/>
             <h3 className='logo-name'>ProThrift</h3>
           </div>

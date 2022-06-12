@@ -1,12 +1,29 @@
 import Navigation from "../Components/Navigation"
 import '../../assets/styles/About.css';
+import { useLocation } from "react-router-dom";
+import UserData from "../../models/User";
+import { useEffect, useState } from "react";
+
+const initialUser = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  contactNumber: 0,
+  email: "",
+  isLogged: false,
+  isDeleted: false,
+  dateCreated: new Date(),
+  dateUpdated: new Date()
+}
 
 export default function About() {
+  const state = useLocation().state as UserData;
+  console.log(state)
 
   return (
     <>
     <Navigation></Navigation>
-    <body>
+
     <div>
       <h1 className="About">About us</h1>
         <div className='about-us'>
@@ -29,7 +46,6 @@ export default function About() {
       </div>
       
     </div>
-    </body>
     </>
   )
 }
