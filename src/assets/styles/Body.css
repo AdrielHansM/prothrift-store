@@ -23,10 +23,10 @@ body{
 .bcktext {
     margin-top: 20px;
     text-align: center;
-    color: rgb(30, 30, 30);
+    color: rgb(253, 253, 253);
     text-transform: capitalize;
-    font-size: 50px;
-    font-weight: 90;
+    font-size: 60px;
+    font-weight: 5;
 }
 
 .text1Con{

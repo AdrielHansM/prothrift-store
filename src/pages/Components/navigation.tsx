@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Button, NavDropdown } from 'react-bootstrap'
+import { Button, NavDropdown, Toast} from 'react-bootstrap'
 import '../../assets/styles/Navbar.css';
 import {MenuItems} from "./MenuItems";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import UserData from '../../models/User';
 import { auth } from '../../services/Firebase/firebaseApp';
 import { getUser } from '../../services/Firebase/firestoreService';
@@ -24,7 +24,7 @@ export default function Navigation() {
   const navigate = useNavigate();
 
   if (userDetails.isLogged === false) {
-    fetchData();
+    fetchData(); 
   }
     
   async function fetchData() {
@@ -43,6 +43,31 @@ export default function Navigation() {
 
   const navigateTo = (url : string) => {
     navigate(url, { state: userDetails});
+  }
+
+  const state = useLocation().state as UserData;
+  console.log(state)
+
+  const [showA, setShowA] = useState(false);
+
+  const toggleShowA = () => setShowA(!showA);
+
+  function Example() {
+    return (
+          <Toast show={showA} onClose={toggleShowA} className='toast'>
+            <Toast.Header>
+              <img
+                src="holder.js/20x20?text=%20"
+                className="rounded me-2"
+                alt=""
+              />
+              <strong className="me-auto">Bootstrap</strong>
+              <small>11 mins ago</small>
+            </Toast.Header>
+            <Toast.Body>Collect your daily points.</Toast.Body>
+            <button className='toast-btn'>Get!</button>
+          </Toast>
+    );
   }
 
   return (
@@ -65,18 +90,24 @@ export default function Navigation() {
             
           {MenuItems.map((item, index) => {
             return(
-              <li key={index}>
+              <li key={index} className="menu-items">
                   <a className={item.cName} onClick={() => {navigateTo(item.url)}}>
                   {item.title}
                   </a>
               </li>
             )
           })}
+          <div className="search">
+                <input type="text" className="search-box" placeholder="search brand, product"/>
+                <button className="search-btn">search</button>
+            </div>
         </ul>
-          
+        
         {
         userDetails.isLogged 
         ? <>
+              <img src='/images/bell.png' className='bell-icon' alt=''/>
+            
             <NavDropdown title={
               <img src="/images/user.png" className="user-logo" alt=""/>}>
               <NavDropdown.Item onClick={() => navigateTo('/profile')}>
@@ -85,10 +116,10 @@ export default function Navigation() {
               <NavDropdown.Item onClick={() => navigateTo('/profile')}>
                 Messages
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigateTo('/profile')}>
+              <NavDropdown.Item onClick={() => navigateTo('/likedproducts')}>
                 Favorites
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigateTo('/profile')}>
+              <NavDropdown.Item onClick={()=>{ setShowA(true) }}>
                 Points
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => handleLogout()}>
@@ -97,13 +128,14 @@ export default function Navigation() {
             </NavDropdown>
             <button className='sell-btn' onClick={() => navigateTo('/addproduct')}>sell</button>
           </>
+          
         : <> 
             <Button className='btnLogin' onClick={() => navigate('/login')}>Login</Button>
             <Button className='btnSign' onClick={() => navigate('/register')}>Signup</Button>
           </>
-        }
-
+        }     
       </nav>
+      <Example/>
     </>  
   )
 }
