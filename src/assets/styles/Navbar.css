@@ -63,8 +63,9 @@
     border: 1px solid #ededed;
     text-transform: capitalize;
     background: none;
-    color: #e6e6e6;
+    color: #747373;
     outline: none;
+    font-size: 17px;
 }
 
 .search-btn{
@@ -126,6 +127,26 @@
     transition: 250ms;
 }
 
+.toast{
+    position: absolute;
+    text-align: center;
+    margin: 100px 39%;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.toast-btn{
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: #4ad9e4;
+    color: #fff;
+}
+
+.toast-btn:hover{
+    background-color: #fff;
+    color: #3a3c9b;
+}
 /*@media screen and (max-width: 960px) {
     .NavbarItems{
         position: relative;
