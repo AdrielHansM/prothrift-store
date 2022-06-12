@@ -64,7 +64,7 @@ export default function RegisterForm() {
           <Form.Control type={'text'} name="contactNumber" placeholder="Contact..." value={formData.contactNumber === 0 ? "" : formData.contactNumber} onChange={handleChange} />
         </Form.Group>
 
-        <Button type='submit' className="w-100 mt-4 mb-3">{'Register'}</Button>
+        <Button type='submit' className="w-100 mt-4 mb-3">Register</Button>
       </Form>
     </>
   )

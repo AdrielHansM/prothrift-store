@@ -1,11 +1,34 @@
+import { useEffect, useState } from 'react';
 import '../../assets/styles/Profile.css';
+import Product from '../../models/Product';
+import { fetchProducts } from '../../services/Firebase/firestoreService';
+import Loading from '../Components/LoadingScreen';
 import Navigation from '../Components/Navigation';
 
 export default function ProfileBody(){
+    const [products, setProducts] = useState<Product[]>([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+    
+    const getProducts = async () => {
+        setLoading(true)
+        const productArray = await fetchProducts()    
+        if (productArray) {
+            setProducts(productArray)
+            setLoading(false)
+        }    
+    }
+    
+    
     return(
         <>
-        <Navigation/>
-
+        {
+            loading ?  <Loading/> 
+            : <>
+             <Navigation/>
             <div className="hero-section" style={{ backgroundImage: "url(/images/header.png)" }}>
                 <div className="content">
                     <img src="/images/ProThrift-logo.png" className="logo" alt=""/>
@@ -97,48 +120,31 @@ export default function ProfileBody(){
             </div>
             </div>
             </section>
+            
+
             <section>
                 <h2 className="product-category2">Products</h2>
                     <div className="product-container2">
-                        <div className="product-card">
-                            <div className="product-image">
-                                <span className="discount-tag">50% off</span>
-                                <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to cart</button>
-                            </div>
-                            <div className="product-info">
-                                <h2 className="product-brand">air jordan</h2>
-                                <p className="product-short-des">a short line about the cloth..</p>
-                                <span className="price">$20</span><span className="actual-price">$40</span>
-                                <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
-                            </div>
-                        </div>
-                        <div className="product-card">
-                            <div className="product-image">
-                                <span className="discount-tag">50% off</span>
-                                <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to cart</button>
-                            </div>
-                            <div className="product-info">
-                                <h2 className="product-brand">air jordan</h2>
-                                <p className="product-short-des">a short line about the cloth..</p>
-                                <span className="price">$20</span><span className="actual-price">$40</span>
-                                <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
-                            </div>
-                        </div>
-                        <div className="product-card">
-                            <div className="product-image">
-                                <span className="discount-tag">50% off</span>
-                                <img src="/images/card12.jpg" className="product-thumb" alt=""/>
-                                <button className="card-btn">add to cart</button>
-                            </div>
-                            <div className="product-info">
-                                <h2 className="product-brand">air jordan</h2>
-                                <p className="product-short-des">a short line about the cloth..</p>
-                                <span className="price">$20</span><span className="actual-price">$40</span>
-                                <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
-                            </div>
-                        </div>
+                        {
+                            products.map((product) => {
+                                return(
+                                <>
+                                    <div className="product-card">
+                                        <div className="product-image">
+                                            <img src={product.imageUrl} className="product-thumb" alt=""/>
+                                            <button className="card-btn">add to cart</button>
+                                        </div>
+                                        <div className="product-info">
+                                            <h2 className="product-brand">{product.productName}</h2>
+                                            <p className="product-short-des">{product.productDescription}</p>
+                                            <span className="price">{product.productPrice}</span>
+                                            <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
+                                        </div>
+                                    </div>
+                                </>
+                                )
+                            })
+                        }
                     </div>
                     
                     <div className="product-container3">
@@ -188,6 +194,8 @@ export default function ProfileBody(){
             <footer className='footer'>
                 <h1>This is Footer</h1>
             </footer>
+            </>
+        }
         </>
     )
 }

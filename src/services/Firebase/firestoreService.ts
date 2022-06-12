@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import Firebase, { auth, database, storage } from "./firebaseApp";
 import UserData from "../../models/User";
+import Product from '../../models/Product';
 
 export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number) => {
     await database.collection('users').add({ 
@@ -20,10 +21,13 @@ export const createUser = async(userId: string, firstName: string, lastName: str
 }
 
 export const getUser = async (uid : string) => {
-  return await database.collection('users').where('userId', '==', uid).get().then((doc) => {
+  return await database
+    .collection('users')
+    .where('userId', '==', uid)
+    .get()
+    .then((doc) => {
       const userDocs = doc.docs[0].data();
 
-      //Map the data to the UserData interface
       const user = { userId: userDocs.userId, firstName: userDocs.firstName, lastName: userDocs.lastName, contactNumber: userDocs.contact, email: userDocs.email, isLogged: true};
 
       return user;
@@ -34,46 +38,64 @@ export const getUser = async (uid : string) => {
   })
 }
 
-export const createProduct = async(productName: string, productPrice: number, productDescription : string, status: string, meetup: string,   image: File) => {
+export const createProduct = async(userId: string, productName: string, productPrice: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
   const imageUrl = await uploadImage(image)
-  await database.collection('products').add({
-      productName: productName,
-      productPrice: productPrice,
-      productDescription : productDescription,
-      imageUrl: imageUrl,
-      meetup: meetup,
-      status: status,
-      isDeleted: false,
-      isSold: false,
-      dateCreated: new Date(),
-      dateUpdated: new Date(),
-  }).then(() => {
-    return true;
-  }).catch ((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorCode + " " + errorMessage)
-  })
+  if(imageUrl) {
+    return await database.collection('products').add({
+        userId: userId,
+        productName: productName,
+        productPrice: productPrice,
+        productDescription : productDescription,
+        imageUrl: imageUrl,
+        meetup: meetup,
+        category: category,
+        status: status,
+        isDeleted: false,
+        isSold: false,
+        dateCreated: new Date(),
+        dateUpdated: new Date(),
+    }).then(() => {
+      return true;
+    }).catch ((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorCode + " " + errorMessage)
+    })
+  }
 }
 
 export const uploadImage = async (image: File) => {
-  const storageRef = firebase.storage().ref();
-  const imageRef = storageRef.child(`images/${image.name}`);
-  const uploadTask = imageRef.put(image);
+  const uploadTask = storage.ref(`/images/${image.name}`).put(image)
 
-  await uploadTask.on('state_changed', () => {
+  uploadTask.on('state_changed', () => {
   }, error => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
-  }, () => {
-    storage
-      .ref("images")
-      .child(image.name)
-      .getDownloadURL()
-      .then(url => {
-        return url;
-      });
-    }
-  )
+  }
+  );
+  await uploadTask
+  let downloadUrl = await storage.ref("images").child(image.name).getDownloadURL()
+  return downloadUrl
+}
+
+export const fetchProducts = async () => {
+  let products: Product[] = []
+
+  return await database
+  .collection('products')
+  .where('isDeleted', '==', false)
+  .where('isSold', '==', false)
+  .get()
+  .then(querySnapshots => {
+    querySnapshots.forEach(doc => {
+      const productDetails = doc.data() as Product
+      products.push(productDetails)
+    })
+    return products
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
 }

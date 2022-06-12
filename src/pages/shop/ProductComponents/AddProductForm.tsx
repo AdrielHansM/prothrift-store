@@ -1,10 +1,11 @@
-import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
-import { Form, Container, Card} from 'react-bootstrap';
+import { FormEvent, useState, ChangeEvent, useEffect, useRef } from 'react';
+import { Form, Container, Card, Button, InputGroup, Alert } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import Navigation from '../../Components/Navigation';
 import UserData from '../../../models/User';
 import Product from '../../../models/Product';
 import { createProduct } from '../../../services/Firebase/firestoreService';
+import Loading from '../../Components/LoadingScreen';
 
 const initialProduct = {
 	productName: '',
@@ -21,36 +22,53 @@ const initialProduct = {
 }
 
 export default function AddProductForm(){
-	const [inputFile, setInputFile] = useState<HTMLInputElement | null>(null);
+	const state = useLocation().state as UserData
+  
+	const imageRef = useRef<HTMLInputElement>(null);
 	const [formData, setFormData] = useState<Product>(initialProduct);
-
-  useEffect(() => {
-    setInputFile(document.getElementById("image-file") as HTMLInputElement);
-  }, []);
-
 	const [category, setCategory] = useState("");
 	const [status, setStatus] = useState("");
-
-	const state = useLocation().state as UserData;
-	console.log(state)
+	const [loading, setLoading] = useState(true);
+	const [show, setShow] = useState(false);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setFormData({ ...formData, [event.target.name]: event.target.value })
 	}
 	
-	const handleSubmit = (data: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (data: FormEvent<HTMLFormElement>) => {
 		data.preventDefault();
-		if (inputFile) {
-			// createProduct(formData.productName, formData.productPrice, formData.productDescription, formData.meetup, status, inputFile);
-			
+		if (imageRef.current?.files) {
+			setLoading(false)
+			const image = imageRef.current.files[0]			
+			const createStatus = await createProduct(state.userId, formData.productName, formData.productPrice, formData.productDescription, formData.meetup, category, status, image);
+			if (createStatus) {
+				setLoading(createStatus)
+				setShow(true)
+			}
 		}
-		console.log(state.userId)
-		console.log(data)
+	}
+
+	function SuccessAlert()	{
+		return(
+			<div className="w-75 h-50 mx-auto d-block mt-3">
+				<Alert show={show} variant="success">
+					<Alert.Heading>Product Successfully Listed</Alert.Heading>
+					<div className="d-flex justify-content-end">
+						<Button onClick={() => setShow(false)} variant="outline-success">
+							Close
+						</Button>
+					</div>
+				</Alert>
+			</div>
+		)
 	}
 	
 	return(
 	<>
+	{loading === false ? <Loading/> : 
+	<>
 	<Navigation/>
+	<SuccessAlert/>
 		<Container className="mainregCon">
 			<Card>
 				<Card.Body>
@@ -60,10 +78,14 @@ export default function AddProductForm(){
 							<Form.Label>Product Name</Form.Label>
 							<Form.Control type={'text'} name="productName" placeholder="Product name..."   onChange={handleChange} />
 						</Form.Group>
-
+						
 						<Form.Group className='mt-3'>
-							<Form.Label>Product Price</Form.Label>
+						<Form.Label>Product Price</Form.Label>
+						<InputGroup>
+							<InputGroup.Text>Php</InputGroup.Text>
 							<Form.Control type={'number'} name="productPrice" placeholder="Product price..."  onChange={handleChange} />
+							<InputGroup.Text>.00</InputGroup.Text>
+						</InputGroup>
 						</Form.Group>
 
 						<Form.Group className='mt-3'>
@@ -73,7 +95,7 @@ export default function AddProductForm(){
 
 						<Form.Group className="mt-3">
 							<Form.Label>Product Image</Form.Label>
-							<Form.Control name="image" type="file" id="image-file" />
+							<Form.Control name="image" type="file" id="image-file" ref={imageRef}/>
 						</Form.Group>
 
 						<Form.Group className='mt-3'>
@@ -111,10 +133,14 @@ export default function AddProductForm(){
 								<option>Used Frequently</option>
 							</Form.Control>
 						</Form.Group>
+
+						<Button type='submit' className="w-100 mt-4 mb-3">Create Product</Button>
 					</Form>
 				</Card.Body>
 			</Card>
 		</Container>
+		</>
+		}
 		</>
 	)
 }

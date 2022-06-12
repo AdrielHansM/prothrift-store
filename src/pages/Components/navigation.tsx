@@ -95,6 +95,7 @@ export default function Navigation() {
                 logout
               </NavDropdown.Item>
             </NavDropdown>
+            <button className='sell-btn' onClick={() => navigateTo('/addproduct')}>sell</button>
           </>
         : <> 
             <Button className='btnLogin' onClick={() => navigate('/login')}>Login</Button>
