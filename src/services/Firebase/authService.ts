@@ -1,5 +1,5 @@
 import { auth } from "./firebaseApp";
-import { createUser, getUser } from "./firestoreService";
+import { createUser} from "./firestoreService";
 import UserData from "../../models/User";
 
 
@@ -15,14 +15,16 @@ auth.onAuthStateChanged((user) => {
 export const signUp = async (firstName: string, lastName: string, email: string, contact : number, password: string) => await auth.createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
     const user = userCredential.user;
-    createUser(
-      //@ts-ignore user.uid,
-      user.uid,
-      firstName,
-      lastName,
-      email,
-      contact
-    )
+    console.log(user?.uid, firstName, lastName, email, contact)
+    if (user?.uid) {
+      createUser(
+        user.uid,
+        firstName,
+        lastName,
+        email,
+        contact
+      )
+    }
   })
   .catch((error) => {
     const errorCode = error.code;

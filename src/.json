@@ -4,22 +4,39 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "first-name": "string",
-            "last-name": "string",
+            "points": "number",
+            "firstName": "string",
+            "lastName": "string",
             "email": "string",
-            "contact-number": "number",
-            "date-added": "timestamp",
-            "date-updated": "timestamp"
+            "contacumber": "number",
+            "isDeleted": "boolean",
+            "dateCreated": "timestamp",
+            "dateUpdated": "timestamp"
         }
     ],
 
+    "Transaction":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "product_id": "number",
+            "buyer_id": "string",
+            "seller_id": "string",
+            "transaction_status": "string"
+        }
+    ],
+
+
     "Material_Recycled":[
         {
-            "material_id": "ObjectId",
+            "_ID": {
+                "$oid": "ObjectId"
+            },
             "product_id": "ObjectId",
             "user_id": "ObjectId",
-            "material_recycled": "double",
-            "weight_recycled": "double",
+            "weight_recycled": "string",
+            "is_recycled" : "boolean",
             "date-added": "timestamp",
             "date-updated": "timestamp"
         }
@@ -34,7 +51,9 @@
             "product_name": "string",
             "product_description": "string",
             "product_price": "double",
-            "quantity": "number",
+            "meetup" : "string",
+            "category" : "string",
+            "status": "string",
             "contact_number": "number",
             "is_sold": "boolean",
             "is_deleted": "boolean",
@@ -54,6 +73,7 @@
             "contact_number": "number",
             "date-added": "timestamp",
             "date-updated": "timestamp",
+            "is_read" : "boolean",
             "Messages":{
                 "_ID": {
                     "$oid": "ObjectId"
@@ -62,15 +82,5 @@
                 "message_content": "string"
             }
         }
-    ],
-
-    "Materials":[
-        {
-            "_ID": {
-                "$oid": "ObjectId"
-            },
-            "date-added": "timestamp",
-            "date-updated": "timestamp"
-        }
-    ]    
+    ]
 }

@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import Product from '../../models/Product'
-import { useLocation } from 'react-router-dom';
-import Navigation from '../Components/Navigation';
+import React from 'react'
+import Navigation from '../Components/Navigation'
 
 export default function Men() {
-
 
   return (
     <>

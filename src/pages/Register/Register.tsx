@@ -4,12 +4,7 @@ import RegisterForm from './RegisterForm'
 import { Card, Container } from 'react-bootstrap'
 import '../../assets/styles/login.css';
 
-
-interface LoginProps {
-  register?: boolean;
-}
-
-export default function Login(props: LoginProps) {
+export default function Login() {
   return (
     <>
       <Container className="mainregCon">

@@ -1,18 +1,17 @@
 import firebase from 'firebase/app';
 import Firebase, { auth, database, storage } from "./firebaseApp";
-import { useState } from "react";
 import UserData from "../../models/User";
 
 export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number) => {
-  await database.collection('users').add({ 
+    await database.collection('users').add({ 
       userId: userId,
       firstName: firstName,
       lastName: lastName,
       email: email,
       contact: contact,
       isDeleted: false,
-      dateCreated: firebase.firestore.FieldValue.serverTimestamp,
-      dateUpdated: firebase.firestore.FieldValue.serverTimestamp,
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
     }).catch ((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -35,19 +34,19 @@ export const getUser = async (uid : string) => {
   })
 }
 
-export const createProduct = async(productName: string, status: string, meetupLocation: string, price: number, descrtipion : string, image: File) => {
+export const createProduct = async(productName: string, productPrice: number, productDescription : string, status: string, meetup: string,   image: File) => {
   const imageUrl = await uploadImage(image)
   await database.collection('products').add({
       productName: productName,
-      status: status,
-      meetupLocation: meetupLocation,
-      price: price,
-      descrtipion : descrtipion,
+      productPrice: productPrice,
+      productDescription : productDescription,
       imageUrl: imageUrl,
+      meetup: meetup,
+      status: status,
       isDeleted: false,
       isSold: false,
-      dateCreated: firebase.firestore.FieldValue.serverTimestamp,
-      dateUpdated: firebase.firestore.FieldValue.serverTimestamp,
+      dateCreated: new Date(),
+      dateUpdated: new Date(),
   }).then(() => {
     return true;
   }).catch ((error) => {

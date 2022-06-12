@@ -1,10 +1,11 @@
 interface Product {
   productName: string;
-  status: string;
-  meetupLocation: string;
-  price: number;
-  descrtipion: string;
+  productPrice: number;
+  productDescription: string;
   imageUrl: string;
+  meetup: string;
+  category: string;
+  status: string;
   isDeleted: boolean;
   isSold: boolean;
   dateCreated: Date;

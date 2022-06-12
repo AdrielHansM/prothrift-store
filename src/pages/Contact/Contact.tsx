@@ -1,8 +1,6 @@
-import React, { ChangeEvent, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import React from 'react'
 import Navigation from '../Components/Navigation';
-import { getUser } from '../../services/Firebase/firestoreService';
-import { getLoggedUser } from '../../services/Firebase/authService';
+
 import { Button, Form } from 'react-bootstrap'
 import '../../assets/styles/Body.css';
 

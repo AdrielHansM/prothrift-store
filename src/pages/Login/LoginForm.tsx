@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { Navigate, useNavigate, useLocation, To, Link } from 'react-router-dom'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { useNavigate} from 'react-router-dom'
 import { signIn } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
 import '../../assets/styles/login.css';
@@ -10,22 +10,6 @@ import { getUser } from '../../services/Firebase/firestoreService';
 interface LoginData {
   email: string;
   password: string;
-}
-
-interface LoginFormProps {
-  register: boolean;
-}
-
-const initialUser = {
-  userId: "",
-  firstName: "",
-  lastName: "",
-  contactNumber: 0,
-  email: "",
-  isLogged: false,
-  isDeleted: false,
-  dateCreated: new Date(),
-  dateUpdated: new Date()
 }
 
 const initialValues = { 

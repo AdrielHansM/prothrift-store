@@ -1,4 +1,3 @@
-import ProfileNav from '../User/ProfileNav';
 import '../../assets/styles/Shop.css';
 import Navigation from '../Components/Navigation';
 export default function LikedProducts() {

@@ -1,8 +1,4 @@
-import React from 'react'
-import { ToggleButton } from 'react-bootstrap';
-import { ButtonToggle } from 'reactstrap';
 import '../../assets/styles/Profile.css';
-import ProfileNav from '../User/ProfileNav';
 import Navigation from '../Components/Navigation';
 
 export default function ProfileBody(){

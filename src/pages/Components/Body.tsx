@@ -1,20 +1,8 @@
-import Navigation from "./Navigation"
+import Navigation from './Navigation';
 import '../../assets/styles/Body.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import UserData from '../../models/User';
-
-const initialUser = {
-    userId: "",
-    firstName: "",
-    lastName: "",
-    contactNumber: 0,
-    email: "",
-    isLogged: false,
-    isDeleted: false,
-    dateCreated: new Date(),
-    dateUpdated: new Date()
-  }
 
 export default function Body() {
     const state = useLocation().state as UserData;
@@ -22,23 +10,14 @@ export default function Body() {
 
     return(
         <>
-<<<<<<< HEAD
-        <Navigation></Navigation>
+        <Navigation/>
 
         <div className="background" style={{ backgroundImage: "url(/images/backimage.jpg)" }}>
             <div>
                 <img src="/images/ProThrift-logo.png" className="logo" alt=""/>
-                <p className='bcktext'>Sustainability is the Key</p>
+                <p className='bcktext'>Sustainability is the Key </p>
             </div>
         </div>
-=======
-       
-       <Navigation />
-        <article className='bckimage'>
-          <img src='/images/backimage.jpg' alt="background" className='backimage'/>
-          <p className='bcktext'>Sustainability is the Key</p>
-        </article>
->>>>>>> d1b2d63760ed2ca06fb5e275baafdfeeb20ff01c
         <br/>
             <div className="text1Con">
                 <p className="text1">Total of Users saved a Potential</p>

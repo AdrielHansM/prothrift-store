@@ -4,10 +4,6 @@ import LoginForm from './LoginForm'
 import { Card, Container } from 'react-bootstrap'
 import '../../assets/styles/login.css';
 
-interface LoginProps {
-  register?: boolean;
-}
-
 export default function Login() {
   return (
     <>

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signUp } from '../../services/Firebase/authService';
 import { Button, Form } from 'react-bootstrap'
@@ -61,7 +61,7 @@ export default function RegisterForm() {
         
         <Form.Group className='mt-3'>
           <Form.Label>Contact Number</Form.Label>
-          <Form.Control type={'text'} name="contactNumber" placeholder="Contact..." value={formData.contactNumber == 0 ? "" : formData.contactNumber} onChange={handleChange} />
+          <Form.Control type={'text'} name="contactNumber" placeholder="Contact..." value={formData.contactNumber === 0 ? "" : formData.contactNumber} onChange={handleChange} />
         </Form.Group>
 
         <Button type='submit' className="w-100 mt-4 mb-3">{'Register'}</Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Button, NavDropdown } from 'react-bootstrap'
 import '../../assets/styles/Navbar.css';
 import {MenuItems} from "./MenuItems";
@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import UserData from '../../models/User';
 import { auth } from '../../services/Firebase/firebaseApp';
 import { getUser } from '../../services/Firebase/firestoreService';
-
 
 const initialUser = {
   userId: "",
@@ -88,6 +87,9 @@ export default function Navigation() {
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => navigateTo('/profile')}>
                 Favorites
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigateTo('/profile')}>
+                Points
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => handleLogout()}>
                 logout

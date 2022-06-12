@@ -1,13 +1,13 @@
-import Navigation from "../Components/Navigation"
 import '../../assets/styles/Body.css';
 import { Button, Form } from 'react-bootstrap'
+import Navigation from '../Components/Navigation';
 
 
 export default function Feedback() {
 
     return (
         <>
-        <Navigation></Navigation>
+        <Navigation/>
         
         <Form className="feedbck">
             <h1>Feedback Form</h1>

@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import Product from '../../models/Product'
-import ProfileNav from '../User/ProfileNav'
+import React from 'react'
 import '../../assets/styles/Shop.css';
-import { useLocation } from 'react-router-dom';
 import Navigation from '../Components/Navigation';
 
 
