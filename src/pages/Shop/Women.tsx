@@ -2,26 +2,15 @@ import React, { useState, useEffect } from 'react'
 import Product from '../../models/Product'
 import ProfileNav from '../User/ProfileNav'
 import '../../assets/styles/Shop.css';
+import { useLocation } from 'react-router-dom';
+import Navigation from '../Components/Navigation';
 
-/*const initialProducts = {
-  productName: '',
-  price: 0,
-  descrtipion: ''
-}*/
 
 export default function Women() {
-/*  const [products, setProducts] = useState<Product>(initialProducts)
-
-  useEffect(() => {
-    const getProducts = () => {
-      // Fetched Products
-    }
-  }, [])*/
-
 
   return (
     <>
-    <ProfileNav/>
+    <Navigation/>
     <div>
       <h1 className='titleWomen'>Women's Clothes</h1>
     </div>

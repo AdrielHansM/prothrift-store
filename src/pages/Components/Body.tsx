@@ -17,10 +17,8 @@ const initialUser = {
   }
 
 export default function Body() {
-
     const state = useLocation().state as UserData;
     console.log(state)
-
 
     return(
         <>

@@ -5,16 +5,6 @@ import '../../assets/styles/Profile.css';
 
 export default function Profile() {
   const navigate = useNavigate();
- /* const [loading, setLoading] = useState(false);
-  var loggedUser = getLoggedUser(); 
-  setLoading(true);
-  setTimeout("", 4000)
-  setLoading(false);
-  var userDetails: any[] = []
-  userDetails.push(getUser(loggedUser ? loggedUser.uid : ''));
-  
-
-  console.log(userDetails)*/
 
   return (
     <>

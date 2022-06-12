@@ -18,7 +18,7 @@ import Body from './pages/Components/Body';
 import Feedback from './pages/Feedback/Feedback';
 import FirstFeat from './pages/Components/FirstFeat';
 import SecFeat from './pages/Components/SecFeat';
-import ProfileBody from './pages/User/ProfileBody';
+import ProfileBody from './pages/Shop/Shop';
 import LikedProducts from './pages/Shop/LikedProducts';
 import AddProductForm from './pages/Shop/ProductComponents/AddProductForm';
 import Profile from './pages/User/Profile';
@@ -33,20 +33,20 @@ root.render(
         <Route path={'/'} element={<App />} >
           <Route index element={<LandingPage />} />
           <Route path={'home'} element={<Body />} />
-          <Route path={'User'} element={ <Profile/> }/>
+          <Route path={'profile'} element={ <Profile/> }/>
           <Route path={'login'} element={<Login />} />
           <Route path={'register'} element={<Register />} />
           <Route path={'firstfeat'} element={<FirstFeat />} />
           <Route path={'secfeat'} element={<SecFeat />} />
           <Route path={'about'} element={<About />} />
           <Route path={'chat'} element={<Chat />} />
-          <Route path={'profilebody'} element={<ProfileBody />} />
+          <Route path={'shop'} element={<ProfileBody />} />
           <Route path={'contact'} element={<Contact />} />
           <Route path={'feedback'} element={<Feedback />} />
           <Route path={'shop-women'} element={<Women />} />
           <Route path={'shop-men'} element={<Men />} />
           <Route path={'shop-kids'} element={<Kids />} />
-          <Route path={'shop-access'} element={<Accessories />} />
+          <Route path={'shop-accessories'} element={<Accessories />} />
           <Route path={'likedproducts'} element={<LikedProducts/>}/>
           <Route path={'addproduct'} element={<AddProductForm/>}/>
         </Route>
