@@ -24,7 +24,7 @@ export default function Navigation() {
   const navigate = useNavigate();
 
   if (userDetails.isLogged === false) {
-    fetchData();
+    fetchData(); 
   }
     
   async function fetchData() {
@@ -65,18 +65,24 @@ export default function Navigation() {
             
           {MenuItems.map((item, index) => {
             return(
-              <li key={index}>
+              <li key={index} className="menu-items">
                   <a className={item.cName} onClick={() => {navigateTo(item.url)}}>
                   {item.title}
                   </a>
               </li>
             )
           })}
+          <div className="search">
+                <input type="text" className="search-box" placeholder="search brand, product"/>
+                <button className="search-btn">search</button>
+            </div>
         </ul>
-          
+        
         {
         userDetails.isLogged 
         ? <>
+              <img src='/images/bell.png' className='bell-icon' alt=''/>
+            
             <NavDropdown title={
               <img src="/images/user.png" className="user-logo" alt=""/>}>
               <NavDropdown.Item onClick={() => navigateTo('/profile')}>
