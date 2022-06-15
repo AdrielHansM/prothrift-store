@@ -67,6 +67,7 @@
             "contact_number": "number",
             "is_sold": "boolean",
             "is_deleted": "boolean",
+            "is_donated": "boolean",
             "date-added": "timestamp",
             "date-updated": "timestamp"
         }

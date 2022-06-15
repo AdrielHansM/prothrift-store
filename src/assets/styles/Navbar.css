@@ -147,6 +147,10 @@
     background-color: #fff;
     color: #3a3c9b;
 }
+
+.sell-btn{
+    margin-right: 20px;
+}
 /*@media screen and (max-width: 960px) {
     .NavbarItems{
         position: relative;

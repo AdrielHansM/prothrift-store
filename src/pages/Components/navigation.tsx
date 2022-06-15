@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, NavDropdown, Toast} from 'react-bootstrap'
+import { Button, Form, FormControl, NavDropdown, Toast} from 'react-bootstrap'
 import '../../assets/styles/Navbar.css';
 import {MenuItems} from "./MenuItems";
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -97,10 +97,21 @@ export default function Navigation() {
               </li>
             )
           })}
+          <Form className="d-flex w-100">
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="info">Search</Button>
+          </Form>
+          {/* <li>
           <div className="search">
                 <input type="text" className="search-box" placeholder="search brand, product"/>
                 <button className="search-btn">search</button>
             </div>
+          </li> */}
         </ul>
         
         {

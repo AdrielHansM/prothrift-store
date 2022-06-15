@@ -128,7 +128,6 @@ export default function AddProductForm(){
 									setStatus(e.target.value);
 								}}
 							 >
-								<option>Brand New</option>
 								<option>Used with Care</option>
 								<option>Used Frequently</option>
 							</Form.Control>
