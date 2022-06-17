@@ -8,6 +8,7 @@ import { createProduct } from '../../../services/Firebase/firestoreService';
 import Loading from '../../Components/LoadingScreen';
 
 const initialProduct = {
+	productId: '',
 	productName: '',
 	productPrice: 0,
 	productDescription: '',

@@ -4,11 +4,14 @@ import Product from '../../models/Product';
 import { fetchProducts } from '../../services/Firebase/firestoreService';
 import Loading from '../Components/LoadingScreen';
 import Navigation from '../Components/Navigation';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import UserData from '../../models/User';
 
 export default function ProfileBody(){
+    const userDetails = useLocation().state as UserData
     const [products, setProducts] = useState<Product[]>([])
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         getProducts()
@@ -23,8 +26,11 @@ export default function ProfileBody(){
         }    
     }
     
-    
-    const navigate = useNavigate();
+    const navigateToProduct = (productId: string) => {
+        console.log(userDetails)
+        console.log(productId)
+        navigate('/view-product', {state: {user: userDetails, productId: productId}})
+    }
 
     return(
         <>
@@ -131,7 +137,11 @@ export default function ProfileBody(){
                         {
                             products.map((product) => {
                                 return(
-                                <>
+                                <>  
+                                <Link
+                                  to={'/view-product'}
+																	state={{user: userDetails, product: product.productId}}
+                                >
                                     <div className="product-card">
                                         <div className="product-image">
                                             <img src={product.imageUrl} className="product-thumb" alt=""/>
@@ -144,6 +154,7 @@ export default function ProfileBody(){
                                             <div><img src="/images/heart1.png" className="liked-heart" alt=''/></div>
                                         </div>
                                     </div>
+                                </Link>
                                 </>
                                 )
                             })

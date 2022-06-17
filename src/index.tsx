@@ -14,7 +14,7 @@ import Register from './pages/Register/Register';
 import About from './pages/About/About';
 import Chat from './pages/Chat/Chat';
 import Contact from './pages/Contact/Contact';
-import Body from './pages/Components/Body';
+import Body from './pages/Home/Body';
 import Feedback from './pages/Feedback/Feedback';
 import FirstFeat from './pages/Components/FirstFeat';
 import SecFeat from './pages/Components/SecFeat';
@@ -22,6 +22,7 @@ import ProfileBody from './pages/Shop/Shop';
 import LikedProducts from './pages/Shop/LikedProducts';
 import AddProductForm from './pages/Shop/ProductComponents/AddProductForm';
 import Profile from './pages/User/Profile';
+import ViewProduct from './pages/Shop/ProductComponents/ViewProduct';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -47,6 +48,7 @@ root.render(
           <Route path={'shop-men'} element={<Men />} />
           <Route path={'shop-kids'} element={<Kids />} />
           <Route path={'shop-accessories'} element={<Accessories />} />
+          <Route path={'view-product'} element={<ViewProduct />} />
           <Route path={'likedproducts'} element={<LikedProducts/>}/>
           <Route path={'addproduct'} element={<AddProductForm/>}/>
         </Route>

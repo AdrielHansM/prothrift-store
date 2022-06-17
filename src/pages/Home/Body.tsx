@@ -1,14 +1,11 @@
-import Navigation from './Navigation';
+import Navigation from '../Components/Navigation';
 import '../../assets/styles/Body.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import UserData from '../../models/User';
-
+//Junemey
 export default function Body() {
-    
-    const state = useLocation().state as UserData;
-    console.log(state)
-
+    const state = useLocation().state as UserData
     const navigate = useNavigate();
 
     return(

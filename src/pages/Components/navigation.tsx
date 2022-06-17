@@ -45,11 +45,7 @@ export default function Navigation() {
     navigate(url, { state: userDetails});
   }
 
-  const state = useLocation().state as UserData;
-  console.log(state)
-
   const [showA, setShowA] = useState(false);
-
   const toggleShowA = () => setShowA(!showA);
 
   function Example() {
@@ -106,14 +102,7 @@ export default function Navigation() {
             />
             <Button variant="info">Search</Button>
           </Form>
-          {/* <li>
-          <div className="search">
-                <input type="text" className="search-box" placeholder="search brand, product"/>
-                <button className="search-btn">search</button>
-            </div>
-          </li> */}
-        </ul>
-        
+        </ul>     
         {
         userDetails.isLogged 
         ? <>
