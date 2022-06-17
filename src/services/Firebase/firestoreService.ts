@@ -99,3 +99,30 @@ export const fetchProducts = async () => {
     alert(errorCode + " " + errorMessage)
   })
 }
+
+export const fetchSingleProduct = async (productId: string) => {
+  return await database
+    .collection('products')
+    .where('__name__', '==', productId)
+    .get()
+    .then((doc) => {
+      const productDoc = doc.docs[0].data()
+
+      const product = {
+        productId: doc.docs[0].id, 
+        productName: productDoc.productName,
+        productPrice: productDoc.productPrice,
+        productDescription: productDoc.productDescription,
+        imageUrl: productDoc.imageUrl,
+        meetup: productDoc.meetup,
+        category: productDoc.category,
+        status: productDoc.status,
+        isDeleted: productDoc.isDeleted,
+        isSold: productDoc.isSold,
+        dateCreated: productDoc.dateCreated,
+        dateUpdated: productDoc.dateUpdated
+      }
+
+      return product
+    })
+}

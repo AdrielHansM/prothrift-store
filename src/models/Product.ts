@@ -1,4 +1,5 @@
 interface Product {
+  productId: string;
   productName: string;
   productPrice: number;
   productDescription: string;
