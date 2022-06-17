@@ -14,7 +14,7 @@ import Register from './pages/Register/Register';
 import About from './pages/About/About';
 import Chat from './pages/Chat/Chat';
 import Contact from './pages/Contact/Contact';
-import Body from './pages/Components/Body';
+import Body from './pages/Home/Body';
 import Feedback from './pages/Feedback/Feedback';
 import FirstFeat from './pages/Components/FirstFeat';
 import SecFeat from './pages/Components/SecFeat';

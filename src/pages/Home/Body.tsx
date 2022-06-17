@@ -1,4 +1,4 @@
-import Navigation from './Navigation';
+import Navigation from '../Components/Navigation';
 import '../../assets/styles/Body.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
