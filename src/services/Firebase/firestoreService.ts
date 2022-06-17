@@ -89,7 +89,21 @@ export const fetchProducts = async () => {
   .get()
   .then(querySnapshots => {
     querySnapshots.forEach(doc => {
-      const productDetails = doc.data() as Product
+      const productDetails = {
+        productId: doc.id,
+        userId: doc.data().userId,
+        productName: doc.data().productName,
+        productPrice: doc.data().productPrice,
+        productDescription: doc.data().productDescription,
+        imageUrl: doc.data().imageUrl,
+        meetup: doc.data().meetup,
+        category: doc.data().category,
+        status: doc.data().status,
+        isDeleted: doc.data().isDeleted,
+        isSold: doc.data().isSold,
+        dateCreated: doc.data().dateCreated,
+        dateUpdated: doc.data().dateUpdated,
+      }
       products.push(productDetails)
     })
     return products
