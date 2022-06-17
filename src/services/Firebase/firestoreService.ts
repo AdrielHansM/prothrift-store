@@ -124,6 +124,7 @@ export const fetchSingleProduct = async (productId: string) => {
 
       const product = {
         productId: doc.docs[0].id, 
+        userId: productDoc.userId,
         productName: productDoc.productName,
         productPrice: productDoc.productPrice,
         productDescription: productDoc.productDescription,

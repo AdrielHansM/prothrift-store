@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Product from "../../../models/Product";
-import { fetchSingleProduct } from "../../../services/Firebase/firestoreService";
+import {
+  fetchSingleProduct,
+  getUser,
+} from "../../../services/Firebase/firestoreService";
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
@@ -14,23 +17,34 @@ interface stateType {
 export default function ViewProduct() {
   const state = useLocation().state as stateType;
   const [productDetails, setProductDetails] = useState<Product>();
+  const [sellerDetails, setSellerDetails] = useState<UserData>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (state.product) {
-      fetchData(state.product);
-      console.log(state.user);
+      fetchProductData(state.product);
+      setLoading(false);
+    }
+
+    if (productDetails?.productId) {
+      fetchSellerData(productDetails.userId);
+      setLoading(false);
     }
   });
 
-  async function fetchData(productId: string) {
+  async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
     if (fetchedProduct.productId) {
       setProductDetails(fetchedProduct);
-      setLoading(false);
     }
   }
 
+  async function fetchSellerData(userId: string) {
+    const fetchedSeller = (await getUser(userId)) as UserData;
+    if (fetchedSeller.userId) {
+      setSellerDetails(fetchedSeller);
+    }
+  }
   return (
     <>
       {loading === true ? (
@@ -41,10 +55,16 @@ export default function ViewProduct() {
       ) : (
         <>
           <Navigation />
+          <h3>product</h3>
           <p>{productDetails?.productId}</p>
           <p>{productDetails?.productName}</p>
           <p>{productDetails?.productPrice}</p>
           <p>{productDetails?.productDescription}</p>
+          <h3>seller</h3>
+          <p>{sellerDetails?.firstName}</p>
+          <p>{sellerDetails?.lastName}</p>
+          <p>{sellerDetails?.contactNumber}</p>
+          <p>{sellerDetails?.email}</p>
         </>
       )}
     </>

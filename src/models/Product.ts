@@ -11,6 +11,7 @@ interface Product {
   isSold: boolean;
   dateCreated: Date;
   dateUpdated: Date;
+  userId: string;
 }
   
 export default Product;
