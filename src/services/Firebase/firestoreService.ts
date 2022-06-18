@@ -38,13 +38,14 @@ export const getUser = async (uid : string) => {
   })
 }
 
-export const createProduct = async(userId: string, productName: string, productPrice: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
+export const createProduct = async(userId: string, productName: string, productPrice: number, productWeight: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
   const imageUrl = await uploadImage(image)
   if(imageUrl) {
     return await database.collection('products').add({
         userId: userId,
         productName: productName,
         productPrice: productPrice,
+        productWeight: productWeight,
         productDescription : productDescription,
         imageUrl: imageUrl,
         meetup: meetup,
@@ -94,6 +95,7 @@ export const fetchProducts = async () => {
         userId: doc.data().userId,
         productName: doc.data().productName,
         productPrice: doc.data().productPrice,
+        productWeight: doc.data().productWeight,
         productDescription: doc.data().productDescription,
         imageUrl: doc.data().imageUrl,
         meetup: doc.data().meetup,
@@ -127,6 +129,7 @@ export const fetchSingleProduct = async (productId: string) => {
         userId: productDoc.userId,
         productName: productDoc.productName,
         productPrice: productDoc.productPrice,
+        productWeight: productDoc.productWeight,
         productDescription: productDoc.productDescription,
         imageUrl: productDoc.imageUrl,
         meetup: productDoc.meetup,

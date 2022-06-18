@@ -46,7 +46,6 @@
             "product_id": "ObjectId",
             "user_id": "ObjectId",
             "weight_recycled": "string",
-            "is_recycled" : "boolean",
             "date-added": "timestamp",
             "date-updated": "timestamp"
         }
@@ -61,6 +60,7 @@
             "product_name": "string",
             "product_description": "string",
             "product_price": "double",
+            "product_weight" : "double",
             "meetup" : "string",
             "category" : "string",
             "status": "string",

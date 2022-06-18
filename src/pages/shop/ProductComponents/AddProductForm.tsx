@@ -13,12 +13,19 @@ import UserData from "../../../models/User";
 import Product from "../../../models/Product";
 import { createProduct } from "../../../services/Firebase/firestoreService";
 import Loading from "../../Components/LoadingScreen";
+import { estimateWeight } from "../../../utils/productUtils";
+
+const shirt = {
+  name: "Shirt",
+  type: "Upperwear",
+};
 
 const initialProduct = {
   productId: "",
   userId: "",
   productName: "",
   productPrice: 0,
+  productWeight: 0,
   productDescription: "",
   imageUrl: "",
   meetup: "",
@@ -37,6 +44,8 @@ export default function AddProductForm() {
   const [formData, setFormData] = useState<Product>(initialProduct);
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
+  const [clothingType, setClothingType] = useState("");
+  const [weight, setWeight] = useState(0);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
 
@@ -49,22 +58,34 @@ export default function AddProductForm() {
     if (imageRef.current?.files) {
       setLoading(false);
       const image = imageRef.current.files[0];
-      const createStatus = await createProduct(
-        state.userId,
-        formData.productName,
-        formData.productPrice,
-        formData.productDescription,
-        formData.meetup,
-        category,
-        status,
-        image
-      );
-      if (createStatus) {
-        setLoading(createStatus);
-        setShow(true);
+
+      if (image.size < 2000000) {
+        const createProductStatus = await createProduct(
+          state.userId,
+          formData.productName,
+          formData.productPrice,
+          formData.productWeight,
+          formData.productDescription,
+          formData.meetup,
+          category,
+          status,
+          image
+        );
+        if (createProductStatus) {
+          setLoading(createProductStatus);
+          setShow(true);
+        }
+      } else {
+        return <Alert variant="danger">Image size is too large</Alert>;
       }
     }
   };
+
+  useEffect(() => {
+    if (category && clothingType) {
+      setWeight(estimateWeight(category, clothingType));
+    }
+  });
 
   function SuccessAlert() {
     return (
@@ -158,10 +179,54 @@ export default function AddProductForm() {
                         setCategory(e.target.value);
                       }}
                     >
+                      <option value="" disabled>
+                        Please Select...
+                      </option>
                       <option>Mens</option>
                       <option>Womens</option>
                       <option>Kids</option>
                       <option>Accessories</option>
+                    </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group className="mt-3">
+                    <Form.Label>Clothing Type</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={clothingType}
+                      onChange={(e) => {
+                        setClothingType(e.target.value);
+                      }}
+                    >
+                      <option value="" disabled>
+                        Please Select...
+                      </option>
+                      <option disabled>Upperwear</option>
+                      <hr />
+                      <option>Shirt</option>
+                      <option>T-Shirt</option>
+                      <option>Hoodie</option>
+                      <option>Sweater</option>
+                      <option>Hoodie</option>
+                      <option>Jacket</option>
+                      <option>Vest</option>
+                      <option disabled>Bottomwear</option>
+                      <hr />
+                      <option>Pant</option>
+                      <option>Jean</option>
+                      <option>Short</option>
+                      <option>Legging</option>
+                      <option>Underpant</option>
+                      <option>Skirt</option>
+                      <option disabled>Accessories</option>
+                      <hr />
+                      <option>Wallet</option>
+                      <option>Belt</option>
+                      <option>Hat</option>
+                      <option>Scarf</option>
+                      <option>Tie</option>
+                      <option>Bag</option>
+                      <option>Travel Bag</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -174,9 +239,24 @@ export default function AddProductForm() {
                         setStatus(e.target.value);
                       }}
                     >
+                      <option value="" disabled>
+                        Please Select...
+                      </option>
+                      <option>Like New</option>
                       <option>Used with Care</option>
                       <option>Used Frequently</option>
                     </Form.Control>
+                  </Form.Group>
+
+                  <Form.Group className="mt-3">
+                    <Form.Label>Estimated Weight (grams)</Form.Label>
+                    <Form.Control
+                      disabled
+                      type={"text"}
+                      name="productWeight"
+                      value={weight}
+                      onChange={handleChange}
+                    />
                   </Form.Group>
 
                   <Button type="submit" className="w-100 mt-4 mb-3">

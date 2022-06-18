@@ -1,8 +1,10 @@
 interface Product {
   productId: string;
+  userId: string;
   productName: string;
   productPrice: number;
   productDescription: string;
+  productWeight: number;
   imageUrl: string;
   meetup: string;
   category: string;
@@ -11,7 +13,6 @@ interface Product {
   isSold: boolean;
   dateCreated: Date;
   dateUpdated: Date;
-  userId: string;
 }
   
 export default Product;
