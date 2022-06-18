@@ -1,24 +1,22 @@
-import { FormEvent, useState, ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import {
-  Form,
-  Container,
-  Card,
-  Button,
-  InputGroup,
   Alert,
+  Button,
+  Card,
+  Container,
+  Dropdown,
+  DropdownButton,
+  Form,
+  InputGroup,
 } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import Navigation from "../../Components/Navigation";
-import UserData from "../../../models/User";
 import Product from "../../../models/Product";
+import UserData from "../../../models/User";
 import { createProduct } from "../../../services/Firebase/firestoreService";
-import Loading from "../../Components/LoadingScreen";
 import { estimateWeight } from "../../../utils/productUtils";
-
-const shirt = {
-  name: "Shirt",
-  type: "Upperwear",
-};
+import Footer from "../../Components/Footer";
+import Loading from "../../Components/LoadingScreen";
+import Navigation from "../../Components/Navigation";
 
 const initialProduct = {
   productId: "",
@@ -45,9 +43,17 @@ export default function AddProductForm() {
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
   const [clothingType, setClothingType] = useState("");
+
+  const [metric, setMetric] = useState("g");
+  const [convertedWeight, setConvertedWeight] = useState(0);
   const [weight, setWeight] = useState(0);
+
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
+
+  if (state === null || state === undefined) {
+    window.location.href = "/home";
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -250,13 +256,31 @@ export default function AddProductForm() {
 
                   <Form.Group className="mt-3">
                     <Form.Label>Estimated Weight (grams)</Form.Label>
-                    <Form.Control
-                      disabled
-                      type={"text"}
-                      name="productWeight"
-                      value={weight}
-                      onChange={handleChange}
-                    />
+                    <InputGroup>
+                      <DropdownButton
+                        variant="outline-secondary"
+                        title={metric}
+                        id="input-group-dropdown-1"
+                        onSelect={(e: any) => {
+                          setMetric(e);
+                        }}
+                      >
+                        <Dropdown.Item eventKey={"g"}>Grams (g)</Dropdown.Item>
+                        <Dropdown.Item eventKey={"lbs"}>
+                          Pounds (lbs)
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey={"kg"}>
+                          Kilograms (kg)
+                        </Dropdown.Item>
+                      </DropdownButton>
+                      <Form.Control
+                        disabled
+                        type={"text"}
+                        name="productWeight"
+                        value={weight}
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
                   </Form.Group>
 
                   <Button type="submit" className="w-100 mt-4 mb-3">
@@ -266,6 +290,7 @@ export default function AddProductForm() {
               </Card.Body>
             </Card>
           </Container>
+          <Footer />
         </>
       )}
     </>
