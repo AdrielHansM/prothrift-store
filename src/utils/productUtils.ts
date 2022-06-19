@@ -22,7 +22,7 @@ export function convertWeight(metric : string, weight: number): number {
   if (metric == 'kg') {
     return weight / GRAMS_TO_KILOGRAMS;
   }
-  if (metric == 'lb') {
+  if (metric == 'lbs') {
     return weight / GRAMS_TO_POUNDS;
   }
 

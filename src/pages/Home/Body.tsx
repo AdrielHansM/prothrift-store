@@ -2,6 +2,7 @@ import { Button } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
+import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 
 export default function Body() {
@@ -60,6 +61,7 @@ export default function Body() {
       </div>
       <br />
       <br />
+      <Footer />
     </>
   );
 }

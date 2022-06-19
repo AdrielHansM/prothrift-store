@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import Product from "../../../models/Product";
 import UserData from "../../../models/User";
 import { createProduct } from "../../../services/Firebase/firestoreService";
-import { estimateWeight } from "../../../utils/productUtils";
+import { estimateWeight, convertWeight } from "../../../utils/productUtils";
 import Footer from "../../Components/Footer";
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
@@ -91,6 +91,14 @@ export default function AddProductForm() {
     if (category && clothingType) {
       setWeight(estimateWeight(category, clothingType));
     }
+
+    if (metric === "g") {
+      setConvertedWeight(weight);
+    }
+
+    if (metric != "g") {
+      setConvertedWeight(convertWeight(metric, weight));
+    }
   });
 
   function SuccessAlert() {
@@ -111,7 +119,10 @@ export default function AddProductForm() {
   return (
     <>
       {loading === false ? (
-        <Loading />
+        <>
+          <Navigation />
+          <Loading />
+        </>
       ) : (
         <>
           <Navigation />
@@ -277,7 +288,7 @@ export default function AddProductForm() {
                         disabled
                         type={"text"}
                         name="productWeight"
-                        value={weight}
+                        value={convertedWeight}
                         onChange={handleChange}
                       />
                     </InputGroup>

@@ -39,7 +39,7 @@ export const getUser = async (uid : string) => {
 }
 
 export const createProduct = async(userId: string, productName: string, productPrice: number, productWeight: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
-  const imageUrl = await uploadImage(image)
+  const imageUrl = await uploadImage(image, userId, productName)
   if(imageUrl) {
     return await database.collection('products').add({
         userId: userId,
@@ -60,13 +60,13 @@ export const createProduct = async(userId: string, productName: string, productP
     }).catch ((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorCode + " " + errorMessage)
+      alert(errorCode + " : " + errorMessage)
     })
   }
 }
 
-export const uploadImage = async (image: File) => {
-  const uploadTask = storage.ref(`/images/${image.name}`).put(image)
+export const uploadImage = async (image: File, userId: string, productName: string) => {
+  const uploadTask = storage.ref(`/images/${userId}/${image.name}_${productName}`).put(image)
 
   uploadTask.on('state_changed', () => {
   }, error => {
@@ -76,7 +76,7 @@ export const uploadImage = async (image: File) => {
   }
   );
   await uploadTask
-  let downloadUrl = await storage.ref("images").child(image.name).getDownloadURL()
+  let downloadUrl = await storage.ref("images").child(`${userId}/${image.name}_${productName}`).getDownloadURL()
   return downloadUrl
 }
 
