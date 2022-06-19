@@ -25,22 +25,16 @@ export default function Footer() {
               <h6>Categories</h6>
               <ul className="footer-links">
                 <li>
-                  <a href="">C</a>
+                  <a href="">Men</a>
                 </li>
                 <li>
-                  <a href="">UI Design</a>
+                  <a href="">Women</a>
                 </li>
                 <li>
-                  <a href="">PHP</a>
+                  <a href="">Kids</a>
                 </li>
                 <li>
-                  <a href="">Java</a>
-                </li>
-                <li>
-                  <a href="">Android</a>
-                </li>
-                <li>
-                  <a href="">Templates</a>
+                  <a href="">Accessories</a>
                 </li>
               </ul>
             </div>
@@ -82,12 +76,12 @@ export default function Footer() {
             <div className="col-md-4 col-sm-6 col-xs-12">
               <ul className="social-icons">
                 <li>
-                  <a className="facebook" href="#">
+                  <a className="facebook" href="https://www.facebook.com/">
                     <i className="fa-brands fa-facebook"></i>
                   </a>
                 </li>
                 <li>
-                  <a className="twitter" href="#">
+                  <a className="instagram" href="https://www.instagram.com/?hl=en">
                     <i className="fa-brands fa-instagram"></i>
                   </a>
                 </li>

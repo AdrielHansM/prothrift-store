@@ -6,7 +6,8 @@ import UserData from "../../models/User";
 import { fetchProducts } from "../../services/Firebase/firestoreService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from "../Components/Navigation";
+import Navigation from '../Components/Navigation'
+import { Button } from 'react-bootstrap';
 
 export default function ProfileBody() {
   const userDetails = useLocation().state as UserData;
@@ -67,11 +68,12 @@ export default function ProfileBody() {
 
           <section>
             <h2 className="product-category2">Products</h2>
-            <div className="product-container2 col-3">
+            <div className="product-container2">
               {products.map((product, index) => {
                 return (
                   <>
                     <Link
+                      className="product-link"
                       to={"/view-product"}
                       state={{ user: userDetails, product: product.productId }}
                     >
@@ -91,7 +93,7 @@ export default function ProfileBody() {
                           <p className="product-short-des">
                             {product.productDescription}
                           </p>
-                          <span className="price">{product.productPrice}</span>
+                          <span className="price">₱{product.productPrice}</span>
                           <div>
                             <img
                               src="/images/heart1.png"
@@ -105,6 +107,9 @@ export default function ProfileBody() {
                   </>
                 );
               })}
+            </div>
+            <div className='view-btn'>
+              <Button className='btn-lg'>View More</Button>
             </div>
           </section>
           <Footer />

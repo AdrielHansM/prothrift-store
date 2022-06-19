@@ -8,6 +8,7 @@ import {
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
+import "../../../assets/styles/ViewProduct.css";
 
 interface stateType {
   product: string;
@@ -55,16 +56,25 @@ export default function ViewProduct() {
       ) : (
         <>
           <Navigation />
+          <section className="details">
           <h3>product</h3>
           <p>{productDetails?.productId}</p>
+          <p>Image Here</p>
           <p>{productDetails?.productName}</p>
           <p>{productDetails?.productPrice}</p>
+          <p>{productDetails?.meetup}</p>
           <p>{productDetails?.productDescription}</p>
+          <button>Buy</button>
+          <br/>
+          
           <h3>seller</h3>
           <p>{sellerDetails?.firstName}</p>
           <p>{sellerDetails?.lastName}</p>
           <p>{sellerDetails?.contactNumber}</p>
           <p>{sellerDetails?.email}</p>
+          <p>Reviews?</p>
+          <button>Message Seller??</button>
+          </section>
         </>
       )}
     </>

@@ -1,0 +1,8 @@
+.details{
+    margin: 100px 50px 0 100px;
+}
+
+.details h3{
+    text-transform: capitalize;
+    font-size: 50px;
+}

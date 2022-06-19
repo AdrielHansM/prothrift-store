@@ -81,9 +81,9 @@ body{
 }
 
 .testimony span{
-    float: inline-end;
     padding: 10px 15px;
-    position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
 }
 
 .feedback{
@@ -100,11 +100,11 @@ body{
     font-size: 20px;
     margin: 20px 15px;
     background: #4cecf8;
+    border: none;
 }
 
 .fdBtn:hover {
-    background-color: #fff;
-    color: #3a3c9b;
+    background-color: rgb(100, 113, 147);
     transition: 250ms;
 }
 

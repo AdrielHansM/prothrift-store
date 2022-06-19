@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../assets/styles/Shop.css';
 import Navigation from '../Components/Navigation';
+import Footer from "../Components/Footer";
 
 
 export default function Women() {
@@ -16,7 +17,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -27,7 +28,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -38,7 +39,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -51,7 +52,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -62,7 +63,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -73,7 +74,7 @@ export default function Women() {
       <div className="product-card">
           <div className="product-image">
               <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">add to cart</button>
+              <button className="card-btn">Buy Product</button>
           </div>
           <div className="product-info">
               <h2 className="product-brand">shorts</h2>
@@ -83,10 +84,7 @@ export default function Women() {
       </div>                    
     </div>
 
-    <br/>
-    <footer className='footer'>
-        <h1>This is Footer</h1>
-    </footer>
+    <Footer />
     </>
   )
 }
