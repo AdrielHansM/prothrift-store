@@ -82,7 +82,7 @@ export default function ProfileBody() {
                             className="product-thumb"
                             alt=""
                           />
-                          <button className="card-btn">add to cart</button>
+                          <button className="card-btn">Buy Product</button>
                         </div>
                         <div className="product-info">
                           <h2 className="product-brand">

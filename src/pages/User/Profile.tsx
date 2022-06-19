@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navigation from "../Components/Navigation";
 import UserData from "../../models/User";
 import "../../assets/styles/UserProfile.css";
@@ -8,6 +8,8 @@ import { ToastContainer, Toast, Button, Tabs, Tab } from "react-bootstrap";
 import Footer from "../Components/Footer";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const state = useLocation().state as UserData;
   console.log(state);
 
@@ -35,7 +37,7 @@ export default function Profile() {
 
                   <div className="profile-header-info">
                     <h4 className="m-t-10 m-b-5">Sean Ngu</h4>
-                    <button className="edit-btn">Edit Profile</button>
+                    <button className="edit-btn" onClick={() => navigate("/editprofile")}>Edit Profile</button>
                   </div>
                 </div>
 
