@@ -59,11 +59,11 @@ export default function ViewProduct() {
           <section className="details">
           <h3>product</h3>
           <div className="product-con">
-            <img src={productDetails?.imageUrl}/>
+            <img src={productDetails?.imageUrl} style={{width: "50%", height: "600px"}}/>
           <div className="product-details">
             <p className="p-name">{productDetails?.productName}</p>
             <p className="price">₱{productDetails?.productPrice}</p>
-            <p>{productDetails?.meetup}</p>
+            <p>meet-up place: {productDetails?.meetup}</p>
             <p>{productDetails?.productDescription}</p>
             <div>
               <img
@@ -72,18 +72,20 @@ export default function ViewProduct() {
                 alt=""
               />
             </div>
-            <button>Buy</button>
+            <div className="seller-details">
+              <h2>seller:</h2>
+                <p>name: {sellerDetails?.firstName}</p>
+                <p>lastname: {sellerDetails?.lastName}</p>
+                <p>Contact: {sellerDetails?.contactNumber}</p>
+                <p>Email: {sellerDetails?.email}</p>
+                <p>Reviews?</p>
+            </div>
+            <div className="product-btn">
+              <button>Message Seller</button>
+              <button>Buy</button>
+            </div>
           </div>
           </div>
-          <br/>
-          
-          <h3>seller</h3>
-          <p>{sellerDetails?.firstName}</p>
-          <p>{sellerDetails?.lastName}</p>
-          <p>{sellerDetails?.contactNumber}</p>
-          <p>{sellerDetails?.email}</p>
-          <p>Reviews?</p>
-          <button>Message Seller??</button>
           </section>
         </>
       )}
