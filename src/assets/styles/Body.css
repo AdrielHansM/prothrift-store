@@ -39,12 +39,9 @@ body{
     font-size: 50px;
 }
 
-.numofpounds p{
+.numofpounds{
     font-size: 100px;
-    border-style: solid;
-    border-radius: 9px;
-    margin-right: 20rem;
-    margin-left: 20rem;
+    text-decoration-line: underline;
 }
 
 .text2{

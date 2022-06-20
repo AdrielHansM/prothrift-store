@@ -61,11 +61,11 @@ export default function EditProfile() {
   return (
     <>
       <Navigation />
-      <div className="container rounded bg-white mt-5 mb-5">
+
         <div className="row">
-          <div className="col-md-3 border-right"></div>
-          <div className="col-md-5 border-right">
-            <div className="p-3 py-5">
+          
+          <div className="col-md-5">
+            <div className="edit-details-con">
               <div className="row mt-2">
                 <div className="col-md-6">
                   <label className="labels">First Name</label>
@@ -154,7 +154,7 @@ export default function EditProfile() {
             </div>
           </div>
         </div>
-      </div>
+
     </>
   );
 }

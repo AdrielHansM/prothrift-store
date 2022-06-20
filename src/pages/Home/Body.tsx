@@ -41,7 +41,7 @@ export default function Body() {
       <div className="text1Con">
         <p className="text1">Total of Users saved a Potential</p>
         <div className="numofpounds">
-          <p>{totalSaved} Pounds</p>
+          {totalSaved} Pounds
         </div>
         <p className="text1">By Doing Secondhand Shopping</p>
       </div>

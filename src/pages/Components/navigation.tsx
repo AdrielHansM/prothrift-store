@@ -53,10 +53,9 @@ export default function Navigation() {
       <Toast show={showA} onClose={toggleShowA} className="toast">
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
+          <strong className="me-auto">ProThrift</strong>
         </Toast.Header>
-        <Toast.Body>Collect your daily points.</Toast.Body>
+        <Toast.Body className="toast-body">Collect your daily points.</Toast.Body>
         <button className="toast-btn">Get!</button>
       </Toast>
     );

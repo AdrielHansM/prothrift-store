@@ -47,7 +47,7 @@ export default function Profile() {
                 <ul className="profile-header-tab nav nav-tabs">
                   <li className="nav-item">
                     <a
-                      href="#profile-post"
+                      href="#"
                       className="nav-link active show"
                       data-toggle="tab"
                     >
@@ -56,7 +56,7 @@ export default function Profile() {
                   </li>
                   <li className="nav-item">
                     <a
-                      href="#profile-about"
+                      href="#"
                       className="nav-link"
                       data-toggle="tab"
                     >
