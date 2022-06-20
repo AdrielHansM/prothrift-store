@@ -58,13 +58,23 @@ export default function ViewProduct() {
           <Navigation />
           <section className="details">
           <h3>product</h3>
-          <p>{productDetails?.productId}</p>
-          <p>Image Here</p>
-          <p>{productDetails?.productName}</p>
-          <p>{productDetails?.productPrice}</p>
-          <p>{productDetails?.meetup}</p>
-          <p>{productDetails?.productDescription}</p>
-          <button>Buy</button>
+          <div className="product-con">
+            <img src={productDetails?.imageUrl}/>
+          <div className="product-details">
+            <p className="p-name">{productDetails?.productName}</p>
+            <p className="price">₱{productDetails?.productPrice}</p>
+            <p>{productDetails?.meetup}</p>
+            <p>{productDetails?.productDescription}</p>
+            <div>
+              <img
+                src="/images/heart1.png"
+                className="liked-heart"
+                alt=""
+              />
+            </div>
+            <button>Buy</button>
+          </div>
+          </div>
           <br/>
           
           <h3>seller</h3>

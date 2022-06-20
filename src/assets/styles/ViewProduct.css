@@ -6,3 +6,37 @@
     text-transform: capitalize;
     font-size: 50px;
 }
+
+.product-con{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    gap: 20px;
+}
+
+.product-details, p{
+    font-size: 20px;
+    
+}
+
+.product-details .p-name{
+    font-size: 50px;
+}
+
+.product-details .price{
+    font-size: 30px;
+}
+
+.product-con button{
+    padding: 5px 30px;
+    margin-left: 70%;
+    margin-top: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    background: #4ad9e4;
+    color: #fff;
+}
+.product-con button:hover{
+    background-color: rgb(43, 100, 141);
+}
