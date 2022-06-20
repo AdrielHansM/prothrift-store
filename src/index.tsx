@@ -1,28 +1,28 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.min.css";
-import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import App from "./App";
 
-import Login from "./pages/Login/Login";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import Women from "./pages/Shop/Women";
-import Men from "./pages/Shop/Men";
-import Kids from "./pages/Shop/Kids";
-import Accessories from "./pages/Shop/Accessories";
-import Register from "./pages/Register/Register";
 import About from "./pages/About/About";
 import Chat from "./pages/Chat/Chat";
-import Contact from "./pages/Contact/Contact";
-import Body from "./pages/Home/Body";
-import Feedback from "./pages/Feedback/Feedback";
 import FirstFeat from "./pages/Components/FirstFeat";
 import SecFeat from "./pages/Components/SecFeat";
-import ProfileBody from "./pages/Shop/Shop";
+import Contact from "./pages/Contact/Contact";
+import Feedback from "./pages/Feedback/Feedback";
+import Body from "./pages/Home/Body";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Accessories from "./pages/Shop/Accessories";
+import Kids from "./pages/Shop/Kids";
 import LikedProducts from "./pages/Shop/LikedProducts";
+import Men from "./pages/Shop/Men";
 import AddProductForm from "./pages/Shop/ProductComponents/AddProductForm";
-import Profile from "./pages/User/Profile";
 import ViewProduct from "./pages/Shop/ProductComponents/ViewProduct";
+import ProfileBody from "./pages/Shop/Shop";
+import Women from "./pages/Shop/Women";
+import Profile from "./pages/User/Profile";
 import EditProfile from "./pages/User/UserComponenents/EditProfile";
 
 const root = ReactDOM.createRoot(
