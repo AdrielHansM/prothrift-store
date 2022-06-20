@@ -1,13 +1,28 @@
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
+import { fetchTotalSaved } from "../../services/Firebase/firestoreService";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
 
 export default function Body() {
   const state = useLocation().state as UserData;
+  const [totalSaved, setTotalSaved] = useState(0);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchTotal();
+  });
+
+  async function fetchTotal() {
+    const total = await fetchTotalSaved();
+    if (total) {
+      setTotalSaved(total);
+    }
+  }
 
   return (
     <>
@@ -26,7 +41,7 @@ export default function Body() {
       <div className="text1Con">
         <p className="text1">Total of Users saved a Potential</p>
         <div className="numofpounds">
-          <p>### Pounds</p>
+          <p>{totalSaved} Pounds</p>
         </div>
         <p className="text1">By Doing Secondhand Shopping</p>
       </div>

@@ -6,6 +6,7 @@ import "../../assets/styles/UserProfile.css";
 // import '../../assets/styles/UserProfile.css';
 import { ToastContainer, Toast, Button, Tabs, Tab } from "react-bootstrap";
 import Footer from "../Components/Footer";
+import Loading from "../Components/LoadingScreen";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -16,9 +17,6 @@ export default function Profile() {
   return (
     <>
       <Navigation />
-      {/* <p> 
-        {state?.userId}
-      </p> */}
 
       <div className="container">
         <div className="row">
@@ -36,8 +34,13 @@ export default function Profile() {
                   </div>
 
                   <div className="profile-header-info">
-                    <h4 className="m-t-10 m-b-5">Sean Ngu</h4>
-                    <button className="edit-btn" onClick={() => navigate("/editprofile")}>Edit Profile</button>
+                    <h4 className="m-t-10 m-b-5">{`${state?.firstName} ${state?.lastName}`}</h4>
+                    <button
+                      className="edit-btn"
+                      onClick={() => navigate("/editprofile", { state: state })}
+                    >
+                      Edit Profile
+                    </button>
                   </div>
                 </div>
 

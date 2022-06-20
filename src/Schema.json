@@ -31,8 +31,10 @@
             "$oid": "ObjectId"
         },
         "product_id": "string",
+        "seller_id" : "string",
         "user_id": "string",
-        "rating": "number"
+        "rating": "number",
+        "review": "string"
         }
     ],
 
@@ -44,8 +46,7 @@
             "product_id": "number",
             "buyer_id": "string",
             "seller_id": "string",
-            "transaction_status": "string",
-            "is_seller_reviewed": "boolean"
+            "transaction_status": "string"
         }
     ],
 

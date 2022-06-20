@@ -3,7 +3,7 @@ import Firebase, { auth, database, storage } from "./firebaseApp";
 import UserData from "../../models/User";
 import Product from '../../models/Product';
 
-export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number) => {
+export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number, dateUpdated : Date) => {
     await database.collection('users').add({ 
       userId: userId,
       firstName: firstName,
@@ -11,7 +11,7 @@ export const createUser = async(userId: string, firstName: string, lastName: str
       email: email,
       contact: contact,
       isDeleted: false,
-      dateCreated: new Date(),
+      dateCreated: dateUpdated ? dateUpdated : new Date(),
       dateUpdated: new Date(),
     }).catch ((error) => {
     const errorCode = error.code;
@@ -142,5 +142,20 @@ export const fetchSingleProduct = async (productId: string) => {
       }
 
       return product
+    })
+}
+
+export const fetchTotalSaved = async() => {
+  return await database
+    .collection('products')
+    .where('isDeleted', '==', false)
+    .where('isSold', '==', false)
+    .get()
+    .then((docs) => {
+      let totalSaved = 0;
+      docs.forEach(productDoc => {
+        totalSaved += productDoc.data().productWeight
+      });
+      return totalSaved
     })
 }
