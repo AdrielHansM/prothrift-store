@@ -127,7 +127,7 @@ export default function Navigation() {
               <NavDropdown.Item onClick={() => navigateTo("/profile")}>
                 Profile
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigateTo("/profile")}>
+              <NavDropdown.Item onClick={() => navigateTo("/chat")}>
                 Messages
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => navigateTo("/likedproducts")}>
