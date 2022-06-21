@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Nav } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
@@ -24,20 +24,12 @@ export default function Body() {
     }
   }
 
+
+
   return (
     <>
-      <Navigation />
-
-      <div
-        className="background"
-        style={{ backgroundImage: "url(/images/header.png)" }}
-      >
-        <div>
-          <img src="/images/ProThrift-logo.png" className="logo" alt="" />
-          <p className="bcktext">Sustainability is the Key </p>
-        </div>
-      </div>
-      <br />
+      <Navigation/>
+      <br/>
       <div className="text1Con">
         <p className="text1">Total of Users saved a Potential</p>
         <div className="numofpounds">
