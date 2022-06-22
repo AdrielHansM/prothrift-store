@@ -70,13 +70,9 @@ export default function Navigation() {
         </div>
         <ul className={"nav-menu active"}>
           <NavDropdown
-            title={<span className="text-white">ProThrift</span>}
+            title={<span className="text-white" onClick={() => navigateTo("/shop")}>Shop</span>}
             id="nav-dropdown"
           >
-            <NavDropdown.Item onClick={() => navigateTo("/shop")}>
-              Shop
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
               Womens
             </NavDropdown.Item>
