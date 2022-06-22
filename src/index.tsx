@@ -6,8 +6,6 @@ import App from "./App";
 
 import About from "./pages/About/About";
 import Chat from "./pages/Chat/Chat";
-import FirstFeat from "./pages/Components/FirstFeat";
-import SecFeat from "./pages/Components/SecFeat";
 import Contact from "./pages/Contact/Contact";
 import Feedback from "./pages/Feedback/Feedback";
 import Body from "./pages/Home/Body";
@@ -38,8 +36,6 @@ root.render(
           <Route path={"profile"} element={<Profile />} />
           <Route path={"login"} element={<Login />} />
           <Route path={"register"} element={<Register />} />
-          <Route path={"firstfeat"} element={<FirstFeat />} />
-          <Route path={"secfeat"} element={<SecFeat />} />
           <Route path={"about"} element={<About />} />
           <Route path={"chat"} element={<Chat />} />
           <Route path={"shop"} element={<ProfileBody />} />

@@ -1,7 +1,7 @@
-import firebase from 'firebase/app';
-import Firebase, { auth, database, storage } from "./firebaseApp";
-import UserData from "../../models/User";
-import Product from '../../models/Product';
+import MaterialsRecycled from '../../models/MaterialsRecycled';
+import MaterialsRecycledByUser from '../../models/MaterialsRecycledByUser';
+import Reviews from '../../models/Reviews';
+import { database } from "./firebaseApp";
 
 export const createTransaction = async (productId: string, buyerId: string, sellerId : string, transactionStatus: string) => {
   return await database.collection('transactions').add({
@@ -49,5 +49,81 @@ export const createUserReview = async(productId: string, sellerId: string, userI
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " : " + errorMessage)
+  })
+}
+
+export const fetchUserReviews = async(sellerId: string) => {
+  let reviews: Reviews[] = []
+
+  return await database
+  .collection('reviews')
+  .where('sellerId', '==', sellerId)
+  .get()
+  .then(querySnapshots => {
+    querySnapshots.forEach(doc => {
+      const review = {
+        reviewId: doc.id,
+        productId: doc.data().productId,
+        sellerId: doc.data().sellerId,
+        userId: doc.data().userId,
+        rating: doc.data().rating,
+        review: doc.data().review,
+        dateUpdated: doc.data().dateUpdated,
+        dateCreated: doc.data().dateCreated
+      }
+      reviews.push(review)
+    })
+    return reviews
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const createMaterialsRecycled = async (productId: string, productName: string, userId: string, weightRecycled: Number) => {
+  await database
+  .collection('materialsRecycled')
+  .add({
+    productId: productId,
+    productName: productName,
+    userId: userId,
+    weightRecycled: weightRecycled,
+    dateUpdated: new Date(),
+    dateCreated: new Date()
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchMaterialsRecycled = async (userId:string) => {
+  let totalMaterialsRecycled = 0;
+  let materialsRecycled: MaterialsRecycled[] = []
+  let materialsRecycledByUser: MaterialsRecycledByUser
+  return await database
+  .collection('materialsRecycled')
+  .where('userId', '==', userId)
+  .get()
+  .then(querySnapshots => {
+    querySnapshots.forEach(doc => {
+      totalMaterialsRecycled += doc.data().weightRecycled
+      const materialRecycled = {
+        materialId: doc.id,
+        productId: doc.data().productId,
+        productName: doc.data().productName,
+        userId: doc.data().userId,
+        weightRecycled: doc.data().weightRecycled,
+        dateUpdated: doc.data().dateUpdated,
+        dateCreated: doc.data().dateCreated
+      }
+      materialsRecycled.push(materialRecycled)
+    })
+    materialsRecycledByUser.totalMaterialsReycled = totalMaterialsRecycled
+    
+    materialsRecycledByUser.materialsRecycled = materialsRecycled
+
+    return materialsRecycledByUser
   })
 }
