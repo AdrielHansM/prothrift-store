@@ -44,43 +44,29 @@ export default function Profile() {
                   </div>
                 </div>
 
-                <ul className="profile-header-tab nav nav-tabs">
-                  <li className="nav-item">
-                    <a
-                      href="#"
-                      className="nav-link active show"
-                      data-toggle="tab"
-                    >
-                      LISTS
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      href="#"
-                      className="nav-link"
-                      data-toggle="tab"
-                    >
-                      REVIEWS
-                    </a>
-                  </li>
-                </ul>
-
-                {/* <ul className="profile-header-tab nav nav-tabs">
-                  <Tabs defaultActiveKey="second" className='tab-content'>
-                    <Tab eventKey="first" title="Dashboard">
-                      Hii, I am 1st tab content
-                    </Tab>
-                    <Tab eventKey="second" title="Setting">
-                      Hii, I am 2nd tab content
-                    </Tab>
+                <Tabs
+                  defaultActiveKey="home"
+                  transition={false}
+                  id="noanim-tab-example"
+                  className="mb-3"
+                >
+                  <Tab eventKey="weekly" title="Weekly">
+                    <div>weeklyss</div>
+                  </Tab>
+                  <Tab eventKey="monthly" title="Monthly">
+                    <div>monthlyss</div>
+                  </Tab>
+                  <Tab eventKey="yearly" title="Yearly">
+                    <div>yearlyss</div>
+                  </Tab>
                 </Tabs>
-                  </ul> */}
+
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

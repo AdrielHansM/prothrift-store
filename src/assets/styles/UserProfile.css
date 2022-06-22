@@ -1,6 +1,5 @@
 .profile-header {
     position: relative;
-    overflow: hidden
 }
 
 
@@ -13,7 +12,7 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
+    bottom:0;
 }
 
 .profile-header .profile-header-cover:before {
@@ -37,7 +36,7 @@
     height: 120px;
     overflow: hidden;
     z-index: 10;
-    margin: 50px 0 -20px;
+    margin: 100px 0 -20px;
     padding: 3px;
     border-radius: 4px;
     background: #fff
@@ -63,11 +62,6 @@
     position: relative
 }
 
-
-.profile-header-tab {
-    background: #fff;
-    padding: 0px 20px 50px 140px;
-}
 
 .edit-btn{
     background-color: rgb(13,202,240);

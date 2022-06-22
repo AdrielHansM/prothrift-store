@@ -45,7 +45,11 @@ export default function Body() {
             <div className="numofpounds">
               {totalSaved} Pounds
             </div>
-            <p>Some Illustrations</p>
+            <div className="illustration">
+              <img src='./images/house.png' alt='' className="img-illustrate"/>
+              <p style={{marginTop: '50px', fontSize: '50px'}}>=</p>
+              <p><strong>3.2kg or 7.1lbs of waste thrown everday</strong></p>
+            </div>
           </Col>       
           <Col>
           <div className="statistics">
@@ -73,7 +77,7 @@ export default function Body() {
       <div className="gif-container">
       <p className="text1"><strong>This is how much wastes in pounds by users on ProThrift 
         potentially saved in 2022 by buying and selling used 
-        things instead of new. By prolonging the lifetime of steel we are 
+        things instead of new. By prolonging the lifetime of clothes we are 
         releasing the pressure on the earth's natural resources.</strong></p>
       </div>
 
