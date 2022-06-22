@@ -1,48 +1,65 @@
-body{
-    background: rgb(207, 230, 234);
-}
-
 .About{
-    font-size: 65px;
-    padding: 100px 50px;
+    position: relative;
+    height: 90vh;
+    width: 100%;
 }
 
-.about-us{
-    margin: 0px 18rem;
+.About::before{
+    content: "";
+    position: absolute;
+    background-image: url(/public/images/about-us-png-1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.7;
+}
+
+.about-container{
+    padding: 200px;
+    position: relative;
+    margin-left: 0;
+}
+
+h1{
+    font-size: 70px;
+    margin-right: 60%;
+}
+
+p{
+    margin-left: 8%;
+}
+
+.about-content h2{
     text-align: center;
-    font-size: 1.7rem;
-    padding-bottom: 120px;
+    font-size: 50px;
+    margin-top: 70px;
 }
 
-.teamimg {
-    width: 100px;
-    height: 100px;
-    margin: 5px 100px;
-}
-
-
-.teamimage1 {
-    width: 20%;
-    padding: 10px 10px;
-    margin-left: 25rem;
-    float: left;
-}
-
-.teamimage2 {
-    width: 20%;
-    padding: 10px 10px;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    float: left;
-}
-
-.teamimage1 p{
+.about-content p{
     text-align: center;
-    margin: 5px 100px;
-    padding: 0px 15px;
+    text-transform: none;
 }
-.teamimage2 p{
-    text-align: center;
-    margin: 5px 100px;
-    padding: 0px 15px;
+
+.map{
+    overflow:hidden;
+    padding-bottom:50%;
+    position:relative;
+    height:0;
+    display: flex;
+    margin-top: 100px;
+}
+
+.map p{
+    position: relative;
+    font-size: 30px;
+}
+
+.map iframe{
+    margin-left: 40%;
+    height:50%;
+    width:50%;
+    position: absolute;
 }

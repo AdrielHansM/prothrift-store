@@ -29,15 +29,26 @@ export default function Body() {
   return (
     <>
       <Navigation/>
-      <br/>
+      <div
+        className="background"
+        style={{ backgroundImage: "url(/images/header.png)" }}>
+        <div>
+          <img src="/images/ProThrift-logo.png" className="logo" alt="" />
+        </div>
+      </div>
+      <div className="gif-container">
       <div className="text1Con">
-        <p className="text1">Total of Users saved a Potential</p>
         <div className="numofpounds">
           {totalSaved} Pounds
         </div>
-        <p className="text1">By Doing Secondhand Shopping</p>
+        <p className="text1"><strong>This is how much wastes in pounds by users on ProThrift 
+        potentially saved in 2022 by buying and selling used 
+        things instead of new. By prolonging the lifetime of steel we are 
+        releasing the pressure on the earth's natural resources.</strong></p>
       </div>
-      <br />
+      </div>
+      <br/>
+      <p>STATISTICS HERE?</p>
 
       <div className="text2">
         <h1 className="textTitle">What We Do!</h1>

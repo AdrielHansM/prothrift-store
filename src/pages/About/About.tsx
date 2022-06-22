@@ -22,30 +22,26 @@ export default function About() {
 
   return (
     <>
-    <Navigation></Navigation>
+    <Navigation/>
 
-    <div>
-      <h1 className="About">About us</h1>
-        <div className='about-us'>
-          <p>What is it that fuels you? For me, it’s The Artistry. 
-            I love writing about my daily life and what interests me, and sharing all of my thoughts with my readers. 
-            The site is an open and honest platform about how to make the best of what comes my way.</p>
-          <p>The Artistry is truly my passion project, gaining more and more traction each day. 
-            I hope you enjoy my site and all of the unique content I offer. 
-            Take a look around; perhaps you’ll discover what exhilarates you as well. Are you ready to be inspired?</p>
+      <div className="About">
+        <div className="about-container">
+          <h1>About Us</h1>
+          <p style={{fontSize:'40px', textTransform: 'none'}}>Empowers Consumers and Promotes Thrifting as a Pro-Environmental </p>
         </div>
-    </div>
-    <div className="row"> 
-      <div className='teamimage1'>
-        <img src='/images/user.png' alt="teamimage1" className='teamimg'/>
-        <p>Name1</p>
       </div>
-      <div className='teamimage2'>
-        <img src='/images/user.png' alt="teamimage2" className='teamimg'/>
-        <p>Name2</p>
+
+      <div className="about-content">
+        <h2>This is ProThrift</h2>
+        <p>ProThrift is a secondhand platform with a mission to empower people in their daily lives. 
+          "CHANGE LINE - We do this by providing leading online marketplaces, building world-class media houses, and helping great companies scale." </p>
+      </div>
+
+      <div className="map">
+        <p>Our Location</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.1700146273524!2d120.60876511482714!3d16.416189588667432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3391a1572cc1835b%3A0xb82d1aa8aa94d8fe!2sNavy%20Base%20Rd%2C%20Baguio%2C%20Benguet!5e0!3m2!1sen!2sph!4v1655870664320!5m2!1sen!2sph" style={{border:"0"}}></iframe>
       </div>
       
-    </div>
     </>
   )
 }
