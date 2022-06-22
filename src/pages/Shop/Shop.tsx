@@ -49,7 +49,7 @@ export default function ProfileBody() {
           >
             <div className="content">
               <img src="/images/ProThrift-logo.png" className="logo" alt="" />
-              <p className="sub-heading">Best fashion collection of all time</p>
+              <p className="sub-heading">Lorem ipsum yadayadyad</p>
             </div>
           </div>
           <br />

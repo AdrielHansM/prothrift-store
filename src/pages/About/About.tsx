@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import "../../assets/styles/About.css";
 import Navigation from "../Components/Navigation";
 import UserData from "../../models/User";
+import Footer from "../Components/Footer";
 
 export default function About() {
   const state = useLocation().state as UserData;
@@ -14,7 +15,7 @@ export default function About() {
       <div className="About">
         <div className="about-container">
           <h1>About Us</h1>
-          <p style={{ fontSize: "40px", textTransform: "none" }}>
+          <p style={{ fontSize: "40px", textTransform: "none" }} className="about-text">
             Empowers Consumers and Promotes Thrifting as a Pro-Environmental{" "}
           </p>
         </div>
@@ -37,6 +38,7 @@ export default function About() {
           style={{ border: "0" }}
         ></iframe>
       </div>
+      <Footer/>
     </>
   );
 }

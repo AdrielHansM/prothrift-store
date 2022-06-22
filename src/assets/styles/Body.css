@@ -18,6 +18,7 @@
 
 .stats-container{
     margin-top: 50px;
+    flex-wrap: wrap;
 }
 
 .statistics{
@@ -25,9 +26,28 @@
 }
 
 .numofpounds{
-    font-size: 50px;
-    margin-bottom: 10px;
+    font-size: 60px;
+    margin-bottom: 20px;
     text-align: center;
+    display: flex;
+    margin-left: 20%;
+    margin-top: 15px;
+}
+
+.numofpounds p{
+    text-transform: none;
+    margin-right: 5%;
+    margin-left: 0;
+    margin-top: 0;
+    font-size: 30px;
+}
+
+.numofpounds img{
+    width: 25%;
+    height: 25%;
+    border-radius: 100%;
+    margin-right: 50px;
+    position: relative;
 }
 
 .illustration{
@@ -49,7 +69,7 @@
     height: 150px;
 }
 
-.text1{
+.gif-container .text1{
     font-size: 25px;
     margin-left: 50px;
     margin-right: 15%;
@@ -58,15 +78,31 @@
 }
 
 .gif-container{
-    padding: 9%;
+    padding: 9% 150px;
     background-image: url(/public/images/zerowaste.gif);
     background-repeat: no-repeat;
     background-position:right;
     background-size:30%;
+    margin-top: 20px;
+}
+
+.circularEcon{
+    flex-wrap: wrap;
+}
+
+.circularEcon h1{
+    text-align: center;
+    margin-top: 100px;
+    font-size: 50px;
+}
+.circularEcon img{
+    margin-left: 15%;
+    margin-right: 10%;
+    margin-top: 50px;
 }
 
 .feedback{
-    margin-top: 20%;
+    margin-top: 10%;
     text-align: center;
 }
 

@@ -23,12 +23,12 @@
     margin-left: 0;
 }
 
-h1{
+.about-container h1{
     font-size: 70px;
     margin-right: 60%;
 }
 
-p{
+.about-text{
     margin-left: 8%;
 }
 

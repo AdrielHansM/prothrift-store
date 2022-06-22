@@ -36,13 +36,16 @@ export default function Body() {
           <img src="/images/ProThrift-logo.png" className="logo" alt="" />
         </div>
       </div>
-      <br />
-      <p>STATISTICS HERE?</p>
+      <br/>
 
       <Container className="stats-container">
         <Row>
           <Col style={{ backgroundColor: "#2222", borderRadius: "5px" }}>
-            <div className="numofpounds">{totalSaved} Pounds</div>
+            <div className="numofpounds">
+              {totalSaved} 
+              <p>Pounds of Clothes</p>
+              <img src="./images/saved.png"/>
+            </div>
             <div className="illustration">
               <img src="./images/house.png" alt="" className="img-illustrate" />
               <p style={{ marginTop: "50px", fontSize: "50px" }}>=</p>
@@ -84,10 +87,15 @@ export default function Body() {
           </strong>
         </p>
       </div>
-
       <br />
+
+      <div className="circularEcon">
+        <h1>Circular Economy</h1>
+        <img src="./images/circular_economy.gif"/>
+      </div>
+
       <div className="feedback">
-        <h1>Feedback!</h1>
+        <h1>Give us Feedback</h1>
         <Link to={"/feedback"}>
           <Button className="fdBtn">Click here</Button>
         </Link>

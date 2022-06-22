@@ -20,7 +20,6 @@ export default function Profile() {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
             <div id="content" className="content content-full-width">
               <div className="profile-header">
                 <div className="profile-header-cover"></div>
@@ -34,7 +33,7 @@ export default function Profile() {
                   </div>
 
                   <div className="profile-header-info">
-                    <h4 className="m-t-10 m-b-5">{`${state?.firstName} ${state?.lastName}`}</h4>
+                    <h4>{`${state?.firstName} ${state?.lastName}`}</h4>
                     <button
                       className="edit-btn"
                       onClick={() => navigate("/editprofile", { state: state })}
@@ -42,28 +41,26 @@ export default function Profile() {
                       Edit Profile
                     </button>
                   </div>
-                </div>
-
-                <Tabs
-                  defaultActiveKey="home"
-                  transition={false}
-                  id="noanim-tab-example"
-                  className="mb-3"
-                >
-                  <Tab eventKey="weekly" title="Weekly">
-                    <div>weeklyss</div>
-                  </Tab>
-                  <Tab eventKey="monthly" title="Monthly">
-                    <div>monthlyss</div>
-                  </Tab>
-                  <Tab eventKey="yearly" title="Yearly">
-                    <div>yearlyss</div>
-                  </Tab>
-                </Tabs>
-
               </div>
             </div>
           </div>
+
+          <Tabs
+            defaultActiveKey="home"
+            transition={false}
+            id="noanim-tab-example"
+            className="tab-col"
+          >
+            <Tab eventKey="weekly" title="LISTS">
+              <div>Product Lists</div>
+            </Tab>
+
+            <Tab eventKey="monthly" title="REVIEWS">
+              <div>Your Reviews</div>
+            </Tab>
+            
+          </Tabs>
+
         </div>
       </div>
       {/* <Footer /> */}

@@ -1,7 +1,4 @@
 *{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
     font-family: 'Raleway', sans-serif;
   }
 
@@ -27,6 +24,7 @@
     border: none;
     background: rgb(95, 174, 216);
     color: #fff;
+    position: relative;
 }
 
 .landing-page button:hover{
