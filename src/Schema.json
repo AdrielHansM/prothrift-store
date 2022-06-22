@@ -8,7 +8,7 @@
             "firstName": "string",
             "lastName": "string",
             "email": "string",
-            "contacumber": "number",
+            "contactNumber": "number",
             "isDeleted": "boolean",
             "dateCreated": "timestamp",
             "dateUpdated": "timestamp"
@@ -21,7 +21,9 @@
             "$oid": "ObjectId"
         },
         "product_id": "string",
-        "user_id": "string"
+        "user_id": "string",
+        "dateUpdated" :"timestamp",
+        "dateCreated" : "timestamp"
         }
     ],
 
@@ -30,11 +32,13 @@
         "_ID": {
             "$oid": "ObjectId"
         },
-        "product_id": "string",
-        "seller_id" : "string",
-        "user_id": "string",
+        "productId": "string",
+        "sellerId" : "string",
+        "userId": "string",
         "rating": "number",
-        "review": "string"
+        "review": "string",
+        "dateUpdated" :"timestamp",
+        "dateCreated" : "timestamp"
         }
     ],
 
@@ -43,10 +47,12 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "product_id": "number",
-            "buyer_id": "string",
-            "seller_id": "string",
-            "transaction_status": "string"
+            "productId": "number",
+            "buyerId": "string",
+            "sellerId": "string",
+            "transactionStatus": "string",
+            "dateUpdated" :"timestamp",
+            "dateCreated" : "timestamp"
         }
     ],
 
@@ -56,11 +62,11 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "product_id": "ObjectId",
-            "user_id": "ObjectId",
-            "weight_recycled": "string",
-            "date-added": "timestamp",
-            "date-updated": "timestamp"
+            "productId": "ObjectId",
+            "userId": "ObjectId",
+            "weightRecycled": "string",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp"
         }
     ],
 
@@ -69,20 +75,19 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "user_id": "ObjectId",
-            "product_name": "string",
-            "product_description": "string",
-            "product_price": "double",
-            "product_weight" : "double",
+            "userId": "ObjectId",
+            "productName": "string",
+            "productDescription": "string",
+            "productPrice": "double",
+            "productWeight" : "double",
             "meetup" : "string",
             "category" : "string",
             "status": "string",
-            "contact_number": "number",
-            "is_sold": "boolean",
-            "is_deleted": "boolean",
-            "is_donated": "boolean",
-            "date-added": "timestamp",
-            "date-updated": "timestamp"
+            "isSold": "boolean",
+            "isDeleted": "boolean",
+            "isDonated": "boolean",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp"
         }
     ],
 
@@ -91,18 +96,18 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "user_id": "ObjectId",
-            "sender_first_name": "string",
-            "sender_last_name": "string",
-            "contact_number": "number",
-            "date-added": "timestamp",
-            "date-updated": "timestamp",
-            "is_read" : "boolean",
+            "userId": "ObjectId",
+            "senderFirstName": "string",
+            "senderLastName": "string",
+            "contactNumber": "number",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp",
+            "isRead" : "boolean",
             "Messages":{
                 "_ID": {
                     "$oid": "ObjectId"
                 },
-                "sender_id": "ObjectId",
+                "senderId": "ObjectId",
                 "message_content": "string"
             }
         }

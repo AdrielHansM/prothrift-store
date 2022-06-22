@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
 import { auth } from "../../services/Firebase/firebaseApp";
-import { getUser } from "../../services/Firebase/firestoreService";
+import { getUser } from "../../services/Firebase/productService";
 import { MenuItems } from "./MenuItems";
 
 const initialUser = {
@@ -55,7 +55,9 @@ export default function Navigation() {
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">ProThrift</strong>
         </Toast.Header>
-        <Toast.Body className="toast-body">Collect your daily points.</Toast.Body>
+        <Toast.Body className="toast-body">
+          Collect your daily points.
+        </Toast.Body>
         <button className="toast-btn">Get!</button>
       </Toast>
     );
@@ -159,7 +161,6 @@ export default function Navigation() {
         )}
       </nav>
       <Example />
-      
     </>
   );
 }

@@ -9,6 +9,7 @@ interface Product {
   meetup: string;
   category: string;
   status: string;
+  isDonated: boolean;
   isDeleted: boolean;
   isSold: boolean;
   dateCreated: Date;

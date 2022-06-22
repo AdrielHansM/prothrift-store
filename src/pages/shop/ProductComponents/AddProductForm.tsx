@@ -12,7 +12,7 @@ import {
 import { useLocation } from "react-router-dom";
 import Product from "../../../models/Product";
 import UserData from "../../../models/User";
-import { createProduct } from "../../../services/Firebase/firestoreService";
+import { createProduct } from "../../../services/Firebase/productService";
 import { estimateWeight, convertWeight } from "../../../utils/productUtils";
 import Footer from "../../Components/Footer";
 import Loading from "../../Components/LoadingScreen";
@@ -29,6 +29,7 @@ const initialProduct = {
   meetup: "",
   category: "",
   status: "",
+  isDonated: false,
   isDeleted: false,
   isSold: false,
   dateCreated: new Date(),

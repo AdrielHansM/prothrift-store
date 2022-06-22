@@ -3,7 +3,7 @@ import "../../../assets/styles/EditProfile.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import UserData from "../../../models/User";
 import { useState } from "react";
-import { createUser } from "../../../services/Firebase/firestoreService";
+import { createUser } from "../../../services/Firebase/productService";
 
 export default function EditProfile() {
   const [firstName, setFirstName] = useState("");

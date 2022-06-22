@@ -1,5 +1,5 @@
 import { auth } from "./firebaseApp";
-import { createUser} from "./firestoreService";
+import { createUser} from "./productService";
 import UserData from "../../models/User";
 
 

@@ -3,11 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts } from "../../services/Firebase/firestoreService";
+import { fetchProducts } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from '../Components/Navigation'
-import { Button } from 'react-bootstrap';
+import Navigation from "../Components/Navigation";
+import { Button } from "react-bootstrap";
 
 export default function Men() {
   const userDetails = useLocation().state as UserData;
@@ -43,7 +43,7 @@ export default function Men() {
       ) : (
         <>
           <Navigation />
-          
+
           <section>
             <h2 className="product-category2">Men's Clothes</h2>
             <div className="product-container2">
@@ -86,8 +86,8 @@ export default function Men() {
                 );
               })}
             </div>
-            <div className='view-btn'>
-              <Button className='btn-lg'>View More</Button>
+            <div className="view-btn">
+              <Button className="btn-lg">View More</Button>
             </div>
           </section>
           <Footer />

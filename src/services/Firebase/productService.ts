@@ -1,7 +1,5 @@
-import firebase from 'firebase/app';
-import Firebase, { auth, database, storage } from "./firebaseApp";
-import UserData from "../../models/User";
 import Product from '../../models/Product';
+import { database, storage } from "./firebaseApp";
 
 export const createUser = async(userId: string, firstName: string, lastName: string, email: string, contact : number, dateUpdated : Date) => {
     await database.collection('users').add({ 
@@ -38,6 +36,21 @@ export const getUser = async (uid : string) => {
   })
 }
 
+export const addUserFavorite = async (productId: string, userId: string) => {
+  return await database
+    .collection('favorites')
+    .add({
+      productId: productId,
+      userId: userId,
+      dateUpdated: new Date(),
+      dateCreated: new Date()
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorCode + " " + errorMessage)
+    })
+}
+
 export const createProduct = async(userId: string, productName: string, productPrice: number, productWeight: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
   const imageUrl = await uploadImage(image, userId, productName)
   if(imageUrl) {
@@ -51,6 +64,7 @@ export const createProduct = async(userId: string, productName: string, productP
         meetup: meetup,
         category: category,
         status: status,
+        isDonated: false,
         isDeleted: false,
         isSold: false,
         dateCreated: new Date(),
@@ -80,6 +94,56 @@ export const uploadImage = async (image: File, userId: string, productName: stri
   return downloadUrl
 }
 
+export const updateProduct = async (image: any, userId: string, productId: string, productName: string, productDescription : string,meetup: string, category: string, productWeight: Number) => {
+  let queryCreator:any = {};
+  
+  if (image) {
+    const imageUrl = await uploadImage(image, userId, productName)
+    if (imageUrl) {
+      queryCreator.imageUrl = imageUrl
+    }
+  }
+
+  if (productName) {
+    queryCreator.productName = productName
+  }
+
+  if (productDescription) {
+    queryCreator.productDescription = productDescription
+  }
+
+  if(productWeight) {
+    queryCreator.productWeight = productWeight
+  }
+
+  if (meetup) {
+    queryCreator.meetup = meetup
+  }
+
+  if (category) {
+    queryCreator.category = category
+  }
+
+  if (queryCreator) {
+    queryCreator.dateUpdated = new Date()
+    return await database.collection('products')
+    .doc(productId)
+    .update(
+      queryCreator
+    )
+  }
+}
+
+export const donateProduct = async (productId: string) => {
+  return await database.collection('products').doc(productId)
+    .update(
+      {
+        isDonated: false,
+        dateUpdated: new Date()
+      }
+    )
+}
+
 export const fetchProducts = async () => {
   let products: Product[] = []
 
@@ -101,6 +165,7 @@ export const fetchProducts = async () => {
         meetup: doc.data().meetup,
         category: doc.data().category,
         status: doc.data().status,
+        isDonated: doc.data().isDonated,
         isDeleted: doc.data().isDeleted,
         isSold: doc.data().isSold,
         dateCreated: doc.data().dateCreated,
@@ -135,27 +200,27 @@ export const fetchSingleProduct = async (productId: string) => {
         meetup: productDoc.meetup,
         category: productDoc.category,
         status: productDoc.status,
+        isDonated: productDoc.isDonated,
         isDeleted: productDoc.isDeleted,
         isSold: productDoc.isSold,
         dateCreated: productDoc.dateCreated,
         dateUpdated: productDoc.dateUpdated
       }
-
       return product
     })
 }
 
 export const fetchTotalSaved = async() => {
   return await database
-    .collection('products')
-    .where('isDeleted', '==', false)
-    .where('isSold', '==', false)
-    .get()
-    .then((docs) => {
-      let totalSaved = 0;
-      docs.forEach(productDoc => {
-        totalSaved += productDoc.data().productWeight
-      });
-      return totalSaved
-    })
+  .collection('products')
+  .where('isDeleted', '==', false)
+  .where('isSold', '==', false)
+  .get()
+  .then((docs) => {
+    let totalSaved = 0;
+    docs.forEach(productDoc => {
+      totalSaved += productDoc.data().productWeight
+    });
+    return totalSaved
+  })
 }
