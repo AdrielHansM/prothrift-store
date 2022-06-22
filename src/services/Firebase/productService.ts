@@ -210,6 +210,44 @@ export const fetchSingleProduct = async (productId: string) => {
     })
 }
 
+export const fetchProductsByCategory = async(category: string) => {
+  let categoryProducts: Product[] = []
+
+  return await database
+  .collection('products')
+  .where('isDeleted', '==', false)
+  .where('isSold', '==', false)
+  .where('category', '==', category)
+  .get()
+  .then(querySnapshots => {
+    querySnapshots.forEach(doc => {
+      const productDetails = {
+        productId: doc.id,
+        userId: doc.data().userId,
+        productName: doc.data().productName,
+        productPrice: doc.data().productPrice,
+        productWeight: doc.data().productWeight,
+        productDescription: doc.data().productDescription,
+        imageUrl: doc.data().imageUrl,
+        meetup: doc.data().meetup,
+        category: doc.data().category,
+        status: doc.data().status,
+        isDonated: doc.data().isDonated,
+        isDeleted: doc.data().isDeleted,
+        isSold: doc.data().isSold,
+        dateCreated: doc.data().dateCreated,
+        dateUpdated: doc.data().dateUpdated,
+      }
+      categoryProducts.push(productDetails)
+    })
+    return categoryProducts
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
 export const fetchTotalSaved = async() => {
   return await database
   .collection('products')
