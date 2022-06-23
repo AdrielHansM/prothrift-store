@@ -6,7 +6,8 @@ import UserData from "../../models/User";
 import { fetchTotalSaved } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
-import BarChart from "./BarChart";
+import { PieChart } from "../Components/graphs/PieChart";
+import { BarGraph } from "../Components/graphs/BarGraph";
 
 export default function Body() {
   const state = useLocation().state as UserData;
@@ -36,15 +37,19 @@ export default function Body() {
           <img src="/images/ProThrift-logo.png" className="logo" alt="" />
         </div>
       </div>
-      <br/>
+      <br />
 
+      {/* NOTE: This one works */}
+      {/* <PieChart /> 
+          <BarChart />
+      */}
       <Container className="stats-container">
         <Row>
           <Col style={{ backgroundColor: "#2222", borderRadius: "5px" }}>
             <div className="numofpounds">
-              {totalSaved} 
+              {totalSaved}
               <p>Pounds of Clothes</p>
-              <img src="./images/saved.png"/>
+              <img src="./images/saved.png" />
             </div>
             <div className="illustration">
               <img src="./images/house.png" alt="" className="img-illustrate" />
@@ -91,7 +96,7 @@ export default function Body() {
 
       <div className="circularEcon">
         <h1>Circular Economy</h1>
-        <img src="./images/circular_economy.gif"/>
+        <img src="./images/circular_economy.gif" />
       </div>
 
       <div className="feedback">

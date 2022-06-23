@@ -8,7 +8,7 @@ import About from "./pages/About/About";
 import Chat from "./pages/Chat/Chat";
 import Contact from "./pages/Contact/Contact";
 import Feedback from "./pages/Feedback/Feedback";
-import Body from "./pages/Home/Body";
+import Home from "./pages/Home/Home";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -32,7 +32,7 @@ root.render(
       <Routes>
         <Route path={"/"} element={<App />}>
           <Route index element={<LandingPage />} />
-          <Route path={"home"} element={<Body />} />
+          <Route path={"home"} element={<Home />} />
           <Route path={"profile"} element={<Profile />} />
           <Route path={"login"} element={<Login />} />
           <Route path={"register"} element={<Register />} />
