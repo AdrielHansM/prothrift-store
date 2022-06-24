@@ -13,7 +13,6 @@ export default function Body() {
   const state = useLocation().state as UserData;
   const [totalSaved, setTotalSaved] = useState(0);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTotal();
@@ -46,7 +45,7 @@ export default function Body() {
       <Container className="stats-container">
         <Row>
           <div style={{borderRadius: "5px" }} className='first-col'>
-            <p style={{marginTop:'10px', marginLeft:'100px', fontSize:'30px'}}>Our ProThrifters potentially saved</p>
+            <p className="potentially">Our ProThrifters potentially saved</p>
             
             <div className="numofpounds">
               {totalSaved}
@@ -55,24 +54,24 @@ export default function Body() {
                 <div>of Clothes</div>
               </div>
             </div>
-              <p className="p-text">equivalent to the monthly waste from:</p>
+            <div className="p-text">equivalent to the monthly waste from:</div>
             
             <div className="illustrate">
-            <div className="illustration">
-              <img src="./images/house.png" alt="" className="img-illustrate" />
-              <strong className="grid-text">
-                <p style={{fontSize:'40px', color:'#FE7475'}} className="numb">15</p>
-                <p className="numb">households</p>
-              </strong>
-            </div>
-            
-            <div className="illustration">
-              <img src="./images/throwing-trash.png" alt="" className="img-illustrate2" />
-              <strong className="grid-text">
-                <p style={{fontSize:'40px', color:'#FE7475'}} className="numb">121</p>
-                <p className="numb">filipinos</p>
-              </strong>
-            </div>
+              <div className="illustration">
+                <img src="./images/house.png" alt="" className="img-illustrate" />
+                <strong className="grid-text">
+                  <p style={{fontSize:'90px', color:'#FE7475'}} className="numb">15</p>
+                  <p className="numb">households</p>
+                </strong>
+              </div>
+              
+              <div className="illustration">
+                <img src="./images/throwing-trash.png" alt="" className="img-illustrate2" />
+                <strong className="grid-text">
+                  <p style={{fontSize:'90px', color:'#FE7475'}} className="numb">121</p>
+                  <p className="numb">filipinos</p>
+                </strong>
+              </div>
             </div>
           </div>
         </Row>

@@ -19,22 +19,34 @@
 .stats-container{
     margin-top: 50px;
     flex-wrap: wrap;
+    color: #4B3535;
+}
+
+.first-col .potentially{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 50px;
+    margin-left: 100px;
+    font-size: 26px;
+    text-transform: none;
 }
 
 .numofpounds{
     font-size: 90px;
     justify-content: center;
     display: flex;
-    margin-top: 15px;
+    margin-top: 25px;
     margin-left: 5%;
     grid-template-columns: 120px 120px;
+    font-family: 'Familjen Grotesk', sans-serif;
+    font-weight: 600;
+    height:117px;
 }
 
 .pounds-text {
-    text-transform: none;
+    text-transform: uppercase;
     font-size: 24px;
     grid-template-rows: 5px 5px;
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 0;
     margin-left: 15px;
     align-items: center;
@@ -43,8 +55,10 @@
 .p-text{
     text-align: center;
     margin-top: 0;
-    margin-bottom: 10%;
+    margin-bottom: 7%;
     text-transform: uppercase;
+    font-size: 17px;
+    margin-left: 6%;
 }
 
 .illustrate{
@@ -53,17 +67,15 @@
 
 .illustration{
     display: inline-flex;
-    margin-Left: 120px;
+    margin-Left: 130px;
 }
 
-.grid-text{
-    margin-top: 50px;
-}
 .grid-text p{
     margin-left: 40px;
     text-transform: uppercase;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
+    font-family: 'Familjen Grotesk', sans-serif;
 }
 
 .grid-text .numb{
@@ -72,14 +84,14 @@
 }
 
 .img-illustrate{
-    width: 170px;
-    height: 170px;
+    width: 190px;
+    height: 190px;
 }
 
 .img-illustrate2{
-    width: 170px;
-    height: 170px;
-    margin-left: 50%;
+    width: 190px;
+    height: 190px;
+    margin-left: 40%;
 }
 
 .text1{
