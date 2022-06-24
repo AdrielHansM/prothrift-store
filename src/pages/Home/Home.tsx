@@ -79,7 +79,7 @@ export default function Body() {
       <br />
         <p className="text1">
           <strong>
-            This is how much wastes in pounds by users on ProThrift potentially
+            This is how much waste in pounds by users on ProThrift potentially
             saved in 2022 by buying and selling used things instead of new. By
             prolonging the lifetime of clothes we are releasing the pressure on
             the earth's natural resources.
