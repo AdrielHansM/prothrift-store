@@ -95,11 +95,12 @@ export default function ProfileBody() {
                           </p>
                           <span className="price">₱{product.productPrice}</span>
                           <div>
-                            <img
+                            <button>Add to Likes</button>
+                            {/* <img
                               src="/images/heart1.png"
                               className="liked-heart"
                               alt=""
-                            />
+                            /> */}
                           </div>
                         </div>
                       </div>

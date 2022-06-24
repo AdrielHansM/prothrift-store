@@ -45,44 +45,39 @@ export default function Body() {
       */}
       <Container className="stats-container">
         <Row>
-          <Col style={{ backgroundColor: "#2222", borderRadius: "5px" }}>
+          <div style={{borderRadius: "5px" }} className='first-col'>
+            <p style={{marginTop:'10px', marginLeft:'100px', fontSize:'30px'}}>Our ProThrifters potentially saved</p>
+            
             <div className="numofpounds">
               {totalSaved}
-              <p>Pounds of Clothes</p>
-              <img src="./images/saved.png" />
+              <div className="pounds-text">
+                <div>Pounds</div>
+                <div>of Clothes</div>
+              </div>
             </div>
+              <p className="p-text">equivalent to the monthly waste from:</p>
+            
+            <div className="illustrate">
             <div className="illustration">
               <img src="./images/house.png" alt="" className="img-illustrate" />
-              <p style={{ marginTop: "50px", fontSize: "50px" }}>=</p>
-              <p>
-                <strong>3.2kg or 7.1lbs of waste thrown everday</strong>
-              </p>
+              <strong className="grid-text">
+                <p style={{fontSize:'40px', color:'#FE7475'}} className="numb">15</p>
+                <p className="numb">households</p>
+              </strong>
             </div>
-          </Col>
-          <Col>
-            <div className="statistics">
-              <Tabs
-                defaultActiveKey="home"
-                transition={false}
-                id="noanim-tab-example"
-                className="mb-3"
-              >
-                <Tab eventKey="weekly" title="Weekly">
-                  <div>weeklyss</div>
-                </Tab>
-                <Tab eventKey="monthly" title="Monthly">
-                  <div>monthlyss</div>
-                </Tab>
-                <Tab eventKey="yearly" title="Yearly">
-                  <div>yearlyss</div>
-                </Tab>
-              </Tabs>
+            
+            <div className="illustration">
+              <img src="./images/throwing-trash.png" alt="" className="img-illustrate2" />
+              <strong className="grid-text">
+                <p style={{fontSize:'40px', color:'#FE7475'}} className="numb">121</p>
+                <p className="numb">filipinos</p>
+              </strong>
             </div>
-          </Col>
+            </div>
+          </div>
         </Row>
       </Container>
       <br />
-      <div className="gif-container">
         <p className="text1">
           <strong>
             This is how much wastes in pounds by users on ProThrift potentially
@@ -91,12 +86,29 @@ export default function Body() {
             the earth's natural resources.
           </strong>
         </p>
+
+      <div className="bargraph"> 
+      <BarGraph/>
       </div>
-      <br />
 
       <div className="circularEcon">
         <h1>Circular Economy</h1>
+        <p>Second-hand trade is an important part of circular consumption. 
+          It means keeping products and materials in continuous use by repairing, reusing, 
+          sharing and recycling. We need to do this more – as we are consuming too much, too fast today.</p>
         <img src="./images/circular_economy.gif" />
+      </div>
+
+      <div className="UN-goals">
+        <h1>UN’s sustainable development goals</h1>
+        <div className="UN-text">
+          <img src="./images/RCP.gif"/>
+          <p>In 2015, the UN launched the 2030 agenda for sustainable development 
+            which sets 17 sustainable development goals. The Second Hand Effect aligns 
+            with SDG 12; Responsible consumption and production. Buying and selling 
+            second-hand is one of the easiest ways you can contribute to the UN’s sustainable development goals. 
+            <a href="https://www.un.org/sustainabledevelopment/sustainable-consumption-production/" style={{textDecoration:'none'}}> Read More!</a></p>
+        </div>
       </div>
 
       <div className="feedback">

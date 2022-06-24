@@ -69,11 +69,12 @@ export default function ViewProduct() {
                 <p>meet-up place: {productDetails?.meetup}</p>
                 <p>{productDetails?.productDescription}</p>
                 <div>
-                  <img
+                  {/* <img
                     src="/images/heart1.png"
                     className="liked-heart"
                     alt=""
-                  />
+                  /> */}
+                  <button style={{marginTop:'0', marginLeft:'5px'}}>Add to Likes</button>
                 </div>
                 <div className="seller-details">
                   <h2>seller:</h2>
