@@ -94,14 +94,6 @@ export default function ProfileBody() {
                             {product.productDescription}
                           </p>
                           <span className="price">₱{product.productPrice}</span>
-                          <div>
-                            <button>Add to Likes</button>
-                            {/* <img
-                              src="/images/heart1.png"
-                              className="liked-heart"
-                              alt=""
-                            /> */}
-                          </div>
                         </div>
                       </div>
                     </Link>

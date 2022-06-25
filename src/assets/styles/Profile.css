@@ -198,6 +198,7 @@
 .product-link{
   text-decoration: none;
   color: black;
+  display: grid;
 }
 
 .product-link:hover{

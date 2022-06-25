@@ -1,18 +1,44 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navigation from "../Components/Navigation";
 import UserData from "../../models/User";
+import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
-// import '../../assets/styles/UserProfile.css';
-import { ToastContainer, Toast, Button, Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab } from "react-bootstrap";
+import { fetchProducts } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
-import Loading from "../Components/LoadingScreen";
+
 
 export default function Profile() {
   const navigate = useNavigate();
+  const userDetails = useLocation().state as UserData;
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const state = useLocation().state as UserData;
   console.log(state);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    setLoading(true);
+    const productArray = await fetchProducts();
+    if (productArray) {
+      setProducts(productArray);
+      setLoading(false);
+    }
+  };
+
+  const navigateToProduct = (productId: string) => {
+    console.log(userDetails);
+    console.log(productId);
+    navigate("/view-product", {
+      state: { user: userDetails, productId: productId },
+    });
+  };
+
 
   return (
     <>
@@ -46,13 +72,44 @@ export default function Profile() {
           </div>
 
           <Tabs
-            defaultActiveKey="home"
+            defaultActiveKey="list"
             transition={false}
             id="noanim-tab-example"
             className="tab-col"
           >
-            <Tab eventKey="weekly" title="LISTS">
-              <div>Product Lists</div>
+            <Tab eventKey="list" title="LISTS">
+            <div className="product-container3">
+              {products.map((product, index) => {
+                return (
+                  <>
+                    <Link
+                      className="product-link"
+                      to={"#"}
+                      state={{ user: userDetails, product: product.productId }}
+                    >
+                      <div key={index} className="product-card">
+                        <div className="product-image">
+                          <img
+                            src={product.imageUrl}
+                            className="product-thumb"
+                            alt=""
+                          />
+                        </div>
+                        <div className="product-info">
+                          <h2 className="product-brand">
+                            {product.productName}
+                          </h2>
+                          <p className="product-short-des">
+                            {product.productDescription}
+                          </p>
+                          <span className="price">₱{product.productPrice}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </>
+                );
+              })}
+            </div>
             </Tab>
 
             <Tab eventKey="monthly" title="REVIEWS">
@@ -63,7 +120,7 @@ export default function Profile() {
 
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

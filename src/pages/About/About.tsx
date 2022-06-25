@@ -79,19 +79,13 @@ export default function About() {
     </section>
 
       <div className="map">
-        <Col>
+
           <div >
             <h1>Our Location</h1>
-          </div>
-          <div>
             <h2>University of the Cordilleras, Gov. Pack Road</h2>
-            <h2>Baguio City, Benguet, 2600</h2>
           </div>
-        </Col>
-        <Col>
           <iframe className="gmap"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2210.947130406117!2d120.59794280528612!3d16.409037850732762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xad71a188041ff97!2sUniversity%20Of%20The%20Cordilleras%20-%20Purchasing%20Office!5e0!3m2!1sen!2sph!4v1656098757826!5m2!1sen!2sph"></iframe>
-        </Col>
       </div>
 
       <Footer/>

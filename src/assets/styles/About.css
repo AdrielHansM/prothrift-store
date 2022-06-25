@@ -132,7 +132,7 @@ figcaption a:visited{
 
 .map{
     overflow:hidden;
-    padding-bottom:30%;
+    padding-bottom:15%;
     position:relative;
     display: flex;
     margin-top: 15%;
@@ -141,6 +141,7 @@ figcaption a:visited{
 .map h1{
     position: relative;
     font-size: 45px;
+    margin-top: 50px;
 }
 
 .map h2{
@@ -151,7 +152,8 @@ figcaption a:visited{
 }
 
 .gmap{
-    height:95%;
-    width:45%;
+    height:90%;
+    width:50%;
     position: absolute;
+    margin-left: 45%;
 }
