@@ -72,7 +72,11 @@ export default function Navigation() {
         </div>
         <ul className={"nav-menu active"}>
           <NavDropdown
-            title={<span className="text-white" onClick={() => navigateTo("/shop")}>Shop</span>}
+            title={
+              <span className="text-white" onClick={() => navigateTo("/shop")}>
+                Shop
+              </span>
+            }
             id="nav-dropdown"
           >
             <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
@@ -88,7 +92,6 @@ export default function Navigation() {
               Accessories
             </NavDropdown.Item>
           </NavDropdown>
-
           {MenuItems.map((item, index) => {
             return (
               <li key={index} className="menu-items">
