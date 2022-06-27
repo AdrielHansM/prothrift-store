@@ -48,6 +48,9 @@ export default function Navigation() {
   const [showA, setShowA] = useState(false);
   const toggleShowA = () => setShowA(!showA);
 
+  const [showB, setShowB] = useState(false);
+  const toggleShowB = () => setShowB(!showB);
+
   function Example() {
     return (
       <Toast show={showA} onClose={toggleShowA} className="toast">
@@ -59,6 +62,21 @@ export default function Navigation() {
           Collect your daily points.
         </Toast.Body>
         <button className="toast-btn">Get!</button>
+      </Toast>
+    );
+  }
+
+  function Logout() {
+    return (
+      <Toast show={showB} onClose={toggleShowB} className="toast">
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">Logout</strong>
+        </Toast.Header>
+        <Toast.Body className="toast-body">
+          Are you sure you want to logout?
+        </Toast.Body>
+        <button className="toast-btn" onClick={() => handleLogout()}>Confirm</button>
       </Toast>
     );
   }
@@ -92,10 +110,9 @@ export default function Navigation() {
           {MenuItems.map((item, index) => {
             return (
               <li key={index} className="menu-items">
-                <a
-                  className={item.cName}
+                <a className={item.cName}
                   onClick={() => {
-                    navigateTo(item.url);
+                  navigateTo(item.url);
                   }}
                 >
                   {item.title}
@@ -138,8 +155,11 @@ export default function Navigation() {
               >
                 Points
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => handleLogout()}>
-                logout
+              <NavDropdown.Item 
+                onClick={() => {
+                setShowB(true);
+                }}>
+                Logout
               </NavDropdown.Item>
             </NavDropdown>
             <button
@@ -160,6 +180,7 @@ export default function Navigation() {
           </>
         )}
       </nav>
+      <Logout/>
       <Example />
     </>
   );
