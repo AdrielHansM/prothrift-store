@@ -2,16 +2,16 @@ const GRAMS_TO_KILOGRAMS = 1000;
 const GRAMS_TO_POUNDS = 453.6;
 
 export function estimateWeight(category: string, clothingType: string): number {
-    if (category == 'Mens') {
+    if (category === 'Mens') {
       return 300;
     }
-    if (category == 'Womens') {
+    if (category === 'Womens') {
       return 200;
     }
-    if (category == 'Kids') {
+    if (category === 'Kids') {
       return 100;
     }
-    if (category == 'Accessories') {
+    if (category === 'Accessories') {
       return 50;
     }
 
@@ -19,10 +19,10 @@ export function estimateWeight(category: string, clothingType: string): number {
 }
 
 export function convertWeight(metric : string, weight: number): number {
-  if (metric == 'kg') {
+  if (metric === 'kg') {
     return weight / GRAMS_TO_KILOGRAMS;
   }
-  if (metric == 'lbs') {
+  if (metric === 'lbs') {
     return weight / GRAMS_TO_POUNDS;
   }
 
