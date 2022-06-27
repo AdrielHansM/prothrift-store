@@ -7,7 +7,7 @@ import { fetchProducts } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";
-import { Button } from "react-bootstrap";
+import { Pagination, Col, Container, Row } from "react-bootstrap";
 
 export default function ProfileBody() {
   const userDetails = useLocation().state as UserData;
@@ -48,23 +48,42 @@ export default function ProfileBody() {
             style={{ backgroundImage: "url(/images/header.png)" }}
           >
             <div className="content">
-              <img src="/images/ProThrift-logo.png" className="logo" alt="" />
-              <p className="sub-heading">Lorem ipsum yadayadyad</p>
+            <h2>Our users are superheroes!</h2>
             </div>
           </div>
           <br />
 
-          <section className="message-to-user">
-            <div>
-              <h2>Our users are superheroes!</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-          </section>
+        <Container>
+          <Row>
+            <Col>
+              <div className='coupon_box'>
+                <div className='coupon-body'>
+                  <h2 className='how_much'> <b> 5% </b> </h2>
+                  <h3> OFF </h3>
+                </div>
+                <button className='redeem-btn'> Redeem </button>
+              </div>
+            </Col>
+            <Col>
+              <div className='coupon_box2'>
+                <div className='coupon-body2'>
+                  <h2 className='how_much'> <b> 15% </b> </h2>
+                  <h3> OFF </h3>
+                </div>
+                <button className='redeem-btn'> Redeem </button>
+              </div>
+            </Col>
+            <Col>
+              <div className='coupon_box3'>
+                <div className='coupon-body3'>
+                  <h2 className='how_much'> <b> 25% </b> </h2>
+                  <h3> OFF </h3>
+                </div>
+                <button className='redeem-btn'> Redeem </button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
 
           <section>
             <h2 className="product-category2">Products</h2>
@@ -101,9 +120,18 @@ export default function ProfileBody() {
                 );
               })}
             </div>
-            <div className="view-btn">
-              <Button className="btn-lg">View More</Button>
-            </div>
+            <Pagination className="paginate">
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item>{1}</Pagination.Item>
+              <Pagination.Item>{2}</Pagination.Item>
+              <Pagination.Item>{3}</Pagination.Item>
+              <Pagination.Item>{4}</Pagination.Item>
+              <Pagination.Ellipsis />
+              <Pagination.Item>{10}</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+            </Pagination>
           </section>
           <Footer />
         </>

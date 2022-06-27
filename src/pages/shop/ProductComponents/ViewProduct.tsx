@@ -86,8 +86,7 @@ export default function ViewProduct() {
                   <p>Reviews?</p>
                 </div>
                 <div className="product-btn">
-                  <button>Message Seller</button>
-                  <button>Buy</button>
+                  <button>Make Offer</button>
                 </div>
               </div>
             </div>

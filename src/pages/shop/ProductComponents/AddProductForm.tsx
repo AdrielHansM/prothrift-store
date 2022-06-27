@@ -219,24 +219,24 @@ export default function AddProductForm() {
                       <option value="" disabled>
                         Please Select...
                       </option>
-                      <option disabled>Upperwear</option>
+                      <option disabled>Upperwear</option><hr/>
                       <option value="Upperwear">Shirt</option>
                       <option value="Upperwear">T-Shirt</option>
                       <option value="Upperwear">Hoodie</option>
                       <option value="Upperwear">Sweater</option>
                       <option value="Upperwear">Hoodie</option>
                       <option value="Upperwear">Jacket</option>
-                      <option value="Upperwear">Vest</option>
+                      <option value="Upperwear">Vest</option><hr/>
 
-                      <option disabled>Bottomwear</option>
+                      <option disabled>Bottomwear</option><hr/>
                       <option value="Bottomwear">Pant</option>
                       <option value="Bottomwear">Jean</option>
                       <option value="Bottomwear">Short</option>
                       <option value="Bottomwear">Legging</option>
                       <option value="Bottomwear">Underpant</option>
-                      <option value="Bottomwear">Skirt</option>
+                      <option value="Bottomwear">Skirt</option><hr/>
 
-                      <option disabled>Accessories</option>
+                      <option disabled>Accessories</option><hr/>
                       <option>Wallet</option>
                       <option>Belt</option>
                       <option>Hat</option>
