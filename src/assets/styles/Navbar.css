@@ -46,6 +46,7 @@
     color: #fff;
     text-decoration: none;
     padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 
 .nav-links:hover{
@@ -53,7 +54,6 @@
     border-radius: 4px;
     transition: all 0.2s ease-out;
 }
-
 
 .search-box{
     width: 40px;
@@ -85,14 +85,6 @@
 .search-box::placeholder{
     color: #eaeaea;
 }
-
-/*.fa-bars{
-    color: #fff;
-}
-
-.menu-icon{
-    display: none;
-}*/
 
 .btnLogin{
     display: block;
@@ -130,15 +122,20 @@
 .toast{
     position: absolute;
     text-align: center;
-    margin: 100px 39%;
+    margin: 10px 63%;
     font-size: 20px;
     border-radius: 5px;
 }
 
+.toast-body{
+    margin: 5px 0;
+}
+
 .toast-btn{
-    outline: none;
+    border: none;
     padding: 5px 10px;
     border-radius: 5px;
+    margin-bottom: 10px;
     background: #4ad9e4;
     color: #fff;
 }
@@ -151,7 +148,8 @@
 .sell-btn{
     margin-right: 20px;
 }
-/*@media screen and (max-width: 960px) {
+
+@media screen and (max-width: 960px) {
     .NavbarItems{
         position: relative;
     }
@@ -159,11 +157,10 @@
     .nav-menu{
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: 60%;
         height: 500px;
         position: absolute;
-        top: 80px;
-        left: -100%;
+        top: 50px;
         opacity: 1;
         transition: all 0.5s ease;
     }
@@ -177,36 +174,16 @@
     }
 
     .nav-links{
-        text-align: center;
-        padding: 2rem;
+        padding: 50px;
         width: 100%;
         display: table;
     }
 
     .nav-links:hover{
         background-color: rgb(39, 61, 122);
-        border-radius: 0;
     }
 
     .navbar-logo{
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(25%, 50%);
+        transform: translate(0, 5%);
     }
-
-    .menu-icon{
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translate(-100%,60%);
-        font-size: 1.8rem;
-        cursor: pointer;
-    }
-
-    .fa-times{
-        color: #fff;
-        font-size: 2rem;
-    }
-}*/
+}

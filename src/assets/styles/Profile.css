@@ -154,7 +154,7 @@
 /* User Contents */
 .hero-section{
     width: 100%;
-    height: calc(100vh - 120px);
+    height: calc(70vh - 120px);
     display: flex;
     background-size: cover;
     justify-content: center;
@@ -162,7 +162,7 @@
 }
 
 
-.hero-section .logo{
+.content .logo{
     height: 200px;
     width: auto;
     display: block;
@@ -171,7 +171,7 @@
     opacity: .9;
 }
 
-.sub-heading{
+.content .sub-heading{
     margin-top: 20px;
     text-align: center;
     color: rgb(221, 221, 221);
@@ -195,45 +195,29 @@
 }
 
 /*Product section*/
-.product{
-    position: relative;
-    overflow: hidden;
-    padding: 50px 0;
+.product-link{
+  text-decoration: none;
+  color: black;
+  display: grid;
 }
 
-.product-category1{
-    padding: 30px 10vw;
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 40px;
-    text-transform: capitalize;
-}
-
-.product-container{
-    padding: 0 10vw;
-    display: flex;
-    scroll-behavior: smooth;
-}
-
-.product-container2{
-    padding: 1% 15vw;
-    display: inline-flex;
-    gap: 100px;
-    margin-bottom: 6%;
+.product-link:hover{
+  color: black;
 }
 
 .product-category2{
-    padding: 10% 10vw;
-    font-size: 50px;
-    font-weight: 500;
-    text-transform: capitalize;
+  padding: 2% 10vw;
+  font-size: 50px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
-.product-container3{
-    padding: 1% 15vw;
-    display: inline-flex;
-    gap: 100px;
-    margin-bottom: 15%;
+.product-container2{
+  padding: 5px 17vw;
+  display: flex;
+  gap: 170px 60px;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
 }
 
 .product-container::-webkit-scrollbar{
@@ -321,47 +305,21 @@
     font-size: 20px;
 }
 
-.actual-price{
-    margin-left: 20px;
-    opacity: 0.5;
-    text-decoration: line-through;
+.view-btn{
+  padding: 50px 20px;
+  margin: 60px 0px;
+  text-align: center;
 }
 
-/*Arrow Back and Next*/
-
-.pre-btn, .nxt-btn{
-    border: none;
-    width: 10vw;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
-    cursor: pointer;
-    z-index: 8;
+.btn-lg{
+  background-color: #a2a2a2;
+  border: none;
+}
+.btn-lg:hover{
+  background-color: #3b5998;
 }
 
-.pre-btn{
-    left: 0;
-    transform: rotate(180deg);
-}
-
-.nxt-btn{
-    right: 0;
-}
-
-.pre-btn img, .nxt-btn img{
-    opacity: 0.2;
-}
-
-.pre-btn:hover img, .nxt-btn:hover img{
-    opacity: 1;
-}
-
-
-/* FOOTER */
+/* Start FOOTER */
 .site-footer
 {
   background-color:#333d65;
@@ -464,14 +422,7 @@
   display:inline-block;
   margin-bottom:4px
 }
-.social-icons li.title
-{
-  margin-right:15px;
-  text-transform:uppercase;
-  color:#96a2b2;
-  font-weight:700;
-  font-size:13px
-}
+
 .social-icons a{
   background-color:#eceeef;
   color:#818a91;
@@ -492,35 +443,13 @@
   color:#fff;
   background-color:#29aafe
 }
-.social-icons.size-sm a
-{
-  line-height:34px;
-  height:34px;
-  width:34px;
-  font-size:14px
-}
+
 .social-icons a.facebook:hover
 {
   background-color:#3b5998
 }
-.social-icons a.twitter:hover
+.social-icons a.instagram:hover
 {
-  background-color:#00aced
+  background-color:rgb(227, 90, 115);
 }
-.social-icons a.linkedin:hover
-{
-  background-color:#007bb6
-}
-.social-icons a.dribbble:hover
-{
-  background-color:#ea4c89
-}
-@media (max-width:767px)
-{
-  .social-icons li.title
-  {
-    display:block;
-    margin-right:0;
-    font-weight:600
-  }
-}
+/* End Footer */

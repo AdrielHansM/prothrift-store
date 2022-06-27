@@ -1,0 +1,26 @@
+.col-md-5{
+    margin: 6% 30%;
+}
+
+.edit-details-con{
+    background-color: #fff;
+    padding: 20px 20px;
+}
+
+.form-control:focus{
+    box-shadow: none;
+}
+
+.profile-button{
+    background: #4ad9e4;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover{
+    background-color: rgb(43, 100, 141);
+}
+
+.labels{
+    font-size: 11px
+}

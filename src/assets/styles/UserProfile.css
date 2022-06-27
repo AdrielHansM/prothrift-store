@@ -1,6 +1,5 @@
 .profile-header {
     position: relative;
-    overflow: hidden
 }
 
 
@@ -13,7 +12,7 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
+    bottom:0;
 }
 
 .profile-header .profile-header-cover:before {
@@ -37,10 +36,11 @@
     height: 120px;
     overflow: hidden;
     z-index: 10;
-    margin: 50px 0 -20px;
+    margin: 40px 0 -20px;
     padding: 3px;
     border-radius: 4px;
-    background: #fff
+    background: #fff;
+    position: relative;
 }
 
 .profile-header-img img {
@@ -51,23 +51,16 @@
     font-weight: 500;
     color: #fff;
     padding-left: 0;
+    margin-top: 10;
+    margin-bottom: 5;
 }
 
 .profile-header-img+.profile-header-info {
     margin-left: 140px;
     margin-top: 75px;
-}
-
-.profile-header .profile-header-content,
-.profile-header .profile-header-tab {
     position: relative
 }
 
-
-.profile-header-tab {
-    background: #fff;
-    padding: 0px 20px 50px 140px;
-}
 
 .edit-btn{
     background-color: rgb(13,202,240);
@@ -82,3 +75,19 @@
     transition: 250ms;
 }
 
+.tab-col{
+    gap: 5px;
+    margin-left: 1%;
+    margin-right: 25%;
+}
+
+/* Lists Product */
+.product-container3{
+    padding: 5px 10vw;
+    display: flex;
+    gap: 100px 50px;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+    margin-top: 50px;
+    justify-content: flex-start;
+  }

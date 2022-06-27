@@ -1,0 +1,116 @@
+{
+    "User":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "points": "number",
+            "firstName": "string",
+            "lastName": "string",
+            "email": "string",
+            "contactNumber": "number",
+            "isDeleted": "boolean",
+            "dateCreated": "timestamp",
+            "dateUpdated": "timestamp"
+        }
+    ],
+
+    "UserFavorites" : [
+        {
+        "_ID": {
+            "$oid": "ObjectId"
+        },
+        "product_id": "string",
+        "user_id": "string",
+        "dateUpdated" :"timestamp",
+        "dateCreated" : "timestamp"
+        }
+    ],
+
+    "UserReviews" : [
+        {
+        "_ID": {
+            "$oid": "ObjectId"
+        },
+        "productId": "string",
+        "sellerId" : "string",
+        "userId": "string",
+        "rating": "number",
+        "review": "string",
+        "dateUpdated" :"timestamp",
+        "dateCreated" : "timestamp"
+        }
+    ],
+
+    "Transaction":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "productId": "number",
+            "buyerId": "string",
+            "sellerId": "string",
+            "transactionStatus": "string",
+            "dateUpdated" :"timestamp",
+            "dateCreated" : "timestamp"
+        }
+    ],
+
+
+    "Material_Recycled":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "productId": "ObjectId",
+            "productName" : "string",
+            "userId": "ObjectId",
+            "weightRecycled": "string",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp"
+        }
+    ],
+
+    "Product":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "userId": "ObjectId",
+            "productName": "string",
+            "productDescription": "string",
+            "productPrice": "double",
+            "productWeight" : "double",
+            "meetup" : "string",
+            "category" : "string",
+            "status": "string",
+            "isSold": "boolean",
+            "isDeleted": "boolean",
+            "isDonated": "boolean",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp"
+        }
+    ],
+
+    "Messages_Thread":[
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "userId": "ObjectId",
+            "senderFirstName": "string",
+            "senderLastName": "string",
+            "contactNumber": "number",
+            "dateAdded": "timestamp",
+            "dateUpdated": "timestamp",
+            "isRead" : "boolean",
+            "Messages":{
+                "_ID": {
+                    "$oid": "ObjectId"
+                },
+                "senderId": "ObjectId",
+                "message_content": "string"
+            }
+        }
+    ]
+}

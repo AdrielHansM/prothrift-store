@@ -1,0 +1,64 @@
+.details{
+    margin: 100px 50px 0 100px;
+}
+
+.details h3{
+    text-transform: capitalize;
+    font-size: 50px;
+}
+
+.details h2{
+    font-size: 30px;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.product-con{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 70px;
+    gap: 10px;
+    padding: 50px 20px;
+}
+
+.product-img{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 10%;
+}
+
+.product-details, p{
+    font-size: 20px;
+    
+}
+
+.product-details .p-name{
+    font-size: 50px;
+}
+
+.product-details .price{
+    font-size: 30px;
+}
+
+.seller-details h2, p{
+    text-transform: capitalize;
+}
+
+.product-con button{
+    padding: 5px 30px;
+    margin-left: 40px;
+    margin-top: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: none;
+    background: #4ad9e4;
+    color: #fff;
+}
+.product-con button:hover{
+    background-color: rgb(43, 100, 141);
+}
+
+.product-btn{
+    display: inline-flex;
+    margin-left: 40%;
+}

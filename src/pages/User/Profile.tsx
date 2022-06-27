@@ -1,64 +1,126 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom';
-import Navigation from '../Components/Navigation';
-import UserData from '../../models/User';
-import '../../assets/styles/UserProfile.css';
-// import '../../assets/styles/UserProfile.css';
-import { ToastContainer, Toast, Button, Tabs, Tab} from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import Navigation from "../Components/Navigation";
+import UserData from "../../models/User";
+import Product from "../../models/Product";
+import "../../assets/styles/UserProfile.css";
+import { Tabs, Tab } from "react-bootstrap";
+import { fetchProducts } from "../../services/Firebase/productService";
+import Footer from "../Components/Footer";
+
 
 export default function Profile() {
+  const navigate = useNavigate();
+  const userDetails = useLocation().state as UserData;
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const state = useLocation().state as UserData;
-  console.log(state)
+  console.log(state);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    setLoading(true);
+    const productArray = await fetchProducts();
+    if (productArray) {
+      setProducts(productArray);
+      setLoading(false);
+    }
+  };
+
+  const navigateToProduct = (productId: string) => {
+    console.log(userDetails);
+    console.log(productId);
+    navigate("/view-product", {
+      state: { user: userDetails, productId: productId },
+    });
+  };
+
 
   return (
     <>
-    <Navigation />
-      {/* <p> 
-        {state?.userId}
-      </p> */}
+      <Navigation />
 
-<div className="container">
-   <div className="row">
-      <div className="col-md-12">
-         <div id="content" className="content content-full-width">
-        
-            
-               <div className="profile-header">
-                  <div className="profile-header-cover"></div>
-                
-                  <div className="profile-header-content">
-                     <div className="profile-header-img">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""/>
-                     </div>
-                   
-                     <div className="profile-header-info">
-                        <h4 className="m-t-10 m-b-5">Sean Ngu</h4>
-                        <button className='edit-btn'>Edit Profile</button>
-                     </div>
+      <div className="container">
+        <div className="row">
+            <div id="content" className="content content-full-width">
+              <div className="profile-header">
+                <div className="profile-header-cover"></div>
+
+                <div className="profile-header-content">
+                  <div className="profile-header-img">
+                    <img
+                      src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                      alt=""
+                    />
                   </div>
-                
-                  <ul className="profile-header-tab nav nav-tabs">
-                     <li className="nav-item"><a href="#profile-post" className="nav-link active show" data-toggle="tab">LISTS</a></li>
-                     <li className="nav-item"><a href="#profile-about" className="nav-link" data-toggle="tab">REVIEWS</a></li>
-                  </ul>
-                  
-                  {/* <ul className="profile-header-tab nav nav-tabs">
-                  <Tabs defaultActiveKey="second" className='tab-content'>
-                    <Tab eventKey="first" title="Dashboard">
-                      Hii, I am 1st tab content
-                    </Tab>
-                    <Tab eventKey="second" title="Setting">
-                      Hii, I am 2nd tab content
-                    </Tab>
-                </Tabs>
-                  </ul> */}
-              </div>
-            
 
-         </div>
+                  <div className="profile-header-info">
+                    <h4>{`${state?.firstName} ${state?.lastName}`}</h4>
+                    <button
+                      className="edit-btn"
+                      onClick={() => navigate("/editprofile", { state: state })}
+                    >
+                      Edit Profile
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <Tabs
+            defaultActiveKey="list"
+            transition={false}
+            id="noanim-tab-example"
+            className="tab-col"
+          >
+            <Tab eventKey="list" title="LISTS">
+            <div className="product-container3">
+              {products.map((product, index) => {
+                return (
+                  <>
+                    <Link
+                      className="product-link"
+                      to={"#"}
+                      state={{ user: userDetails, product: product.productId }}
+                    >
+                      <div key={index} className="product-card">
+                        <div className="product-image">
+                          <img
+                            src={product.imageUrl}
+                            className="product-thumb"
+                            alt=""
+                          />
+                        </div>
+                        <div className="product-info">
+                          <h2 className="product-brand">
+                            {product.productName}
+                          </h2>
+                          <p className="product-short-des">
+                            {product.productDescription}
+                          </p>
+                          <span className="price">₱{product.productPrice}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </>
+                );
+              })}
+            </div>
+            </Tab>
+
+            <Tab eventKey="monthly" title="REVIEWS">
+              <div>Your Reviews</div>
+            </Tab>
+            
+          </Tabs>
+
+        </div>
       </div>
-   </div>
-</div>
+      <Footer />
     </>
-  )
+  );
 }

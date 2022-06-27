@@ -5,7 +5,7 @@ import { Button, Form } from 'react-bootstrap'
 import '../../assets/styles/login.css';
 import UserData from '../../models/User';
 import { auth } from '../../services/Firebase/firebaseApp';
-import { getUser } from '../../services/Firebase/firestoreService';
+import { getUser } from '../../services/Firebase/productService';
 
 interface LoginData {
   email: string;
