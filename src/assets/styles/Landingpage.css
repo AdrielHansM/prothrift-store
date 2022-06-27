@@ -2,6 +2,14 @@
     font-family: 'Raleway', sans-serif;
   }
 
+.logo{
+    height: 500px;
+    width: auto;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 100%;
+}
 
 .landing-page h1{
     text-align: center;

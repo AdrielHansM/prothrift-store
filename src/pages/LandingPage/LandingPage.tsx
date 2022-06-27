@@ -7,7 +7,9 @@ function LandingPage() {
 
   return (
     <div className='landing-page'>
-      <h1>Welcome to ProThrift</h1>
+      <div>
+        <img src="/images/ProThrift-logo.png" className="logo" alt="" />
+      </div>
       <button onClick={() => navigate('/home')}>
         Begin
       </button>

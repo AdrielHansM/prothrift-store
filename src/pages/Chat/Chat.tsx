@@ -2,110 +2,157 @@ import Navigation from "../Components/Navigation"
 import "../../assets/styles/Chat.css";
 import { FormControl } from "react-bootstrap";
 
+
 export default function chats() {
 
   return (
     <>
     <Navigation/>
-    <body>
-  <div className="container">
-    <div className="row">
 
-      <section className="discussions">
-        <div className="discussion search">
-          <div className="searchbar">
-            <i className="fa fa-search" aria-hidden="true"></i>
-            <input type="text" placeholder="Search..."></input>
-          </div>
-        </div>
-        <div className="discussion message-active">
-          <div className="photo">
-            <div className="online"></div>
-          </div>
-          <div className="desc-contact">
-            <p className="name">Megan Leib</p>
-            <p className="message">9 pm at the bar if possible 😳</p>
-          </div>
-          <div className="timer">12 sec</div>
-        </div>
+<div className="container">
 
-        <div className="discussion">
-          <div className="photo">
-            <div className="online"></div>
-          </div>
-          <div className="desc-contact">
-            <p className="name">Dave Corlew</p>
-            <p className="message">Let's meet for a coffee or something today ?</p>
-          </div>
-          <div className="timer">3 min</div>
-        </div>
+    <div className="content-wrapper">
 
-        <div className="discussion">
-          <div className="photo">
-          </div>
-          <div className="desc-contact">
-            <p className="name">Jerome Seiber</p>
-            <p className="message">I've sent you the annual report</p>
-          </div>
-          <div className="timer">42 min</div>
-        </div>
+        
+        <div className="row gutters">
 
-        <div className="discussion">
-          <div className="photo">
-            <div className="online"></div>
-          </div>
-          <div className="desc-contact">
-            <p className="name">Thomas Dbtn</p>
-            <p className="message">See you tomorrow ! 🙂</p>
-          </div>
-          <div className="timer">2 hour</div>
-        </div>
+                <div className="card m-0">
 
-      </section>
-      <section className="chat">
-        <div className="header-chat">
-          <i className="icon fa fa-user-o" aria-hidden="true"></i>
-          <p className="name">Megan Leib</p>
-          <i className="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
+                    {/* <!-- Row start --> */}
+                    <div className="row no-gutters">
+                        <div className="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                            <div className="users-container">
+                                <div className="chat-search-box">
+                                    <div className="input-group">
+                                        <input className="form-control" placeholder="Search"/>
+                                        <div className="input-group-btn">
+                                            <button type="button" className="btn btn-info">
+                                                <i className="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul className="users">
+                                    <li className="person" data-chat="person1">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"/>
+                                            <span className="status busy"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Steve Bangalter</span>
+                                            <span className="time">15/02/2019</span>
+                                        </p>
+                                    </li>
+                                    <li className="person" data-chat="person1">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Retail Admin"/>
+                                            <span className="status offline"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Steve Bangalter</span>
+                                            <span className="time">15/02/2019</span>
+                                        </p>
+                                    </li>
+                                    <li className="person active-user" data-chat="person2">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar2.png" alt="Retail Admin"/>
+                                            <span className="status away"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Peter Gregor</span>
+                                            <span className="time">12/02/2019</span>
+                                        </p>
+                                    </li>
+                                    <li className="person" data-chat="person3">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"/>
+                                            <span className="status busy"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Jessica Larson</span>
+                                            <span className="time">11/02/2019</span>
+                                        </p>
+                                    </li>
+                                    <li className="person" data-chat="person4">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png" alt="Retail Admin"/>
+                                            <span className="status offline"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Lisa Guerrero</span>
+                                            <span className="time">08/02/2019</span>
+                                        </p>
+                                    </li>
+                                    <li className="person" data-chat="person5">
+                                        <div className="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar5.png" alt="Retail Admin"/>
+                                            <span className="status away"></span>
+                                        </div>
+                                        <p className="name-time">
+                                            <span className="name">Michael Jordan</span>
+                                            <span className="time">05/02/2019</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                            <div className="selected-user">
+                                <span>To: <span className="name">Emily Russell</span></span>
+                            </div>
+                            <div className="chat-container">
+                                <ul className="chat-box chatContainerScroll">
+                                    <li className="chat-left">
+                                        <div className="chat-avatar">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"/>
+                                            <div className="chat-name">Russell</div>
+                                        </div>
+                                        <div className="chat-text">Hello, I'm Russell.
+                                            <br/>How can I help you today?</div>
+                                        <div className="chat-hour">08:55 <span className="fa fa-check-circle"></span></div>
+                                    </li>
+                                    <li className="chat-right">
+                                        <div className="chat-hour">08:56 <span className="fa fa-check-circle"></span></div>
+                                        <div className="chat-text">Hi, Russell
+                                            <br/> I need more information about Developer Plan.</div>
+                                        <div className="chat-avatar">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"/>
+                                            <div className="chat-name">Sam</div>
+                                        </div>
+                                    </li>
+                                    <li className="chat-left">
+                                        <div className="chat-avatar">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"/>
+                                            <div className="chat-name">Russell</div>
+                                        </div>
+                                        <div className="chat-text">Are we meeting today?
+                                            <br/>Project has been already finished and I have results to show you.</div>
+                                        <div className="chat-hour">08:57 <span className="fa fa-check-circle"></span></div>
+                                    </li>
+                                    <li className="chat-right">
+                                        <div className="chat-hour">08:59 <span className="fa fa-check-circle"></span></div>
+                                        <div className="chat-text">Well I am not sure.
+                                            <br/>I have results to show you.</div>
+                                        <div className="chat-avatar">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar5.png" alt="Retail Admin"/>
+                                            <div className="chat-name">Joyse</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div className="form-group mt-3 mb-0">
+                                    <textarea className="form-control" rows={3} placeholder="Type your message here..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
         </div>
-        <div className="messages-chat">
-          <div className="message">
-            <div className="photo">
-              <div className="online"></div>
-            </div>
-            <p className="text"> Hi, how are you ? </p>
-          </div>
-          <div className="message text-only">
-            <p className="text"> What are you doing tonight ? Want to go take a drink ?</p>
-          </div>
-          <p className="time"> 14h58</p>
-          <div className="message text-only">
-            <div className="response">
-              <p className="text"> Hey Megan ! It's been a while 😃</p>
-            </div>
-          </div>
-          <div className="message text-only">
-            <div className="response">
-              <p className="text"> When can we meet ?</p>
-            </div>
-          </div>
-          <p className="response-time time"> 15h04</p>
-          <div className="message">
-            <div className="photo" >
-              <div className="online"></div>
-            </div>
-            <p className="text"> 9 pm at the bar if possible 😳</p>
-          </div>
-          <p className="time"> 15h09</p>
+        {/* <!-- Row end --> */}
+
         </div>
-        <div className="fter-chat">
-          <input type="text" className="write-message" placeholder="Type your message here"></input>
-          <i className="fa-solid fa-image"></i>
-        </div>
-      </section>
-    </div>
-  </div>
-</body>
+      </div>
     </>
   )
 }

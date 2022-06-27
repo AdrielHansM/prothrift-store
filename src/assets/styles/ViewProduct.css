@@ -21,6 +21,12 @@
     padding: 50px 20px;
 }
 
+.product-img{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 10%;
+}
+
 .product-details, p{
     font-size: 20px;
     

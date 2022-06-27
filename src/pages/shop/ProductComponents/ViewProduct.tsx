@@ -60,8 +60,9 @@ export default function ViewProduct() {
             <h3>product</h3>
             <div className="product-con">
               <img
+                className="product-img"
                 src={productDetails?.imageUrl}
-                style={{ width: "50%", height: "600px" }}
+                style={{ width: "50%", height: "auto" }}
               />
               <div className="product-details">
                 <p className="p-name">{productDetails?.productName}</p>
