@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, FormControl, NavDropdown, Toast } from "react-bootstrap";
+import { Button, Form, FormControl, NavDropdown, Toast, Row, Col} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
@@ -50,10 +50,13 @@ export default function Navigation() {
 
   const [showB, setShowB] = useState(false);
   const toggleShowB = () => setShowB(!showB);
+  
+  const [showNotify, setShowNotify] = useState(false);
+  const toggleShowNotify = () => setShowNotify(!showNotify);
 
   function Example() {
     return (
-      <Toast show={showA} onClose={toggleShowA} className="toast">
+      <Toast show={showA} onClose={toggleShowA} className="toast" delay={3000} autohide>
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">ProThrift</strong>
@@ -68,16 +71,26 @@ export default function Navigation() {
 
   function Logout() {
     return (
-      <Toast show={showB} onClose={toggleShowB} className="toast">
-        <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">Logout</strong>
-        </Toast.Header>
+      <Toast show={showB} onClose={toggleShowB} className="toast" delay={5000} autohide>
         <Toast.Body className="toast-body">
           Are you sure you want to logout?
         </Toast.Body>
         <button className="toast-btn" onClick={() => handleLogout()}>Confirm</button>
       </Toast>
+    );
+  }
+
+  function Notify() {
+    return (
+      <Row>
+        <Toast show={showNotify} onClose={toggleShowNotify} className="toast" delay={2000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">Notification</strong>
+            <small>Just Now</small>
+          </Toast.Header>
+          <Toast.Body>Nothing to show!</Toast.Body>
+        </Toast>
+      </Row>
     );
   }
 
@@ -132,7 +145,7 @@ export default function Navigation() {
         </ul>
         {userDetails.isLogged ? (
           <>
-            <img src="/images/bell.png" className="bell-icon" alt="" />
+            <img src="/images/bell.png" className="bell-icon" alt="" onClick={() => setShowNotify(true)}/>
 
             <NavDropdown
               title={
@@ -180,6 +193,7 @@ export default function Navigation() {
           </>
         )}
       </nav>
+      <Notify/>
       <Logout/>
       <Example />
     </>
