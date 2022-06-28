@@ -3,7 +3,6 @@ import "../../assets/styles/About.css";
 import Navigation from "../Components/Navigation";
 import UserData from "../../models/User";
 import Footer from "../Components/Footer";
-import { Col, Row } from "react-bootstrap";
 
 export default function About() {
   const state = useLocation().state as UserData;

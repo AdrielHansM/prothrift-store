@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import RegisterForm from './RegisterForm'
 import { Card, Container } from 'react-bootstrap'

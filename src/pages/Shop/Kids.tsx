@@ -1,4 +1,3 @@
-import React from 'react'
 import '../../assets/styles/Shop.css';
 import Navigation from '../Components/Navigation'
 import Footer from "../Components/Footer";

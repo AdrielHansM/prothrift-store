@@ -7,7 +7,6 @@ import { fetchProducts } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";
-import { Button } from "react-bootstrap";
 
 export default function Men() {
   const userDetails = useLocation().state as UserData;

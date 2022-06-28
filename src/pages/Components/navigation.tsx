@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, FormControl, NavDropdown, Toast, Row, Col} from "react-bootstrap";
+import { Button, Form, FormControl, NavDropdown, Toast, Row} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
@@ -129,7 +129,7 @@ export default function Navigation() {
                   }}
                 >
                   {item.title}
-                </a>
+                </a >
               </li>
             );
           })}

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Nav, Tabs, Tab, Container, Col, Row } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Button, Container, Row } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
 import { fetchTotalSaved } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Navigation from "../Components/Navigation";
-import { PieChart } from "../Components/graphs/PieChart";
 import { BarGraph } from "../Components/graphs/BarGraph";
 
 export default function Body() {
