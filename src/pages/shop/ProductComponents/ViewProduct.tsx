@@ -9,7 +9,7 @@ import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Modal, Button } from "react-bootstrap";
 
 interface stateType {
   product: string;
@@ -22,6 +22,12 @@ export default function ViewProduct() {
   const [sellerDetails, setSellerDetails] = useState<UserData>();
   const [loading, setLoading] = useState(true);
   const navigateTo = useNavigate();
+  
+  //Show Modal  
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   useEffect(() => {
     if (state.product) {
@@ -48,6 +54,7 @@ export default function ViewProduct() {
       setSellerDetails(fetchedSeller);
     }
   }
+
   return (
     <>
       {loading === true ? (
@@ -99,9 +106,22 @@ export default function ViewProduct() {
                     </p>
                 </Col>
                 <Col className="voucher">
-                    <button>
+
+                    <button onClick={handleShow}>
                         Voucher
                     </button>
+
+                    <Modal 
+                      show={show} 
+                      centered
+                    >
+                      <Modal.Body style={{textAlign:'center', fontSize:'30px', padding:'20% 5%'}}>You don't have any vouchers.</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                 </Col>
                 <Col className="makeoffer-btn">
                     <button onClick={() => navigateTo("/chat")}>
