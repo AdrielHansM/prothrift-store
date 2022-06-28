@@ -10,7 +10,7 @@ export default function Women() {
     <>
     <Navigation/>
     <div>
-      <h1 className='titleWomen'>Women's Clothes</h1>
+      <h2 className='productCateg'>Women's Clothes</h2>
     </div>
 
     <div className="product-container1">

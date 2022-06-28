@@ -84,22 +84,6 @@
     background-image: linear-gradient(right, #e9eff5, #ffffff);
 }
 
-.users .person.active-user {
-    background-color: #ffffff;
-    /* Fallback Color */
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f9fb), to(#ffffff));
-    /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient(right, #f7f9fb, #ffffff);
-    /* Chrome 10+, Saf5.1+, iOS 5+ */
-    background-image: -moz-linear-gradient(right, #f7f9fb, #ffffff);
-    /* FF3.6 */
-    background-image: -ms-linear-gradient(right, #f7f9fb, #ffffff);
-    /* IE10 */
-    background-image: -o-linear-gradient(right, #f7f9fb, #ffffff);
-    /* Opera 11.10+ */
-    background-image: linear-gradient(right, #f7f9fb, #ffffff);
-}
-
 .users .person:last-child {
     border-bottom: 0;
 }
@@ -118,45 +102,10 @@
     border-radius: 50px;
 }
 
-.users .person .user .status {
-    width: 10px;
-    height: 10px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    background: #e6ecf3;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.users .person .user .status.online {
-    background: #9ec94a;
-}
-
-.users .person .user .status.offline {
-    background: #c4d2e2;
-}
-
-.users .person .user .status.away {
-    background: #f9be52;
-}
-
-.users .person .user .status.busy {
-    background: #fd7274;
-}
-
 .users .person p.name-time {
     font-weight: 600;
     font-size: .85rem;
     display: inline-block;
-}
-
-.users .person p.name-time .time {
-    font-weight: 400;
-    font-size: .7rem;
-    text-align: right;
-    color: #8796af;
 }
 
 @media (max-width: 767px) {
@@ -348,7 +297,7 @@ ul {
 }
 .card {
     border: 0;
-    background: #f4f5fb;
+    background: #e8e9ef;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;

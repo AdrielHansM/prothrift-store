@@ -1,15 +1,17 @@
-.titleWomen{
-    margin-top: 100px;
-    margin-bottom: 30px;
+.productCateg{
+    padding: 2% 10vw;
     font-size: 50px;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin-top: 20px;
 }
 
 .product-container1{
-    padding: 5% 15vw;
-    display: inline-flex;
-    overflow-x: auto;
-    gap: 100px;
+    padding: 5px 17vw;
+    display: flex;
+    gap: 170px 60px;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
 }
 
 .product-container::-webkit-scrollbar{

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Product from "../../../models/Product";
 import {
   fetchSingleProduct,
@@ -9,6 +9,7 @@ import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
+import { Row, Col } from "react-bootstrap";
 
 interface stateType {
   product: string;
@@ -20,6 +21,7 @@ export default function ViewProduct() {
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
   const [loading, setLoading] = useState(true);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     if (state.product) {
@@ -83,14 +85,31 @@ export default function ViewProduct() {
                   <p>lastname: {sellerDetails?.lastName}</p>
                   <p>Contact: {sellerDetails?.contactNumber}</p>
                   <p>Email: {sellerDetails?.email}</p>
-                  <p>Reviews?</p>
-                </div>
-                <div className="product-btn">
-                  <button>Make Offer</button>
                 </div>
               </div>
             </div>
           </section>
+          <hr/>
+          <div>
+            <Row className="offer-cont">
+                <Col className="make-offer">
+                    <p className="price-input"><b>Offer: </b> 
+                      <span>Php </span>
+                    <input type={"number"} placeholder="0"/>
+                    </p>
+                </Col>
+                <Col className="voucher">
+                    <button>
+                        Voucher
+                    </button>
+                </Col>
+                <Col className="makeoffer-btn">
+                    <button onClick={() => navigateTo("/chat")}>
+                        Make Offer
+                    </button>
+                </Col>  
+            </Row>
+          </div>
         </>
       )}
     </>

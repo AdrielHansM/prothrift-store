@@ -11,7 +11,7 @@ export default function Login() {
         <Card>
           <Card.Body>
           <LoginForm/>
-          <p>Don't have an account? <Link to={'/register'}>Register</Link></p>
+          <p style={{textTransform:'none'}}>Don't have an account? <Link to={'/register'}>Register</Link></p>
           </Card.Body>
         </Card>
       </Container>

@@ -62,3 +62,40 @@
     display: inline-flex;
     margin-left: 40%;
 }
+
+/* Make Offer */
+.make-offer{
+    margin-left: 10%;
+    font-family: 'Raleway', sans-serif;
+}
+
+.make-offer .price-input{
+    font-size: 30px;
+}
+
+.make-offer input{
+    font-size: 20px;
+}
+
+.offer-cont button{
+    border: none;
+    height: 50px;
+    width: 150px;
+    background: #4ad9e4;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.offer-cont button:hover{
+    background-color: rgb(43, 100, 141);
+}
+
+.voucher{
+    text-align: center;
+}
+
+.makeoffer-btn{
+    margin-right: 10%;
+    text-align: center;
+}

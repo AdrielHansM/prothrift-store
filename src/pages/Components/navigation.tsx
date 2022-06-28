@@ -93,14 +93,14 @@ export default function Navigation() {
             title={<span className="text-white" onClick={() => navigateTo("/shop")}>Shop</span>}
             id="nav-dropdown"
           >
-            <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
-              Womens
-            </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-men")}>
-              Mens
+              Men's
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
+              Women's
             </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-kids")}>
-              Kids
+              Kid's
             </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-accessories")}>
               Accessories
