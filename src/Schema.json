@@ -97,19 +97,18 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "userId": "ObjectId",
-            "senderFirstName": "string",
-            "senderLastName": "string",
-            "contactNumber": "number",
+            "senderId": "ObjectId",
+            "receiverId": "string",
+            "productId": "string",
             "dateAdded": "timestamp",
             "dateUpdated": "timestamp",
-            "isRead" : "boolean",
             "Messages":{
                 "_ID": {
                     "$oid": "ObjectId"
                 },
-                "senderId": "ObjectId",
-                "message_content": "string"
+                "fromId": "ObjectId",
+                "message_content": "string",
+                "dateCreated": "string"
             }
         }
     ]
