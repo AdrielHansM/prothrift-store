@@ -1,4 +1,4 @@
-interface Reviews {
+interface Review {
   reviewId: string,
   productId: string,
   sellerId: string,
@@ -9,4 +9,4 @@ interface Reviews {
   dateCreated: Date
 }
 
-export default Reviews;
+export default Review;

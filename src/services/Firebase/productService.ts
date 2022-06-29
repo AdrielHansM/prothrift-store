@@ -20,15 +20,13 @@ export const createUser = async(userId: string, firstName: string, lastName: str
 
 export const getUser = async (uid : string) => {
   return await database
-    .collection('users')
-    .where('userId', '==', uid)
-    .get()
-    .then((doc) => {
-      const userDocs = doc.docs[0].data();
-
-      const user = { userId: userDocs.userId, firstName: userDocs.firstName, lastName: userDocs.lastName, contactNumber: userDocs.contact, email: userDocs.email, isLogged: true};
-
-      return user;
+  .collection('users')
+  .where('userId', '==', uid)
+  .get()
+  .then((doc) => {
+    const userDocs = doc.docs[0].data();
+    const user = { userId: userDocs.userId, firstName: userDocs.firstName, lastName: userDocs.lastName, contactNumber: userDocs.contact, email: userDocs.email, isLogged: true};
+    return user;
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -38,17 +36,17 @@ export const getUser = async (uid : string) => {
 
 export const addUserFavorite = async (productId: string, userId: string) => {
   return await database
-    .collection('favorites')
-    .add({
-      productId: productId,
-      userId: userId,
-      dateUpdated: new Date(),
-      dateCreated: new Date()
-    }).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorCode + " " + errorMessage)
-    })
+  .collection('favorites')
+  .add({
+    productId: productId,
+    userId: userId,
+    dateUpdated: new Date(),
+    dateCreated: new Date()
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
 }
 
 export const createProduct = async(userId: string, productName: string, productPrice: number, productWeight: number, productDescription : string, meetup: string, category: string, status: string, image: File) => {
@@ -183,31 +181,30 @@ export const fetchProducts = async () => {
 
 export const fetchSingleProduct = async (productId: string) => {
   return await database
-    .collection('products')
-    .where('__name__', '==', productId)
-    .get()
-    .then((doc) => {
-      const productDoc = doc.docs[0].data()
-
-      const product = {
-        productId: doc.docs[0].id, 
-        userId: productDoc.userId,
-        productName: productDoc.productName,
-        productPrice: productDoc.productPrice,
-        productWeight: productDoc.productWeight,
-        productDescription: productDoc.productDescription,
-        imageUrl: productDoc.imageUrl,
-        meetup: productDoc.meetup,
-        category: productDoc.category,
-        status: productDoc.status,
-        isDonated: productDoc.isDonated,
-        isDeleted: productDoc.isDeleted,
-        isSold: productDoc.isSold,
-        dateCreated: productDoc.dateCreated,
-        dateUpdated: productDoc.dateUpdated
-      }
-      return product
-    })
+  .collection('products')
+  .where('__name__', '==', productId)
+  .get()
+  .then((doc) => {
+    const productDoc = doc.docs[0].data()
+    const product = {
+      productId: doc.docs[0].id, 
+      userId: productDoc.userId,
+      productName: productDoc.productName,
+      productPrice: productDoc.productPrice,
+      productWeight: productDoc.productWeight,
+      productDescription: productDoc.productDescription,
+      imageUrl: productDoc.imageUrl,
+      meetup: productDoc.meetup,
+      category: productDoc.category,
+      status: productDoc.status,
+      isDonated: productDoc.isDonated,
+      isDeleted: productDoc.isDeleted,
+      isSold: productDoc.isSold,
+      dateCreated: productDoc.dateCreated,
+      dateUpdated: productDoc.dateUpdated
+    }
+    return product
+  })
 }
 
 export const fetchProductsByCategory = async(category: string) => {

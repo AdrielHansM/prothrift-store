@@ -1,10 +1,12 @@
 import MaterialsRecycled from '../../models/MaterialsRecycled';
 import MaterialsRecycledByUser from '../../models/MaterialsRecycledByUser';
-import Reviews from '../../models/Reviews';
+import Review from '../../models/Review';
 import { database } from "./firebaseApp";
 
 export const createTransaction = async (productId: string, buyerId: string, sellerId : string, transactionStatus: string) => {
-  return await database.collection('transactions').add({
+  return await database
+  .collection('transactions')
+  .add({
     productId : productId,
     buyerId : buyerId,
     sellerId : sellerId,
@@ -19,24 +21,26 @@ export const createTransaction = async (productId: string, buyerId: string, sell
 }
 
 export const updateTransaction = async (productId: string) => {
-  return await database.collection('transactions')
-    .doc(productId)
-    .update(
-      {
-        transactionStatus: 'SUCCESS',
-        dateUpdated: new Date()
-      }
-    ).then(() => {
-      return true;
-    }).catch ((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorCode + " : " + errorMessage)
+  return await database
+  .collection('transactions')
+  .doc(productId)
+  .update(
+    {
+      transactionStatus: 'SUCCESS',
+      dateUpdated: new Date()
+    }
+  ).then(() => {
+    return true;
+  }).catch ((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " : " + errorMessage)
   })
 }
 
 export const createUserReview = async(productId: string, sellerId: string, userId: string, rating: Number, review: string) => {
-  return await database.collection('reviews')
+  return await database
+  .collection('reviews')
   .add({
     productId: productId,
     sellerId: sellerId, 
@@ -53,7 +57,7 @@ export const createUserReview = async(productId: string, sellerId: string, userI
 }
 
 export const fetchUserReviews = async(sellerId: string) => {
-  let reviews: Reviews[] = []
+  let reviews: Review[] = []
 
   return await database
   .collection('reviews')
@@ -102,6 +106,7 @@ export const fetchMaterialsRecycled = async (userId:string) => {
   let totalMaterialsRecycled = 0;
   let materialsRecycled: MaterialsRecycled[] = []
   let materialsRecycledByUser: MaterialsRecycledByUser
+
   return await database
   .collection('materialsRecycled')
   .where('userId', '==', userId)
@@ -121,9 +126,7 @@ export const fetchMaterialsRecycled = async (userId:string) => {
       materialsRecycled.push(materialRecycled)
     })
     materialsRecycledByUser.totalMaterialsReycled = totalMaterialsRecycled
-    
     materialsRecycledByUser.materialsRecycled = materialsRecycled
-
     return materialsRecycledByUser
   })
 }

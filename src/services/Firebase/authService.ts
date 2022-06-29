@@ -35,14 +35,10 @@ export const signUp = async (firstName: string, lastName: string, email: string,
   });
 
 export const signIn = async (email: string, password: string) => auth.signInWithEmailAndPassword(email, password)
-  .then((userCredential) =>  {
-
-  })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
-    return Promise.reject(errorCode)
   });
 
 export const signOutUser = async () => {
