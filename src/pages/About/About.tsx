@@ -42,63 +42,42 @@ export default function About() {
             </div>
 
             <div className="container2">
-              <div className="row-con">
-                <div className="col-team">
-                  <div className="team-member">
-                    <figure>
-                      <img
-                        src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no"
-                        alt=""
-                        className="img-responsive"
-                      />
-                      <figcaption>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Recusandae asperiores mollitia.
-                        </p>
-                        <ul>
-                          <li>
-                            <a href="">
-                              <i className="fa-brands fa-facebook fa-2x"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </figcaption>
-                    </figure>
-                    <h4>Jade Jimenez</h4>
-                  </div>
-                </div>
+          <div className="row-con">
 
-                <div className="col-team">
-                  <div className="team-member">
-                    <figure>
-                      <img
-                        src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no"
-                        alt=""
-                        className="img-responsive"
-                      />
-                      <figcaption>
-                        <p>
-                          Neque minima ea, a praesentium saepe nihil maxime quod
-                          esse numquam explicabo eligendi.
-                        </p>
-                        <ul>
-                          <li>
-                            <a href="">
-                              <i className="fa-brands fa-facebook fa-2x"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </figcaption>
-                    </figure>
-                    <h4>Jianina Escalo</h4>
-                  </div>
+            <div className="col-team">
+              <div className="team-member">
+                <figure>
+                  <img src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no" alt="" className="img-responsive"/>
+                  <figcaption>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores mollitia.</p>
+                    <ul>
+                      <li><a href=""><i className="fa-brands fa-facebook fa-2x"></i></a></li>
+                    </ul>
+                  </figcaption>
+                </figure>
+                <h4>Jade Jimenez</h4>
+              </div>
+            </div>
+
+              <div className="col-team">
+                <div className="team-member">
+                  <figure>
+                    <img src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no" alt="" className="img-responsive"/>
+                    <figcaption>
+                      <p>Neque minima ea, a praesentium saepe nihil maxime quod esse numquam explicabo eligendi.</p>
+                      <ul>
+                        <li><a href=""><i className="fa-brands fa-facebook fa-2x"></i></a></li>
+                      </ul>
+                    </figcaption>
+                  </figure>
+                  <h4>Jianina Escalo</h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <div className="map">
         <div>

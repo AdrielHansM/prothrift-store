@@ -7,7 +7,7 @@ import { fetchProducts } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";
-import { Pagination, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 export default function Shop() {
   const userDetails = useLocation().state as UserData;
@@ -136,18 +136,6 @@ export default function Shop() {
                 );
               })}
             </div>
-            <Pagination className="paginate">
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Item>{2}</Pagination.Item>
-              <Pagination.Item>{3}</Pagination.Item>
-              <Pagination.Item>{4}</Pagination.Item>
-              <Pagination.Ellipsis />
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
           </section>
           <Footer />
         </>
