@@ -1,3 +1,4 @@
+import { on } from 'events';
 import Product from '../../models/Product';
 import { database, storage } from "./firebaseApp";
 
@@ -142,6 +143,39 @@ export const donateProduct = async (productId: string) => {
     )
 }
 
+export const searchProduct = async (searchKey : string) => {
+  let products: Product[] = []
+
+  return await database
+  .collection('products')
+  .where('productName', '==', searchKey)
+  .where('isDeleted', '==', false)
+  .where('isSold', '==', false)
+  .onSnapshot((querySnapshot) => {
+    querySnapshot.forEach(doc => {
+      const productDetails = {
+        productId: doc.id,
+        userId: doc.data().userId,
+        productName: doc.data().productName,
+        productPrice: doc.data().productPrice,
+        productWeight: doc.data().productWeight,
+        productDescription: doc.data().productDescription,
+        imageUrl: doc.data().imageUrl,
+        meetup: doc.data().meetup,
+        category: doc.data().category,
+        status: doc.data().status,
+        isDonated: doc.data().isDonated,
+        isDeleted: doc.data().isDeleted,
+        isSold: doc.data().isSold,
+        dateCreated: doc.data().dateCreated,
+        dateUpdated: doc.data().dateUpdated,
+      }
+      products.push(productDetails)
+    })
+    return products
+  })
+}
+
 export const fetchProducts = async () => {
   let products: Product[] = []
 
@@ -242,6 +276,37 @@ export const fetchProductsByCategory = async(category: string) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchProductsByProfile = async(userId: string) =>{
+  let products: Product[] = []
+
+  return await database
+  .collection('products')
+  .where('userId', '==', userId)
+  .onSnapshot((querySnapshot) => {
+    querySnapshot.forEach(doc => {
+      const productDetails = {
+        productId: doc.id,
+        userId: doc.data().userId,
+        productName: doc.data().productName,
+        productPrice: doc.data().productPrice,
+        productWeight: doc.data().productWeight,
+        productDescription: doc.data().productDescription,
+        imageUrl: doc.data().imageUrl,
+        meetup: doc.data().meetup,
+        category: doc.data().category,
+        status: doc.data().status,
+        isDonated: doc.data().isDonated,
+        isDeleted: doc.data().isDeleted,
+        isSold: doc.data().isSold,
+        dateCreated: doc.data().dateCreated,
+        dateUpdated: doc.data().dateUpdated,
+      }
+      products.push(productDetails)
+    })
+    return products
   })
 }
 
