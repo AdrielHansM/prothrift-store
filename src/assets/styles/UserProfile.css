@@ -1,7 +1,10 @@
+.row-profile{
+    height: 100%;
+}
+
 .profile-header {
     position: relative;
 }
-
 
 .profile-header .profile-header-cover {
     background-image: url(https://bootdey.com/img/Content/bg1.jpg);
@@ -124,6 +127,7 @@
 
 .u-shadow-v18 {
     box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+    margin-left: 70px;
 }
 
 .g-color-gray-dark-v4 {

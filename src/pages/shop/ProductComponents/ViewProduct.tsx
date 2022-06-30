@@ -28,6 +28,10 @@ export default function ViewProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const[liked, setLiked] = useState(false);
+  const handleLikedProducts = () => {
+    setLiked(true);
+  }
 
   useEffect(() => {
     if (state.product) {
@@ -79,12 +83,20 @@ export default function ViewProduct() {
                 <p>meet-up place: {productDetails?.meetup}</p>
                 <p>{productDetails?.productDescription}</p>
                 <div>
-                  {/* <img
-                    src="/images/heart1.png"
+                  {liked ? (
+                    <img
+                    src="/images/heartfilled-svg.svg"
                     className="liked-heart"
                     alt=""
-                  /> */}
-                  <button style={{marginTop:'0', marginLeft:'5px'}}>Add to Likes</button>
+                  />
+                  ) : (
+                    <img
+                    src="/images/heart-svg.svg"
+                    className="liked-heart"
+                    alt=""
+                    onClick={handleLikedProducts}
+                  />
+                  )}
                 </div>
                 <div className="seller-details">
                   <h2>seller:</h2>

@@ -47,7 +47,7 @@ export default function About() {
             <div className="col-team">
               <div className="team-member">
                 <figure>
-                  <img src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no" alt="" className="img-responsive"/>
+                  <img src="./images/jade.webp" alt="" className="img-responsive"/>
                   <figcaption>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores mollitia.</p>
                     <ul>
@@ -62,7 +62,7 @@ export default function About() {
               <div className="col-team">
                 <div className="team-member">
                   <figure>
-                    <img src="https://lh3.googleusercontent.com/a-/AOh14GiL-y6piLbVLUGYEtFPEikBCWFtmdfCYhVIn8bD=s360-p-rw-no" alt="" className="img-responsive"/>
+                    <img src="./images/jian.webp" alt="" className="img-responsive"/>
                     <figcaption>
                       <p>Neque minima ea, a praesentium saepe nihil maxime quod esse numquam explicabo eligendi.</p>
                       <ul>
