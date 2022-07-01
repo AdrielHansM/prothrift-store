@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Form, FormControl, NavDropdown, Toast, Row} from "react-bootstrap";
+import {
+  Button,
+  Form,
+  FormControl,
+  NavDropdown,
+  Toast,
+  Row,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
@@ -38,7 +45,7 @@ export default function Navigation() {
   async function handleLogout() {
     await auth.signOut();
     setUserDetails(initialUser);
-    window.location.reload();
+    window.location.href = "/home";
   }
 
   const navigateTo = (url: string) => {
@@ -50,13 +57,19 @@ export default function Navigation() {
 
   const [showB, setShowB] = useState(false);
   const toggleShowB = () => setShowB(!showB);
-  
+
   const [showNotify, setShowNotify] = useState(false);
   const toggleShowNotify = () => setShowNotify(!showNotify);
 
   function Example() {
     return (
-      <Toast show={showA} onClose={toggleShowA} className="toast" delay={3000} autohide>
+      <Toast
+        show={showA}
+        onClose={toggleShowA}
+        className="toast"
+        delay={3000}
+        autohide
+      >
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">ProThrift</strong>
@@ -71,11 +84,19 @@ export default function Navigation() {
 
   function Logout() {
     return (
-      <Toast show={showB} onClose={toggleShowB} className="toast" delay={5000} autohide>
+      <Toast
+        show={showB}
+        onClose={toggleShowB}
+        className="toast"
+        delay={5000}
+        autohide
+      >
         <Toast.Body className="toast-body">
           Are you sure you want to logout?
         </Toast.Body>
-        <button className="toast-btn" onClick={() => handleLogout()}>Confirm</button>
+        <button className="toast-btn" onClick={() => handleLogout()}>
+          Confirm
+        </button>
       </Toast>
     );
   }
@@ -83,7 +104,13 @@ export default function Navigation() {
   function Notify() {
     return (
       <Row>
-        <Toast show={showNotify} onClose={toggleShowNotify} className="toast" delay={2000} autohide>
+        <Toast
+          show={showNotify}
+          onClose={toggleShowNotify}
+          className="toast"
+          delay={2000}
+          autohide
+        >
           <Toast.Header>
             <strong className="me-auto">Notification</strong>
             <small>Just Now</small>
@@ -103,7 +130,11 @@ export default function Navigation() {
         </div>
         <ul className={"nav-menu active"}>
           <NavDropdown
-            title={<span className="text-white" onClick={() => navigateTo("/shop")}>Shop</span>}
+            title={
+              <span className="text-white" onClick={() => navigateTo("/shop")}>
+                Shop
+              </span>
+            }
             id="nav-dropdown"
           >
             <NavDropdown.Item onClick={() => navigateTo("/shop-men")}>
@@ -123,13 +154,14 @@ export default function Navigation() {
           {MenuItems.map((item, index) => {
             return (
               <li key={index} className="menu-items">
-                <a className={item.cName}
+                <a
+                  className={item.cName}
                   onClick={() => {
-                  navigateTo(item.url);
+                    navigateTo(item.url);
                   }}
                 >
                   {item.title}
-                </a >
+                </a>
               </li>
             );
           })}
@@ -145,7 +177,12 @@ export default function Navigation() {
         </ul>
         {userDetails.isLogged ? (
           <>
-            <img src="/images/bell.png" className="bell-icon" alt="" onClick={() => setShowNotify(true)}/>
+            <img
+              src="/images/bell.png"
+              className="bell-icon"
+              alt=""
+              onClick={() => setShowNotify(true)}
+            />
 
             <NavDropdown
               title={
@@ -168,10 +205,11 @@ export default function Navigation() {
               >
                 Points
               </NavDropdown.Item>
-              <NavDropdown.Item 
+              <NavDropdown.Item
                 onClick={() => {
-                setShowB(true);
-                }}>
+                  setShowB(true);
+                }}
+              >
                 Logout
               </NavDropdown.Item>
             </NavDropdown>
@@ -193,8 +231,8 @@ export default function Navigation() {
           </>
         )}
       </nav>
-      <Notify/>
-      <Logout/>
+      <Notify />
+      <Logout />
       <Example />
     </>
   );
