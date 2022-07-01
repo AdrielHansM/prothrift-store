@@ -1,5 +1,6 @@
 import Navigation from "../Components/Navigation";
 import "../../assets/styles/Chat.css";
+import Footer from "../Components/Footer";
 
 export default function chats() {
   return (
@@ -33,28 +34,6 @@ export default function chats() {
                         </div>
                         <p className="name-time">
                           <span className="name">Emily Russell</span>
-                        </p>
-                      </li>
-                      <li className="person" data-chat="person1">
-                        <div className="user">
-                          <img
-                            src="https://www.bootdey.com/img/Content/avatar/avatar1.png"
-                            alt="Retail Admin"
-                          />
-                        </div>
-                        <p className="name-time">
-                          <span className="name">Steve Bangalter</span>
-                        </p>
-                      </li>
-                      <li className="person" data-chat="person2">
-                        <div className="user">
-                          <img
-                            src="https://www.bootdey.com/img/Content/avatar/avatar2.png"
-                            alt="Retail Admin"
-                          />
-                        </div>
-                        <p className="name-time">
-                          <span className="name">Peter Gregor</span>
                         </p>
                       </li>
                     </ul>
@@ -124,13 +103,22 @@ export default function chats() {
                         </div>
                       </li>
                     </ul>
-                    <div className="form-group mt-3 mb-0">
+                    <div className="form-group">
                       <textarea
                         className="form-control"
                         rows={3}
                         placeholder="Type your message here..."
-                        disabled
                       ></textarea>
+                      
+                      <p className="priceOffer">
+                        <b>Offer: </b> 
+                        <span>Php </span>
+                      <input type={"number"} placeholder="0"/>
+                      <button>
+                          Make Offer
+                      </button>
+                      </p>
+        
                     </div>
                   </div>
                 </div>
@@ -140,6 +128,7 @@ export default function chats() {
           {/* <!-- Row end --> */}
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

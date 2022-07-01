@@ -11,7 +11,7 @@
     border-radius: 2px 0 0 2px;
     border-right: 0;
 }
-
+ 
 .chat-search-box .input-group .form-control:focus {
     border-right: 0;
 }
@@ -219,25 +219,6 @@
     left: inherit;
 }
 
-.chat-container li .chat-hour {
-    padding: 0;
-    margin-bottom: 10px;
-    font-size: .75rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 0 15px;
-}
-
-.chat-container li .chat-hour > span {
-    font-size: 16px;
-    color: #9ec94a;
-}
-
-.chat-container li.chat-right > .chat-hour {
-    margin: 0 15px 0 0;
-}
 
 @media (max-width: 767px) {
     .chat-container li.chat-left,
@@ -253,10 +234,7 @@
         margin: 0 0 5px 0;
         display: flex;
         align-items: center;
-    }
-    .chat-container li.chat-left .chat-hour {
-        justify-content: flex-end;
-    }
+    }s
     .chat-container li.chat-left .chat-name {
         margin-left: 5px;
     }
@@ -267,10 +245,6 @@
         display: flex;
         justify-content: right;
         flex-direction: row-reverse;
-    }
-    .chat-container li.chat-right .chat-hour {
-        justify-content: flex-start;
-        order: 2;
     }
     .chat-container li.chat-right .chat-name {
         margin-right: 5px;
@@ -303,4 +277,20 @@ ul {
     border-radius: 2px;
     margin-bottom: 2rem;
     box-shadow: none;
+}
+
+.priceOffer{
+    margin-top: 15px;;
+}
+.priceOffer button{
+    margin-left: 10px;
+    border: none;
+    background-color: rgb(13,202,240);
+    border-radius: 5px;
+    color:#fff;
+}
+.priceOffer button:hover{
+    background-color: #3a3c9b;
+    color: #fff;
+    transition: 250ms;
 }

@@ -69,7 +69,7 @@ export default function ViewListedProducts() {
                   <Button type="submit" style={{ marginLeft: "0" }}>
                     Mark as Sold
                   </Button>
-                  <Button>Edit Product</Button>
+                  <Button onClick={() => navigateTo("/editlistedproduct")}>Edit Product</Button>
                   <Button onClick={handleShow}>Delete</Button>
                   <Modal show={show} centered>
                     <Modal.Body

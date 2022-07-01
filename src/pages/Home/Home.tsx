@@ -115,7 +115,7 @@ export default function Body() {
       </div>
 
       <div className="UN-goals">
-        <h1>UN’s sustainable development goals</h1>
+        <h1 style={{textAlign:'center'}}>UN’s sustainable development goals</h1>
         <div className="UN-text">
           <img src="./images/RCP.gif" />
           <p>

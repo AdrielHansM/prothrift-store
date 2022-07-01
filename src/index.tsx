@@ -23,6 +23,7 @@ import Women from "./pages/Shop/Women";
 import Profile from "./pages/User/Profile";
 import EditProfile from "./pages/User/UserComponenents/EditProfile";
 import ViewListedProducts from "./pages/Shop/ProductComponents/ViewListedProducts";
+import EditListedProduct from "./pages/Shop/ProductComponents/EditListedProduct";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -51,6 +52,7 @@ root.render(
           <Route path={"likedproducts"} element={<LikedProducts />} />
           <Route path={"addproduct"} element={<AddProductForm />} />
           <Route path={"editprofile"} element={<EditProfile />} />
+          <Route path={"editlistedproduct"} element={<EditListedProduct/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
