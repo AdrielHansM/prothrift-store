@@ -71,17 +71,22 @@ export default function ViewListedProducts() {
                   </Button>
                   <Button>Edit Product</Button>
                   <Button onClick={handleShow}>Delete</Button>
-                  <Modal 
-                      show={show} 
-                      centered
+                  <Modal show={show} centered>
+                    <Modal.Body
+                      style={{
+                        textAlign: "center",
+                        fontSize: "30px",
+                        padding: "5% 1%",
+                      }}
                     >
-                      <Modal.Body style={{textAlign:'center', fontSize:'30px', padding:'5% 1%'}}>Are you sure you want to remove product?</Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                      Are you sure you want to remove product?
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </div>
               </div>
             </section>
