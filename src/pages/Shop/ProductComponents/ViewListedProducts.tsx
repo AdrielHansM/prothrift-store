@@ -5,7 +5,7 @@ import { fetchSingleProduct } from "../../../services/Firebase/productService";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
-import { Form } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 
 interface stateType {
   product: string;
@@ -17,6 +17,10 @@ export default function ViewListedProducts() {
   const [productDetails, setProductDetails] = useState<Product>();
   const [loading, setLoading] = useState(true);
   const navigateTo = useNavigate();
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     if (state.product) {
@@ -62,9 +66,22 @@ export default function ViewListedProducts() {
                     Description: <br />
                     {productDetails?.productDescription}
                   </p>
-                  <button type="submit" style={{ marginLeft: "0" }}>
-                    Sold
-                  </button>
+                  <Button type="submit" style={{ marginLeft: "0" }}>
+                    Mark as Sold
+                  </Button>
+                  <Button>Edit Product</Button>
+                  <Button onClick={handleShow}>Delete</Button>
+                  <Modal 
+                      show={show} 
+                      centered
+                    >
+                      <Modal.Body style={{textAlign:'center', fontSize:'30px', padding:'5% 1%'}}>Are you sure you want to remove product?</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                 </div>
               </div>
             </section>
