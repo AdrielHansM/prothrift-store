@@ -1,11 +1,11 @@
 import { useEffect, useState, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Product from "../../../models/Product";
-import {fetchSingleProduct} from "../../../services/Firebase/productService";
+import { fetchSingleProduct } from "../../../services/Firebase/productService";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
-import {Form} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 interface stateType {
   product: string;
@@ -34,7 +34,7 @@ export default function ViewListedProducts() {
 
   const handleSubmit = async (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
-  }
+  };
   return (
     <>
       {loading === true ? (
@@ -45,28 +45,31 @@ export default function ViewListedProducts() {
         <>
           <Navigation />
           <Form onSubmit={handleSubmit} className="sold-btn">
-          <section className="details">
-            <div className="product-con">
+            <section className="details">
+              <div className="product-con">
                 <img
-                    className="product-img"
-                    src={productDetails?.imageUrl}
-                    style={{ width: "40%", height: "auto" }}
+                  className="product-img"
+                  src={productDetails?.imageUrl}
+                  style={{ width: "40%", height: "auto" }}
                 />
                 <p>{productDetails?.isSold}</p>
-              <div className="product-details">
-                <p className="p-name">{productDetails?.productName}</p>
-                <p className="price">₱{productDetails?.productPrice}</p>
-                <p className="status">{productDetails?.status}</p>
-                <p>meet-up place: {productDetails?.meetup}</p>
-                <p>Description: <br/>
+                <div className="product-details">
+                  <p className="p-name">{productDetails?.productName}</p>
+                  <p className="price">₱{productDetails?.productPrice}</p>
+                  <p className="status">{productDetails?.status}</p>
+                  <p>meet-up place: {productDetails?.meetup}</p>
+                  <p>
+                    Description: <br />
                     {productDetails?.productDescription}
-                </p>
-                <button type="submit" style={{marginLeft:'0'}}>Sold</button>
+                  </p>
+                  <button type="submit" style={{ marginLeft: "0" }}>
+                    Sold
+                  </button>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
           </Form>
-          <br/>
+          <br />
         </>
       )}
     </>

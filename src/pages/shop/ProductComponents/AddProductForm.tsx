@@ -140,6 +140,7 @@ export default function AddProductForm() {
                       name="productName"
                       placeholder="Product name..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
@@ -152,6 +153,8 @@ export default function AddProductForm() {
                         name="productPrice"
                         placeholder="Product price..."
                         onChange={handleChange}
+                        min={0}
+                        required
                       />
                       <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
@@ -165,6 +168,7 @@ export default function AddProductForm() {
                       name="productDescription"
                       placeholder="Product description..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
@@ -185,6 +189,7 @@ export default function AddProductForm() {
                       name="meetup"
                       placeholder="Meetup..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
@@ -196,6 +201,7 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
@@ -215,28 +221,34 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setClothingType(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
                       </option>
-                      <option disabled>Upperwear</option><hr/>
+                      <option disabled>Upperwear</option>
+                      <hr />
                       <option value="Upperwear">Shirt</option>
                       <option value="Upperwear">T-Shirt</option>
                       <option value="Upperwear">Hoodie</option>
                       <option value="Upperwear">Sweater</option>
                       <option value="Upperwear">Hoodie</option>
                       <option value="Upperwear">Jacket</option>
-                      <option value="Upperwear">Vest</option><hr/>
+                      <option value="Upperwear">Vest</option>
+                      <hr />
 
-                      <option disabled>Bottomwear</option><hr/>
+                      <option disabled>Bottomwear</option>
+                      <hr />
                       <option value="Bottomwear">Pant</option>
                       <option value="Bottomwear">Jean</option>
                       <option value="Bottomwear">Short</option>
                       <option value="Bottomwear">Legging</option>
                       <option value="Bottomwear">Underpant</option>
-                      <option value="Bottomwear">Skirt</option><hr/>
+                      <option value="Bottomwear">Skirt</option>
+                      <hr />
 
-                      <option disabled>Accessories</option><hr/>
+                      <option disabled>Accessories</option>
+                      <hr />
                       <option>Wallet</option>
                       <option>Belt</option>
                       <option>Hat</option>
@@ -255,6 +267,7 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setStatus(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
@@ -290,6 +303,7 @@ export default function AddProductForm() {
                         name="productWeight"
                         value={convertedWeight}
                         onChange={handleChange}
+                        required
                       />
                     </InputGroup>
                   </Form.Group>
