@@ -70,8 +70,8 @@ export default function AddProductForm() {
         const createProductStatus = await createProduct(
           state.userId,
           formData.productName,
-          formData.productPrice,
-          formData.productWeight,
+          Math.floor(formData.productPrice),
+          weight,
           formData.productDescription,
           formData.meetup,
           category,
