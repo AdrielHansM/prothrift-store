@@ -84,7 +84,7 @@ export default function Profile() {
                   <>
                     <Link
                       className="product-link"
-                      to={"#"}
+                      to={"/viewlisted-products"}
                       state={{ user: userDetails, product: product.productId }}
                     >
                       <div key={index} className="product-card">

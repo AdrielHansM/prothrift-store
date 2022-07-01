@@ -28,11 +28,6 @@ export default function ViewProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const[liked, setLiked] = useState(false);
-  const handleLikedProducts = () => {
-    setLiked(true);
-  }
-
   useEffect(() => {
     if (state.product) {
       fetchProductData(state.product);
@@ -80,23 +75,13 @@ export default function ViewProduct() {
               <div className="product-details">
                 <p className="p-name">{productDetails?.productName}</p>
                 <p className="price">₱{productDetails?.productPrice}</p>
-                <p>meet-up place: {productDetails?.meetup}</p>
-                <p>{productDetails?.productDescription}</p>
+                <p className="status">{productDetails?.status}</p>
+                <p>meet-up place: <strong>{productDetails?.meetup}</strong></p>
+                <p>Description: <br/>
+                    {productDetails?.productDescription}
+                </p>
                 <div>
-                  {liked ? (
-                    <img
-                    src="/images/heartfilled-svg.svg"
-                    className="liked-heart"
-                    alt=""
-                  />
-                  ) : (
-                    <img
-                    src="/images/heart-svg.svg"
-                    className="liked-heart"
-                    alt=""
-                    onClick={handleLikedProducts}
-                  />
-                  )}
+                <button style={{marginTop:'0', marginLeft:'5px'}}>Add to Likes</button>
                 </div>
                 <div className="seller-details">
                   <h2>seller:</h2>
