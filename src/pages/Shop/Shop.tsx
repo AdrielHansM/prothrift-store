@@ -16,7 +16,9 @@ export default function Shop() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0) {
+      getProducts();
+    }
   }, []);
 
   const getProducts = async () => {
@@ -26,14 +28,6 @@ export default function Shop() {
       setProducts(productArray);
       setLoading(false);
     }
-  };
-
-  const navigateToProduct = (productId: string) => {
-    console.log(userDetails);
-    console.log(productId);
-    navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
-    });
   };
 
   return (
