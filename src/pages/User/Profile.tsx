@@ -5,7 +5,7 @@ import UserData from "../../models/User";
 import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
 import { Tabs, Tab } from "react-bootstrap";
-import { fetchProducts } from "../../services/Firebase/productService";
+import { fetchProducts, fetchProductsByProfile } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 
 
@@ -19,12 +19,14 @@ export default function Profile() {
   console.log(state);
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0) {
+      getProducts();
+    }
   }, []);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProducts();
+    const productArray = await fetchProductsByProfile('userId');
     if (productArray) {
       setProducts(productArray);
       setLoading(false);

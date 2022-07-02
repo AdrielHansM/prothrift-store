@@ -131,6 +131,7 @@ export default function Shop() {
               })}
             </div>
           </section>
+          <br/>
           <Footer />
         </>
       )}

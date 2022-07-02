@@ -110,7 +110,7 @@ export default function Navigation() {
           show={showNotify}
           onClose={toggleShowNotify}
           className="toast"
-          delay={2000}
+          delay={3000}
           autohide
         >
           <Toast.Header>
