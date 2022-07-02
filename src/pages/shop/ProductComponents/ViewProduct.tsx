@@ -28,7 +28,7 @@ export default function ViewProduct() {
   const [messageThreads, setMessageThreads] = useState<MessageThread[]>([]);
   const [offer, setOffer] = useState(0);
   const [dataFetched, setDataFetched] = useState(false);
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   //Show Modal
@@ -75,6 +75,7 @@ export default function ViewProduct() {
   }
 
   async function createOffer() {
+    setLoading(true);
     if (sellerDetails && state.user && productDetails) {
       const message = {
         senderId: state.user.userId,
@@ -82,12 +83,17 @@ export default function ViewProduct() {
         productId: productDetails.productId,
         messageContent: `Hey! are willing to accept my offer ${offer}`,
       };
-      createNewMessageThread(
+      const messageStatus = await createNewMessageThread(
         message.senderId,
         message.receiverId,
         message.productId,
         message.messageContent
       );
+
+      if (messageStatus) {
+        setLoading(false);
+        navigate("/chat", { state: state.user });
+      }
     }
   }
 
@@ -174,7 +180,7 @@ export default function ViewProduct() {
                 </Modal>
               </Col>
               <Col className="makeoffer-btn">
-                <button onClick={() => createOffer}>Make Offer</button>
+                <button onClick={() => createOffer()}>Make Offer</button>
               </Col>
             </Row>
           </div>

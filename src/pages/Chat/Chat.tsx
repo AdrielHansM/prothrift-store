@@ -1,8 +1,20 @@
 import Navigation from "../Components/Navigation";
 import "../../assets/styles/Chat.css";
 import Footer from "../Components/Footer";
+import { useLocation } from "react-router-dom";
+import UserData from "../../models/User";
+import Product from "../../models/Product";
+import { useState } from "react";
+import MessageThread from "../../models/MessageThread";
+import Message from "../../models/Message";
 
 export default function chats() {
+  const state = useLocation().state as UserData;
+  const [product, setProduct] = useState<Product>();
+  const [loading, setLoading] = useState(false);
+  const [messageThread, setMessageThread] = useState<MessageThread[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
+
   return (
     <>
       <Navigation />
@@ -109,16 +121,13 @@ export default function chats() {
                         rows={3}
                         placeholder="Type your message here..."
                       ></textarea>
-                      
+
                       <p className="priceOffer">
-                        <b>Offer: </b> 
+                        <b>Offer: </b>
                         <span>Php </span>
-                      <input type={"number"} placeholder="0"/>
-                      <button>
-                          Make Offer
-                      </button>
+                        <input type={"number"} placeholder="0" />
+                        <button>Make Offer</button>
                       </p>
-        
                     </div>
                   </div>
                 </div>
@@ -128,7 +137,7 @@ export default function chats() {
           {/* <!-- Row end --> */}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

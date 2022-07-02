@@ -151,7 +151,8 @@ export const searchProduct = async (searchKey : string) => {
   .where('productName', '==', searchKey)
   .where('isDeleted', '==', false)
   .where('isSold', '==', false)
-  .onSnapshot((querySnapshot) => {
+  .get()
+  .then((querySnapshot) => {
     querySnapshot.forEach(doc => {
       const productDetails = {
         productId: doc.id,
@@ -282,10 +283,11 @@ export const fetchProductsByCategory = async(category: string) => {
 export const fetchProductsByProfile = async(userId: string) =>{
   let products: Product[] = []
 
-  return await database
-  .collection('products')
-  .where('userId', '==', userId)
-  .onSnapshot((querySnapshot) => {
+  return database
+    .collection('products')
+    .where('userId', '==', userId)
+    .get()
+    .then((querySnapshot) => {
     querySnapshot.forEach(doc => {
       const productDetails = {
         productId: doc.id,
@@ -303,10 +305,10 @@ export const fetchProductsByProfile = async(userId: string) =>{
         isSold: doc.data().isSold,
         dateCreated: doc.data().dateCreated,
         dateUpdated: doc.data().dateUpdated,
-      }
-      products.push(productDetails)
-    })
-    return products
+      };
+      products.push(productDetails);
+    });
+    return products;
   })
 }
 

@@ -1,7 +1,10 @@
 import { useEffect, useState, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Product from "../../../models/Product";
-import { fetchSingleProduct } from "../../../services/Firebase/productService";
+import {
+  fetchProductsByProfile,
+  fetchSingleProduct,
+} from "../../../services/Firebase/productService";
 import Navigation from "../../Components/Navigation";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
@@ -31,7 +34,7 @@ export default function ViewListedProducts() {
 
   async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
-    if (fetchedProduct.productId) {
+    if (fetchedProduct) {
       setProductDetails(fetchedProduct);
     }
   }
@@ -69,7 +72,9 @@ export default function ViewListedProducts() {
                   <Button type="submit" style={{ marginLeft: "0" }}>
                     Mark as Sold
                   </Button>
-                  <Button onClick={() => navigateTo("/editlistedproduct")}>Edit Product</Button>
+                  <Button onClick={() => navigateTo("/editlistedproduct")}>
+                    Edit Product
+                  </Button>
                   <Button onClick={handleShow}>Delete</Button>
                   <Modal show={show} centered>
                     <Modal.Body

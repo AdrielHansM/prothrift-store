@@ -28,9 +28,10 @@ const initialUser = {
 
 export default function Navigation() {
   const [userDetails, setUserDetails] = useState<UserData>(initialUser);
+  const [userFetched, setUserFetched] = useState(false);
   const navigate = useNavigate();
 
-  if (userDetails.isLogged === false) {
+  if (!userFetched) {
     fetchData();
   }
 
@@ -39,6 +40,7 @@ export default function Navigation() {
     if (uidIsPresent && userDetails.isLogged === false) {
       const user = (await getUser(uidIsPresent)) as UserData;
       setUserDetails(user);
+      setUserFetched(true);
     }
   }
 
@@ -52,20 +54,20 @@ export default function Navigation() {
     navigate(url, { state: userDetails });
   };
 
-  const [showA, setShowA] = useState(false);
-  const toggleShowA = () => setShowA(!showA);
+  const [pointsDropdown, setPointsDropdown] = useState(false);
+  const togglePointsDropdown = () => setPointsDropdown(!pointsDropdown);
 
-  const [showB, setShowB] = useState(false);
-  const toggleShowB = () => setShowB(!showB);
+  const [logoutDropdown, setLogoutDropdown] = useState(false);
+  const toggleShowB = () => setLogoutDropdown(!logoutDropdown);
 
   const [showNotify, setShowNotify] = useState(false);
   const toggleShowNotify = () => setShowNotify(!showNotify);
 
-  function Example() {
+  function DailyPointsToast() {
     return (
       <Toast
-        show={showA}
-        onClose={toggleShowA}
+        show={pointsDropdown}
+        onClose={togglePointsDropdown}
         className="toast"
         delay={3000}
         autohide
@@ -85,7 +87,7 @@ export default function Navigation() {
   function Logout() {
     return (
       <Toast
-        show={showB}
+        show={logoutDropdown}
         onClose={toggleShowB}
         className="toast"
         delay={5000}
@@ -200,14 +202,14 @@ export default function Navigation() {
               </NavDropdown.Item>
               <NavDropdown.Item
                 onClick={() => {
-                  setShowA(true);
+                  setPointsDropdown(true);
                 }}
               >
                 Points
               </NavDropdown.Item>
               <NavDropdown.Item
                 onClick={() => {
-                  setShowB(true);
+                  setLogoutDropdown(true);
                 }}
               >
                 Logout
@@ -233,7 +235,7 @@ export default function Navigation() {
       </nav>
       <Notify />
       <Logout />
-      <Example />
+      <DailyPointsToast />
     </>
   );
 }

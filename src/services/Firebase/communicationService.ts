@@ -3,7 +3,7 @@ import MessageThread from "../../models/MessageThread";
 import { database } from "./firebaseApp";
 
 export const createNewMessageThread = async(senderId: string, receiverId: string, productId: string, messageOffer: string)=> {
-  await database
+  return await database
     .collection('messageThread')
     .add({
       senderId: senderId,
@@ -12,14 +12,19 @@ export const createNewMessageThread = async(senderId: string, receiverId: string
       dateCreated: new Date(),
       dateUpdated: new Date()
     })
-    .then( async (messageThreadRef)=> {
-    await database
+    .then(async (messageThreadRef)=> {
+    return await database
       .collection('messageThread').doc(messageThreadRef.id)
       .collection('messages')
       .add({
       fromId: senderId,
       messageContent: messageOffer,
+      dateCreated: new Date()
     })
+    .then(() => {
+      return true;
+    }
+    )
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
