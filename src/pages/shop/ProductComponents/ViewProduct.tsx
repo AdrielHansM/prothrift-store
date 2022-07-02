@@ -25,7 +25,9 @@ export default function ViewProduct() {
   const state = useLocation().state as stateType;
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
+
   const [messageThreads, setMessageThreads] = useState<MessageThread[]>([]);
+
   const [offer, setOffer] = useState(0);
   const [dataFetched, setDataFetched] = useState(false);
   const navigate = useNavigate();
@@ -46,6 +48,8 @@ export default function ViewProduct() {
 
       if (productDetails?.productId) {
         fetchSellerData(productDetails.userId);
+        const initialPriceOffer = productDetails.productPrice;
+        setOffer(initialPriceOffer);
         setLoading(false);
         setDataFetched(true);
       }
@@ -153,6 +157,7 @@ export default function ViewProduct() {
                     placeholder="0"
                     min={0}
                     required
+                    value={offer}
                     onChange={(e) => {
                       setOffer(e.target.valueAsNumber);
                     }}

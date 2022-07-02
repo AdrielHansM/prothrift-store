@@ -37,7 +37,7 @@ export const fetchMessageThread = async(userId: string) => {
 
   return await database
   .collection('messageThread')
-  .where(userId, 'in', ['senderId', 'receiverId'])
+  .where('senderId', '==', userId)
   .get()
   .then((querySnapshot)=>{
     querySnapshot.forEach(doc => {
@@ -82,7 +82,8 @@ export const fetchMessage = async(messageThreadId: string) => {
     .collection('messageThread')
     .doc(messageThreadId)
     .collection('messages')
-    .onSnapshot((messageDocs) => {
+    .get()
+    .then((messageDocs) => {
       messageDocs.forEach(doc => {
         const message = {
           messageId: doc.id,
