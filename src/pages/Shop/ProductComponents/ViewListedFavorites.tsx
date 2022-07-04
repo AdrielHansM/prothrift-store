@@ -15,14 +15,13 @@ import {
   fetchMessageThread,
 } from "../../../services/Firebase/communicationService";
 import MessageThread from "../../../models/MessageThread";
-import LikedProducts from "../LikedProducts";
 
 interface stateType {
   product: string;
   user: UserData;
 }
 
-export default function ViewProduct() {
+export default function ViewListedFavorites() {
   const state = useLocation().state as stateType;
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
@@ -38,6 +37,11 @@ export default function ViewProduct() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //Show Modal Favorites
+  const [showLike, setShowLike] = useState(false);
+  const handleConfirm = () => setShowLike(false);
+  const handleShowLike = () => setShowLike(true);
 
   useEffect(() => {
     if (dataFetched === false) {
@@ -56,15 +60,6 @@ export default function ViewProduct() {
       }
     }
   });
-
-  // const addUserFavorite = (productId: string, userId: string) => {
-  //   console.log(state);
-  //   console.log(productId);
-  //   console.log(userId);
-  //   navigate("/likedproducts", {
-  //     state: { user: state, productId: productId },
-  //   });
-  // };
 
   async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
@@ -146,9 +141,26 @@ export default function ViewProduct() {
                     src="/images/heart.svg"
                     className="liked-heart"
                     alt=""
-                    onClick={() => navigate("/likedproducts")}
+                    onClick={handleShowLike}
                   />
                 </div>
+                <Modal show={showLike} centered>
+                  <Modal.Body
+                    style={{
+                      textAlign: "center",
+                      fontSize: "30px",
+                      padding: "6% 2%",
+                    }}
+                  >
+                    Would you like to remove it from your favorites?
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleConfirm} style={{textAlign:'center'}}>
+                      Yes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
                 <div className="seller-details">
                   <h2>seller:</h2>
                   <p>name: {sellerDetails?.firstName}</p>

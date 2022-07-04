@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts, addUserFavorite } from "../../services/Firebase/productService";
+import { fetchProducts, fetchUserFavorites } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";
@@ -15,7 +15,9 @@ export default function LikedProducts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0) {
+      getProducts();
+    }
   }, []);
 
   const getProducts = async () => {
@@ -25,14 +27,6 @@ export default function LikedProducts() {
       setProducts(productArray);
       setLoading(false);
     }
-  };
-
-  const navigateToProduct = (productId: string) => {
-    console.log(userDetails);
-    console.log(productId);
-    navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
-    });
   };
 
   return (
@@ -51,7 +45,7 @@ export default function LikedProducts() {
                   <>
                     <Link
                       className="product-link"
-                      to={"/view-product"}
+                      to={"/viewlistedfavorites"}
                       state={{ user: userDetails, product: product.productId }}
                     >
                       <div key={index} className="product-card">
@@ -71,6 +65,13 @@ export default function LikedProducts() {
                             {product.productDescription}
                           </p>
                           <span className="price">₱{product.productPrice}</span>
+                          <div>
+                            <img
+                              src="/images/heartfilled.svg"
+                              className="liked-heart"
+                              alt=""
+                              />
+                          </div>
                         </div>
                       </div>
                     </Link>

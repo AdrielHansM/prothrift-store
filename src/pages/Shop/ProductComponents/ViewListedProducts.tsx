@@ -88,7 +88,7 @@ export default function ViewListedProducts() {
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Delete
                       </Button>
                     </Modal.Footer>
                   </Modal>

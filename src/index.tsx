@@ -24,6 +24,7 @@ import Profile from "./pages/User/Profile";
 import EditProfile from "./pages/User/UserComponenents/EditProfile";
 import ViewListedProducts from "./pages/Shop/ProductComponents/ViewListedProducts";
 import EditListedProduct from "./pages/Shop/ProductComponents/EditListedProduct";
+import ViewListedFavorites from "./pages/Shop/ProductComponents/ViewListedFavorites";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -49,6 +50,7 @@ root.render(
           <Route path={"shop-accessories"} element={<Accessories />} />
           <Route path={"view-product"} element={<ViewProduct />} />
           <Route path={"viewlisted-products"} element={<ViewListedProducts />} />
+          <Route path={"viewlistedfavorites"} element={<ViewListedFavorites/>} />
           <Route path={"likedproducts"} element={<LikedProducts />} />
           <Route path={"addproduct"} element={<AddProductForm />} />
           <Route path={"editprofile"} element={<EditProfile />} />
