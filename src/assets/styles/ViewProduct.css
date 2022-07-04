@@ -99,3 +99,9 @@
     margin-right: 10%;
     text-align: center;
 }
+
+.liked-heart{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

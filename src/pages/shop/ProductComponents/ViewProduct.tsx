@@ -56,6 +56,11 @@ export default function ViewProduct() {
     }
   });
 
+  const[liked, setLiked] = useState(false);
+  const handleLikedProducts = () => {
+    setLiked(true);
+  }
+
   async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
     if (fetchedProduct.productId) {
@@ -131,9 +136,20 @@ export default function ViewProduct() {
                   {productDetails?.productDescription}
                 </p>
                 <div>
-                  <button style={{ marginTop: "0", marginLeft: "5px" }}>
-                    Add to Likes
-                  </button>
+                  {liked ? (
+                    <img
+                    src="/images/heartfilled.svg"
+                    className="liked-heart"
+                    alt=""
+                  />
+                  ) : (
+                    <img
+                    src="/images/heart.svg"
+                    className="liked-heart"
+                    alt=""
+                    onClick={handleLikedProducts}
+                  />
+                  )}
                 </div>
                 <div className="seller-details">
                   <h2>seller:</h2>
