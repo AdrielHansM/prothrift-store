@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
 import { auth } from "../../services/Firebase/firebaseApp";
-import { getUser } from "../../services/Firebase/productService";
+import { getUser, searchProduct } from "../../services/Firebase/productService";
 import { MenuItems } from "./MenuItems";
 
 const initialUser = {

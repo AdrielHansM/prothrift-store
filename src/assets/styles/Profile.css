@@ -269,6 +269,14 @@
     font-weight: bold;
   }
   
+  .info-img{
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 0px;
+    left: 120px;
+    cursor: pointer;
+  }
 
 /*Product section*/
 .product-category2{

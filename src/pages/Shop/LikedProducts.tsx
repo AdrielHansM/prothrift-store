@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts } from "../../services/Firebase/productService";
+import { fetchProducts, addUserFavorite } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";

@@ -25,16 +25,16 @@ export default function Footer() {
               <h6>Categories</h6>
               <ul className="footer-links">
                 <li>
-                  <a href="">Men</a>
+                  <a href="/shop-men">Men</a>
                 </li>
                 <li>
-                  <a href="">Women</a>
+                  <a href="/shop-women">Women</a>
                 </li>
                 <li>
-                  <a href="">Kids</a>
+                  <a href="/shop-kids">Kids</a>
                 </li>
                 <li>
-                  <a href="">Accessories</a>
+                  <a href="/shop-accessories">Accessories</a>
                 </li>
               </ul>
             </div>
@@ -54,7 +54,7 @@ export default function Footer() {
                   Contacts
                 </li>
                 <li
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("#")}
                   style={{ cursor: "pointer" }}
                 >
                   Privacy Policy
@@ -69,7 +69,7 @@ export default function Footer() {
             <div className="col-md-8 col-sm-6 col-xs-12">
               <p className="copyright-text">
                 Copyright &copy; 2022 All Rights Reserved by
-                <a href="#"> ProThrift </a>.
+                <a href="/home"> ProThrift </a>.
               </p>
             </div>
 

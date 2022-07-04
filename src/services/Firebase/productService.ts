@@ -36,7 +36,7 @@ export const getUser = async (uid : string) => {
 }
 
 export const addUserFavorite = async (productId: string, userId: string) => {
-  return await database
+  return database
   .collection('favorites')
   .add({
     productId: productId,
