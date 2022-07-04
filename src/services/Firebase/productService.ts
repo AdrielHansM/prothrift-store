@@ -36,7 +36,7 @@ export const getUser = async (uid : string) => {
 }
 
 export const addUserFavorite = async (productId: string, userId: string) => {
-  return database
+  return await database
   .collection('favorites')
   .add({
     productId: productId,
@@ -47,6 +47,44 @@ export const addUserFavorite = async (productId: string, userId: string) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchUserFavorites = async (userId: string) => {
+  let products: Product[] = []
+
+  return await database
+  .collection('favorites')
+  .where('usedId', '==', userId)
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach(async doc => {
+      return await database
+      .collection('products')
+      .doc(doc.data().productId)
+      .get()
+      .then(documentSnapshot => {
+        const productDetails = {
+          productId: doc.id,
+          userId: doc.data().userId,
+          productName: doc.data().productName,
+          productPrice: doc.data().productPrice,
+          productWeight: doc.data().productWeight,
+          productDescription: doc.data().productDescription,
+          imageUrl: doc.data().imageUrl,
+          meetup: doc.data().meetup,
+          category: doc.data().category,
+          status: doc.data().status,
+          isDonated: doc.data().isDonated,
+          isDeleted: doc.data().isDeleted,
+          isSold: doc.data().isSold,
+          dateCreated: doc.data().dateCreated,
+          dateUpdated: doc.data().dateUpdated,
+        };
+        products.push(productDetails);
+      })
+    })
+    return products;
   })
 }
 
@@ -283,7 +321,7 @@ export const fetchProductsByCategory = async(category: string) => {
 export const fetchProductsByProfile = async(userId: string) =>{
   let products: Product[] = []
 
-  return database
+  return await database
     .collection('products')
     .where('userId', '==', userId)
     .get()

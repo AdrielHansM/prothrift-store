@@ -33,7 +33,7 @@ export default function Chats() {
       getMessageThreads();
     }
 
-    if (messageThreadFetched) {
+    if (!messageThreadFetched) {
       getMessage();
     }
   }, []);
