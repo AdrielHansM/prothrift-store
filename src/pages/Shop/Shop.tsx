@@ -171,6 +171,13 @@ export default function Shop() {
                             {product.productDescription}
                           </p>
                           <span className="price">₱{product.productPrice}</span>
+                          <div>
+                            <img
+                              src="/images/heart.svg"
+                              className="liked-heart"
+                              alt=""
+                              />
+                          </div>
                         </div>
                       </div>
                     </Link>
