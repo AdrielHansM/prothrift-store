@@ -50,6 +50,19 @@ export const addUserFavorite = async (productId: string, userId: string) => {
   })
 }
 
+export const removeFromUserFavoties = async (productId: string, userId: string) => {
+  return await database
+  .collection('favorites')
+  .where('productId', '==', productId)
+  .where('userId', '==', userId)
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach(doc => {
+      doc.ref.delete();
+    });
+  });
+}
+
 export const fetchUserFavorites = async (userId: string) => {
   let products: Product[] = []
 

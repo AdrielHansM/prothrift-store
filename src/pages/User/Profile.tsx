@@ -14,11 +14,9 @@ import Loading from "../Components/LoadingScreen";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const userDetails = useLocation().state as UserData;
+  const state = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const state = useLocation().state as UserData;
 
   useEffect(() => {
     if (products.length === 0) {
@@ -28,7 +26,7 @@ export default function Profile() {
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProductsByProfile(userDetails.userId);
+    const productArray = await fetchProductsByProfile(state.userId);
     if (productArray) {
       setProducts(productArray);
       setLoading(false);
@@ -36,10 +34,10 @@ export default function Profile() {
   };
 
   const navigateToProduct = (productId: string) => {
-    console.log(userDetails);
+    console.log(state);
     console.log(productId);
     navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
+      state: { user: state, productId: productId },
     });
   };
 
@@ -98,7 +96,7 @@ export default function Profile() {
                             className="product-link"
                             to={"/viewlisted-products"}
                             state={{
-                              user: userDetails,
+                              user: state,
                               product: product.productId,
                             }}
                           >
