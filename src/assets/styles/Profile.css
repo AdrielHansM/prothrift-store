@@ -180,7 +180,7 @@
     color: #fff;
     font-family: 'Tahoma', sans-serif;
     position: relative;
-    margin: 5rem auto;
+    margin: 2rem auto;
   }
 
   .coupon_box2{ 
@@ -192,7 +192,7 @@
       color: #fff;
       font-family: 'Tahoma', sans-serif;
       position: relative;
-      margin: 5rem auto;
+      margin: 2rem auto;
     }
 
     .coupon_box3{
@@ -204,7 +204,7 @@
         color: #fff;
         font-family: 'Tahoma', sans-serif;
         position: relative;
-        margin: 5rem auto;
+        margin: 2rem auto;
       }
   
   .how_much{font-size: 60px;}
@@ -270,11 +270,11 @@
   }
   
   .info-img{
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     position: relative;
-    top: 0px;
-    left: 120px;
+    top: 20px;
+    left: 95%;
     cursor: pointer;
   }
 

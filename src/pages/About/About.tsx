@@ -51,7 +51,7 @@ export default function About() {
                   <figcaption>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores mollitia.</p>
                     <ul>
-                      <li><a href=""><i className="fa-brands fa-facebook fa-2x"></i></a></li>
+                      <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
                     </ul>
                   </figcaption>
                 </figure>
@@ -66,7 +66,7 @@ export default function About() {
                     <figcaption>
                       <p>Neque minima ea, a praesentium saepe nihil maxime quod esse numquam explicabo eligendi.</p>
                       <ul>
-                        <li><a href=""><i className="fa-brands fa-facebook fa-2x"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
                       </ul>
                     </figcaption>
                   </figure>

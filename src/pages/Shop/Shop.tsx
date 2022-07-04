@@ -55,11 +55,16 @@ export default function Shop() {
           </div>
           <br />
 
-          <Container>
+          <Container style={{
+            border: "none", 
+            borderRadius: "10px",
+            backgroundColor:'#EAEAEB'
+            }}
+          >  
+          <img src="/images/info.png" className="info-img" onClick={handleShowInfo}/>
             <Row>
               <Col>
                 <div className="coupon_box">
-                  <img src="/images/info.png" className="info-img" onClick={handleShowInfo}/>
                   <div className="coupon-body">
                     <h2 className="how_much">
                       {" "}
@@ -72,7 +77,6 @@ export default function Shop() {
               </Col>
               <Col>
                 <div className="coupon_box2">
-                <img src="/images/info.png" className="info-img" onClick={handleShowInfo}/>
                   <div className="coupon-body2">
                     <h2 className="how_much">
                       {" "}
@@ -85,7 +89,6 @@ export default function Shop() {
               </Col>
               <Col>
                 <div className="coupon_box3">
-                <img src="/images/info.png" className="info-img" onClick={handleShowInfo}/>
                   <div className="coupon-body3">
                     <h2 className="how_much">
                       {" "}
@@ -124,7 +127,7 @@ export default function Shop() {
               }}
             >
               To be able to redeem a voucher, you need to collect atleast 10 points for 5% Off,
-              20 points for 15% Off, and 30 points for 25% Off from logging in daily.
+              20 points for 15%   , and 30 points for 25% Off from logging in daily.
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseInfo}>
