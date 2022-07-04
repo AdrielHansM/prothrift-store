@@ -38,6 +38,11 @@ export default function ViewProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //Show Modal (Favorites)
+  const [showLike, setShowLike] = useState(false);
+  const handleCloseLike = () => setShowLike(false);
+  const handleShowLike = () => setShowLike(true);
+
   useEffect(() => {
     if (dataFetched === false) {
       if (state.product && state.user) {
@@ -55,11 +60,6 @@ export default function ViewProduct() {
       }
     }
   });
-
-  const[liked, setLiked] = useState(false);
-  const handleLikedProducts = () => {
-    setLiked(true);
-  }
 
   async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
@@ -136,21 +136,30 @@ export default function ViewProduct() {
                   {productDetails?.productDescription}
                 </p>
                 <div>
-                  {liked ? (
-                    <img
-                    src="/images/heartfilled.svg"
-                    className="liked-heart"
-                    alt=""
-                  />
-                  ) : (
                     <img
                     src="/images/heart.svg"
                     className="liked-heart"
                     alt=""
-                    onClick={handleLikedProducts}
+                    onClick={handleShowLike}
                   />
-                  )}
                 </div>
+                <Modal show={showLike} centered>
+                  <Modal.Body
+                    style={{
+                      textAlign: "center",
+                      fontSize: "30px",
+                      padding: "6% 2%",
+                    }}
+                  >
+                    Would you like to remove it from your favorites?
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseLike} style={{textAlign:'center'}}>
+                      Yes
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+
                 <div className="seller-details">
                   <h2>seller:</h2>
                   <p>name: {sellerDetails?.firstName}</p>
