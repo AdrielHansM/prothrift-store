@@ -135,7 +135,7 @@ export default function Profile() {
                           <img
                             className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
                             src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                            alt="Image Description"
+                            alt=''
                           />
                           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                             <div className="g-mb-15">
@@ -186,7 +186,7 @@ export default function Profile() {
                           <img
                             className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
                             src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                            alt="Image Description"
+                            alt=''
                           />
                           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                             <div className="g-mb-15">

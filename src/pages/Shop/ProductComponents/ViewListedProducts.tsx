@@ -42,6 +42,7 @@ export default function ViewListedProducts() {
   const handleSubmit = async (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
   };
+  
   return (
     <>
       {loading === true ? (
@@ -58,6 +59,7 @@ export default function ViewListedProducts() {
                   className="product-img"
                   src={productDetails?.imageUrl}
                   style={{ width: "40%", height: "auto" }}
+                  alt=''
                 />
                 <p>{productDetails?.isSold}</p>
                 <div className="product-details">
@@ -72,7 +74,7 @@ export default function ViewListedProducts() {
                   <Button type="submit" style={{ marginLeft: "0" }}>
                     Mark as Sold
                   </Button>
-                  <Button onClick={() => navigateTo("/editlistedproduct")}>
+                  <Button onClick={() => navigateTo("/editlistedproduct", {state: state})}>
                     Edit Product
                   </Button>
                   <Button onClick={handleShow}>Delete</Button>
