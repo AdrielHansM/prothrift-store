@@ -24,7 +24,10 @@ export default function Women() {
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProductsByCategory("Womens");
+    const productArray = await fetchProductsByCategory(
+      "Womens",
+      userDetails.userId
+    );
     if (productArray) {
       setProducts(productArray);
       setLoading(false);

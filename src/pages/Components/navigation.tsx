@@ -197,7 +197,7 @@ export default function Navigation() {
               <NavDropdown.Item onClick={() => navigateTo("/chat")}>
                 Messages
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigateTo("/likedproducts")}>
+              <NavDropdown.Item onClick={() => navigateTo("/favorites")}>
                 Favorites
               </NavDropdown.Item>
               <NavDropdown.Item

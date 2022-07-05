@@ -16,7 +16,7 @@ interface stateType {
 }
 
 export default function ViewListedProducts() {
-  const state = useLocation().state as stateType;
+  const userDetails = useLocation().state as stateType;
   const [productDetails, setProductDetails] = useState<Product>();
   const [loading, setLoading] = useState(true);
   const navigateTo = useNavigate();
@@ -26,8 +26,8 @@ export default function ViewListedProducts() {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if (state.product) {
-      fetchProductData(state.product);
+    if (userDetails.product) {
+      fetchProductData(userDetails.product);
       setLoading(false);
     }
   });
@@ -42,7 +42,7 @@ export default function ViewListedProducts() {
   const handleSubmit = async (data: FormEvent<HTMLFormElement>) => {
     data.preventDefault();
   };
-  
+
   return (
     <>
       {loading === true ? (
@@ -59,7 +59,7 @@ export default function ViewListedProducts() {
                   className="product-img"
                   src={productDetails?.imageUrl}
                   style={{ width: "40%", height: "auto" }}
-                  alt=''
+                  alt=""
                 />
                 <p>{productDetails?.isSold}</p>
                 <div className="product-details">
@@ -74,7 +74,11 @@ export default function ViewListedProducts() {
                   <Button type="submit" style={{ marginLeft: "0" }}>
                     Mark as Sold
                   </Button>
-                  <Button onClick={() => navigateTo("/editlistedproduct", {state: state})}>
+                  <Button
+                    onClick={() =>
+                      navigateTo("/editlistedproduct", { state: userDetails })
+                    }
+                  >
                     Edit Product
                   </Button>
                   <Button onClick={handleShow}>Delete</Button>

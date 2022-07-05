@@ -21,7 +21,10 @@ export default function Kids() {
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProductsByCategory("Accessories");
+    const productArray = await fetchProductsByCategory(
+      "Accessories",
+      userDetails.userId
+    );
     if (productArray) {
       setProducts(productArray);
       setLoading(false);

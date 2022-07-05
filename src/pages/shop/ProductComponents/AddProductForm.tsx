@@ -37,7 +37,7 @@ const initialProduct = {
 };
 
 export default function AddProductForm() {
-  const state = useLocation().state as UserData;
+  const userDetails = useLocation().state as UserData;
 
   const imageRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<Product>(initialProduct);
@@ -52,7 +52,7 @@ export default function AddProductForm() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
 
-  if (state === null || state === undefined) {
+  if (userDetails === null || userDetails === undefined) {
     window.location.href = "/home";
   }
 
@@ -68,7 +68,7 @@ export default function AddProductForm() {
 
       if (image.size < 2000000) {
         const createProductStatus = await createProduct(
-          state.userId,
+          userDetails.userId,
           formData.productName,
           Math.floor(formData.productPrice),
           weight,

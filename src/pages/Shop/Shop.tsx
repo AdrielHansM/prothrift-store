@@ -16,14 +16,14 @@ export default function Shop() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (products.length === 0 && userDetails) {
       getProducts();
     }
   }, []);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProducts();
+    const productArray = await fetchProducts(userDetails.userId);
     if (productArray) {
       setProducts(productArray);
       setLoading(false);
@@ -44,6 +44,7 @@ export default function Shop() {
         <Loading />
       ) : (
         <>
+          {console.log(products)}
           <Navigation />
           <div
             className="hero-section"
@@ -55,13 +56,18 @@ export default function Shop() {
           </div>
           <br />
 
-          <Container style={{
-            border: "none", 
-            borderRadius: "10px",
-            backgroundColor:'#EAEAEB'
+          <Container
+            style={{
+              border: "none",
+              borderRadius: "10px",
+              backgroundColor: "#EAEAEB",
             }}
-          >  
-          <img src="/images/info.png" className="info-img" onClick={handleShowInfo}/>
+          >
+            <img
+              src="/images/info.png"
+              className="info-img"
+              onClick={handleShowInfo}
+            />
             <Row>
               <Col>
                 <div className="coupon_box">
@@ -72,7 +78,10 @@ export default function Shop() {
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}> Redeem </button>
+                  <button className="redeem-btn" onClick={handleShow}>
+                    {" "}
+                    Redeem{" "}
+                  </button>
                 </div>
               </Col>
               <Col>
@@ -84,7 +93,10 @@ export default function Shop() {
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}> Redeem </button>
+                  <button className="redeem-btn" onClick={handleShow}>
+                    {" "}
+                    Redeem{" "}
+                  </button>
                 </div>
               </Col>
               <Col>
@@ -96,7 +108,10 @@ export default function Shop() {
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}> Redeem </button>
+                  <button className="redeem-btn" onClick={handleShow}>
+                    {" "}
+                    Redeem{" "}
+                  </button>
                 </div>
               </Col>
             </Row>
@@ -126,8 +141,9 @@ export default function Shop() {
                 padding: "10% 5%",
               }}
             >
-              To be able to redeem a voucher, you need to collect atleast 10 points for 5% Off,
-              20 points for 15%   , and 30 points for 25% Off from logging in daily.
+              To be able to redeem a voucher, you need to collect atleast 10
+              points for 5% Off, 20 points for 15% , and 30 points for 25% Off
+              from logging in daily.
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseInfo}>
@@ -143,16 +159,12 @@ export default function Shop() {
                 return (
                   <>
                     <Link
-                      key={product.productId}
                       className="product-link"
                       to={"/view-product"}
                       state={{ user: userDetails, product: product.productId }}
                     >
-                      <div key={product.productId} className="product-card">
-                        <div
-                          key={`${product.productId} ${product.imageUrl}`}
-                          className="product-image"
-                        >
+                      <div key={index} className="product-card">
+                        <div className="product-image">
                           <img
                             src={product.imageUrl}
                             className="product-thumb"
@@ -160,10 +172,7 @@ export default function Shop() {
                           />
                           <button className="card-btn">Buy Product</button>
                         </div>
-                        <div
-                          key={`${product.productId} ${product.productName}`}
-                          className="product-info"
-                        >
+                        <div className="product-info">
                           <h2 className="product-brand">
                             {product.productName}
                           </h2>
@@ -176,7 +185,7 @@ export default function Shop() {
                               src="/images/heart.svg"
                               className="liked-heart"
                               alt=""
-                              />
+                            />
                           </div>
                         </div>
                       </div>
@@ -186,7 +195,7 @@ export default function Shop() {
               })}
             </div>
           </section>
-          <br/>
+          <br />
           <Footer />
         </>
       )}

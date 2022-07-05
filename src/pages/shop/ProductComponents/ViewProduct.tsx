@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Product from "../../../models/Product";
 import {
+  addUserFavorite,
   fetchSingleProduct,
   getUser,
+  removeFromUserFavorites,
+  validateIfFavorite,
 } from "../../../services/Firebase/productService";
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/Navigation";
@@ -15,7 +18,6 @@ import {
   fetchMessageThread,
 } from "../../../services/Firebase/communicationService";
 import MessageThread from "../../../models/MessageThread";
-import LikedProducts from "../LikedProducts";
 
 interface stateType {
   product: string;
@@ -23,7 +25,7 @@ interface stateType {
 }
 
 export default function ViewProduct() {
-  const state = useLocation().state as stateType;
+  const userDetails = useLocation().state as stateType;
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
 
@@ -39,13 +41,43 @@ export default function ViewProduct() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //Handle like products
+  const [validated, setValidated] = useState(false);
+  const [like, setLike] = useState(false);
+  const handleLike = async () => {
+    if (validated) {
+      addUserFavorite(userDetails.product, userDetails.user.userId);
+      setLike(!like);
+    }
+  };
+
+  const handleRemove = async () => {
+    if (validated) {
+      removeFromUserFavorites(userDetails.product, userDetails.user.userId);
+      setLike(!like);
+      setShowModal(false);
+    }
+  };
+
+  //Handle Confirmation Modal
+  const [showModal, setShowModal] = useState(false);
+  const closeConfirmation = () => setShowModal(false);
+  const acceptConfirmation = () => handleRemove();
+
   useEffect(() => {
-    if (dataFetched === false) {
-      if (state.product && state.user) {
-        fetchProductData(state.product);
-        fetchUserMessageThreads(state.user.userId, state.product);
-        setLoading(false);
+    if (validated === false) {
+      if (userDetails.user && productDetails) {
+        validateIfUserFavorite(
+          userDetails.user.userId,
+          productDetails.productId
+        );
       }
+    }
+
+    if (dataFetched === false) {
+      fetchProductData(userDetails.product);
+      fetchUserMessageThreads(userDetails.user.userId, userDetails.product);
+      setLoading(false);
 
       if (productDetails?.productId) {
         fetchSellerData(productDetails.userId);
@@ -57,14 +89,13 @@ export default function ViewProduct() {
     }
   });
 
-  // const addUserFavorite = (productId: string, userId: string) => {
-  //   console.log(state);
-  //   console.log(productId);
-  //   console.log(userId);
-  //   navigate("/likedproducts", {
-  //     state: { user: state, productId: productId },
-  //   });
-  // };
+  async function validateIfUserFavorite(userId: string, productId: string) {
+    const isValidated = await validateIfFavorite(userId, productId);
+    if (isValidated) {
+      setLike(isValidated);
+    }
+    setValidated(true);
+  }
 
   async function fetchProductData(productId: string) {
     const fetchedProduct = await fetchSingleProduct(productId);
@@ -90,9 +121,9 @@ export default function ViewProduct() {
 
   async function createOffer() {
     setLoading(true);
-    if (sellerDetails && state.user && productDetails) {
+    if (sellerDetails && userDetails.user && productDetails) {
       const message = {
-        senderId: state.user.userId,
+        senderId: userDetails.user.userId,
         receiverId: sellerDetails.userId,
         productId: productDetails.productId,
         messageContent: `Hey! are you willing to accept my offer ${offer}`,
@@ -106,9 +137,31 @@ export default function ViewProduct() {
 
       if (messageStatus) {
         setLoading(false);
-        navigate("/chat", { state: state.user });
+        navigate("/chat", { state: userDetails.user });
       }
     }
+  }
+
+  function Confirmation() {
+    return (
+      <>
+        <Modal show={showModal} onHide={closeConfirmation}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Are you sure you want to remove from favorites
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeConfirmation}>
+              No
+            </Button>
+            <Button variant="primary" onClick={acceptConfirmation}>
+              Yes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   }
 
   return (
@@ -121,6 +174,7 @@ export default function ViewProduct() {
       ) : (
         <>
           <Navigation />
+          <Confirmation />
           <section className="details">
             <h3>product</h3>
             <div className="product-con">
@@ -128,7 +182,7 @@ export default function ViewProduct() {
                 className="product-img"
                 src={productDetails?.imageUrl}
                 style={{ width: "50%", height: "auto" }}
-                alt=''
+                alt=""
               />
               <div className="product-details">
                 <p className="p-name">{productDetails?.productName}</p>
@@ -142,12 +196,21 @@ export default function ViewProduct() {
                   {productDetails?.productDescription}
                 </p>
                 <div>
+                  {like ? (
                     <img
-                    src="/images/heart.svg"
-                    className="liked-heart"
-                    alt=""
-                    onClick={() => navigate("/likedproducts")}
-                  />
+                      src="/images/heartfilled.svg"
+                      className="liked-heart"
+                      alt=""
+                      onClick={() => setShowModal(!showModal)}
+                    />
+                  ) : (
+                    <img
+                      src="/images/heart.svg"
+                      className="liked-heart"
+                      alt=""
+                      onClick={handleLike}
+                    />
+                  )}
                 </div>
                 <div className="seller-details">
                   <h2>seller:</h2>

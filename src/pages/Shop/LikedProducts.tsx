@@ -3,7 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts, fetchUserFavorites } from "../../services/Firebase/productService";
+import {
+  fetchProducts,
+  fetchUserFavorites,
+} from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/Navigation";
@@ -12,7 +15,6 @@ export default function LikedProducts() {
   const userDetails = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (products.length === 0) {
@@ -22,8 +24,11 @@ export default function LikedProducts() {
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProducts();
+    const productArray = (await fetchUserFavorites(
+      userDetails.userId
+    )) as Product[];
     if (productArray) {
+      console.log(productArray);
       setProducts(productArray);
       setLoading(false);
     }
@@ -32,11 +37,13 @@ export default function LikedProducts() {
   return (
     <>
       {loading ? (
-        <Loading />
+        <>
+          <Navigation />
+          <Loading />
+        </>
       ) : (
         <>
           <Navigation />
-
           <section>
             <h2 className="product-category2">Liked Products</h2>
             <div className="product-container2">
@@ -45,7 +52,7 @@ export default function LikedProducts() {
                   <>
                     <Link
                       className="product-link"
-                      to={"/viewlistedfavorites"}
+                      to={"/view-product"}
                       state={{ user: userDetails, product: product.productId }}
                     >
                       <div key={index} className="product-card">
@@ -70,7 +77,7 @@ export default function LikedProducts() {
                               src="/images/heartfilled.svg"
                               className="liked-heart"
                               alt=""
-                              />
+                            />
                           </div>
                         </div>
                       </div>
