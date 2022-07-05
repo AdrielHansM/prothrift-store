@@ -235,7 +235,7 @@ export default function Profile() {
                   </div>
                 </Tab>
                 <Tab eventKey="voucher" title="VOUCHERS">
-                  <div>VOUCHER HERE?</div>
+                  <div style={{marginBottom:'20%', textAlign:'center', marginTop:'10%', fontSize:'50px'}}>You don't have any vouchers!</div>
                 </Tab>
               </Tabs>
             </div>

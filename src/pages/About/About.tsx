@@ -24,10 +24,8 @@ export default function About() {
       <div className="about-content">
         <h2>This is ProThrift</h2>
         <p>
-          ProThrift is a secondhand platform with a mission to empower people in
-          their daily lives. "CHANGE LINE - We do this by providing leading
-          online marketplaces, building world-className media houses, and
-          helping great companies scale."
+          ProThrift is a secondhand shopping platform with a mission to empower people in
+          their daily lives. We do this by providing a.....
         </p>
       </div>
 
@@ -49,7 +47,7 @@ export default function About() {
                 <figure>
                   <img src="./images/jade.webp" alt="" className="img-responsive"/>
                   <figcaption>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores mollitia.</p>
+                    <p>Visit me on Facebook</p>
                     <ul>
                       <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
                     </ul>
@@ -64,7 +62,7 @@ export default function About() {
                   <figure>
                     <img src="./images/jian.webp" alt="" className="img-responsive"/>
                     <figcaption>
-                      <p>Neque minima ea, a praesentium saepe nihil maxime quod esse numquam explicabo eligendi.</p>
+                      <p>Visit me on Facebook</p>
                       <ul>
                         <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
                       </ul>
