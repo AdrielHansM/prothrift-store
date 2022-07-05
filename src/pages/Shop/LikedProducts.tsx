@@ -15,6 +15,7 @@ export default function LikedProducts() {
   const userDetails = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const loadTimer = setTimeout(() => setLoading(false), 3000);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -30,7 +31,6 @@ export default function LikedProducts() {
     if (productArray) {
       console.log(productArray);
       setProducts(productArray);
-      setLoading(false);
     }
   };
 
@@ -72,13 +72,6 @@ export default function LikedProducts() {
                             {product.productDescription}
                           </p>
                           <span className="price">₱{product.productPrice}</span>
-                          <div>
-                            <img
-                              src="/images/heartfilled.svg"
-                              className="liked-heart"
-                              alt=""
-                            />
-                          </div>
                         </div>
                       </div>
                     </Link>
