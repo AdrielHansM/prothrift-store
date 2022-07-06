@@ -17,6 +17,7 @@ import {
   fetchSingleProduct,
   fetchUser,
 } from "../../services/Firebase/productService";
+import { Button } from "react-bootstrap";
 
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
@@ -134,6 +135,28 @@ export default function Chats() {
                           To: <span className="name">Emily Russell</span>
                         </span>
                       </div>
+                      <hr/>
+
+                      <div className="product-display">
+                        <img 
+                          src="/images/Boys-Shirts.jpg" alt="" 
+                          style={{
+                            width:'80px',
+                            height:'auto'
+                          }}/>
+                        <div className="product-disp-title">
+                          <h2>
+                            Kid's Polo-shirt
+                          </h2>
+                          <h3>
+                            ₱249
+                          </h3>  
+                        </div>
+                        {/* Leave a review to the "Buyer"? */}
+                        <Button className="btn-review">Leave a review</Button>
+                      </div>
+                      <hr/>
+                      
                       <div className="chat-container">
                         <ul className="chat-box chatContainerScroll">
                           <li className="chat-left">
@@ -179,32 +202,20 @@ export default function Chats() {
                               results to show you.
                             </div>
                           </li>
-                          <li className="chat-right">
-                            <div className="chat-text">
-                              Well I am not sure.
-                              <br />I have results to show you.
-                            </div>
-                            <div className="chat-avatar">
-                              <img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar5.png"
-                                alt="Retail Admin"
-                              />
-                              <div className="chat-name">Joyse</div>
-                            </div>
-                          </li>
                         </ul>
                         <div className="form-group">
                           <textarea
                             className="form-control"
                             rows={3}
                             placeholder="Type your message here..."
-                          ></textarea>
+                          />
 
                           <p className="priceOffer">
                             <b>Offer: </b>
                             <span>Php </span>
                             <input type={"number"} placeholder="0" />
-                            <button>Make Offer</button>
+                            <Button>Make Offer</Button>
+                            <Button className="btn-trans">Complete Transaction</Button>
                           </p>
                         </div>
                       </div>

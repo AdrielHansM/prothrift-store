@@ -294,3 +294,27 @@ ul {
     color: #fff;
     transition: 250ms;
 }
+
+.product-display{
+    display: flex;
+}
+
+.product-disp-title{
+    display: grid;
+    margin-left: 10px;
+}
+
+.btn-review{
+    margin-left: 50%;
+    margin-top: 20px;
+    height: 50px;
+    background-color: rgb(13,202,240);
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+}
+
+.btn-trans{
+    float: right;
+    height: 40px;
+}

@@ -45,7 +45,7 @@ export default function About() {
             <div className="col-team">
               <div className="team-member">
                 <figure>
-                  <img src="./images/jade.webp" alt="" className="img-responsive"/>
+                  <img src="./images/jade.webp" alt="" className="img-responsive" style={{height:'340px'}}/>
                   <figcaption>
                     <p>Visit me on Facebook</p>
                     <ul>
