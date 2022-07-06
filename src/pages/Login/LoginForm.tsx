@@ -5,7 +5,7 @@ import { Button, Form } from "react-bootstrap";
 import "../../assets/styles/login.css";
 import UserData from "../../models/User";
 import { auth } from "../../services/Firebase/firebaseApp";
-import { getUser } from "../../services/Firebase/productService";
+import { fetchUser } from "../../services/Firebase/productService";
 
 interface LoginData {
   email: string;
@@ -30,7 +30,7 @@ export default function LoginForm() {
     signIn(formData.email, formData.password).then(async () => {
       const uid = auth.currentUser?.uid;
       if (uid) {
-        const user = (await getUser(uid)) as UserData;
+        const user = (await fetchUser(uid)) as UserData;
         navigate("/home", { state: user });
       }
     });

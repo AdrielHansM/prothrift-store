@@ -11,7 +11,10 @@ import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
 import UserData from "../../models/User";
 import { auth } from "../../services/Firebase/firebaseApp";
-import { getUser, searchProduct } from "../../services/Firebase/productService";
+import {
+  fetchUser,
+  searchProduct,
+} from "../../services/Firebase/productService";
 import { MenuItems } from "./MenuItems";
 
 const initialUser = {
@@ -38,7 +41,7 @@ export default function Navigation() {
   async function fetchData() {
     const uidIsPresent = auth.currentUser?.uid;
     if (uidIsPresent && userDetails.isLogged === false) {
-      const user = (await getUser(uidIsPresent)) as UserData;
+      const user = (await fetchUser(uidIsPresent)) as UserData;
       setUserDetails(user);
       setUserFetched(true);
     }

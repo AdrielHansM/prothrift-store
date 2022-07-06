@@ -4,7 +4,7 @@ import Product from "../../../models/Product";
 import {
   addUserFavorite,
   fetchSingleProduct,
-  getUser,
+  fetchUser,
   removeFromUserFavorites,
   validateIfFavorite,
 } from "../../../services/Firebase/productService";
@@ -105,7 +105,7 @@ export default function ViewProduct() {
   }
 
   async function fetchSellerData(userId: string) {
-    const fetchedSeller = (await getUser(userId)) as UserData;
+    const fetchedSeller = (await fetchUser(userId)) as UserData;
     if (fetchedSeller.userId) {
       setSellerDetails(fetchedSeller);
     }

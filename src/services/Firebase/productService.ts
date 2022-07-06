@@ -19,7 +19,7 @@ export const createUser = async(userId: string, firstName: string, lastName: str
   })
 }
 
-export const getUser = async (uid : string) => {
+export const fetchUser = async (uid : string) => {
   return await database
   .collection('users')
   .where('userId', '==', uid)

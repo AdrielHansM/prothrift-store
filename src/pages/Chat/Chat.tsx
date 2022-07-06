@@ -13,32 +13,35 @@ import {
 } from "../../services/Firebase/communicationService";
 import Loading from "../Components/LoadingScreen";
 import MessageContainer from "../../models/MessageContainer";
+import {
+  fetchSingleProduct,
+  fetchUser,
+} from "../../services/Firebase/productService";
 
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
 
   const [conversations, setConversations] = useState<MessageContainer[]>([]);
 
-  const [product, setProduct] = useState<Product>();
-
   const [messageThreads, setMessageThreads] = useState<MessageThread[]>([]);
   const [messageThreadFetched, setMessageThreadFetched] = useState(false);
-  const [conversationsFetched, setConversationsFetched] = useState(false);
 
-  const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!messageThreadFetched) {
       getMessageThreads();
     }
-
-    if (!messageThreadFetched) {
-      getMessage();
-    }
   }, []);
 
+  useEffect(() => {
+    if (messageThreadFetched && messageThreads) {
+      buildThread();
+    }
+  }, [messageThreads]);
+
   const getMessageThreads = async () => {
+    setLoading(true);
     const messageThreadsArray = await fetchMessageThread(userDetails.userId);
     if (messageThreadsArray) {
       setMessageThreads(messageThreadsArray);
@@ -46,33 +49,46 @@ export default function Chats() {
     }
   };
 
-  const getMessage = async () => {
+  const buildThread = async () => {
     let conversationArray: MessageContainer[] = [];
     messageThreads.forEach(async (messageThread) => {
       const messages = await fetchMessage(messageThread.messageThreadId);
-      if (messages) {
+      const product = await fetchSingleProduct(messageThread.productId);
+      const receiver = (await fetchUser(messageThread.receiverId)) as UserData;
+      if (messages && product) {
         const conversationArrayIndex = {
           messageThread: messageThread,
           messages: messages,
+          product: product,
+          receiver: receiver,
         };
         conversationArray.push(conversationArrayIndex);
       }
     });
     setConversations(conversationArray);
-    setConversationsFetched(true);
+    const timeout = setTimeout(() => setLoading(false), 2500);
   };
 
   return (
     <>
-      {!messageThreadFetched && !conversationsFetched ? (
+      {loading ? (
         <>
           <Navigation />
           <Loading />
         </>
       ) : (
         <>
-          {console.log(conversations)}
           <Navigation />
+          {conversations.map((conversation, index) => {
+            console.log("Thread: ", conversation.messageThread);
+            console.log("Message: ", conversation.messages);
+            console.log("Product: ", conversation.product);
+            console.log("Receiver: ", conversation.receiver);
+
+            conversation.messages.forEach((message) => {
+              console.log(message.messageContent);
+            });
+          })}
           <div className="container">
             <div className="content-wrapper">
               <div className="row gutters">
