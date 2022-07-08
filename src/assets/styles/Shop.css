@@ -38,17 +38,6 @@
     object-fit: cover;
 }
 
-.discount-tag{
-    position: absolute;
-    background: #fff;
-    padding: 5px;
-    border-radius: 5px;
-    color: #ff7d7d;
-    right: 10px;
-    top: 10px;
-    text-transform: capitalize;
-}
-
 .card-btn{
     position: absolute;
     bottom: 10px;
