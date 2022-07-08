@@ -92,7 +92,9 @@ export default function EditProfile() {
                   className="form-control"
                   placeholder="last name"
                   value={
-                    isLNameModified || lastName ? lastName : userState?.lastName
+                    isLNameModified || lastName 
+                    ? lastName 
+                    : userState?.lastName
                   }
                   onChange={(e) => {
                     setLastName(e.target.value);
@@ -102,8 +104,8 @@ export default function EditProfile() {
               </div>
             </div>
 
-            <div className="row mt-3">
-              <div className="col-md-12">
+            <div>
+              <div className="mt-4">
                 <label className="labels">Phone Number</label>
                 <input
                   type="number"
@@ -121,7 +123,7 @@ export default function EditProfile() {
                 />
               </div>
 
-              <div className="col-md-12 mt-3">
+              <div className="mt-4">
                 <label className="labels">Email Address</label>
                 <input
                   type="text"

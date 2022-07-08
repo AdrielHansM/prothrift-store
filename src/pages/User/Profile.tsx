@@ -61,7 +61,7 @@ export default function Profile() {
                   <div className="profile-header-content">
                     <div className="profile-header-img">
                       <img
-                        src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                        src="/images/user-profile.png"
                         alt=""
                       />
                     </div>
