@@ -42,8 +42,9 @@ export default function RegisterForm() {
   return (
     <>
       <Form onSubmit={handleSubmit} className="registerForm">
-        <h1>Register</h1>
-        <Form.Group className="mt-3">
+        <h1 className="log-con">Register</h1>
+
+        <Form.Group className="mb-3">
           <Form.Label>First Name</Form.Label>
           <Form.Control
             type={"text"}
@@ -55,7 +56,7 @@ export default function RegisterForm() {
           />
         </Form.Group>
 
-        <Form.Group className="mt-3">
+        <Form.Group className="mb-3">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
             type={"text"}
@@ -67,7 +68,7 @@ export default function RegisterForm() {
           />
         </Form.Group>
 
-        <Form.Group className="mt-3">
+        <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
             type={"email"}
@@ -79,7 +80,7 @@ export default function RegisterForm() {
           />
         </Form.Group>
 
-        <Form.Group className="mt-3">
+        <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type={"password"}
@@ -91,7 +92,7 @@ export default function RegisterForm() {
           />
         </Form.Group>
 
-        <Form.Group className="mt-3">
+        <Form.Group className="mb-3">
           <Form.Label>Contact Number</Form.Label>
           <Form.Control
             type={"text"}
@@ -103,7 +104,7 @@ export default function RegisterForm() {
           />
         </Form.Group>
 
-        <Button type="submit" className="w-100 mt-4 mb-3">
+        <Button type="submit" className="btnlog">
           Register
         </Button>
       </Form>

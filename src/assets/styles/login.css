@@ -2,21 +2,12 @@
   width: 550px;
   margin: 25px auto;
   padding: 50px;
-  background-color: rgb(238, 215, 215);
+  background-color: rgb(199, 220, 226);
   border-radius: 10px;
 }
 
-.loginCon{
-  width: auto;
-  margin: 25px auto;
-}
-
-.loginCon h1{
+.log-con{
   text-align: center;
-}
-
-.email{
-  margin: 15px 0px;
 }
 
 .btnlog{
@@ -27,14 +18,14 @@
 /*Register css*/
 .mainregCon{
   width: 40rem;
+  height: 49rem;
   margin: 25px auto;
-  padding: 50px;
-  background-color: rgb(238, 215, 215);
+  padding: 70px;
+  background-color: rgb(199, 220, 226);
   border-radius: 10px;
 }
 
-.regCon{
+.registerForm{
   width: auto;
-  margin: 25px auto;
 }
 

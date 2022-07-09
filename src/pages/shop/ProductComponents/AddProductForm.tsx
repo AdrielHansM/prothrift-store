@@ -17,6 +17,7 @@ import { estimateWeight, convertWeight } from "../../../utils/productUtils";
 import Footer from "../../Components/Footer";
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/NavBar";
+import "../../../assets/styles/AddProduct.css";
 
 const initialProduct = {
   productId: "",
@@ -104,7 +105,7 @@ export default function AddProductForm() {
 
   function SuccessAlert() {
     return (
-      <div className="w-75 h-50 mx-auto d-block mt-3">
+      <div className="w-75 h-50 mx-auto d-block mb-3">
         <Alert show={show} variant="success">
           <Alert.Heading>Product Successfully Listed</Alert.Heading>
           <div className="d-flex justify-content-end">
@@ -128,12 +129,12 @@ export default function AddProductForm() {
         <>
           <Navigation />
           <SuccessAlert />
-          <Container className="mainregCon">
-            <Card>
+          <Container className="add-con">
+            <Card style={{height:'100%'}}>
               <Card.Body>
                 <Form onSubmit={handleSubmit} className="productForm">
                   <h1>Add Product</h1>
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control
                       type={"text"}
@@ -144,7 +145,7 @@ export default function AddProductForm() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Price</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>Php</InputGroup.Text>
@@ -160,7 +161,7 @@ export default function AddProductForm() {
                     </InputGroup>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Description</Form.Label>
                     <Form.Control
                       as="textarea"
@@ -172,7 +173,7 @@ export default function AddProductForm() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Image</Form.Label>
                     <Form.Control
                       name="image"
@@ -182,7 +183,7 @@ export default function AddProductForm() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Preferred Meetup</Form.Label>
                     <Form.Control
                       type={"text"}
@@ -193,7 +194,7 @@ export default function AddProductForm() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                       as="select"
@@ -213,7 +214,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Clothing Type</Form.Label>
                     <Form.Control
                       as="select"
@@ -259,7 +260,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Status</Form.Label>
                     <Form.Control
                       as="select"
@@ -278,7 +279,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Estimated Weight (grams)</Form.Label>
                     <InputGroup>
                       <DropdownButton
@@ -308,7 +309,7 @@ export default function AddProductForm() {
                     </InputGroup>
                   </Form.Group>
 
-                  <Button type="submit" className="w-100 mt-4 mb-3">
+                  <Button type="submit" className="addproduct-btn">
                     Create Product
                   </Button>
                 </Form>

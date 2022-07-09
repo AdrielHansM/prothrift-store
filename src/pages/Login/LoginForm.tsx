@@ -39,7 +39,7 @@ export default function LoginForm() {
   return (
     <>
       <Form onSubmit={handleSubmit} className="loginCon">
-        <h1>{"Welcome!"}</h1>
+        <h1 className="log-con">{"Welcome!"}</h1>
 
         <Form.Group>
           <Form.Label>Email</Form.Label>

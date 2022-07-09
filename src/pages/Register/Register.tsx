@@ -7,7 +7,7 @@ export default function Login() {
   return (
     <>
       <Container className="mainregCon">
-        <Card>
+        <Card style={{height:'100%'}}>
           <Card.Body>
           <RegisterForm />
             <p>Already registered? <Link to={'/login'}>Login</Link></p>

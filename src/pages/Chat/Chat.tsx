@@ -153,7 +153,7 @@ export default function Chats() {
                               src={currentProduct.imageUrl}
                               alt=""
                               style={{
-                                width: "80px",
+                                width: "100px",
                               }}
                             />
                             <div className="product-disp-title">
@@ -227,7 +227,7 @@ export default function Chats() {
                         </>
                       ) : (
                         <>
-                          <h3>No Conversations yet</h3>
+                          <h3 className="msg-noconvo">No Conversations yet</h3>
                         </>
                       )}
                     </div>
