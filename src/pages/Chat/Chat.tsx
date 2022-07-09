@@ -1,23 +1,23 @@
-import Navigation from "../Components/Navigation";
-import "../../assets/styles/Chat.css";
-import Footer from "../Components/Footer";
-import { useLocation } from "react-router-dom";
-import UserData from "../../models/User";
-import Product from "../../models/Product";
 import { useEffect, useState } from "react";
-import MessageThread from "../../models/MessageThread";
+import { Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import "../../assets/styles/Chat.css";
 import Message from "../../models/Message";
+import MessageContainer from "../../models/MessageContainer";
+import MessageThread from "../../models/MessageThread";
+import Product from "../../models/Product";
+import UserData from "../../models/User";
 import {
   fetchMessage,
   fetchMessageThread,
 } from "../../services/Firebase/communicationService";
-import Loading from "../Components/LoadingScreen";
-import MessageContainer from "../../models/MessageContainer";
 import {
   fetchSingleProduct,
   fetchUser,
 } from "../../services/Firebase/productService";
-import { Button } from "react-bootstrap";
+import Footer from "../Components/Footer";
+import Loading from "../Components/LoadingScreen";
+import Navigation from "../Components/NavBar";
 
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
@@ -28,6 +28,10 @@ export default function Chats() {
   const [messageThreadFetched, setMessageThreadFetched] = useState(false);
 
   const [loading, setLoading] = useState(false);
+
+  const [currentConversation, setCurrentConversation] = useState<Message[]>([]);
+  const [currentProduct, setCurrentProduct] = useState<Product>();
+  const [currentChathead, setCurrentChathead] = useState<UserData>();
 
   useEffect(() => {
     if (!messageThreadFetched) {
@@ -80,16 +84,6 @@ export default function Chats() {
       ) : (
         <>
           <Navigation />
-          {conversations.map((conversation, index) => {
-            console.log("Thread: ", conversation.messageThread);
-            console.log("Message: ", conversation.messages);
-            console.log("Product: ", conversation.product);
-            console.log("Receiver: ", conversation.receiver);
-
-            conversation.messages.forEach((message) => {
-              console.log(message.messageContent);
-            });
-          })}
           <div className="container">
             <div className="content-wrapper">
               <div className="row gutters">
@@ -112,113 +106,130 @@ export default function Chats() {
                           </div>
                         </div>
                         <ul className="users">
-                          <li
-                            className="person active-user"
-                            data-chat="person1"
-                          >
-                            <div className="user">
-                              <img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                alt="Retail Admin"
-                              />
-                            </div>
-                            <p className="name-time">
-                              <span className="name">Emily Russell</span>
-                            </p>
-                          </li>
+                          {conversations.map((conversation, index) => {
+                            return (
+                              <>
+                                <li
+                                  key={index}
+                                  className="person active-user"
+                                  onClick={() => {
+                                    setCurrentConversation(
+                                      conversation.messages
+                                    );
+                                    setCurrentProduct(conversation.product);
+                                    setCurrentChathead(conversation.receiver);
+                                  }}
+                                >
+                                  <div className="user">
+                                    <img
+                                      src={require("../../assets/images/user.png")}
+                                    />
+                                  </div>
+                                  <p className="name-time">
+                                    <span className="name">{`${conversation.receiver.firstName} ${conversation.receiver.lastName}`}</span>
+                                  </p>
+                                </li>
+                              </>
+                            );
+                          })}
                         </ul>
                       </div>
                     </div>
                     <div className="col-xl-9 col-lg-8 col-md-8 col-sm-9 col-9">
-                      <div className="selected-user">
-                        <span>
-                          To: <span className="name">Emily Russell</span>
-                        </span>
-                      </div>
-                      <hr/>
+                      {currentConversation.length > 0 &&
+                      currentChathead &&
+                      currentProduct ? (
+                        <>
+                          <div className="selected-user">
+                            <span>
+                              To:{" "}
+                              <span className="name">{`${currentChathead.firstName} ${currentChathead.lastName}`}</span>
+                            </span>
+                          </div>
+                          <hr />
 
-                      <div className="product-display">
-                        <img 
-                          src="/images/Boys-Shirts.jpg" alt="" 
-                          style={{
-                            width:'80px',
-                            height:'auto'
-                          }}/>
-                        <div className="product-disp-title">
-                          <h2>
-                            Kid's Polo-shirt
-                          </h2>
-                          <h3>
-                            ₱249
-                          </h3>  
-                        </div>
-                        {/* Leave a review to the "Buyer"? */}
-                        <Button className="btn-review">Leave a review</Button>
-                      </div>
-                      <hr/>
-                      
-                      <div className="chat-container">
-                        <ul className="chat-box chatContainerScroll">
-                          <li className="chat-left">
-                            <div className="chat-avatar">
-                              <img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                alt="Retail Admin"
-                              />
-                              <div className="chat-name">Russell</div>
+                          <div className="product-display">
+                            <img
+                              src={currentProduct.imageUrl}
+                              alt=""
+                              style={{
+                                width: "80px",
+                              }}
+                            />
+                            <div className="product-disp-title">
+                              <h2>{currentProduct.productName}</h2>
+                              <h3>{currentProduct.productPrice}</h3>
                             </div>
-                            <div className="chat-text">
-                              Hello, I'm Russell.
-                              <br />
-                              How can I help you today?
-                            </div>
-                          </li>
-                          <li className="chat-right">
-                            <div className="chat-text">
-                              Hi, Russell
-                              <br /> I need more information about Developer
-                              Plan.
-                            </div>
-                            <div className="chat-avatar">
-                              <img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar5.png"
-                                alt="Retail Admin"
-                              />
-                              <div className="chat-name">Sam</div>
-                            </div>
-                          </li>
-                          <li className="chat-left">
-                            <div className="chat-avatar">
-                              <img
-                                src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
-                                alt="Retail Admin"
-                              />
-                              <div className="chat-name">Russell</div>
-                            </div>
-                            <div className="chat-text">
-                              Are we meeting today?
-                              <br />
-                              Project has been already finished and I have
-                              results to show you.
-                            </div>
-                          </li>
-                        </ul>
-                        <div className="form-group">
-                          <textarea
-                            className="form-control"
-                            rows={3}
-                            placeholder="Type your message here..."
-                          />
+                            {/* Leave a review to the "Buyer"? */}
+                            <Button className="btn-review">
+                              Leave a review
+                            </Button>
+                            <Button className="btn-trans">
+                              Complete Transaction
+                            </Button>
+                          </div>
+                          <hr />
 
-                          <p className="priceOffer">
-                            <b>Offer: </b>
-                            <span>Php </span>
-                            <input type={"number"} placeholder="0" />
-                            <Button>Make Offer</Button>
-                            <Button className="btn-trans">Complete Transaction</Button>
-                          </p>
-                        </div>
-                      </div>
+                          <div className="chat-container">
+                            <ul className="chat-box chatContainerScroll">
+                              {currentConversation.map((message, index) => {
+                                return (
+                                  <>
+                                    {currentChathead.userId ===
+                                    message.fromId ? (
+                                      <>
+                                        <li key={index} className="chat-left">
+                                          <div className="chat-avatar">
+                                            <img
+                                              src={require("../../assets/images/user.png")}
+                                            />
+                                            <div className="chat-name">
+                                              {currentChathead.firstName}
+                                            </div>
+                                          </div>
+                                          <div className="chat-text">
+                                            {message.messageContent}
+                                          </div>
+                                        </li>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <li className="chat-right">
+                                          <div className="chat-avatar">
+                                            <img
+                                              src={require("../../assets/images/user.png")}
+                                            />
+                                            <div className="chat-name">
+                                              {userDetails.firstName}
+                                            </div>
+                                          </div>
+                                          <div className="chat-text">
+                                            {message.messageContent}
+                                          </div>
+                                        </li>
+                                      </>
+                                    )}
+                                  </>
+                                );
+                              })}
+                            </ul>
+                            <div className="form-group">
+                              <textarea
+                                className="form-control"
+                                rows={3}
+                                placeholder="Type your message here..."
+                              ></textarea>
+                              <Button className="btn-trans">
+                                Send Message
+                              </Button>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <h3>No Conversations yet</h3>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -231,4 +242,46 @@ export default function Chats() {
       )}
     </>
   );
+}
+
+{
+  /* <>
+{currentConversation.map((message, index) => {
+  currentChathead.userId === message.fromId ? (
+    <>
+      <li key={index} className="chat-left">
+        <div className="chat-avatar">
+          <img
+            src="../../assets/images/user.png"
+            alt="Retail Admin"
+          />
+          <div className="chat-name">
+            {currentChathead.firstName}
+          </div>
+        </div>
+        <div className="chat-text">
+          {message.messageContent}
+        </div>
+      </li>
+    </>
+  ) : (
+    <>
+      <li className="chat-right">
+        <div className="chat-avatar">
+          <img
+            src="../../assets/images/user.png"
+            alt="Retail Admin"
+          />
+          <div className="chat-name">
+            {userDetails.firstName}
+          </div>
+        </div>
+        <div className="chat-text">
+          {message.messageContent}
+        </div>
+      </li>
+    </>
+  );
+})}
+</> */
 }

@@ -5,7 +5,7 @@ import {
   fetchProductsByProfile,
   fetchSingleProduct,
 } from "../../../services/Firebase/productService";
-import Navigation from "../../Components/Navigation";
+import Navigation from "../../Components/NavBar";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
 import { Form, Modal, Button } from "react-bootstrap";

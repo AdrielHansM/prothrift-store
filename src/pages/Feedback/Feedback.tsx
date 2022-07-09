@@ -1,6 +1,6 @@
 import "../../assets/styles/Body.css";
 import { Button, Form } from "react-bootstrap";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 import Footer from "../Components/Footer";
 
 export default function Feedback() {

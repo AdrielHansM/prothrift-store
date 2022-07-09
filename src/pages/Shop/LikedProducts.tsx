@@ -9,7 +9,7 @@ import {
 } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 
 export default function LikedProducts() {
   const userDetails = useLocation().state as UserData;
@@ -46,7 +46,7 @@ export default function LikedProducts() {
           <Navigation />
           <section>
             <h2 className="product-category2">Liked Products</h2>
-            <div className="product-container2" style={{marginBottom:'17%'}}>
+            <div className="product-container2" style={{ marginBottom: "17%" }}>
               {products.map((product, index) => {
                 return (
                   <>

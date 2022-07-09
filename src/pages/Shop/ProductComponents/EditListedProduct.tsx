@@ -13,7 +13,7 @@ import UserData from "../../../models/User";
 import { createProduct } from "../../../services/Firebase/productService";
 import Footer from "../../Components/Footer";
 import Loading from "../../Components/LoadingScreen";
-import Navigation from "../../Components/Navigation";
+import Navigation from "../../Components/NavBar";
 
 const initialProduct = {
   productId: "",
@@ -171,7 +171,7 @@ export default function EditListedProduct() {
                       onChange={handleChange}
                       required
                     />
-                  </Form.Group>      
+                  </Form.Group>
 
                   <Form.Group className="mt-3">
                     <Form.Label>Product Status</Form.Label>

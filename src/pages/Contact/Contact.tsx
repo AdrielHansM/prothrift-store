@@ -1,4 +1,4 @@
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 
 import { Button, Form } from "react-bootstrap";
 import "../../assets/styles/Body.css";

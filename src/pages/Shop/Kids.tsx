@@ -6,7 +6,7 @@ import UserData from "../../models/User";
 import { fetchProductsByCategory } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 
 export default function Kids() {
   const userDetails = useLocation().state as UserData;

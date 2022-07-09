@@ -13,7 +13,10 @@ export const createTransaction = async (productId: string, buyerId: string, sell
     transactionStatus: transactionStatus,
     dateUpdated: new Date(),
     dateCreated: new Date()
-  }).catch ((error) => {
+  }).then(()=> {
+    return true
+  })
+  .catch ((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " : " + errorMessage)

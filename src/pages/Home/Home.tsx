@@ -5,7 +5,7 @@ import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
 import { fetchTotalSaved } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 import { BarGraph } from "../Components/graphs/BarGraph";
 import { convertWeight } from "../../utils/productUtils";
 
@@ -115,7 +115,9 @@ export default function Body() {
       </div>
 
       <div className="UN-goals">
-        <h1 style={{textAlign:'center'}}>UN’s sustainable development goals</h1>
+        <h1 style={{ textAlign: "center" }}>
+          UN’s sustainable development goals
+        </h1>
         <div className="UN-text">
           <img src="./images/RCP.gif" />
           <p>

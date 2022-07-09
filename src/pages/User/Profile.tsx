@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
@@ -135,7 +135,7 @@ export default function Profile() {
                           <img
                             className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
                             src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                            alt=''
+                            alt=""
                           />
                           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                             <div className="g-mb-15">
@@ -186,7 +186,7 @@ export default function Profile() {
                           <img
                             className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
                             src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                            alt=''
+                            alt=""
                           />
                           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                             <div className="g-mb-15">
@@ -235,7 +235,16 @@ export default function Profile() {
                   </div>
                 </Tab>
                 <Tab eventKey="voucher" title="VOUCHERS">
-                  <div style={{marginBottom:'20%', textAlign:'center', marginTop:'10%', fontSize:'50px'}}>You don't have any vouchers!</div>
+                  <div
+                    style={{
+                      marginBottom: "20%",
+                      textAlign: "center",
+                      marginTop: "10%",
+                      fontSize: "50px",
+                    }}
+                  >
+                    You don't have any vouchers!
+                  </div>
                 </Tab>
               </Tabs>
             </div>

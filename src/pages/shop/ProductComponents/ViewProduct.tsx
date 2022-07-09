@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Product from "../../../models/Product";
 import {
   addUserFavorite,
@@ -9,15 +9,17 @@ import {
   validateIfFavorite,
 } from "../../../services/Firebase/productService";
 import Loading from "../../Components/LoadingScreen";
-import Navigation from "../../Components/Navigation";
+import Navigation from "../../Components/NavBar";
 import UserData from "../../../models/User";
 import "../../../assets/styles/ViewProduct.css";
 import { Row, Col, Modal, Button } from "react-bootstrap";
 import {
   createNewMessageThread,
   fetchMessageThread,
+  validateIfThreadExists,
 } from "../../../services/Firebase/communicationService";
 import MessageThread from "../../../models/MessageThread";
+import { createTransaction } from "../../../services/Firebase/transactionService";
 
 interface stateType {
   product: string;
@@ -29,7 +31,7 @@ export default function ViewProduct() {
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
 
-  const [messageThreads, setMessageThreads] = useState<MessageThread[]>([]);
+  const [messageThreads, setMessageThreads] = useState(false);
 
   const [offer, setOffer] = useState(0);
   const [dataFetched, setDataFetched] = useState(false);
@@ -77,7 +79,6 @@ export default function ViewProduct() {
     if (dataFetched === false) {
       fetchProductData(userDetails.product);
       fetchUserMessageThreads(userDetails.user.userId, userDetails.product);
-      setLoading(false);
 
       if (productDetails?.productId) {
         fetchSellerData(productDetails.userId);
@@ -112,11 +113,8 @@ export default function ViewProduct() {
   }
 
   async function fetchUserMessageThreads(userId: string, productId: string) {
-    const messageThreadsArray = await fetchMessageThread(userId);
-
-    if (messageThreadsArray) {
-      setMessageThreads(messageThreadsArray);
-    }
+    const validateThread = await validateIfThreadExists(userId, productId);
+    setMessageThreads(validateThread);
   }
 
   async function createOffer() {
@@ -128,6 +126,7 @@ export default function ViewProduct() {
         productId: productDetails.productId,
         messageContent: `Hey! are you willing to accept my offer ${offer}`,
       };
+
       const messageStatus = await createNewMessageThread(
         message.senderId,
         message.receiverId,
@@ -135,7 +134,14 @@ export default function ViewProduct() {
         message.messageContent
       );
 
-      if (messageStatus) {
+      const transactionStatus = await createTransaction(
+        productDetails.productId,
+        userDetails.user.userId,
+        sellerDetails.userId,
+        "PENDING"
+      );
+
+      if (messageStatus && transactionStatus) {
         setLoading(false);
         navigate("/chat", { state: userDetails.user });
       }
@@ -224,47 +230,57 @@ export default function ViewProduct() {
           </section>
           <hr />
           <div>
-            <Row className="offer-cont">
-              <Col className="make-offer">
-                <p className="price-input">
-                  <b>Offer: </b>
-                  <span>Php </span>
-                  <input
-                    type={"number"}
-                    placeholder="0"
-                    min={0}
-                    required
-                    value={offer}
-                    onChange={(e) => {
-                      setOffer(e.target.valueAsNumber);
-                    }}
-                  />
-                </p>
-              </Col>
-              <Col className="voucher">
-                <button onClick={handleShow}>Voucher</button>
+            {!messageThreads ? (
+              <>
+                <Row className="offer-cont">
+                  <Col className="make-offer">
+                    <p className="price-input">
+                      <b>Offer: </b>
+                      <span>Php </span>
+                      <input
+                        type={"number"}
+                        placeholder="0"
+                        min={0}
+                        required
+                        value={offer}
+                        onChange={(e) => {
+                          setOffer(e.target.valueAsNumber);
+                        }}
+                      />
+                    </p>
+                  </Col>
+                  <Col className="voucher">
+                    <button onClick={handleShow}>Voucher</button>
 
-                <Modal show={show} centered>
-                  <Modal.Body
-                    style={{
-                      textAlign: "center",
-                      fontSize: "30px",
-                      padding: "20% 5%",
-                    }}
-                  >
-                    You don't have any vouchers.
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </Col>
-              <Col className="makeoffer-btn">
-                <button onClick={() => createOffer()}>Make Offer</button>
-              </Col>
-            </Row>
+                    <Modal show={show} centered>
+                      <Modal.Body
+                        style={{
+                          textAlign: "center",
+                          fontSize: "30px",
+                          padding: "20% 5%",
+                        }}
+                      >
+                        You don't have any vouchers.
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </Col>
+                  <Col className="makeoffer-btn">
+                    <button onClick={() => createOffer()}>Make Offer</button>
+                  </Col>
+                </Row>
+              </>
+            ) : (
+              <>
+                <Link to={"/chat"} state={userDetails.user}>
+                  <h3>Go to Message Thread</h3>
+                </Link>
+              </>
+            )}
           </div>
         </>
       )}

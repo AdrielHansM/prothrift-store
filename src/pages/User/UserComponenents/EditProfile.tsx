@@ -1,4 +1,4 @@
-import Navigation from "../../Components/Navigation";
+import Navigation from "../../Components/NavBar";
 import "../../../assets/styles/EditProfile.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import UserData from "../../../models/User";

@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "../../assets/styles/About.css";
-import Navigation from "../Components/Navigation";
+import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Footer from "../Components/Footer";
 
@@ -24,8 +24,8 @@ export default function About() {
       <div className="about-content">
         <h2>This is ProThrift</h2>
         <p>
-          ProThrift is a secondhand shopping platform with a mission to empower people in
-          their daily lives. We do this by providing a.....
+          ProThrift is a secondhand shopping platform with a mission to empower
+          people in their daily lives. We do this by providing a.....
         </p>
       </div>
 
@@ -40,42 +40,58 @@ export default function About() {
             </div>
 
             <div className="container2">
-          <div className="row-con">
+              <div className="row-con">
+                <div className="col-team">
+                  <div className="team-member">
+                    <figure>
+                      <img
+                        src="./images/jade.webp"
+                        alt=""
+                        className="img-responsive"
+                        style={{ height: "340px" }}
+                      />
+                      <figcaption>
+                        <p>Visit me on Facebook</p>
+                        <ul>
+                          <li>
+                            <a href="https://www.facebook.com/">
+                              <i className="fa-brands fa-facebook fa-2x"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </figcaption>
+                    </figure>
+                    <h4>Jade Jimenez</h4>
+                  </div>
+                </div>
 
-            <div className="col-team">
-              <div className="team-member">
-                <figure>
-                  <img src="./images/jade.webp" alt="" className="img-responsive" style={{height:'340px'}}/>
-                  <figcaption>
-                    <p>Visit me on Facebook</p>
-                    <ul>
-                      <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
-                    </ul>
-                  </figcaption>
-                </figure>
-                <h4>Jade Jimenez</h4>
-              </div>
-            </div>
-
-              <div className="col-team">
-                <div className="team-member">
-                  <figure>
-                    <img src="./images/jian.webp" alt="" className="img-responsive"/>
-                    <figcaption>
-                      <p>Visit me on Facebook</p>
-                      <ul>
-                        <li><a href="https://www.facebook.com/"><i className="fa-brands fa-facebook fa-2x"></i></a></li>
-                      </ul>
-                    </figcaption>
-                  </figure>
-                  <h4>Jianina Escalo</h4>
+                <div className="col-team">
+                  <div className="team-member">
+                    <figure>
+                      <img
+                        src="./images/jian.webp"
+                        alt=""
+                        className="img-responsive"
+                      />
+                      <figcaption>
+                        <p>Visit me on Facebook</p>
+                        <ul>
+                          <li>
+                            <a href="https://www.facebook.com/">
+                              <i className="fa-brands fa-facebook fa-2x"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </figcaption>
+                    </figure>
+                    <h4>Jianina Escalo</h4>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       <div className="map">
         <div>

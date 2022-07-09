@@ -87,7 +87,7 @@ export const fetchMessage = async(messageThreadId: string) => {
       messageDocs.forEach(doc => {
         const message = {
           messageId: doc.id,
-          fromId: doc.data().id,
+          fromId: doc.data().fromId,
           messageContent: doc.data().messageContent,
           dateCreated: doc.data().dateCreated
         }
@@ -95,4 +95,19 @@ export const fetchMessage = async(messageThreadId: string) => {
       })
       return messages
     })
+}
+
+export const validateIfThreadExists = async(userId: string, productId: string) => {
+  return await database
+  .collection('messageThread')
+  .where('productId', '==', productId)
+  .where('userId', '==', userId)
+  .get()
+  .then((messageDocs) => {
+    if (messageDocs.empty) {
+      return false;
+    } else {
+      return true;
+    }
+  })
 }
