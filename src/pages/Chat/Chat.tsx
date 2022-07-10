@@ -202,7 +202,7 @@ export default function Chats() {
                             />
                             <div className="product-disp-title">
                               <h2>{currentProduct.productName}</h2>
-                              <h3>{currentProduct.productPrice}</h3>
+                              <h3>₱{currentProduct.productPrice}</h3>
                             </div>
                             {/* Leave a review to the "Buyer"? */}
                             {}
@@ -244,6 +244,9 @@ export default function Chats() {
                                     ) : (
                                       <>
                                         <li className="chat-right">
+                                        <div className="chat-text">
+                                            {message.messageContent}
+                                          </div>
                                           <div className="chat-avatar">
                                             <img
                                               src={require("../../assets/images/user.png")}
@@ -252,9 +255,6 @@ export default function Chats() {
                                               {userDetails.firstName}
                                             </div>
                                           </div>
-                                          <div className="chat-text">
-                                            {message.messageContent}
-                                          </div>
                                         </li>
                                       </>
                                     )}
@@ -262,7 +262,7 @@ export default function Chats() {
                                 );
                               })}
                             </ul>
-                            <div className="form-group">
+                            <div className="form-group" style={{display:'flex'}}>
                               <textarea
                                 className="chatbox"
                                 rows={3}

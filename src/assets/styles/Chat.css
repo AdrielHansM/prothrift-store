@@ -2,6 +2,7 @@
     margin-left: 20px;
     margin-right: 20px;
     height: 33rem;
+    position: revert;
 }
 
 .chat-search-box {
@@ -330,6 +331,7 @@ ul {
     color: #fff;
     border: none;
     margin-top: 15px;
+    margin-left: 20px;
 }
 
 .msg-noconvo{

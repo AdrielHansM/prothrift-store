@@ -130,7 +130,7 @@ export default function AddProductForm() {
           <Navigation />
           <SuccessAlert />
           <Container className="add-con">
-            <Card style={{height:'100%'}}>
+            <Card className="card">
               <Card.Body>
                 <Form onSubmit={handleSubmit} className="productForm">
                   <h1>Add Product</h1>
