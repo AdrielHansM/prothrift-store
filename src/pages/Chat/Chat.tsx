@@ -6,15 +6,19 @@ import Message from "../../models/Message";
 import MessageContainer from "../../models/MessageContainer";
 import MessageThread from "../../models/MessageThread";
 import Product from "../../models/Product";
+import Transaction from "../../models/Transaction";
 import UserData from "../../models/User";
 import {
   fetchMessage,
-  fetchMessageThread,
+  fetchBuyerThread,
+  sendMessage,
+  fetchSellerThread,
 } from "../../services/Firebase/communicationService";
 import {
   fetchSingleProduct,
   fetchUser,
 } from "../../services/Firebase/productService";
+import { fetchTransaction } from "../../services/Firebase/transactionService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
@@ -24,14 +28,21 @@ export default function Chats() {
 
   const [conversations, setConversations] = useState<MessageContainer[]>([]);
 
-  const [messageThreads, setMessageThreads] = useState<MessageThread[]>([]);
+  const [buyerThreads, setBuyerThreads] = useState<MessageThread[]>([]);
+  const [sellerThreads, setSellerThreads] = useState<MessageThread[]>([]);
+
   const [messageThreadFetched, setMessageThreadFetched] = useState(false);
+  const [buyerThreadBuilt, setBuyerThreadBuilt] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
-  const [currentConversation, setCurrentConversation] = useState<Message[]>([]);
+  const [currentThread, setCurrentThread] = useState<MessageThread>();
+  const [currentMessages, setCurrentMessages] = useState<Message[]>([]);
   const [currentProduct, setCurrentProduct] = useState<Product>();
   const [currentChathead, setCurrentChathead] = useState<UserData>();
+  const [currentTransaction, setCurrentTransaction] = useState<Transaction>();
+
+  const [messageToSend, setMessageToSend] = useState<string>();
 
   useEffect(() => {
     if (!messageThreadFetched) {
@@ -40,38 +51,59 @@ export default function Chats() {
   }, []);
 
   useEffect(() => {
-    if (messageThreadFetched && messageThreads) {
-      buildThread();
+    if (messageThreadFetched && buyerThreads.length > 0) {
+      buildThread(buyerThreads);
     }
-  }, [messageThreads]);
+  }, [buyerThreads]);
+
+  useEffect(() => {
+    if (messageThreadFetched && sellerThreads.length > 0 && buyerThreadBuilt) {
+      buildThread(sellerThreads);
+    }
+  }, [sellerThreads]);
 
   const getMessageThreads = async () => {
     setLoading(true);
-    const messageThreadsArray = await fetchMessageThread(userDetails.userId);
-    if (messageThreadsArray) {
-      setMessageThreads(messageThreadsArray);
+    const messageThreadsBuyer = await fetchBuyerThread(userDetails.userId);
+    const messageThreadsSeller = await fetchSellerThread(userDetails.userId);
+    if (messageThreadsBuyer && messageThreadsSeller) {
+      setBuyerThreads(messageThreadsBuyer);
+      setSellerThreads(messageThreadsSeller);
       setMessageThreadFetched(true);
     }
   };
 
-  const buildThread = async () => {
+  const buildThread = async (messageThreads: MessageThread[]) => {
     let conversationArray: MessageContainer[] = [];
     messageThreads.forEach(async (messageThread) => {
       const messages = await fetchMessage(messageThread.messageThreadId);
       const product = await fetchSingleProduct(messageThread.productId);
       const receiver = (await fetchUser(messageThread.receiverId)) as UserData;
-      if (messages && product) {
+      const transaction = await fetchTransaction(
+        product.productId,
+        messageThread.senderId,
+        messageThread.receiverId
+      );
+      if (messages && product && transaction) {
         const conversationArrayIndex = {
           messageThread: messageThread,
           messages: messages,
           product: product,
           receiver: receiver,
+          transaction: transaction,
         };
         conversationArray.push(conversationArrayIndex);
       }
     });
     setConversations(conversationArray);
+    setBuyerThreadBuilt(true);
     const timeout = setTimeout(() => setLoading(false), 2500);
+  };
+
+  const sendMessageProcess = async (threadId: string) => {
+    if (messageToSend) {
+      sendMessage(threadId, userDetails.userId, messageToSend);
+    }
   };
 
   return (
@@ -84,6 +116,7 @@ export default function Chats() {
       ) : (
         <>
           <Navigation />
+          {console.log(conversations)}
           <div className="container">
             <div className="content-wrapper">
               <div className="row gutters">
@@ -113,11 +146,15 @@ export default function Chats() {
                                   key={index}
                                   className="person active-user"
                                   onClick={() => {
-                                    setCurrentConversation(
-                                      conversation.messages
+                                    setCurrentThread(
+                                      conversation.messageThread
                                     );
+                                    setCurrentMessages(conversation.messages);
                                     setCurrentProduct(conversation.product);
                                     setCurrentChathead(conversation.receiver);
+                                    setCurrentTransaction(
+                                      conversation.transaction
+                                    );
                                   }}
                                 >
                                   <div className="user">
@@ -126,7 +163,14 @@ export default function Chats() {
                                     />
                                   </div>
                                   <p className="name-time">
-                                    <span className="name">{`${conversation.receiver.firstName} ${conversation.receiver.lastName}`}</span>
+                                    <span className="name">{`${
+                                      conversation.messageThread.senderId ===
+                                      userDetails.userId
+                                        ? "(Seller) "
+                                        : "(Buyer) "
+                                    } ${conversation.receiver.firstName} ${
+                                      conversation.receiver.lastName
+                                    }`}</span>
                                   </p>
                                 </li>
                               </>
@@ -136,7 +180,7 @@ export default function Chats() {
                       </div>
                     </div>
                     <div className="col-xl-9 col-lg-8 col-md-8 col-sm-9 col-9">
-                      {currentConversation.length > 0 &&
+                      {currentMessages.length > 0 &&
                       currentChathead &&
                       currentProduct ? (
                         <>
@@ -161,18 +205,23 @@ export default function Chats() {
                               <h3>{currentProduct.productPrice}</h3>
                             </div>
                             {/* Leave a review to the "Buyer"? */}
-                            <Button className="btn-review">
-                              Leave a review
-                            </Button>
-                            <Button className="btn-trans">
-                              Complete Transaction
-                            </Button>
+                            {}
+                            <div>
+                              <Button className="btn-review">
+                                Leave a review
+                              </Button>
+                            </div>
+                            <div>
+                              <Button className="btn-trans">
+                                Complete Transaction
+                              </Button>
+                            </div>
                           </div>
                           <hr />
 
                           <div className="chat-container">
                             <ul className="chat-box chatContainerScroll">
-                              {currentConversation.map((message, index) => {
+                              {currentMessages.map((message, index) => {
                                 return (
                                   <>
                                     {currentChathead.userId ===
@@ -218,6 +267,9 @@ export default function Chats() {
                                 className="form-control"
                                 rows={3}
                                 placeholder="Type your message here..."
+                                onChange={(e) => {
+                                  setMessageToSend(e.target.value);
+                                }}
                               ></textarea>
                               <Button className="btn-trans">
                                 Send Message
@@ -242,46 +294,4 @@ export default function Chats() {
       )}
     </>
   );
-}
-
-{
-  /* <>
-{currentConversation.map((message, index) => {
-  currentChathead.userId === message.fromId ? (
-    <>
-      <li key={index} className="chat-left">
-        <div className="chat-avatar">
-          <img
-            src="../../assets/images/user.png"
-            alt="Retail Admin"
-          />
-          <div className="chat-name">
-            {currentChathead.firstName}
-          </div>
-        </div>
-        <div className="chat-text">
-          {message.messageContent}
-        </div>
-      </li>
-    </>
-  ) : (
-    <>
-      <li className="chat-right">
-        <div className="chat-avatar">
-          <img
-            src="../../assets/images/user.png"
-            alt="Retail Admin"
-          />
-          <div className="chat-name">
-            {userDetails.firstName}
-          </div>
-        </div>
-        <div className="chat-text">
-          {message.messageContent}
-        </div>
-      </li>
-    </>
-  );
-})}
-</> */
 }

@@ -15,7 +15,7 @@ import "../../../assets/styles/ViewProduct.css";
 import { Row, Col, Modal, Button } from "react-bootstrap";
 import {
   createNewMessageThread,
-  fetchMessageThread,
+  fetchBuyerThread,
   validateIfThreadExists,
 } from "../../../services/Firebase/communicationService";
 import MessageThread from "../../../models/MessageThread";

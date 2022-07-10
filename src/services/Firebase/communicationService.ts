@@ -32,12 +32,39 @@ export const createNewMessageThread = async(senderId: string, receiverId: string
   })
 }
 
-export const fetchMessageThread = async(userId: string) => {
+export const fetchBuyerThread = async(userId: string) => {
   let messageThreads: MessageThread[] = [];
 
   return await database
   .collection('messageThread')
   .where('senderId', '==', userId)
+  .get()
+  .then((querySnapshot)=>{
+    querySnapshot.forEach(doc => {
+      const messageThread = {
+        messageThreadId: doc.id,
+        senderId: doc.data().senderId,
+        receiverId: doc.data().receiverId,
+        productId: doc.data().productId,
+        dateCreated: doc.data().dateCreated,
+        dateUpdated: doc.data().dateUpdated,
+      }
+      messageThreads.push(messageThread)
+    })
+    return messageThreads
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchSellerThread = async (userId: string) => {
+  let messageThreads: MessageThread[] = [];
+
+  return await database
+  .collection('messageThread')
+  .where('receiverId', '==', userId)
   .get()
   .then((querySnapshot)=>{
     querySnapshot.forEach(doc => {

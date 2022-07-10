@@ -1,6 +1,7 @@
 import MaterialsRecycled from '../../models/MaterialsRecycled';
 import MaterialsRecycledByUser from '../../models/MaterialsRecycledByUser';
 import Review from '../../models/Review';
+import Transaction from '../../models/Transaction';
 import { database } from "./firebaseApp";
 
 export const createTransaction = async (productId: string, buyerId: string, sellerId : string, transactionStatus: string) => {
@@ -23,13 +24,35 @@ export const createTransaction = async (productId: string, buyerId: string, sell
   })
 }
 
-export const updateTransaction = async (productId: string) => {
+export const fetchTransaction =async (productId: string, buyerId: string, sellerId: string) => {
+  return await database
+  .collection('transactions')
+  .where('productId', '==', productId)
+  .where('buyerId', '==', buyerId)
+  .where('sellerId', '==', sellerId)
+  .get()
+  .then((transactionSnapshots) => {
+    const transactionDoc = transactionSnapshots.docs[0].data()
+    const transactionData = {
+      transactionId: transactionDoc.id,
+      productId: transactionDoc.productId,
+      buyerId: transactionDoc.buyerId,
+      sellerId: transactionDoc.sellerId,
+      transactionStatus: transactionDoc.transactionStatus,
+      dateUpdated: transactionDoc.dateUpdated,
+      dateCreated: transactionDoc.dateCreated
+    }
+
+    return transactionData as Transaction
+  })
+}
+export const updateTransaction = async (productId: string, status: string) => {
   return await database
   .collection('transactions')
   .doc(productId)
   .update(
     {
-      transactionStatus: 'SUCCESS',
+      transactionStatus: status,
       dateUpdated: new Date()
     }
   ).then(() => {

@@ -4,7 +4,7 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "points": "number",
+            "totalPoints": "number",
             "firstName": "string",
             "lastName": "string",
             "email": "string",
@@ -56,13 +56,27 @@
         }
     ],
 
+    "Voucher" : [
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "voucherValue": "number",
+            "userId": "string",
+            "isUsed": "boolean",
+            "dateUpdated" :"timestamp",
+            "dateCreated" : "timestamp"
+        }
+    ],
+
 
     "Material_Recycled":[
         {
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "productId": "ObjectId",
+            "transactionId" : "string",
+            "productId": "string",
             "productName" : "string",
             "userId": "ObjectId",
             "weightRecycled": "string",
