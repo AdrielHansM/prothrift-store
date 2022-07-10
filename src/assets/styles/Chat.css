@@ -1,3 +1,9 @@
+.main-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 33rem;
+}
+
 .chat-search-box {
     -webkit-border-radius: 3px 0 0 0;
     -moz-border-radius: 3px 0 0 0;
@@ -303,28 +309,34 @@ ul {
 .product-disp-title{
     display: grid;
     margin-left: 20px;
+    width: 40rem;
 }
 
-.btn-review{
-    margin-left: 50%;
-    margin-top: 20px;
+.btn-trans{
+    margin-top: 15px;
     height: 50px;
     background-color: rgb(13,202,240);
     border-radius: 5px;
     color: #fff;
     border: none;
+    margin-right: 5px;
 }
 
-.btn-trans{
+.send-btn{
     float: right;
     height: 50px;
     background-color: rgb(13,202,240);
     border-radius: 5px;
     color: #fff;
     border: none;
+    margin-top: 15px;
 }
 
 .msg-noconvo{
     text-align: center;
     margin-top: 5%;
+}
+
+.chatbox{
+    width: 85%;
 }

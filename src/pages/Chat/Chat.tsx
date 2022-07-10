@@ -117,7 +117,7 @@ export default function Chats() {
         <>
           <Navigation />
           {console.log(conversations)}
-          <div className="container">
+          <div className="main-container">
             <div className="content-wrapper">
               <div className="row gutters">
                 <div className="card">
@@ -207,7 +207,7 @@ export default function Chats() {
                             {/* Leave a review to the "Buyer"? */}
                             {}
                             <div>
-                              <Button className="btn-review">
+                              <Button className="btn-trans">
                                 Leave a review
                               </Button>
                             </div>
@@ -264,14 +264,14 @@ export default function Chats() {
                             </ul>
                             <div className="form-group">
                               <textarea
-                                className="form-control"
+                                className="chatbox"
                                 rows={3}
                                 placeholder="Type your message here..."
                                 onChange={(e) => {
                                   setMessageToSend(e.target.value);
                                 }}
                               ></textarea>
-                              <Button className="btn-trans">
+                              <Button className="send-btn">
                                 Send Message
                               </Button>
                             </div>
