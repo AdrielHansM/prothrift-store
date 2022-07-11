@@ -53,6 +53,7 @@ export default function Contact() {
           <Form.Label>Email</Form.Label>
           <Form.Control 
             type={"email"}
+            name="email"
             placeholder="Email..." 
             value={email} 
             onChange={e => setEmail(e.target.value)}

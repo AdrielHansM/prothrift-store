@@ -348,7 +348,7 @@ export default function Chats() {
                                 </div>
                               ) : (
                                 <div>
-                                  <Button className="btn-secondary" disabled>
+                                  <Button className="btn-trans" disabled>
                                     Leave a review
                                   </Button>
                                 </div>
