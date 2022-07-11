@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import "../../assets/styles/Chat.css";
 import Message from "../../models/Message";
 import MessageContainer from "../../models/MessageContainer";
 import MessageThread from "../../models/MessageThread";
 import Product from "../../models/Product";
+import Review from "../../models/Review";
 import Transaction from "../../models/Transaction";
 import UserData from "../../models/User";
 import {
@@ -18,13 +19,35 @@ import {
   fetchSingleProduct,
   fetchUser,
 } from "../../services/Firebase/productService";
-import { fetchTransaction } from "../../services/Firebase/transactionService";
+import {
+  createUserReview,
+  fetchTransaction,
+  updateRelatedTransaction,
+  updateTransaction,
+} from "../../services/Firebase/transactionService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
 
+const initialReview = {
+  reviewId: "",
+  productId: "",
+  sellerId: "",
+  userId: "",
+  rating: 0,
+  review: "",
+  dateUpdated: new Date(),
+  dateCreated: new Date(),
+};
+
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
+
+  //Form Data
+  const [formData, setFormData] = useState<Review>(initialReview);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [conversationsBuyer, setConversationsBuyer] = useState<
     MessageContainer[]
@@ -145,6 +168,39 @@ export default function Chats() {
       messages.push(newMessage);
       setCurrentMessages(messages);
       setMessageToSend("");
+    }
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  //Should create modal form
+  const writeUserReviews = async () => {
+    if (currentProduct && currentChathead) {
+      createUserReview(
+        currentProduct.productId,
+        currentChathead.userId,
+        userDetails.userId,
+        5,
+        ""
+      );
+    }
+  };
+
+  const completeTransaction = async () => {
+    if (currentTransaction && currentProduct && currentChathead) {
+      const updateSuccess = await updateTransaction(
+        currentTransaction.transactionId,
+        "SUCCESS"
+      );
+      if (updateSuccess) {
+        updateRelatedTransaction(
+          currentProduct.productId,
+          currentChathead.userId,
+          "COMPLETED"
+        );
+      }
     }
   };
 
@@ -292,7 +348,12 @@ export default function Chats() {
                               )
                             ) : (
                               <div>
-                                <Button className="m-lg-4 btn-review">
+                                <Button
+                                  className="m-lg-4 btn-review"
+                                  onClick={() => {
+                                    completeTransaction();
+                                  }}
+                                >
                                   Complete Transaction
                                 </Button>
                               </div>
@@ -385,6 +446,55 @@ export default function Chats() {
             </div>
           </div>
           <Footer />
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>Rating (1 lowest - 5 highest)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min={1}
+                    max={5}
+                    onChange={handleChange}
+                    placeholder="enter rating..."
+                    autoFocus
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Label>Write Review</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="write a review..."
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  writeUserReviews();
+                }}
+              >
+                Submit Review
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       )}
     </>

@@ -3,7 +3,7 @@ interface Review {
   productId: string,
   sellerId: string,
   userId: string,
-  rating: Number,
+  rating: number,
   review: string,
   dateUpdated: Date,
   dateCreated: Date

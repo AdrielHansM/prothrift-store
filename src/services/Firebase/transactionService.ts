@@ -46,10 +46,27 @@ export const fetchTransaction =async (productId: string, buyerId: string, seller
     return transactionData as Transaction
   })
 }
-export const updateTransaction = async (productId: string, status: string) => {
+
+export const updateRelatedTransaction =async (productId: string, buyerId: string, status: string) => {
   return await database
   .collection('transactions')
-  .doc(productId)
+  .where('productId', '==', productId)
+  .where('buyerId', '!=', buyerId)
+  .get()
+  .then((querySnapshots)=> {
+    querySnapshots.forEach((querySnapshot)=> {
+      querySnapshot.ref.update({
+        transactionStatus: status,
+        dateUpdated: new Date()
+      })
+    })
+  })
+}
+
+export const updateTransaction = async (transactionId: string, status: string) => {
+  return await database
+  .collection('transactions')
+  .doc(transactionId)
   .update(
     {
       transactionStatus: status,
