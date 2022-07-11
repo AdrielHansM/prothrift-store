@@ -40,6 +40,7 @@ export default function ViewListedProducts() {
   const [productDetails, setProductDetails] = useState<Product>();
   const [formData, setFormData] = useState<Product>(initialProduct);
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [editProduct, setEditProduct] = useState(false);
@@ -240,14 +241,15 @@ export default function ViewListedProducts() {
                       Are you sure you want to remove product?
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={handleClose}
-                      ></Button>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Close
+                      </Button>
                       <Button
                         variant="danger"
                         onClick={() => {
+                          handleClose();
                           deleteProduct(userDetails.product);
+                          navigate("/profile", { state: userDetails });
                         }}
                       >
                         Delete

@@ -23,6 +23,7 @@ const initialUser = {
   lastName: "",
   contactNumber: 0,
   email: "",
+  points: 0,
   isLogged: false,
   isDeleted: false,
   dateCreated: new Date(),

@@ -1,4 +1,3 @@
-import { on } from 'events';
 import Product from '../../models/Product';
 import { database, storage } from "./firebaseApp";
 
@@ -8,6 +7,7 @@ export const createUser = async(userId: string, firstName: string, lastName: str
       firstName: firstName,
       lastName: lastName,
       email: email,
+      points: 0,
       contact: contact,
       isDeleted: false,
       dateCreated: dateUpdated ? dateUpdated : new Date(),
@@ -26,13 +26,26 @@ export const fetchUser = async (uid : string) => {
   .get()
   .then((doc) => {
     const userDocs = doc.docs[0].data();
-    const user = { userId: userDocs.userId, firstName: userDocs.firstName, lastName: userDocs.lastName, contactNumber: userDocs.contact, email: userDocs.email, isLogged: true};
+    const user = { userId: userDocs.userId, firstName: userDocs.firstName, lastName: userDocs.lastName, contactNumber: userDocs.contact, email: userDocs.email, points: Math.floor(userDocs.points), isLogged: true};
     return user;
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
   })
+}
+
+export const updateUserPoints =async (userId: string, newBalance: number) => {
+  return await database
+  .collection('users')
+  .where('userId', '==', userId)
+  .get()
+  .then((querySnapshot) => {
+    const userDoc = querySnapshot.docs[0]
+    userDoc.ref.update({
+      points: newBalance
+    })
+  }) 
 }
 
 export const addUserFavorite = async (productId: string, userId: string) => {

@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts } from "../../services/Firebase/productService";
+import {
+  fetchProducts,
+  updateUserPoints,
+} from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
 import { Col, Container, Row, Modal, Button } from "react-bootstrap";
+import { createVoucher } from "../../services/Firebase/transactionService";
 
 export default function Shop() {
   const userDetails = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [currentVoucherValue, setCurrentVoucherValue] = useState(0);
 
   useEffect(() => {
     if (products.length === 0 && userDetails) {
@@ -30,9 +34,32 @@ export default function Shop() {
     }
   };
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showNotEnough, setShoeNotEnough] = useState(false);
+  const handleClose = () => setShoeNotEnough(false);
+  const handleShow = () => setShoeNotEnough(true);
+
+  const [purchaseConfirmation, setPurchaseConfirmation] = useState(false);
+  const confirmationClose = () => setPurchaseConfirmation(false);
+  const confirmationShow = (voucherValue: number) => {
+    setCurrentVoucherValue(voucherValue);
+    setPurchaseConfirmation(true);
+  };
+
+  const purchaseVoucher = async () => {
+    if (currentVoucherValue <= userDetails.points) {
+      createVoucher(currentVoucherValue, userDetails.userId);
+      updateUserPoints(
+        userDetails.userId,
+        userDetails.points - currentVoucherValue
+      );
+      userDetails.points = userDetails.points - currentVoucherValue;
+      confirmationClose();
+      setTimeout(() => alert("Voucher Purchased"), 750);
+    } else {
+      confirmationClose();
+      handleShow();
+    }
+  };
 
   const [showInfo, setShowInfo] = useState(false);
   const handleCloseInfo = () => setShowInfo(false);
@@ -68,16 +95,20 @@ export default function Shop() {
               onClick={handleShowInfo}
             />
             <Row>
+              <h4>Points: {userDetails.points}</h4>
               <Col>
                 <div className="coupon_box">
                   <div className="coupon-body">
                     <h2 className="how_much">
                       {" "}
-                      <b> 5% </b>{" "}
+                      <b> 10 Peso </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(10)}
+                  >
                     {" "}
                     Redeem{" "}
                   </button>
@@ -88,11 +119,14 @@ export default function Shop() {
                   <div className="coupon-body2">
                     <h2 className="how_much">
                       {" "}
-                      <b> 15% </b>{" "}
+                      <b> 20 Peso </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(20)}
+                  >
                     {" "}
                     Redeem{" "}
                   </button>
@@ -103,11 +137,14 @@ export default function Shop() {
                   <div className="coupon-body3">
                     <h2 className="how_much">
                       {" "}
-                      <b> 25% </b>{" "}
+                      <b> 30 Peso </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
-                  <button className="redeem-btn" onClick={handleShow}>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(30)}
+                  >
                     {" "}
                     Redeem{" "}
                   </button>
@@ -115,7 +152,7 @@ export default function Shop() {
               </Col>
             </Row>
           </Container>
-          <Modal show={show} centered>
+          <Modal show={showNotEnough} centered>
             <Modal.Body
               style={{
                 textAlign: "center",
@@ -132,6 +169,31 @@ export default function Shop() {
             </Modal.Footer>
           </Modal>
 
+          <Modal show={purchaseConfirmation} centered>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "20% 5%",
+              }}
+            >
+              Are you sure you want to buy this voucher?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={confirmationClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  purchaseVoucher();
+                }}
+              >
+                Buy
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
           <Modal show={showInfo} centered>
             <Modal.Body
               style={{
@@ -140,9 +202,7 @@ export default function Shop() {
                 padding: "10% 5%",
               }}
             >
-              To be able to redeem a voucher, you need to collect atleast 10
-              points for 5% Off, 20 points for 15% , and 30 points for 25% Off
-              from logging in daily.
+              Voucher conversion is 1 point equal to 1 Php
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseInfo}>

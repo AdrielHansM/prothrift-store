@@ -49,6 +49,11 @@ export default function Chats() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //Confirmation Modal
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const confirmationClose = () => setShowConfirmation(false);
+  const confirmationShow = () => setShowConfirmation(true);
+
   const [conversationsBuyer, setConversationsBuyer] = useState<
     MessageContainer[]
   >([]);
@@ -175,7 +180,6 @@ export default function Chats() {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  //Should create modal form
   const writeUserReviews = async () => {
     if (currentProduct && currentChathead && formData) {
       createUserReview(
@@ -353,9 +357,7 @@ export default function Chats() {
                               <div>
                                 <Button
                                   className="m-lg-4 btn-review"
-                                  onClick={() => {
-                                    completeTransaction();
-                                  }}
+                                  onClick={confirmationShow}
                                 >
                                   Complete Transaction
                                 </Button>
@@ -495,6 +497,32 @@ export default function Chats() {
                 }}
               >
                 Submit Review
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={showConfirmation} centered>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "5% 1%",
+              }}
+            >
+              Are you sure you want to remove product?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={confirmationClose}>
+                Close
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  confirmationClose();
+                  completeTransaction();
+                }}
+              >
+                Delete
               </Button>
             </Modal.Footer>
           </Modal>

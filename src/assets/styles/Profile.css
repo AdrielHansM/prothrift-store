@@ -78,7 +78,7 @@
     position: relative;
   }
   .coupon-body::before{
-    content: '5%';
+    content: '10';
     position: absolute;
     color: rgba(255,255,255,0.15);
     top: 0%;
@@ -92,7 +92,7 @@
     position: relative;
   }
   .coupon-body2::before{
-    content: '15%';
+    content: '20';
     position: absolute;
     color: rgba(255,255,255,0.15);
     top: 0%;
@@ -106,7 +106,7 @@
     position: relative;
   }
   .coupon-body3::before{
-    content: '25%';
+    content: '30';
     position: absolute;
     color: rgba(255,255,255,0.15);
     top: 0%;

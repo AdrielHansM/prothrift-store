@@ -2,6 +2,7 @@ import MaterialsRecycled from '../../models/MaterialsRecycled';
 import MaterialsRecycledByUser from '../../models/MaterialsRecycledByUser';
 import Review from '../../models/Review';
 import Transaction from '../../models/Transaction';
+import Voucher from '../../models/Voucher';
 import { database } from "./firebaseApp";
 
 export const createTransaction = async (productId: string, buyerId: string, sellerId : string, transactionStatus: string) => {
@@ -171,5 +172,48 @@ export const fetchMaterialsRecycled = async (userId:string) => {
     materialsRecycledByUser.totalMaterialsReycled = totalMaterialsRecycled
     materialsRecycledByUser.materialsRecycled = materialsRecycled
     return materialsRecycledByUser
+  })
+}
+
+export const createVoucher = async (voucherValue: number, userId: string) => {
+  return await database
+  .collection('vouchers')
+  .add({
+    voucherValue: voucherValue,
+    userId: userId,
+    isUsed: false,
+    dateUpdated: new Date(),
+    dateCreated: new Date()
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchVouchers = async (userId: string) => {
+  let vouchers: Voucher[] = [];
+
+  return await database
+  .collection('vouchers')
+  .where('userId', '==', userId)
+  .get()
+  .then((querySnapshots) => {
+    querySnapshots.forEach((voucherSnapshot) => {
+      const voucher = {
+        voucherId: voucherSnapshot.id,
+        voucherValue: voucherSnapshot.data().voucherValue,
+        userId: voucherSnapshot.data().userId,
+        isUsed: voucherSnapshot.data().isUsed,
+        dateUpdated: voucherSnapshot.data().dateUpdated,
+        dateCreated: voucherSnapshot.data().dateCreated
+      }
+      vouchers.push(voucher);
+    })
+    return vouchers
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
   })
 }

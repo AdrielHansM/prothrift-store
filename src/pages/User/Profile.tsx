@@ -4,38 +4,52 @@ import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
-import { Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab, Card } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
 } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
+import Voucher from "../../models/Voucher";
+import { fetchVouchers } from "../../services/Firebase/transactionService";
 
 export default function Profile() {
   const navigate = useNavigate();
-  const state = useLocation().state as UserData;
+  const userDetails = useLocation().state as UserData;
+
   const [products, setProducts] = useState<Product[]>([]);
+  const [vouchers, setVouchers] = useState<Voucher[]>([]);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (products.length === 0 && vouchers.length === 0) {
       getProducts();
+      getVouchers();
     }
   }, []);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProductsByProfile(state.userId);
+    const productArray = await fetchProductsByProfile(userDetails.userId);
     if (productArray) {
       setProducts(productArray);
+    }
+  };
+
+  const getVouchers = async () => {
+    const voucherArray = await fetchVouchers(userDetails.userId);
+    if (voucherArray) {
+      console.log(voucherArray);
+      setVouchers(voucherArray);
       setLoading(false);
     }
   };
 
   const navigateToProduct = (productId: string) => {
     navigate("/view-product", {
-      state: { user: state, productId: productId },
+      state: { user: userDetails, productId: productId },
     });
   };
 
@@ -62,11 +76,11 @@ export default function Profile() {
                     </div>
 
                     <div className="profile-header-info">
-                      <h4>{`${state?.firstName} ${state?.lastName}`}</h4>
+                      <h4>{`${userDetails?.firstName} ${userDetails?.lastName}`}</h4>
                       <button
                         className="edit-btn"
                         onClick={() =>
-                          navigate("/editprofile", { state: state })
+                          navigate("/editprofile", { state: userDetails })
                         }
                       >
                         Edit Profile
@@ -91,7 +105,7 @@ export default function Profile() {
                             className="product-link"
                             to={"/viewlisted-products"}
                             state={{
-                              user: state,
+                              user: userDetails,
                               product: product.productId,
                             }}
                           >
@@ -238,7 +252,37 @@ export default function Profile() {
                       fontSize: "50px",
                     }}
                   >
-                    You don't have any vouchers!
+                    {vouchers.length > 0 ? (
+                      <>
+                        {vouchers.map((voucher, index) => {
+                          var t = new Date(1970, 0, 1); // Epoch
+                          //@ts-ignore
+                          const dateCreated = voucher.dateCreated.seconds;
+                          t.setSeconds(dateCreated);
+                          return (
+                            <Card key={index}>
+                              <Card.Header>
+                                <>
+                                  <h4>Voucher ID: {voucher.voucherId}</h4>
+                                  <p>
+                                    <strong>date purchased: </strong>(
+                                    <i>{t.toDateString()}</i>)
+                                  </p>
+                                </>
+                              </Card.Header>
+                              <Card.Body>
+                                <h3>
+                                  <strong>Discount:</strong> Php{" "}
+                                  {voucher.voucherValue} OFF
+                                </h3>
+                              </Card.Body>
+                            </Card>
+                          );
+                        })}
+                      </>
+                    ) : (
+                      <>You don't have any vouchers</>
+                    )}
                   </div>
                 </Tab>
               </Tabs>
