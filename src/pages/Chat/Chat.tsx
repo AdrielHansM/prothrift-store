@@ -177,13 +177,13 @@ export default function Chats() {
 
   //Should create modal form
   const writeUserReviews = async () => {
-    if (currentProduct && currentChathead) {
+    if (currentProduct && currentChathead && formData) {
       createUserReview(
         currentProduct.productId,
         currentChathead.userId,
         userDetails.userId,
-        5,
-        ""
+        Math.floor(formData.rating),
+        formData.review
       );
     }
   };
@@ -335,7 +335,10 @@ export default function Chats() {
                               currentTransaction.transactionStatus ===
                               "SUCCESS" ? (
                                 <div>
-                                  <Button className="btn-trans">
+                                  <Button
+                                    className="btn-trans"
+                                    onClick={handleShow}
+                                  >
                                     Leave a review
                                   </Button>
                                 </div>
