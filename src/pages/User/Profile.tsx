@@ -34,8 +34,6 @@ export default function Profile() {
   };
 
   const navigateToProduct = (productId: string) => {
-    console.log(state);
-    console.log(productId);
     navigate("/view-product", {
       state: { user: state, productId: productId },
     });
@@ -60,10 +58,7 @@ export default function Profile() {
 
                   <div className="profile-header-content">
                     <div className="profile-header-img">
-                      <img
-                        src="/images/user-profile.png"
-                        alt=""
-                      />
+                      <img src="/images/user-profile.png" alt="" />
                     </div>
 
                     <div className="profile-header-info">

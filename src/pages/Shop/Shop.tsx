@@ -44,7 +44,6 @@ export default function Shop() {
         <Loading />
       ) : (
         <>
-          {console.log(products)}
           <Navigation />
           <div
             className="hero-section"

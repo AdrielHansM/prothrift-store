@@ -163,7 +163,7 @@ export const uploadImage = async (image: File, userId: string, productName: stri
   return downloadUrl
 }
 
-export const updateProduct = async (image: any, userId: string, productId: string, productName: string, productDescription : string,meetup: string, category: string, productWeight: Number) => {
+export const updateProduct = async (image: any, userId: string, productId: string, productName: string, productPrice: number, productDescription : string, meetup: string, category: string, productWeight: number) => {
   let queryCreator:any = {};
   
   if (image) {
@@ -175,6 +175,10 @@ export const updateProduct = async (image: any, userId: string, productId: strin
 
   if (productName) {
     queryCreator.productName = productName
+  }
+
+  if (productPrice) {
+    queryCreator.productPrice = productPrice
   }
 
   if (productDescription) {
@@ -199,8 +203,25 @@ export const updateProduct = async (image: any, userId: string, productId: strin
     .doc(productId)
     .update(
       queryCreator
-    )
+    ).then(() =>{return true})
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorCode + " " + errorMessage)
+    })
   }
+}
+
+export const deleteProduct = async ( productId: string) => {
+  return await database.collection('products')
+  .doc(productId)
+  .update({
+    isDeleted: true
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
 }
 
 export const donateProduct = async (productId: string) => {
@@ -210,7 +231,11 @@ export const donateProduct = async (productId: string) => {
         isDonated: false,
         dateUpdated: new Date()
       }
-    )
+    ).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorCode + " " + errorMessage)
+    })
 }
 
 export const searchProduct = async (searchKey : string, userId: string) => {
@@ -245,6 +270,10 @@ export const searchProduct = async (searchKey : string, userId: string) => {
       products.push(productDetails)
     })
     return products
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
   })
 }
 

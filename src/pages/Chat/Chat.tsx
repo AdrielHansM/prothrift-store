@@ -26,7 +26,12 @@ import Navigation from "../Components/NavBar";
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
 
-  const [conversations, setConversations] = useState<MessageContainer[]>([]);
+  const [conversationsBuyer, setConversationsBuyer] = useState<
+    MessageContainer[]
+  >([]);
+  const [conversationsSeller, setConversationsSeller] = useState<
+    MessageContainer[]
+  >([]);
 
   const [buyerThreads, setBuyerThreads] = useState<MessageThread[]>([]);
   const [sellerThreads, setSellerThreads] = useState<MessageThread[]>([]);
@@ -52,13 +57,13 @@ export default function Chats() {
 
   useEffect(() => {
     if (messageThreadFetched && buyerThreads.length > 0) {
-      buildThread(buyerThreads);
+      buildThreadBuyer();
     }
   }, [buyerThreads]);
 
   useEffect(() => {
-    if (messageThreadFetched && sellerThreads.length > 0 && buyerThreadBuilt) {
-      buildThread(sellerThreads);
+    if (messageThreadFetched && sellerThreads.length > 0) {
+      buildThreadSeller();
     }
   }, [sellerThreads]);
 
@@ -66,6 +71,7 @@ export default function Chats() {
     setLoading(true);
     const messageThreadsBuyer = await fetchBuyerThread(userDetails.userId);
     const messageThreadsSeller = await fetchSellerThread(userDetails.userId);
+
     if (messageThreadsBuyer && messageThreadsSeller) {
       setBuyerThreads(messageThreadsBuyer);
       setSellerThreads(messageThreadsSeller);
@@ -73,9 +79,9 @@ export default function Chats() {
     }
   };
 
-  const buildThread = async (messageThreads: MessageThread[]) => {
+  const buildThreadBuyer = async () => {
     let conversationArray: MessageContainer[] = [];
-    messageThreads.forEach(async (messageThread) => {
+    buyerThreads.forEach(async (messageThread) => {
       const messages = await fetchMessage(messageThread.messageThreadId);
       const product = await fetchSingleProduct(messageThread.productId);
       const receiver = (await fetchUser(messageThread.receiverId)) as UserData;
@@ -95,14 +101,50 @@ export default function Chats() {
         conversationArray.push(conversationArrayIndex);
       }
     });
-    setConversations(conversationArray);
-    setBuyerThreadBuilt(true);
+    setConversationsBuyer(conversationArray);
+    const timeout = setTimeout(() => setLoading(false), 2500);
+  };
+
+  const buildThreadSeller = async () => {
+    let conversationArray: MessageContainer[] = [];
+    sellerThreads.forEach(async (messageThread) => {
+      const messages = await fetchMessage(messageThread.messageThreadId);
+      const product = await fetchSingleProduct(messageThread.productId);
+      const receiver = (await fetchUser(messageThread.senderId)) as UserData;
+      const transaction = await fetchTransaction(
+        product.productId,
+        messageThread.senderId,
+        messageThread.receiverId
+      );
+      if (messages && product && transaction) {
+        const conversationArrayIndex = {
+          messageThread: messageThread,
+          messages: messages,
+          product: product,
+          receiver: receiver,
+          transaction: transaction,
+        };
+        conversationArray.push(conversationArrayIndex);
+      }
+    });
+    setConversationsSeller(conversationArray);
     const timeout = setTimeout(() => setLoading(false), 2500);
   };
 
   const sendMessageProcess = async (threadId: string) => {
     if (messageToSend) {
       sendMessage(threadId, userDetails.userId, messageToSend);
+
+      const newMessage = {
+        messageId: "",
+        fromId: userDetails.userId,
+        messageContent: messageToSend,
+        dateCreated: new Date(),
+      };
+      const messages: Message[] = currentMessages;
+      messages.push(newMessage);
+      setCurrentMessages(messages);
+      setMessageToSend("");
     }
   };
 
@@ -116,8 +158,7 @@ export default function Chats() {
       ) : (
         <>
           <Navigation />
-          {console.log(conversations)}
-          <div className="main-container">
+          <div className="container">
             <div className="content-wrapper">
               <div className="row gutters">
                 <div className="card">
@@ -139,7 +180,9 @@ export default function Chats() {
                           </div>
                         </div>
                         <ul className="users">
-                          {conversations.map((conversation, index) => {
+                          <h5>For Sellers</h5>
+                          <hr />
+                          {conversationsBuyer.map((conversation, index) => {
                             return (
                               <>
                                 <li
@@ -163,14 +206,39 @@ export default function Chats() {
                                     />
                                   </div>
                                   <p className="name-time">
-                                    <span className="name">{`${
-                                      conversation.messageThread.senderId ===
-                                      userDetails.userId
-                                        ? "(Seller) "
-                                        : "(Buyer) "
-                                    } ${conversation.receiver.firstName} ${
-                                      conversation.receiver.lastName
-                                    }`}</span>
+                                    <span className="name">{`(Seller) ${conversation.receiver.firstName} ${conversation.receiver.lastName}`}</span>
+                                  </p>
+                                </li>
+                              </>
+                            );
+                          })}
+                          <h5>For Buyers</h5>
+                          <hr />
+                          {conversationsSeller.map((conversation, index) => {
+                            return (
+                              <>
+                                <li
+                                  key={index}
+                                  className="person active-user"
+                                  onClick={() => {
+                                    setCurrentThread(
+                                      conversation.messageThread
+                                    );
+                                    setCurrentMessages(conversation.messages);
+                                    setCurrentProduct(conversation.product);
+                                    setCurrentChathead(conversation.receiver);
+                                    setCurrentTransaction(
+                                      conversation.transaction
+                                    );
+                                  }}
+                                >
+                                  <div className="user">
+                                    <img
+                                      src={require("../../assets/images/user.png")}
+                                    />
+                                  </div>
+                                  <p className="name-time">
+                                    <span className="name">{`(Buyer) ${conversation.receiver.firstName} ${conversation.receiver.lastName}`}</span>
                                   </p>
                                 </li>
                               </>
@@ -181,6 +249,8 @@ export default function Chats() {
                     </div>
                     <div className="col-xl-9 col-lg-8 col-md-8 col-sm-9 col-9">
                       {currentMessages.length > 0 &&
+                      currentThread &&
+                      currentTransaction &&
                       currentChathead &&
                       currentProduct ? (
                         <>
@@ -204,18 +274,29 @@ export default function Chats() {
                               <h2>{currentProduct.productName}</h2>
                               <h3>₱{currentProduct.productPrice}</h3>
                             </div>
-                            {/* Leave a review to the "Buyer"? */}
-                            {}
-                            <div>
-                              <Button className="btn-trans">
-                                Leave a review
-                              </Button>
-                            </div>
-                            <div>
-                              <Button className="btn-trans">
-                                Complete Transaction
-                              </Button>
-                            </div>
+                            {currentTransaction.buyerId ===
+                            userDetails.userId ? (
+                              currentTransaction.transactionStatus ===
+                              "SUCCESS" ? (
+                                <div>
+                                  <Button className="btn-trans">
+                                    Leave a review
+                                  </Button>
+                                </div>
+                              ) : (
+                                <div>
+                                  <Button className="btn-secondary" disabled>
+                                    Leave a review
+                                  </Button>
+                                </div>
+                              )
+                            ) : (
+                              <div>
+                                <Button className="m-lg-4 btn-review">
+                                  Complete Transaction
+                                </Button>
+                              </div>
+                            )}
                           </div>
                           <hr />
 
@@ -244,7 +325,7 @@ export default function Chats() {
                                     ) : (
                                       <>
                                         <li className="chat-right">
-                                        <div className="chat-text">
+                                          <div className="chat-text">
                                             {message.messageContent}
                                           </div>
                                           <div className="chat-avatar">
@@ -252,7 +333,10 @@ export default function Chats() {
                                               src={require("../../assets/images/user.png")}
                                             />
                                             <div className="chat-name">
-                                              {userDetails.firstName}
+                                              {userDetails.userId ===
+                                              message.fromId
+                                                ? userDetails.firstName
+                                                : currentChathead.firstName}
                                             </div>
                                           </div>
                                         </li>
@@ -262,16 +346,27 @@ export default function Chats() {
                                 );
                               })}
                             </ul>
-                            <div className="form-group" style={{display:'flex'}}>
+                            <div
+                              className="form-group"
+                              style={{ display: "flex" }}
+                            >
                               <textarea
                                 className="chatbox"
                                 rows={3}
                                 placeholder="Type your message here..."
+                                value={messageToSend}
                                 onChange={(e) => {
                                   setMessageToSend(e.target.value);
                                 }}
                               ></textarea>
-                              <Button className="send-btn">
+                              <Button
+                                className="mx-auto p-lg-1 send-btn"
+                                onClick={() =>
+                                  sendMessageProcess(
+                                    currentThread.messageThreadId
+                                  )
+                                }
+                              >
                                 Send Message
                               </Button>
                             </div>

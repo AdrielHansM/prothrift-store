@@ -109,6 +109,7 @@ export const fetchMessage = async(messageThreadId: string) => {
     .collection('messageThread')
     .doc(messageThreadId)
     .collection('messages')
+    .orderBy('dateCreated')
     .get()
     .then((messageDocs) => {
       messageDocs.forEach(doc => {

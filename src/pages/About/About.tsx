@@ -6,7 +6,6 @@ import Footer from "../Components/Footer";
 
 export default function About() {
   const state = useLocation().state as UserData;
-  console.log(state);
 
   return (
     <>
