@@ -45,7 +45,7 @@ export default function LikedProducts() {
         <>
           <Navigation />
           <section>
-            <h2 className="product-category2">Liked Products</h2>
+            <h2 className="product-category2">Favorites</h2>
             <div className="product-container2" style={{ marginBottom: "17%" }}>
               {products.map((product, index) => {
                 return (

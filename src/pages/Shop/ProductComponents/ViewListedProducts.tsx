@@ -105,7 +105,7 @@ export default function ViewListedProducts() {
                 <img
                   className="product-img"
                   src={productDetails?.imageUrl}
-                  style={{ width: "30%", height: "60vh" }}
+                  style={{ width: "40%", height: "75vh" }}
                   alt=""
                 />
                 <div className="product-details">
@@ -163,7 +163,7 @@ export default function ViewListedProducts() {
                             <option value="" disabled>
                               Please Select...
                             </option>
-                            <option>Like New</option>
+                            <option>Slightly Used</option>
                             <option>Used with Care</option>
                             <option>Used Frequently</option>
                           </Form.Control>

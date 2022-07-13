@@ -273,7 +273,7 @@ export default function AddProductForm() {
                       <option value="" disabled>
                         Please Select...
                       </option>
-                      <option>Like New</option>
+                      <option>Slightly Used</option>
                       <option>Used with Care</option>
                       <option>Used Frequently</option>
                     </Form.Control>
