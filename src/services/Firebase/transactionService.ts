@@ -35,7 +35,7 @@ export const fetchTransaction =async (productId: string, buyerId: string, seller
   .then((transactionSnapshots) => {
     const transactionDoc = transactionSnapshots.docs[0].data()
     const transactionData = {
-      transactionId: transactionDoc.id,
+      transactionId: transactionSnapshots.docs[0].id,
       productId: transactionDoc.productId,
       buyerId: transactionDoc.buyerId,
       sellerId: transactionDoc.sellerId,

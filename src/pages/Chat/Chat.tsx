@@ -10,21 +10,25 @@ import Review from "../../models/Review";
 import Transaction from "../../models/Transaction";
 import UserData from "../../models/User";
 import {
-  fetchMessage,
   fetchBuyerThread,
-  sendMessage,
+  fetchMessage,
   fetchSellerThread,
+  sendMessage,
 } from "../../services/Firebase/communicationService";
 import {
   fetchSingleProduct,
   fetchUser,
+  markProductAsSold,
+  updateUserPoints,
 } from "../../services/Firebase/productService";
 import {
+  createMaterialsRecycled,
   createUserReview,
   fetchTransaction,
   updateRelatedTransaction,
   updateTransaction,
 } from "../../services/Firebase/transactionService";
+import { convertWeight } from "../../utils/productUtils";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
@@ -198,12 +202,48 @@ export default function Chats() {
         currentTransaction.transactionId,
         "SUCCESS"
       );
+      setCurrentTransaction({
+        transactionId: currentTransaction.transactionId,
+        productId: currentTransaction.productId,
+        buyerId: currentTransaction.buyerId,
+        sellerId: currentTransaction.sellerId,
+        transactionStatus: "SUCCESS",
+        dateUpdated: new Date(),
+        dateCreated: currentTransaction.dateCreated,
+      });
       if (updateSuccess) {
         updateRelatedTransaction(
           currentProduct.productId,
           currentChathead.userId,
           "COMPLETED"
         );
+        //For seller
+        createMaterialsRecycled(
+          currentProduct.productId,
+          currentProduct.productName,
+          userDetails.userId,
+          convertWeight("lbs", currentProduct.productWeight)
+        );
+        updateUserPoints(
+          userDetails.userId,
+          userDetails.points +
+            Math.ceil(convertWeight("lbs", currentProduct.productWeight))
+        );
+        //For buyer
+        createMaterialsRecycled(
+          currentProduct.productId,
+          currentProduct.productName,
+          currentChathead.userId,
+          convertWeight("lbs", currentProduct.productWeight)
+        );
+        updateUserPoints(
+          currentChathead.userId,
+          currentChathead.points +
+            Math.ceil(convertWeight("lbs", currentProduct.productWeight))
+        );
+
+        //For Product
+        markProductAsSold(currentProduct.productId);
       }
     }
   };
@@ -353,11 +393,21 @@ export default function Chats() {
                                   </Button>
                                 </div>
                               )
-                            ) : (
+                            ) : currentTransaction.transactionStatus ===
+                              "PENDING" ? (
                               <div>
                                 <Button
                                   className="m-lg-4 btn-review"
                                   onClick={confirmationShow}
+                                >
+                                  Complete Transaction
+                                </Button>
+                              </div>
+                            ) : (
+                              <div>
+                                <Button
+                                  className="m-lg-4 btn-secondary"
+                                  disabled
                                 >
                                   Complete Transaction
                                 </Button>
@@ -509,20 +559,20 @@ export default function Chats() {
                 padding: "5% 1%",
               }}
             >
-              Are you sure you want to remove product?
+              Are you sure you want to complete transaction?
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={confirmationClose}>
-                Close
+                No
               </Button>
               <Button
-                variant="danger"
+                variant="success"
                 onClick={() => {
                   confirmationClose();
                   completeTransaction();
                 }}
               >
-                Delete
+                Yes
               </Button>
             </Modal.Footer>
           </Modal>

@@ -19,6 +19,39 @@ export const createUser = async(userId: string, firstName: string, lastName: str
   })
 }
 
+export const updateUser = async (userId: string, firstName: string, lastName: string, email: string, contact: number, dateUpdated: Date) => {
+  let queryCreator:any = {}
+
+  if (firstName) {
+    queryCreator.firstName = firstName
+  }
+
+  if (lastName) {
+    queryCreator.lastName = lastName
+  }
+
+  if (email) {
+    queryCreator.email = email
+  }
+
+  if(contact) {
+    queryCreator.contact = contact
+  }
+
+  queryCreator.dateUpdated = dateUpdated
+  await database.collection('users')
+  .where('userId' , '==', userId)
+  .get()
+  .then((querySnapshot) => {
+    const userSnapshot = querySnapshot.docs[0]
+    userSnapshot.ref.update(
+      {
+        queryCreator
+      }
+    )
+  })
+}
+
 export const fetchUser = async (uid : string) => {
   return await database
   .collection('users')
@@ -35,7 +68,7 @@ export const fetchUser = async (uid : string) => {
   })
 }
 
-export const updateUserPoints =async (userId: string, newBalance: number) => {
+export const updateUserPoints = async (userId: string, newBalance: number) => {
   return await database
   .collection('users')
   .where('userId', '==', userId)
@@ -239,16 +272,30 @@ export const deleteProduct = async ( productId: string) => {
 
 export const donateProduct = async (productId: string) => {
   return await database.collection('products').doc(productId)
-    .update(
-      {
-        isDonated: false,
-        dateUpdated: new Date()
-      }
-    ).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorCode + " " + errorMessage)
-    })
+  .update(
+    {
+      isDonated: true,
+      dateUpdated: new Date()
+    }
+  ).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const markProductAsSold = async (productId: string) => {
+  return await database.collection('products').doc(productId)
+  .update(
+    {
+      isSold: true,
+      dateUpdated: new Date()
+    }
+  ).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
 }
 
 export const searchProduct = async (searchKey : string, userId: string) => {
@@ -268,7 +315,7 @@ export const searchProduct = async (searchKey : string, userId: string) => {
         userId: doc.data().userId,
         productName: doc.data().productName,
         productPrice: doc.data().productPrice,
-        productWeight: doc.data().productWeight,
+        productWeight: Math.floor(doc.data().productWeight),
         productDescription: doc.data().productDescription,
         imageUrl: doc.data().imageUrl,
         meetup: doc.data().meetup,
@@ -306,7 +353,7 @@ export const fetchProducts = async (userId: string) => {
         userId: doc.data().userId,
         productName: doc.data().productName,
         productPrice: doc.data().productPrice,
-        productWeight: doc.data().productWeight,
+        productWeight: Math.floor(doc.data().productWeight),
         productDescription: doc.data().productDescription,
         imageUrl: doc.data().imageUrl,
         meetup: doc.data().meetup,
@@ -340,7 +387,7 @@ export const fetchSingleProduct = async (productId: string) => {
       userId: productDoc.userId,
       productName: productDoc.productName,
       productPrice: productDoc.productPrice,
-      productWeight: productDoc.productWeight,
+      productWeight: Math.floor(productDoc.productWeight),
       productDescription: productDoc.productDescription,
       imageUrl: productDoc.imageUrl,
       meetup: productDoc.meetup,
@@ -373,7 +420,7 @@ export const fetchProductsByCategory = async(category: string, userId: string) =
         userId: doc.data().userId,
         productName: doc.data().productName,
         productPrice: doc.data().productPrice,
-        productWeight: doc.data().productWeight,
+        productWeight: Math.floor(doc.data().productWeight),
         productDescription: doc.data().productDescription,
         imageUrl: doc.data().imageUrl,
         meetup: doc.data().meetup,
@@ -409,7 +456,7 @@ export const fetchProductsByProfile = async(userId: string) =>{
         userId: doc.data().userId,
         productName: doc.data().productName,
         productPrice: doc.data().productPrice,
-        productWeight: doc.data().productWeight,
+        productWeight: Math.floor(doc.data().productWeight),
         productDescription: doc.data().productDescription,
         imageUrl: doc.data().imageUrl,
         meetup: doc.data().meetup,
