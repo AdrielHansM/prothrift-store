@@ -3,37 +3,35 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts } from "../../services/Firebase/productService";
+import {
+  fetchProducts,
+  fetchProductsByCategory,
+} from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from "../Components/Navigation";
-import { Button } from "react-bootstrap";
+import Navigation from "../Components/NavBar";
 
 export default function Men() {
   const userDetails = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0) {
+      getProducts();
+    }
   }, []);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProducts();
+    const productArray = await fetchProductsByCategory(
+      "Mens",
+      userDetails.userId
+    );
     if (productArray) {
       setProducts(productArray);
       setLoading(false);
     }
-  };
-
-  const navigateToProduct = (productId: string) => {
-    console.log(userDetails);
-    console.log(productId);
-    navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
-    });
   };
 
   return (
@@ -72,22 +70,12 @@ export default function Men() {
                             {product.productDescription}
                           </p>
                           <span className="price">₱{product.productPrice}</span>
-                          <div>
-                            <img
-                              src="/images/heart1.png"
-                              className="liked-heart"
-                              alt=""
-                            />
-                          </div>
                         </div>
                       </div>
                     </Link>
                   </>
                 );
               })}
-            </div>
-            <div className="view-btn">
-              <Button className="btn-lg">View More</Button>
             </div>
           </section>
           <Footer />

@@ -1,18 +1,34 @@
 const GRAMS_TO_KILOGRAMS = 1000;
 const GRAMS_TO_POUNDS = 453.6;
 
+//CLEARLY it returns grams(g) as its metric
 export function estimateWeight(category: string, clothingType: string): number {
     if (category === 'Mens') {
-      return 300;
+      if (clothingType === 'Upperwear'){
+        return 1239;
+      }
+      if (clothingType === 'Bottomwear'){
+        return 599;
+      }
     }
     if (category === 'Womens') {
-      return 200;
+      if (clothingType === 'Upperwear'){
+        return 748;
+      }
+      if (clothingType === 'Bottomwear'){
+        return 502;
+      }
     }
     if (category === 'Kids') {
-      return 100;
+      if (clothingType === 'Upperwear'){
+        return 568;
+      }
+      if (clothingType === 'Bottomwear'){
+        return 361;
+      }
     }
     if (category === 'Accessories') {
-      return 50;
+      return 550;
     }
 
     return 0

@@ -1,90 +1,86 @@
-import React from 'react'
-import '../../assets/styles/Shop.css';
-import Navigation from '../Components/Navigation';
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "../../assets/styles/Profile.css";
+import Product from "../../models/Product";
+import UserData from "../../models/User";
+import {
+  fetchProducts,
+  fetchProductsByCategory,
+} from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
-
+import Loading from "../Components/LoadingScreen";
+import Navigation from "../Components/NavBar";
 
 export default function Women() {
+  const userDetails = useLocation().state as UserData;
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (products.length === 0) {
+      getProducts();
+    }
+  }, []);
+
+  const getProducts = async () => {
+    setLoading(true);
+    const productArray = await fetchProductsByCategory(
+      "Womens",
+      userDetails.userId
+    );
+    if (productArray) {
+      setProducts(productArray);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
-    <Navigation/>
-    <div>
-      <h1 className='titleWomen'>Women's Clothes</h1>
-    </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Navigation />
 
-    <div className="product-container1">
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>   
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card4.png" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>                      
-    </div>
-    <div className="product-container1">
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>   
-      <div className="product-card">
-          <div className="product-image">
-              <img src="/images/card1.jpg" className="product-thumb" alt=""/>
-              <button className="card-btn">Buy Product</button>
-          </div>
-          <div className="product-info">
-              <h2 className="product-brand">shorts</h2>
-              <p className="product-short-des">a short line about the cloth..</p>
-              <span className="price">$20</span><span className="actual-price">$40</span>
-          </div>
-      </div>                    
-    </div>
-
-    <Footer />
+          <section>
+            <h2 className="product-category2">Women's Clothes</h2>
+            <div className="product-container2">
+              {products.map((product, index) => {
+                return (
+                  <>
+                    <Link
+                      className="product-link"
+                      to={"/view-product"}
+                      state={{ user: userDetails, product: product.productId }}
+                    >
+                      <div key={index} className="product-card">
+                        <div className="product-image">
+                          <img
+                            src={product.imageUrl}
+                            className="product-thumb"
+                            alt=""
+                          />
+                          <button className="card-btn">Buy Product</button>
+                        </div>
+                        <div className="product-info">
+                          <h2 className="product-brand">
+                            {product.productName}
+                          </h2>
+                          <p className="product-short-des">
+                            {product.productDescription}
+                          </p>
+                          <span className="price">₱{product.productPrice}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </>
+                );
+              })}
+            </div>
+          </section>
+          <Footer />
+        </>
+      )}
     </>
-  )
+  );
 }

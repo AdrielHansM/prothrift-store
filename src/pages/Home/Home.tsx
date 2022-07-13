@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Button, Nav, Tabs, Tab, Container, Col, Row } from "react-bootstrap";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Button, Container, Row } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import "../../assets/styles/Body.css";
 import UserData from "../../models/User";
 import { fetchTotalSaved } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/Navigation";
-import { PieChart } from "../Components/graphs/PieChart";
+import Navigation from "../Components/NavBar";
 import { BarGraph } from "../Components/graphs/BarGraph";
+import { convertWeight } from "../../utils/productUtils";
 
 export default function Body() {
   const state = useLocation().state as UserData;
@@ -20,7 +20,7 @@ export default function Body() {
   async function fetchTotal() {
     const total = await fetchTotalSaved();
     if (total) {
-      setTotalSaved(total);
+      setTotalSaved(convertWeight("lbs", total));
     }
   }
 
@@ -37,17 +37,13 @@ export default function Body() {
       </div>
       <br />
 
-      {/* NOTE: This one works */}
-      {/* <PieChart /> 
-          <BarChart />
-      */}
       <Container className="stats-container">
         <Row>
           <div style={{ borderRadius: "5px" }} className="first-col">
             <p className="potentially">Our ProThrifters potentially saved</p>
 
             <div className="numofpounds">
-              {totalSaved}
+              {totalSaved.toFixed(2)}
               <div className="pounds-text">
                 <div>Pounds</div>
                 <div>of Clothes</div>
@@ -119,7 +115,9 @@ export default function Body() {
       </div>
 
       <div className="UN-goals">
-        <h1>UN’s sustainable development goals</h1>
+        <h1 style={{ textAlign: "center" }}>
+          UN’s sustainable development goals
+        </h1>
         <div className="UN-text">
           <img src="./images/RCP.gif" />
           <p>

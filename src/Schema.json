@@ -4,7 +4,7 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "points": "number",
+            "totalPoints": "number",
             "firstName": "string",
             "lastName": "string",
             "email": "string",
@@ -56,13 +56,27 @@
         }
     ],
 
+    "Voucher" : [
+        {
+            "_ID": {
+                "$oid": "ObjectId"
+            },
+            "voucherValue": "number",
+            "userId": "string",
+            "isUsed": "boolean",
+            "dateUpdated" :"timestamp",
+            "dateCreated" : "timestamp"
+        }
+    ],
+
 
     "Material_Recycled":[
         {
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "productId": "ObjectId",
+            "transactionId" : "string",
+            "productId": "string",
             "productName" : "string",
             "userId": "ObjectId",
             "weightRecycled": "string",
@@ -97,19 +111,18 @@
             "_ID": {
                 "$oid": "ObjectId"
             },
-            "userId": "ObjectId",
-            "senderFirstName": "string",
-            "senderLastName": "string",
-            "contactNumber": "number",
+            "senderId": "ObjectId",
+            "receiverId": "string",
+            "productId": "string",
             "dateAdded": "timestamp",
             "dateUpdated": "timestamp",
-            "isRead" : "boolean",
             "Messages":{
                 "_ID": {
                     "$oid": "ObjectId"
                 },
-                "senderId": "ObjectId",
-                "message_content": "string"
+                "fromId": "ObjectId",
+                "message_content": "string",
+                "dateCreated": "string"
             }
         }
     ]

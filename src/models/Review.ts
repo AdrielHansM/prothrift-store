@@ -1,12 +1,12 @@
-interface Reviews {
+interface Review {
   reviewId: string,
   productId: string,
   sellerId: string,
   userId: string,
-  rating: Number,
+  rating: number,
   review: string,
   dateUpdated: Date,
   dateCreated: Date
 }
 
-export default Reviews;
+export default Review;

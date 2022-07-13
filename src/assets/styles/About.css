@@ -30,7 +30,6 @@
 }
 
 .about-text{
-    margin-left: 7%;
     font-size: 40px;
     text-transform: none;
     font-weight: 300;
@@ -141,18 +140,19 @@ figcaption a:visited{
 .map h1{
     position: relative;
     font-size: 45px;
-    margin-top: 50px;
+    margin-top: 10px;
+    margin-left: 40px;
 }
 
 .map h2{
-  margin-left: 70px;
+  margin-left: 40px;
   margin-top: 40px;
   font-size: 25px;
   height: 10px;
 }
 
 .gmap{
-    height:90%;
+    height:95%;
     width:50%;
     position: absolute;
     margin-left: 45%;

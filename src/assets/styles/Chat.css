@@ -1,3 +1,10 @@
+.main-container{
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 33rem;
+    position: revert;
+}
+
 .chat-search-box {
     -webkit-border-radius: 3px 0 0 0;
     -moz-border-radius: 3px 0 0 0;
@@ -11,7 +18,7 @@
     border-radius: 2px 0 0 2px;
     border-right: 0;
 }
-
+ 
 .chat-search-box .input-group .form-control:focus {
     border-right: 0;
 }
@@ -84,22 +91,6 @@
     background-image: linear-gradient(right, #e9eff5, #ffffff);
 }
 
-.users .person.active-user {
-    background-color: #ffffff;
-    /* Fallback Color */
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#f7f9fb), to(#ffffff));
-    /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient(right, #f7f9fb, #ffffff);
-    /* Chrome 10+, Saf5.1+, iOS 5+ */
-    background-image: -moz-linear-gradient(right, #f7f9fb, #ffffff);
-    /* FF3.6 */
-    background-image: -ms-linear-gradient(right, #f7f9fb, #ffffff);
-    /* IE10 */
-    background-image: -o-linear-gradient(right, #f7f9fb, #ffffff);
-    /* Opera 11.10+ */
-    background-image: linear-gradient(right, #f7f9fb, #ffffff);
-}
-
 .users .person:last-child {
     border-bottom: 0;
 }
@@ -118,45 +109,10 @@
     border-radius: 50px;
 }
 
-.users .person .user .status {
-    width: 10px;
-    height: 10px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    background: #e6ecf3;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.users .person .user .status.online {
-    background: #9ec94a;
-}
-
-.users .person .user .status.offline {
-    background: #c4d2e2;
-}
-
-.users .person .user .status.away {
-    background: #f9be52;
-}
-
-.users .person .user .status.busy {
-    background: #fd7274;
-}
-
 .users .person p.name-time {
     font-weight: 600;
     font-size: .85rem;
     display: inline-block;
-}
-
-.users .person p.name-time .time {
-    font-weight: 400;
-    font-size: .7rem;
-    text-align: right;
-    color: #8796af;
 }
 
 @media (max-width: 767px) {
@@ -270,25 +226,6 @@
     left: inherit;
 }
 
-.chat-container li .chat-hour {
-    padding: 0;
-    margin-bottom: 10px;
-    font-size: .75rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 0 15px;
-}
-
-.chat-container li .chat-hour > span {
-    font-size: 16px;
-    color: #9ec94a;
-}
-
-.chat-container li.chat-right > .chat-hour {
-    margin: 0 15px 0 0;
-}
 
 @media (max-width: 767px) {
     .chat-container li.chat-left,
@@ -304,10 +241,7 @@
         margin: 0 0 5px 0;
         display: flex;
         align-items: center;
-    }
-    .chat-container li.chat-left .chat-hour {
-        justify-content: flex-end;
-    }
+    }s
     .chat-container li.chat-left .chat-name {
         margin-left: 5px;
     }
@@ -318,10 +252,6 @@
         display: flex;
         justify-content: right;
         flex-direction: row-reverse;
-    }
-    .chat-container li.chat-right .chat-hour {
-        justify-content: flex-start;
-        order: 2;
     }
     .chat-container li.chat-right .chat-name {
         margin-right: 5px;
@@ -348,10 +278,67 @@ ul {
 }
 .card {
     border: 0;
-    background: #f4f5fb;
+    background: #e8e9ef;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     margin-bottom: 2rem;
     box-shadow: none;
+    height: 100%;
+}
+
+.priceOffer{
+    margin-top: 15px;;
+}
+.priceOffer button{
+    margin-left: 10px;
+    border: none;
+    background-color: rgb(13,202,240);
+    border-radius: 5px;
+    color:#fff;
+}
+.priceOffer button:hover{
+    background-color: #3a3c9b;
+    color: #fff;
+    transition: 250ms;
+}
+
+.product-display{
+    display: flex;
+}
+
+.product-disp-title{
+    display: grid;
+    margin-left: 20px;
+    width: 40rem;
+}
+
+.btn-trans{
+    margin-top: 15px;
+    height: 50px;
+    background-color: rgb(13,202,240);
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    margin-right: 5px;
+}
+
+.send-btn{
+    float: right;
+    height: 50px;
+    background-color: rgb(13,202,240);
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.msg-noconvo{
+    text-align: center;
+    margin-top: 5%;
+}
+
+.chatbox{
+    width: 85%;
 }

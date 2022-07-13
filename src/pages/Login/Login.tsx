@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import { Card, Container } from 'react-bootstrap'
@@ -11,7 +10,7 @@ export default function Login() {
         <Card>
           <Card.Body>
           <LoginForm/>
-          <p>Don't have an account? <Link to={'/register'}>Register</Link></p>
+          <p style={{textTransform:'none'}}>Don't have an account? <Link to={'/register'}>Register</Link></p>
           </Card.Body>
         </Card>
       </Container>

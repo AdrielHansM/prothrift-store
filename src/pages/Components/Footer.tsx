@@ -11,30 +11,24 @@ export default function Footer() {
             <div className="col-sm-12 col-md-6">
               <h6>About</h6>
               <p className="text-justify">
-                <i>ProThrift.com</i> Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
+                <i>ProThrift.com</i> a secondhand shopping platform with a mission to empower people in
+          their daily lives.
               </p>
             </div>
             <div className="col-xs-6 col-md-3">
               <h6>Categories</h6>
               <ul className="footer-links">
                 <li>
-                  <a href="">Men</a>
+                  <a href="/shop-men">Men</a>
                 </li>
                 <li>
-                  <a href="">Women</a>
+                  <a href="/shop-women">Women</a>
                 </li>
                 <li>
-                  <a href="">Kids</a>
+                  <a href="/shop-kids">Kids</a>
                 </li>
                 <li>
-                  <a href="">Accessories</a>
+                  <a href="/shop-accessories">Accessories</a>
                 </li>
               </ul>
             </div>
@@ -54,7 +48,7 @@ export default function Footer() {
                   Contacts
                 </li>
                 <li
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("#")}
                   style={{ cursor: "pointer" }}
                 >
                   Privacy Policy
@@ -69,7 +63,7 @@ export default function Footer() {
             <div className="col-md-8 col-sm-6 col-xs-12">
               <p className="copyright-text">
                 Copyright &copy; 2022 All Rights Reserved by
-                <a href="#"> ProThrift </a>.
+                <a href="/home"> ProThrift </a>.
               </p>
             </div>
 

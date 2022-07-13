@@ -1,40 +1,69 @@
-import { useEffect, useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProducts } from "../../services/Firebase/productService";
+import {
+  fetchProducts,
+  updateUserPoints,
+} from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
-import Navigation from "../Components/Navigation";
-import { Button } from "react-bootstrap";
+import Navigation from "../Components/NavBar";
+import { Col, Container, Row, Modal, Button } from "react-bootstrap";
+import { createVoucher } from "../../services/Firebase/transactionService";
 
-export default function ProfileBody() {
+export default function Shop() {
   const userDetails = useLocation().state as UserData;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [currentVoucherValue, setCurrentVoucherValue] = useState(0);
 
   useEffect(() => {
-    getProducts();
+    if (products.length === 0 && userDetails) {
+      getProducts();
+    }
   }, []);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProducts();
+    const productArray = await fetchProducts(userDetails.userId);
     if (productArray) {
       setProducts(productArray);
       setLoading(false);
     }
   };
 
-  const navigateToProduct = (productId: string) => {
-    console.log(userDetails);
-    console.log(productId);
-    navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
-    });
+  const [showNotEnough, setShoeNotEnough] = useState(false);
+  const handleClose = () => setShoeNotEnough(false);
+  const handleShow = () => setShoeNotEnough(true);
+
+  const [purchaseConfirmation, setPurchaseConfirmation] = useState(false);
+  const confirmationClose = () => setPurchaseConfirmation(false);
+  const confirmationShow = (voucherValue: number) => {
+    setCurrentVoucherValue(voucherValue);
+    setPurchaseConfirmation(true);
   };
+
+  const purchaseVoucher = async () => {
+    if (currentVoucherValue <= userDetails.points) {
+      createVoucher(currentVoucherValue, userDetails.userId);
+      updateUserPoints(
+        userDetails.userId,
+        userDetails.points - currentVoucherValue
+      );
+      userDetails.points = userDetails.points - currentVoucherValue;
+      confirmationClose();
+      setTimeout(() => alert("Voucher Purchased"), 750);
+    } else {
+      confirmationClose();
+      handleShow();
+    }
+  };
+
+  const [showInfo, setShowInfo] = useState(false);
+  const handleCloseInfo = () => setShowInfo(false);
+  const handleShowInfo = () => setShowInfo(true);
 
   return (
     <>
@@ -48,23 +77,139 @@ export default function ProfileBody() {
             style={{ backgroundImage: "url(/images/header.png)" }}
           >
             <div className="content">
-              <img src="/images/ProThrift-logo.png" className="logo" alt="" />
-              <p className="sub-heading">Lorem ipsum yadayadyad</p>
+              <h2>Our users are superheroes!</h2>
             </div>
           </div>
           <br />
 
-          <section className="message-to-user">
-            <div>
-              <h2>Our users are superheroes!</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
-          </section>
+          <Container
+            style={{
+              border: "none",
+              borderRadius: "10px",
+              backgroundColor: "#EAEAEB",
+            }}
+          >
+            <img
+              src="/images/info.png"
+              className="info-img"
+              onClick={handleShowInfo}
+            />
+            <Row>
+              <h4>Points: {userDetails.points}</h4>
+              <Col>
+                <div className="coupon_box">
+                  <div className="coupon-body">
+                    <h2 className="how_much">
+                      {" "}
+                      <b> 10 Peso </b>{" "}
+                    </h2>
+                    <h3> OFF </h3>
+                  </div>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(10)}
+                  >
+                    {" "}
+                    Redeem{" "}
+                  </button>
+                </div>
+              </Col>
+              <Col>
+                <div className="coupon_box2">
+                  <div className="coupon-body2">
+                    <h2 className="how_much">
+                      {" "}
+                      <b> 20 Peso </b>{" "}
+                    </h2>
+                    <h3> OFF </h3>
+                  </div>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(20)}
+                  >
+                    {" "}
+                    Redeem{" "}
+                  </button>
+                </div>
+              </Col>
+              <Col>
+                <div className="coupon_box3">
+                  <div className="coupon-body3">
+                    <h2 className="how_much">
+                      {" "}
+                      <b> 30 Peso </b>{" "}
+                    </h2>
+                    <h3> OFF </h3>
+                  </div>
+                  <button
+                    className="redeem-btn"
+                    onClick={() => confirmationShow(30)}
+                  >
+                    {" "}
+                    Redeem{" "}
+                  </button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+          <Modal show={showNotEnough} centered>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "20% 5%",
+              }}
+            >
+              You don't have enough points.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={purchaseConfirmation} centered>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "20% 5%",
+              }}
+            >
+              Are you sure you want to buy this voucher?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={confirmationClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  purchaseVoucher();
+                }}
+              >
+                Buy
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={showInfo} centered>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "10% 5%",
+              }}
+            >
+              Voucher conversion is 1 point equal to 1 Php
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseInfo}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
 
           <section>
             <h2 className="product-category2">Products</h2>
@@ -101,10 +246,8 @@ export default function ProfileBody() {
                 );
               })}
             </div>
-            <div className="view-btn">
-              <Button className="btn-lg">View More</Button>
-            </div>
           </section>
+          <br />
           <Footer />
         </>
       )}

@@ -16,7 +16,8 @@ import { createProduct } from "../../../services/Firebase/productService";
 import { estimateWeight, convertWeight } from "../../../utils/productUtils";
 import Footer from "../../Components/Footer";
 import Loading from "../../Components/LoadingScreen";
-import Navigation from "../../Components/Navigation";
+import Navigation from "../../Components/NavBar";
+import "../../../assets/styles/AddProduct.css";
 
 const initialProduct = {
   productId: "",
@@ -37,7 +38,7 @@ const initialProduct = {
 };
 
 export default function AddProductForm() {
-  const state = useLocation().state as UserData;
+  const userDetails = useLocation().state as UserData;
 
   const imageRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<Product>(initialProduct);
@@ -52,7 +53,7 @@ export default function AddProductForm() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
 
-  if (state === null || state === undefined) {
+  if (userDetails === null || userDetails === undefined) {
     window.location.href = "/home";
   }
 
@@ -68,10 +69,10 @@ export default function AddProductForm() {
 
       if (image.size < 2000000) {
         const createProductStatus = await createProduct(
-          state.userId,
+          userDetails.userId,
           formData.productName,
-          formData.productPrice,
-          formData.productWeight,
+          Math.floor(formData.productPrice),
+          weight,
           formData.productDescription,
           formData.meetup,
           category,
@@ -104,7 +105,7 @@ export default function AddProductForm() {
 
   function SuccessAlert() {
     return (
-      <div className="w-75 h-50 mx-auto d-block mt-3">
+      <div className="w-75 h-50 mx-auto d-block mb-3">
         <Alert show={show} variant="success">
           <Alert.Heading>Product Successfully Listed</Alert.Heading>
           <div className="d-flex justify-content-end">
@@ -128,22 +129,23 @@ export default function AddProductForm() {
         <>
           <Navigation />
           <SuccessAlert />
-          <Container className="mainregCon">
-            <Card>
+          <Container className="add-con">
+            <Card className="card">
               <Card.Body>
                 <Form onSubmit={handleSubmit} className="productForm">
                   <h1>Add Product</h1>
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control
                       type={"text"}
                       name="productName"
                       placeholder="Product name..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Price</Form.Label>
                     <InputGroup>
                       <InputGroup.Text>Php</InputGroup.Text>
@@ -152,12 +154,14 @@ export default function AddProductForm() {
                         name="productPrice"
                         placeholder="Product price..."
                         onChange={handleChange}
+                        min={0}
+                        required
                       />
                       <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Description</Form.Label>
                     <Form.Control
                       as="textarea"
@@ -165,10 +169,11 @@ export default function AddProductForm() {
                       name="productDescription"
                       placeholder="Product description..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Image</Form.Label>
                     <Form.Control
                       name="image"
@@ -178,17 +183,18 @@ export default function AddProductForm() {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Preferred Meetup</Form.Label>
                     <Form.Control
                       type={"text"}
                       name="meetup"
                       placeholder="Meetup..."
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                       as="select"
@@ -196,6 +202,7 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setCategory(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
@@ -207,7 +214,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Clothing Type</Form.Label>
                     <Form.Control
                       as="select"
@@ -215,11 +222,13 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setClothingType(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
                       </option>
                       <option disabled>Upperwear</option>
+                      <hr />
                       <option value="Upperwear">Shirt</option>
                       <option value="Upperwear">T-Shirt</option>
                       <option value="Upperwear">Hoodie</option>
@@ -227,16 +236,20 @@ export default function AddProductForm() {
                       <option value="Upperwear">Hoodie</option>
                       <option value="Upperwear">Jacket</option>
                       <option value="Upperwear">Vest</option>
+                      <hr />
 
                       <option disabled>Bottomwear</option>
+                      <hr />
                       <option value="Bottomwear">Pant</option>
                       <option value="Bottomwear">Jean</option>
                       <option value="Bottomwear">Short</option>
                       <option value="Bottomwear">Legging</option>
                       <option value="Bottomwear">Underpant</option>
                       <option value="Bottomwear">Skirt</option>
+                      <hr />
 
                       <option disabled>Accessories</option>
+                      <hr />
                       <option>Wallet</option>
                       <option>Belt</option>
                       <option>Hat</option>
@@ -247,7 +260,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Product Status</Form.Label>
                     <Form.Control
                       as="select"
@@ -255,6 +268,7 @@ export default function AddProductForm() {
                       onChange={(e) => {
                         setStatus(e.target.value);
                       }}
+                      required
                     >
                       <option value="" disabled>
                         Please Select...
@@ -265,7 +279,7 @@ export default function AddProductForm() {
                     </Form.Control>
                   </Form.Group>
 
-                  <Form.Group className="mt-3">
+                  <Form.Group className="mb-3">
                     <Form.Label>Estimated Weight (grams)</Form.Label>
                     <InputGroup>
                       <DropdownButton
@@ -290,11 +304,12 @@ export default function AddProductForm() {
                         name="productWeight"
                         value={convertedWeight}
                         onChange={handleChange}
+                        required
                       />
                     </InputGroup>
                   </Form.Group>
 
-                  <Button type="submit" className="w-100 mt-4 mb-3">
+                  <Button type="submit" className="addproduct-btn">
                     Create Product
                   </Button>
                 </Form>

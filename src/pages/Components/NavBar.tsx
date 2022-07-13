@@ -1,10 +1,22 @@
-import { useState } from "react";
-import { Button, Form, FormControl, NavDropdown, Toast } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Form,
+  FormControl,
+  NavDropdown,
+  Toast,
+  Row,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
+import MessageThread from "../../models/MessageThread";
 import UserData from "../../models/User";
+import { fetchBuyerThread } from "../../services/Firebase/communicationService";
 import { auth } from "../../services/Firebase/firebaseApp";
-import { getUser } from "../../services/Firebase/productService";
+import {
+  fetchUser,
+  searchProduct,
+} from "../../services/Firebase/productService";
 import { MenuItems } from "./MenuItems";
 
 const initialUser = {
@@ -13,6 +25,7 @@ const initialUser = {
   lastName: "",
   contactNumber: 0,
   email: "",
+  points: 0,
   isLogged: false,
   isDeleted: false,
   dateCreated: new Date(),
@@ -21,36 +34,65 @@ const initialUser = {
 
 export default function Navigation() {
   const [userDetails, setUserDetails] = useState<UserData>(initialUser);
+  const [userFetched, setUserFetched] = useState(false);
+  const [messageThread, setMessageThread] = useState<MessageThread[]>([]);
   const navigate = useNavigate();
 
-  if (userDetails.isLogged === false) {
-    fetchData();
-  }
+  useEffect(() => {
+    if (!userFetched) {
+      fetchUserData();
+    }
+  });
 
-  async function fetchData() {
+  useEffect(() => {
+    if (messageThread.length === 0 && userFetched) {
+      fetchMessageThread();
+    }
+  });
+
+  async function fetchMessageThread() {
+    const messageThreadArray = await fetchBuyerThread(userDetails.userId);
+    if (messageThreadArray) {
+      setMessageThread(messageThreadArray);
+    }
+  }
+  async function fetchUserData() {
     const uidIsPresent = auth.currentUser?.uid;
     if (uidIsPresent && userDetails.isLogged === false) {
-      const user = (await getUser(uidIsPresent)) as UserData;
+      const user = (await fetchUser(uidIsPresent)) as UserData;
       setUserDetails(user);
+      setUserFetched(true);
     }
   }
 
   async function handleLogout() {
     await auth.signOut();
     setUserDetails(initialUser);
-    window.location.reload();
+    window.location.href = "/home";
   }
 
   const navigateTo = (url: string) => {
     navigate(url, { state: userDetails });
   };
 
-  const [showA, setShowA] = useState(false);
-  const toggleShowA = () => setShowA(!showA);
+  const [pointsDropdown, setPointsDropdown] = useState(false);
+  const togglePointsDropdown = () => setPointsDropdown(!pointsDropdown);
 
-  function Example() {
+  const [logoutDropdown, setLogoutDropdown] = useState(false);
+  const toggleShowB = () => setLogoutDropdown(!logoutDropdown);
+
+  const [showNotify, setShowNotify] = useState(false);
+  const toggleShowNotify = () => setShowNotify(!showNotify);
+
+  function DailyPointsToast() {
     return (
-      <Toast show={showA} onClose={toggleShowA} className="toast">
+      <Toast
+        show={pointsDropdown}
+        onClose={togglePointsDropdown}
+        className="toast"
+        delay={3000}
+        autohide
+      >
         <Toast.Header>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">ProThrift</strong>
@@ -58,8 +100,52 @@ export default function Navigation() {
         <Toast.Body className="toast-body">
           Collect your daily points.
         </Toast.Body>
+        ``
         <button className="toast-btn">Get!</button>
       </Toast>
+    );
+  }
+
+  function Logout() {
+    return (
+      <Toast
+        show={logoutDropdown}
+        onClose={toggleShowB}
+        className="toast"
+        delay={5000}
+        autohide
+      >
+        <Toast.Body className="toast-body">
+          Are you sure you want to logout?
+        </Toast.Body>
+        <button className="toast-btn" onClick={() => handleLogout()}>
+          Confirm
+        </button>
+      </Toast>
+    );
+  }
+
+  function Notify() {
+    return (
+      <Row>
+        <Toast
+          show={showNotify}
+          onClose={toggleShowNotify}
+          className="toast"
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="me-auto">Notification</strong>
+            <small>Just Now</small>
+          </Toast.Header>
+          {messageThread.length > 0 ? (
+            <Toast.Body>{`You have ${messageThread.length} message`}</Toast.Body>
+          ) : (
+            <Toast.Body>Nothing to show!</Toast.Body>
+          )}
+        </Toast>
+      </Row>
     );
   }
 
@@ -79,14 +165,14 @@ export default function Navigation() {
             }
             id="nav-dropdown"
           >
-            <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
-              Womens
-            </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-men")}>
-              Mens
+              Men's
+            </NavDropdown.Item>
+            <NavDropdown.Item onClick={() => navigateTo("/shop-women")}>
+              Women's
             </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-kids")}>
-              Kids
+              Kid's
             </NavDropdown.Item>
             <NavDropdown.Item onClick={() => navigateTo("/shop-accessories")}>
               Accessories
@@ -118,7 +204,12 @@ export default function Navigation() {
         </ul>
         {userDetails.isLogged ? (
           <>
-            <img src="/images/bell.png" className="bell-icon" alt="" />
+            <img
+              src="/images/bell.png"
+              className="bell-icon"
+              alt=""
+              onClick={() => setShowNotify(true)}
+            />
 
             <NavDropdown
               title={
@@ -131,18 +222,22 @@ export default function Navigation() {
               <NavDropdown.Item onClick={() => navigateTo("/chat")}>
                 Messages
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigateTo("/likedproducts")}>
+              <NavDropdown.Item onClick={() => navigateTo("/favorites")}>
                 Favorites
               </NavDropdown.Item>
               <NavDropdown.Item
                 onClick={() => {
-                  setShowA(true);
+                  setPointsDropdown(true);
                 }}
               >
                 Points
               </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => handleLogout()}>
-                logout
+              <NavDropdown.Item
+                onClick={() => {
+                  setLogoutDropdown(true);
+                }}
+              >
+                Logout
               </NavDropdown.Item>
             </NavDropdown>
             <button
@@ -163,7 +258,9 @@ export default function Navigation() {
           </>
         )}
       </nav>
-      <Example />
+      <Notify />
+      <Logout />
+      <DailyPointsToast />
     </>
   );
 }
