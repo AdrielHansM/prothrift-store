@@ -214,8 +214,12 @@ export default function ViewListedProducts() {
                     <>
                       <p className="p-name">{productDetails?.productName}</p>
                       <p className="price">₱{productDetails?.productPrice}</p>
+                      <p>
+                        Product Status:{" "}
+                        {productDetails?.isSold ? "Sold" : "Available"}
+                      </p>
                       <p className="status">
-                        Product Status: {productDetails?.status}
+                        Quality: {productDetails?.status}
                       </p>
                       <p>meeting place: {productDetails?.meetup}</p>
                       <p>

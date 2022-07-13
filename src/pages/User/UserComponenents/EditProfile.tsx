@@ -3,7 +3,7 @@ import "../../../assets/styles/EditProfile.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import UserData from "../../../models/User";
 import { useState } from "react";
-import { createUser } from "../../../services/Firebase/productService";
+import { updateUser } from "../../../services/Firebase/productService";
 
 export default function EditProfile() {
   const [firstName, setFirstName] = useState("");
@@ -31,7 +31,7 @@ export default function EditProfile() {
         contact !== userState.contactNumber)
     ) {
       const dateUpdated = new Date();
-      createUser(
+      updateUser(
         userState.userId,
         firstName,
         lastName,
@@ -92,9 +92,7 @@ export default function EditProfile() {
                   className="form-control"
                   placeholder="last name"
                   value={
-                    isLNameModified || lastName 
-                    ? lastName 
-                    : userState?.lastName
+                    isLNameModified || lastName ? lastName : userState?.lastName
                   }
                   onChange={(e) => {
                     setLastName(e.target.value);
