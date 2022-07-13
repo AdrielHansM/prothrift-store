@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Form,
@@ -9,7 +9,9 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../../assets/styles/Navbar.css";
+import MessageThread from "../../models/MessageThread";
 import UserData from "../../models/User";
+import { fetchBuyerThread } from "../../services/Firebase/communicationService";
 import { auth } from "../../services/Firebase/firebaseApp";
 import {
   fetchUser,
@@ -33,13 +35,28 @@ const initialUser = {
 export default function Navigation() {
   const [userDetails, setUserDetails] = useState<UserData>(initialUser);
   const [userFetched, setUserFetched] = useState(false);
+  const [messageThread, setMessageThread] = useState<MessageThread[]>([]);
   const navigate = useNavigate();
 
-  if (!userFetched) {
-    fetchData();
-  }
+  useEffect(() => {
+    if (!userFetched) {
+      fetchUserData();
+    }
+  });
 
-  async function fetchData() {
+  useEffect(() => {
+    if (messageThread.length === 0 && userFetched) {
+      fetchMessageThread();
+    }
+  });
+
+  async function fetchMessageThread() {
+    const messageThreadArray = await fetchBuyerThread(userDetails.userId);
+    if (messageThreadArray) {
+      setMessageThread(messageThreadArray);
+    }
+  }
+  async function fetchUserData() {
     const uidIsPresent = auth.currentUser?.uid;
     if (uidIsPresent && userDetails.isLogged === false) {
       const user = (await fetchUser(uidIsPresent)) as UserData;
@@ -83,6 +100,7 @@ export default function Navigation() {
         <Toast.Body className="toast-body">
           Collect your daily points.
         </Toast.Body>
+        ``
         <button className="toast-btn">Get!</button>
       </Toast>
     );
@@ -121,7 +139,11 @@ export default function Navigation() {
             <strong className="me-auto">Notification</strong>
             <small>Just Now</small>
           </Toast.Header>
-          <Toast.Body>Nothing to show!</Toast.Body>
+          {messageThread.length > 0 ? (
+            <Toast.Body>{`You have ${messageThread.length} message`}</Toast.Body>
+          ) : (
+            <Toast.Body>Nothing to show!</Toast.Body>
+          )}
         </Toast>
       </Row>
     );
