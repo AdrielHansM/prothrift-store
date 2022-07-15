@@ -4,7 +4,7 @@ import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
-import { Tabs, Tab, Card, Badge } from "react-bootstrap";
+import { Tabs, Tab, Card, Badge, Row } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
@@ -138,9 +138,19 @@ export default function Profile() {
                 </Tab>
 
                 <Tab eventKey="transactions" title="TRANSACTIONS">
-                    <div>
-                      Hello There
-                    </div>
+                    <Row>
+                      <div>
+                        <h2>
+                          Bought Products
+                        </h2>
+                      </div>
+                      <hr/>
+                      <div>
+                        <h2>
+                          Sold Products
+                        </h2>
+                      </div>
+                    </Row>
                 </Tab>
 
                 <Tab eventKey="reviews" title="REVIEWS">
