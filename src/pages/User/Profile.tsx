@@ -291,7 +291,10 @@ export default function Profile() {
                         })}
                       </>
                     ) : (
-                      <>You don't have any vouchers</>
+                      <>
+                      <p className="no-voucher">
+                        You don't have any vouchers</p>
+                      </>
                     )}
                   </div>
                 </Tab>

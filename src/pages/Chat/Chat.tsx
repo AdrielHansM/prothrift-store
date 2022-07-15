@@ -485,6 +485,12 @@ export default function Chats() {
                               >
                                 Send Message
                               </Button>
+                              {/* Applies to buyers only? */}
+                              <Button
+                                className="mx-auto p-lg-1 send-btn"
+                              >
+                                Apply Voucher
+                              </Button>
                             </div>
                           </div>
                         </>

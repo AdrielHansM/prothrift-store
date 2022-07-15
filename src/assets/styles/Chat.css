@@ -331,7 +331,6 @@ ul {
     color: #fff;
     border: none;
     margin-top: 15px;
-    margin-left: 20px;
 }
 
 .msg-noconvo{
@@ -340,5 +339,5 @@ ul {
 }
 
 .chatbox{
-    width: 85%;
+    width: 70%;
 }

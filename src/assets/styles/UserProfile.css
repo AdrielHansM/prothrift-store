@@ -138,3 +138,8 @@
     background: linear-gradient(to right, #c1e8ed, #9ddef4);
     border-radius: 10px;
 }
+
+.no-voucher{
+    font-size: 50px;
+    text-transform: none;
+}
