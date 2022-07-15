@@ -122,3 +122,19 @@
 .media-comment {
     margin-top:20px
 }
+
+/* Voucher */
+.main-voucher-con{
+    margin-bottom: 10%;
+    text-align: center;
+    margin-top: 10%;
+    display: flex;
+}
+
+.voucher-con{
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: linear-gradient(to right, #c1e8ed, #9ddef4);
+    border-radius: 10px;
+}

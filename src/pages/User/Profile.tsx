@@ -137,7 +137,13 @@ export default function Profile() {
                   </div>
                 </Tab>
 
-                <Tab eventKey="monthly" title="REVIEWS">
+                <Tab eventKey="transactions" title="TRANSACTIONS">
+                    <div>
+                      Hello There
+                    </div>
+                </Tab>
+
+                <Tab eventKey="reviews" title="REVIEWS">
                   <div className="container">
                     <div className="row">
                       <div className="col-md-8">
@@ -245,14 +251,7 @@ export default function Profile() {
                   </div>
                 </Tab>
                 <Tab eventKey="voucher" title="VOUCHERS">
-                  <div
-                    style={{
-                      marginBottom: "20%",
-                      textAlign: "center",
-                      marginTop: "10%",
-                      fontSize: "50px",
-                    }}
-                  >
+                  <div className="main-voucher-con">
                     {vouchers.length > 0 ? (
                       <>
                         {vouchers.map((voucher, index) => {
@@ -261,7 +260,7 @@ export default function Profile() {
                           const dateCreated = voucher.dateCreated.seconds;
                           t.setSeconds(dateCreated);
                           return (
-                            <Card key={index}>
+                            <Card key={index} className="voucher-con">
                               <Card.Header>
                                 <>
                                   <h4>Voucher ID: {voucher.voucherId}</h4>
