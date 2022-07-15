@@ -102,10 +102,16 @@ export default function ViewListedProducts() {
           <Form onSubmit={handleSubmit} className="sold-btn">
             <section className="details">
               <div className="product-con">
+                {productDetails?.isSold ? (
+                  <img src="/images/sold.png" className="sold-items" />
+                ) : (
+                  ""
+                )}
+
                 <img
                   className="product-img"
                   src={productDetails?.imageUrl}
-                  style={{ width: "35%", height: "75vh"}}
+                  style={{ width: "35%", height: "75vh" }}
                   alt=""
                 />
                 <div className="product-details">
@@ -217,7 +223,6 @@ export default function ViewListedProducts() {
                       <p>
                         Product Status:{" "}
                         {productDetails?.isSold ? "Sold" : "Available"}
-                        <img src="/images/sold.png" className="sold-items"/>
                       </p>
                       <p className="status">
                         Quality: {productDetails?.status}

@@ -4,7 +4,7 @@ import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Product from "../../models/Product";
 import "../../assets/styles/UserProfile.css";
-import { Tabs, Tab, Card } from "react-bootstrap";
+import { Tabs, Tab, Card, Badge } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
@@ -45,12 +45,6 @@ export default function Profile() {
       setVouchers(voucherArray);
       setLoading(false);
     }
-  };
-
-  const navigateToProduct = (productId: string) => {
-    navigate("/view-product", {
-      state: { user: userDetails, productId: productId },
-    });
   };
 
   return (
@@ -118,11 +112,18 @@ export default function Profile() {
                                 />
                               </div>
                               <div className="product-info">
-                                <h2 className="product-brand">
+                                <h4 className="product-brand">
                                   {product.productName}
-                                </h2>
+                                  {product.isSold ? (
+                                    <Badge className="m-lg-2" bg="secondary">
+                                      Sold
+                                    </Badge>
+                                  ) : (
+                                    ""
+                                  )}
+                                </h4>
                                 <p className="product-short-des">
-                                  {product.productDescription}
+                                  {product.productDescription}{" "}
                                 </p>
                                 <span className="price">
                                   ₱{product.productPrice}
