@@ -105,7 +105,7 @@ export default function ViewListedProducts() {
                 <img
                   className="product-img"
                   src={productDetails?.imageUrl}
-                  style={{ width: "40%", height: "75vh" }}
+                  style={{ width: "35%", height: "75vh"}}
                   alt=""
                 />
                 <div className="product-details">
@@ -217,6 +217,7 @@ export default function ViewListedProducts() {
                       <p>
                         Product Status:{" "}
                         {productDetails?.isSold ? "Sold" : "Available"}
+                        <img src="/images/sold.png" className="sold-items"/>
                       </p>
                       <p className="status">
                         Quality: {productDetails?.status}

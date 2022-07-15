@@ -105,3 +105,9 @@
     height: 30px;
     cursor: pointer;
 }
+
+.sold-items{
+    width: 10rem;
+    height: 10rem;
+    position: absolute;
+}
