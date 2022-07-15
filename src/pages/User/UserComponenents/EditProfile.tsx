@@ -39,10 +39,10 @@ export default function EditProfile() {
         contact,
         dateUpdated
       ).then(() => {
-        userState.firstName = firstName;
-        userState.lastName = lastName;
-        userState.email = email;
-        userState.contactNumber = contact;
+        userState.firstName = firstName ? firstName : userState.firstName;
+        userState.lastName = lastName ? lastName : userState.lastName;
+        userState.email = email ? email : userState.email;
+        userState.contactNumber = contact ? contact : userState.contactNumber;
         userState.dateUpdated = dateUpdated;
         navigate("/profile", { state: userState });
       });

@@ -45,9 +45,9 @@ export const updateUser = async (userId: string, firstName: string, lastName: st
   .then((querySnapshot) => {
     const userSnapshot = querySnapshot.docs[0]
     userSnapshot.ref.update(
-      {
+      
         queryCreator
-      }
+      
     )
   })
 }
