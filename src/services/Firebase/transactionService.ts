@@ -13,6 +13,7 @@ export const createTransaction = async (productId: string, buyerId: string, sell
     buyerId : buyerId,
     sellerId : sellerId,
     transactionStatus: transactionStatus,
+    voucherApplied: false,
     dateUpdated: new Date(),
     dateCreated: new Date()
   }).then(()=> {
@@ -40,6 +41,7 @@ export const fetchTransaction =async (productId: string, buyerId: string, seller
       buyerId: transactionDoc.buyerId,
       sellerId: transactionDoc.sellerId,
       transactionStatus: transactionDoc.transactionStatus,
+      voucherApplied: transactionDoc.voucherApplied,
       dateUpdated: transactionDoc.dateUpdated,
       dateCreated: transactionDoc.dateCreated
     }

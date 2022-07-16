@@ -1,6 +1,9 @@
-import { useEffect, useState, FormEvent, ChangeEvent } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Button, Form, InputGroup, Modal } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import "../../../assets/styles/ViewProduct.css";
 import Product from "../../../models/Product";
+import UserData from "../../../models/User";
 import {
   deleteProduct,
   fetchProductsByProfile,
@@ -8,9 +11,6 @@ import {
   updateProduct,
 } from "../../../services/Firebase/productService";
 import Navigation from "../../Components/NavBar";
-import UserData from "../../../models/User";
-import "../../../assets/styles/ViewProduct.css";
-import { Form, Modal, Button, InputGroup } from "react-bootstrap";
 
 interface stateType {
   product: string;

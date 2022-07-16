@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Badge, Button, Card, Form, Modal } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import "../../assets/styles/Chat.css";
 import Message from "../../models/Message";
@@ -9,6 +9,7 @@ import Product from "../../models/Product";
 import Review from "../../models/Review";
 import Transaction from "../../models/Transaction";
 import UserData from "../../models/User";
+import Voucher from "../../models/Voucher";
 import {
   fetchBuyerThread,
   fetchMessage,
@@ -25,6 +26,7 @@ import {
   createMaterialsRecycled,
   createUserReview,
   fetchTransaction,
+  fetchVouchers,
   updateRelatedTransaction,
   updateTransaction,
 } from "../../services/Firebase/transactionService";
@@ -58,6 +60,12 @@ export default function Chats() {
   const confirmationClose = () => setShowConfirmation(false);
   const confirmationShow = () => setShowConfirmation(true);
 
+  //Voucher Modal
+  const [vouchers, setVouchers] = useState<Voucher[]>([]);
+  const [showVouchers, setShowVouchers] = useState(false);
+  const voucherClose = () => setShowVouchers(false);
+  const voucherShow = () => setShowVouchers(true);
+
   const [conversationsBuyer, setConversationsBuyer] = useState<
     MessageContainer[]
   >([]);
@@ -69,7 +77,6 @@ export default function Chats() {
   const [sellerThreads, setSellerThreads] = useState<MessageThread[]>([]);
 
   const [messageThreadFetched, setMessageThreadFetched] = useState(false);
-  const [buyerThreadBuilt, setBuyerThreadBuilt] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -84,6 +91,7 @@ export default function Chats() {
   useEffect(() => {
     if (!messageThreadFetched) {
       getMessageThreads();
+      getVouchers();
     }
   }, []);
 
@@ -98,6 +106,13 @@ export default function Chats() {
       buildThreadSeller();
     }
   }, [sellerThreads]);
+
+  const getVouchers = async () => {
+    const vouchersArray = await fetchVouchers(userDetails.userId);
+    if (vouchersArray) {
+      setVouchers(vouchersArray);
+    }
+  };
 
   const getMessageThreads = async () => {
     setLoading(true);
@@ -208,6 +223,7 @@ export default function Chats() {
         buyerId: currentTransaction.buyerId,
         sellerId: currentTransaction.sellerId,
         transactionStatus: "SUCCESS",
+        voucherApplied: currentTransaction.voucherApplied,
         dateUpdated: new Date(),
         dateCreated: currentTransaction.dateCreated,
       });
@@ -371,7 +387,16 @@ export default function Chats() {
                               }}
                             />
                             <div className="product-disp-title">
-                              <h2>{currentProduct.productName}</h2>
+                              <h2>
+                                {currentProduct.productName}{" "}
+                                {currentProduct.isSold ? (
+                                  <Badge className="m-lg-2" bg="secondary">
+                                    Sold
+                                  </Badge>
+                                ) : (
+                                  ""
+                                )}
+                              </h2>
                               <h3>₱{currentProduct.productPrice}</h3>
                             </div>
                             {currentTransaction.buyerId ===
@@ -387,11 +412,35 @@ export default function Chats() {
                                   </Button>
                                 </div>
                               ) : (
-                                <div>
-                                  <Button className="btn-trans" disabled>
-                                    Leave a review
-                                  </Button>
-                                </div>
+                                <>
+                                  {currentTransaction.voucherApplied ? (
+                                    <div>
+                                      <Button
+                                        className="mt-2 btn-secondary"
+                                        disabled
+                                      >
+                                        Apply Voucher
+                                      </Button>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <Button
+                                        className="mt-2 btn-primary"
+                                        onClick={voucherShow}
+                                      >
+                                        Apply Voucher
+                                      </Button>
+                                    </div>
+                                  )}
+                                  <div>
+                                    <Button
+                                      className="m-lg-2 btn-secondary"
+                                      disabled
+                                    >
+                                      Leave a review
+                                    </Button>
+                                  </div>
+                                </>
                               )
                             ) : currentTransaction.transactionStatus ===
                               "PENDING" ? (
@@ -485,12 +534,6 @@ export default function Chats() {
                               >
                                 Send Message
                               </Button>
-                              {/* Applies to buyers only? */}
-                              <Button
-                                className="mx-auto p-lg-1 send-btn"
-                              >
-                                Apply Voucher
-                              </Button>
                             </div>
                           </div>
                         </>
@@ -579,6 +622,48 @@ export default function Chats() {
                 }}
               >
                 Yes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <Modal show={showVouchers} centered>
+            <Modal.Header>
+              <h3>Vouchers</h3>
+            </Modal.Header>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "5% 1%",
+              }}
+            >
+              {vouchers.map((voucher, index) => {
+                var formattedDate = new Date(1970, 0, 1); // Epoch
+                //@ts-ignore
+                const dateCreated = voucher.dateCreated.seconds;
+                formattedDate.setSeconds(dateCreated);
+                return (
+                  <Card key={index} className="m-lg-4">
+                    <Card.Header>
+                      <p>
+                        <strong>ID: </strong>
+                        {voucher.voucherId}
+                        OFF
+                      </p>
+                      <h4>
+                        <strong>Discount:</strong> Php {voucher.voucherValue}{" "}
+                        OFF
+                      </h4>
+                    </Card.Header>
+                    <Card.Body>
+                      <Button>Apply Voucher</Button>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={voucherClose}>
+                Close
               </Button>
             </Modal.Footer>
           </Modal>

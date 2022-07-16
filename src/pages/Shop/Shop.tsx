@@ -1,5 +1,6 @@
-import { useDebugValue, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
@@ -7,11 +8,10 @@ import {
   fetchProducts,
   updateUserPoints,
 } from "../../services/Firebase/productService";
+import { createVoucher } from "../../services/Firebase/transactionService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
-import { Col, Container, Row, Modal, Button } from "react-bootstrap";
-import { createVoucher } from "../../services/Firebase/transactionService";
 
 export default function Shop() {
   const userDetails = useLocation().state as UserData;

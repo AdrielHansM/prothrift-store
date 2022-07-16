@@ -4,6 +4,7 @@ interface Transaction {
   buyerId: string,
   sellerId: string,
   transactionStatus: string,
+  voucherApplied: boolean,
   dateUpdated: Date,
   dateCreated: Date
 }
