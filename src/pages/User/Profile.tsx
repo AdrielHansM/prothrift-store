@@ -171,7 +171,7 @@ export default function Profile() {
                 </Tab>
 
                 <Tab eventKey="transactions" title="TRANSACTIONS">
-                  <Accordion defaultActiveKey="0">
+                  <Accordion>
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Products Bought</Accordion.Header>
                       <Accordion.Body>
