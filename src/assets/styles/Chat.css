@@ -339,5 +339,10 @@ ul {
 }
 
 .chatbox{
-    width: 70%;
+    width: 85%;
+}
+
+.voucher-card{
+    background: linear-gradient(to right, #c1e8ed, #9ddef4);
+    border-radius: 10px;
 }

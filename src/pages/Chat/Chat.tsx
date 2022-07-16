@@ -642,7 +642,7 @@ export default function Chats() {
                 const dateCreated = voucher.dateCreated.seconds;
                 formattedDate.setSeconds(dateCreated);
                 return (
-                  <Card key={index} className="m-lg-4">
+                  <Card key={index} className="m-lg-4 voucher-card">
                     <Card.Header>
                       <p>
                         <strong>ID: </strong>
