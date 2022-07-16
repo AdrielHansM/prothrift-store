@@ -179,6 +179,7 @@ export const createProduct = async(userId: string, productName: string, productP
         meetup: meetup,
         category: category,
         status: status,
+        searchKey: productName.trim().toLowerCase(),
         isDonated: false,
         isDeleted: false,
         isSold: false,
@@ -303,10 +304,8 @@ export const searchProduct = async (searchKey : string, userId: string) => {
 
   return await database
   .collection('products')
-  .where('productName', '==', searchKey)
-  .where('isDeleted', '==', false)
-  .where('isSold', '==', false)
-  .where('userId', '!=', userId)
+  .orderBy('searchKey')
+  .startAt(searchKey.trim().toLowerCase()).endAt(searchKey.trim().toLowerCase() + '~')
   .get()
   .then((querySnapshot) => {
     querySnapshot.forEach(doc => {

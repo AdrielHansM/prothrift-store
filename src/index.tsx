@@ -23,6 +23,7 @@ import Women from "./pages/Shop/Women";
 import Profile from "./pages/User/Profile";
 import EditProfile from "./pages/User/UserComponenents/EditProfile";
 import ViewListedProducts from "./pages/Shop/ProductComponents/ViewListedProducts";
+import SearchProduct from "./pages/Shop/SearchProduct";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -42,6 +43,7 @@ root.render(
           <Route path={"shop"} element={<ProfileBody />} />
           <Route path={"contact"} element={<Contact />} />
           <Route path={"feedback"} element={<Feedback />} />
+          <Route path={"search"} element={<SearchProduct />} />
           <Route path={"shop-women"} element={<Women />} />
           <Route path={"shop-men"} element={<Men />} />
           <Route path={"shop-kids"} element={<Kids />} />

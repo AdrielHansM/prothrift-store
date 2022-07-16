@@ -373,7 +373,14 @@ export default function Profile() {
                               <Card.Body>
                                 <h3>
                                   <strong>Discount:</strong> Php{" "}
-                                  {voucher.voucherValue} OFF
+                                  {voucher.voucherValue} OFF{" "}
+                                  {voucher.isUsed ? (
+                                    <Badge className="m-lg-2" bg="secondary">
+                                      Used
+                                    </Badge>
+                                  ) : (
+                                    ""
+                                  )}
                                 </h3>
                               </Card.Body>
                             </Card>

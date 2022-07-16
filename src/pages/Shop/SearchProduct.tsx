@@ -3,27 +3,30 @@ import { Link, useLocation } from "react-router-dom";
 import "../../assets/styles/Profile.css";
 import Product from "../../models/Product";
 import UserData from "../../models/User";
-import { fetchProductsByCategory } from "../../services/Firebase/productService";
+import { searchProduct } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
 
+interface stateType {
+  searchKey: string;
+  user: UserData;
+}
+
 export default function SearchProduct() {
-  const userDetails = useLocation().state as UserData;
+  const state = useLocation().state as stateType;
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (products.length === 0) {
-      getProducts();
-    }
-  }, []);
+    getProducts();
+  }, [state.searchKey]);
 
   const getProducts = async () => {
     setLoading(true);
-    const productArray = await fetchProductsByCategory(
-      "Mens",
-      userDetails.userId
+    const productArray = await searchProduct(
+      state.searchKey,
+      state.user.userId
     );
     if (productArray) {
       setProducts(productArray);
@@ -40,7 +43,9 @@ export default function SearchProduct() {
           <Navigation />
 
           <section>
-            <h2 className="product-category2">Men's Clothes</h2>
+            <h1 className="m-lg-5">
+              Search key containing "{state.searchKey}"
+            </h1>
             <div className="product-container2">
               {products.map((product, index) => {
                 return (
@@ -48,7 +53,7 @@ export default function SearchProduct() {
                     <Link
                       className="product-link"
                       to={"/view-product"}
-                      state={{ user: userDetails, product: product.productId }}
+                      state={{ user: state.user, product: product.productId }}
                     >
                       <div key={index} className="product-card">
                         <div className="product-image">

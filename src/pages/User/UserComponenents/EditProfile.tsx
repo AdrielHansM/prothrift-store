@@ -80,7 +80,6 @@ export default function EditProfile() {
                   onChange={(e) => {
                     setFirstName(e.target.value);
                     setIsFNameModified(true);
-                    console.log("tyope");
                   }}
                 />
               </div>

@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "../../../assets/styles/ViewProduct.css";
 import Product from "../../../models/Product";
+import UserData from "../../../models/User";
+import {
+  createNewMessageThread,
+  validateIfThreadExists,
+} from "../../../services/Firebase/communicationService";
 import {
   addUserFavorite,
   fetchSingleProduct,
@@ -8,18 +15,9 @@ import {
   removeFromUserFavorites,
   validateIfFavorite,
 } from "../../../services/Firebase/productService";
+import { createTransaction } from "../../../services/Firebase/transactionService";
 import Loading from "../../Components/LoadingScreen";
 import Navigation from "../../Components/NavBar";
-import UserData from "../../../models/User";
-import "../../../assets/styles/ViewProduct.css";
-import { Row, Col, Modal, Button } from "react-bootstrap";
-import {
-  createNewMessageThread,
-  fetchBuyerThread,
-  validateIfThreadExists,
-} from "../../../services/Firebase/communicationService";
-import MessageThread from "../../../models/MessageThread";
-import { createTransaction } from "../../../services/Firebase/transactionService";
 
 interface stateType {
   product: string;

@@ -42,6 +42,7 @@ export const fetchTransaction = async (productId: string, buyerId: string, selle
       sellerId: transactionDoc.sellerId,
       transactionStatus: transactionDoc.transactionStatus,
       voucherApplied: transactionDoc.voucherApplied,
+      voucherId: transactionDoc.voucherId,
       dateUpdated: transactionDoc.dateUpdated,
       dateCreated: transactionDoc.dateCreated
     }
@@ -131,6 +132,25 @@ export const updateTransaction = async (transactionId: string, status: string) =
   .update(
     {
       transactionStatus: status,
+      dateUpdated: new Date()
+    }
+  ).then(() => {
+    return true;
+  }).catch ((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " : " + errorMessage)
+  })
+}
+
+export const applyVoucherToTransaction = async (voucherId: string, transactionId : string) => {
+  return await database
+  .collection('transactions')
+  .doc(transactionId)
+  .update(
+    {
+      voucherId: voucherId,
+      voucherApplied: true,
       dateUpdated: new Date()
     }
   ).then(() => {
@@ -276,4 +296,15 @@ export const fetchVouchers = async (userId: string) => {
     const errorMessage = error.message;
     alert(errorCode + " " + errorMessage)
   })
+}
+
+export const updateVoucher = async (voucherId: string) => {
+  await database
+  .collection('vouchers')
+  .doc(voucherId)
+  .update({
+    isUsed: true,
+    dateUpdated: new Date()
+  })
+  
 }

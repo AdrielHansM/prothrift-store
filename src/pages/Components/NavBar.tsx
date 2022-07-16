@@ -13,10 +13,7 @@ import MessageThread from "../../models/MessageThread";
 import UserData from "../../models/User";
 import { fetchBuyerThread } from "../../services/Firebase/communicationService";
 import { auth } from "../../services/Firebase/firebaseApp";
-import {
-  fetchUser,
-  searchProduct,
-} from "../../services/Firebase/productService";
+import { fetchUser } from "../../services/Firebase/productService";
 import { MenuItems } from "./MenuItems";
 
 const initialUser = {
@@ -36,6 +33,8 @@ export default function Navigation() {
   const [userDetails, setUserDetails] = useState<UserData>(initialUser);
   const [userFetched, setUserFetched] = useState(false);
   const [messageThread, setMessageThread] = useState<MessageThread[]>([]);
+  const [searchKey, setSearchKey] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,6 +55,7 @@ export default function Navigation() {
       setMessageThread(messageThreadArray);
     }
   }
+
   async function fetchUserData() {
     const uidIsPresent = auth.currentUser?.uid;
     if (uidIsPresent && userDetails.isLogged === false) {
@@ -196,11 +196,22 @@ export default function Navigation() {
           <Form className="d-flex w-100">
             <FormControl
               type="search"
-              placeholder="Search"
+              onChange={(event: any) => {
+                setSearchKey(event.target.value);
+              }}
+              placeholder="Search a product..."
               className="me-2"
-              aria-label="Search"
             />
-            <Button variant="info">Search</Button>
+            <Button
+              variant="info"
+              onClick={() => {
+                navigate("/search", {
+                  state: { user: userDetails, searchKey: searchKey },
+                });
+              }}
+            >
+              Search
+            </Button>
           </Form>
         </ul>
         {userDetails.isLogged ? (

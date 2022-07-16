@@ -23,12 +23,14 @@ import {
   updateUserPoints,
 } from "../../services/Firebase/productService";
 import {
+  applyVoucherToTransaction,
   createMaterialsRecycled,
   createUserReview,
   fetchTransaction,
   fetchVouchers,
   updateRelatedTransaction,
   updateTransaction,
+  updateVoucher,
 } from "../../services/Firebase/transactionService";
 import { convertWeight } from "../../utils/productUtils";
 import Footer from "../Components/Footer";
@@ -149,7 +151,7 @@ export default function Chats() {
       }
     });
     setConversationsBuyer(conversationArray);
-    const timeout = setTimeout(() => setLoading(false), 2500);
+    const timeout = setTimeout(() => setLoading(false), 1500);
   };
 
   const buildThreadSeller = async () => {
@@ -178,14 +180,14 @@ export default function Chats() {
     const timeout = setTimeout(() => setLoading(false), 2500);
   };
 
-  const sendMessageProcess = async (threadId: string) => {
-    if (messageToSend) {
-      sendMessage(threadId, userDetails.userId, messageToSend);
+  const sendMessageProcess = async (threadId: string, message: string) => {
+    if (message) {
+      sendMessage(threadId, userDetails.userId, message);
 
       const newMessage = {
         messageId: "",
         fromId: userDetails.userId,
-        messageContent: messageToSend,
+        messageContent: message,
         dateCreated: new Date(),
       };
       const messages: Message[] = currentMessages;
@@ -197,6 +199,33 @@ export default function Chats() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const applyVoucher = async (voucherId: string, voucherValue: number) => {
+    if (currentThread && currentTransaction) {
+      sendMessageProcess(
+        currentThread.messageThreadId,
+        `Voucher valued at ${voucherValue} is applied`
+      );
+
+      applyVoucherToTransaction(voucherId, currentTransaction.transactionId);
+
+      updateVoucher(voucherId);
+
+      //Update transaction
+      setCurrentTransaction({
+        transactionId: currentTransaction.transactionId,
+        productId: currentTransaction.productId,
+        buyerId: currentTransaction.buyerId,
+        sellerId: currentTransaction.sellerId,
+        transactionStatus: currentTransaction.transactionStatus,
+        voucherApplied: true,
+        dateUpdated: new Date(),
+        dateCreated: currentTransaction.dateCreated,
+      });
+
+      voucherClose();
+    }
   };
 
   const writeUserReviews = async () => {
@@ -526,11 +555,14 @@ export default function Chats() {
                               ></textarea>
                               <Button
                                 className="mx-auto p-lg-1 send-btn"
-                                onClick={() =>
-                                  sendMessageProcess(
-                                    currentThread.messageThreadId
-                                  )
-                                }
+                                onClick={() => {
+                                  if (messageToSend) {
+                                    sendMessageProcess(
+                                      currentThread.messageThreadId,
+                                      messageToSend
+                                    );
+                                  }
+                                }}
                               >
                                 Send Message
                               </Button>
@@ -655,7 +687,26 @@ export default function Chats() {
                       </h4>
                     </Card.Header>
                     <Card.Body>
-                      <Button>Apply Voucher</Button>
+                      {voucher.isUsed ? (
+                        <Button className="btn-secondary" disabled>
+                          Voucher is applied
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            applyVoucher(
+                              voucher.voucherId,
+                              voucher.voucherValue
+                            );
+                            alert("Voucher successfully applied");
+                            setTimeout(() => {
+                              window.location.reload();
+                            }, 1000);
+                          }}
+                        >
+                          Apply Voucher
+                        </Button>
+                      )}
                     </Card.Body>
                   </Card>
                 );
