@@ -26,7 +26,7 @@ export const createTransaction = async (productId: string, buyerId: string, sell
   })
 }
 
-export const fetchTransaction =async (productId: string, buyerId: string, sellerId: string) => {
+export const fetchTransaction = async (productId: string, buyerId: string, sellerId: string) => {
   return await database
   .collection('transactions')
   .where('productId', '==', productId)
@@ -47,6 +47,64 @@ export const fetchTransaction =async (productId: string, buyerId: string, seller
     }
 
     return transactionData as Transaction
+  })
+}
+
+export const fetchTransactionsSeller =async (sellerId: string) => {
+  let transactions:Transaction[] = []
+
+  return await database
+  .collection('transactions')
+  .where('sellerId', '==', sellerId)
+  .get()
+  .then((transactionSnapshots) => {
+    transactionSnapshots.forEach(transactionSnapshot => {
+      const transaction = {
+        transactionId: transactionSnapshot.id,
+        productId: transactionSnapshot.data().productId,
+        buyerId: transactionSnapshot.data().buyerId,
+        sellerId: transactionSnapshot.data().sellerId,
+        transactionStatus: transactionSnapshot.data().transactionStatus,
+        voucherApplied: transactionSnapshot.data().voucherId,
+        dateUpdated: transactionSnapshot.data().dateUpdated,
+        dateCreated: transactionSnapshot.data().dateCreated
+      }
+      transactions.push(transaction)
+    })
+    return transactions
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
+  })
+}
+
+export const fetchTransactionsBuyer =async (buyerId: string) => {
+  let transactions:Transaction[] = []
+
+  return await database
+  .collection('transactions')
+  .where('buyerId', '==', buyerId)
+  .get()
+  .then((transactionSnapshots) => {
+    transactionSnapshots.forEach(transactionSnapshot => {
+      const transaction = {
+        transactionId: transactionSnapshot.id,
+        productId: transactionSnapshot.data().productId,
+        buyerId: transactionSnapshot.data().buyerId,
+        sellerId: transactionSnapshot.data().sellerId,
+        transactionStatus: transactionSnapshot.data().transactionStatus,
+        voucherApplied: transactionSnapshot.data().voucherId,
+        dateUpdated: transactionSnapshot.data().dateUpdated,
+        dateCreated: transactionSnapshot.data().dateCreated
+      }
+      transactions.push(transaction)
+    })
+    return transactions
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " " + errorMessage)
   })
 }
 

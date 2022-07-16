@@ -3,8 +3,9 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navigation from "../Components/NavBar";
 import UserData from "../../models/User";
 import Product from "../../models/Product";
+import Transaction from "../../models/Transaction";
 import "../../assets/styles/UserProfile.css";
-import { Tabs, Tab, Card, Badge, Row } from "react-bootstrap";
+import { Tabs, Tab, Card, Badge, Row, Accordion, Table } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
@@ -12,21 +13,36 @@ import {
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Voucher from "../../models/Voucher";
-import { fetchVouchers } from "../../services/Firebase/transactionService";
+import {
+  fetchTransactionsBuyer,
+  fetchTransactionsSeller,
+  fetchVouchers,
+} from "../../services/Firebase/transactionService";
 
 export default function Profile() {
   const navigate = useNavigate();
   const userDetails = useLocation().state as UserData;
 
+  const [transactionsSeller, setTransactionsSeller] = useState<Transaction[]>(
+    []
+  );
+  const [transactionsBuyer, setTransactionsBuyer] = useState<Transaction[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [vouchers, setVouchers] = useState<Voucher[]>([]);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (products.length === 0 && vouchers.length === 0) {
+    if (
+      products.length === 0 &&
+      vouchers.length === 0 &&
+      transactionsSeller.length === 0 &&
+      transactionsBuyer.length === 0
+    ) {
       getProducts();
       getVouchers();
+      getTransactionSeller();
+      getTransactionBuyer();
     }
   }, []);
 
@@ -41,8 +57,25 @@ export default function Profile() {
   const getVouchers = async () => {
     const voucherArray = await fetchVouchers(userDetails.userId);
     if (voucherArray) {
-      console.log(voucherArray);
       setVouchers(voucherArray);
+    }
+  };
+
+  const getTransactionSeller = async () => {
+    const transactionsSellerArray = await fetchTransactionsSeller(
+      userDetails.userId
+    );
+    if (transactionsSellerArray) {
+      setTransactionsSeller(transactionsSellerArray);
+    }
+  };
+
+  const getTransactionBuyer = async () => {
+    const transactionsBuyerArray = await fetchTransactionsBuyer(
+      userDetails.userId
+    );
+    if (transactionsBuyerArray) {
+      setTransactionsBuyer(transactionsBuyerArray);
       setLoading(false);
     }
   };
@@ -51,8 +84,8 @@ export default function Profile() {
     <>
       {loading ? (
         <>
-          <Loading />
           <Navigation />
+          <Loading />
         </>
       ) : (
         <>
@@ -138,19 +171,76 @@ export default function Profile() {
                 </Tab>
 
                 <Tab eventKey="transactions" title="TRANSACTIONS">
-                    <Row>
-                      <div>
-                        <h2>
-                          Bought Products
-                        </h2>
-                      </div>
-                      <hr/>
-                      <div>
-                        <h2>
-                          Sold Products
-                        </h2>
-                      </div>
-                    </Row>
+                  <Accordion defaultActiveKey="0">
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Products Bought</Accordion.Header>
+                      <Accordion.Body>
+                        <Table striped>
+                          <thead>
+                            <tr>
+                              <th>ID#</th>
+                              <th>Transaction Status</th>
+                              <th>Date of Transaction</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {transactionsBuyer.map(
+                              (transactionBuyer, index) => {
+                                var formattedDate = new Date(1970, 0, 1); // Epoch
+                                const dateCreated =
+                                  //@ts-ignore
+                                  transactionBuyer.dateCreated.seconds;
+                                formattedDate.setSeconds(dateCreated);
+                                return (
+                                  <tr key={index}>
+                                    <td>{transactionBuyer.transactionId}</td>
+                                    <td>
+                                      {transactionBuyer.transactionStatus}
+                                    </td>
+                                    <td>{formattedDate.toDateString()}</td>
+                                  </tr>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </Table>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                      <Accordion.Header>Products Sold</Accordion.Header>
+                      <Accordion.Body>
+                        <Table striped>
+                          <thead>
+                            <tr>
+                              <th>ID#</th>
+                              <th>Transaction Status</th>
+                              <th>Date of Transaction</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {transactionsSeller.map(
+                              (transactionSeller, index) => {
+                                var formattedDate = new Date(1970, 0, 1); // Epoch
+                                const dateCreated =
+                                  //@ts-ignore
+                                  transactionSeller.dateCreated.seconds;
+                                formattedDate.setSeconds(dateCreated);
+                                return (
+                                  <tr key={index}>
+                                    <td>{transactionSeller.transactionId}</td>
+                                    <td>
+                                      {transactionSeller.transactionStatus}
+                                    </td>
+                                    <td>{formattedDate.toDateString()}</td>
+                                  </tr>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </Table>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
                 </Tab>
 
                 <Tab eventKey="reviews" title="REVIEWS">
@@ -292,8 +382,9 @@ export default function Profile() {
                       </>
                     ) : (
                       <>
-                      <p className="no-voucher">
-                        You don't have any vouchers</p>
+                        <p className="no-voucher">
+                          You don't have any vouchers
+                        </p>
                       </>
                     )}
                   </div>
