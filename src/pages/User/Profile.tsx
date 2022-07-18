@@ -13,6 +13,7 @@ import {
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Voucher from "../../models/Voucher";
+import Review from "../../models/Review"
 import {
   fetchTransactionsBuyer,
   fetchTransactionsSeller,
@@ -60,6 +61,13 @@ export default function Profile() {
       setVouchers(voucherArray);
     }
   };
+
+  // const getReviews = async () => {
+  //   const reviewsArray = await fetchReviews(userDetails.userId);
+  //   if (reviewsArray) {
+  //     setVouchers(reviewsArray);
+  //   }
+  // };
 
   const getTransactionSeller = async () => {
     const transactionsSellerArray = await fetchTransactionsSeller(
@@ -249,9 +257,9 @@ export default function Profile() {
                       <div className="col-md-8">
                         <div className="media g-mb-30 media-comment">
                           <img
-                            className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                            src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                            src={require("../../assets/images/user.png")}
                             alt=""
+                            style={{width:'45px', height:'45px', marginBottom:'-50px'}}
                           />
                           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                             <div className="g-mb-15">
@@ -262,58 +270,7 @@ export default function Profile() {
                                 5 days ago
                               </span>
                             </div>
-
-                            <p>
-                              Cras sit amet nibh libero, in gravida nulla. Nulla
-                              vel metus scelerisque ante sollicitudin. Cras
-                              purus odio, vestibulum in vulputate at, tempus
-                              viverra turpis. Fusce condimentum nunc ac nisi
-                              vulputate fringilla. Donec lacinia congue felis in
-                              faucibus ras purus odio, vestibulum in vulputate
-                              at, tempus viverra turpis.
-                            </p>
-
-                            <ul className="list-inline d-sm-flex my-0">
-                              <li className="list-inline-item g-mr-20">
-                                <a
-                                  className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                  href="#!"
-                                >
-                                  <i className="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
-                                  178
-                                </a>
-                              </li>
-                              <li className="list-inline-item g-mr-20">
-                                <a
-                                  className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                                  href="#!"
-                                >
-                                  <i className="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
-                                  34
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-md-8">
-                        <div className="media g-mb-30 media-comment">
-                          <img
-                            className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                            src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                            alt=""
-                          />
-                          <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
-                            <div className="g-mb-15">
-                              <h5 className="h5 g-color-gray-dark-v1 mb-0">
-                                John Doe
-                              </h5>
-                              <span className="g-color-gray-dark-v4 g-font-size-12">
-                                5 days ago
-                              </span>
-                            </div>
-
+                            <br/>
                             <p>
                               Cras sit amet nibh libero, in gravida nulla. Nulla
                               vel metus scelerisque ante sollicitudin. Cras

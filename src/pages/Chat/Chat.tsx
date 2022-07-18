@@ -348,6 +348,7 @@ export default function Chats() {
                                   <div className="user">
                                     <img
                                       src={require("../../assets/images/user.png")}
+                                      alt=""
                                     />
                                   </div>
                                   <p className="name-time">
@@ -380,6 +381,7 @@ export default function Chats() {
                                   <div className="user">
                                     <img
                                       src={require("../../assets/images/user.png")}
+                                      alt=""
                                     />
                                   </div>
                                   <p className="name-time">
@@ -506,6 +508,7 @@ export default function Chats() {
                                           <div className="chat-avatar">
                                             <img
                                               src={require("../../assets/images/user.png")}
+                                              alt=""
                                             />
                                             <div className="chat-name">
                                               {currentChathead.firstName}
@@ -525,6 +528,7 @@ export default function Chats() {
                                           <div className="chat-avatar">
                                             <img
                                               src={require("../../assets/images/user.png")}
+                                              alt=""
                                             />
                                             <div className="chat-name">
                                               {userDetails.userId ===
