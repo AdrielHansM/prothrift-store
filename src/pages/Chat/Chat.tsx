@@ -141,7 +141,7 @@ export default function Chats() {
       }
     });
     setConversationsBuyer(conversationArray);
-    const timeout = setTimeout(() => setLoading(false), 1500);
+    const timeout = setTimeout(() => setLoading(false), 2500);
   };
 
   const buildThreadSeller = async () => {
