@@ -29,7 +29,8 @@ import {
   fetchTransaction,
   fetchVouchers,
   updateRelatedTransaction,
-  updateTransaction,
+  updateTransactionReview,
+  updateTransactionStatus,
   updateVoucher,
 } from "../../services/Firebase/transactionService";
 import { convertWeight } from "../../utils/productUtils";
@@ -51,8 +52,9 @@ const initialReview = {
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
 
-  //Form Data
-  const [formData, setFormData] = useState<Review>(initialReview);
+  const [rating, setRating] = useState<number>();
+  const [review, setReview] = useState<string>();
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -197,10 +199,6 @@ export default function Chats() {
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
-
   const applyVoucher = async (voucherId: string, voucherValue: number) => {
     if (currentThread && currentTransaction) {
       sendMessageProcess(
@@ -220,6 +218,7 @@ export default function Chats() {
         sellerId: currentTransaction.sellerId,
         transactionStatus: currentTransaction.transactionStatus,
         voucherApplied: true,
+        isReviewed: currentTransaction.isReviewed,
         dateUpdated: new Date(),
         dateCreated: currentTransaction.dateCreated,
       });
@@ -228,21 +227,51 @@ export default function Chats() {
     }
   };
 
+  const handleReview = (event: ChangeEvent<HTMLInputElement>) => {
+    setReview(event.target.value);
+  };
+
+  const handleRating = (event: ChangeEvent<HTMLInputElement>) => {
+    setRating(event.target.valueAsNumber);
+  };
+
   const writeUserReviews = async () => {
-    if (currentProduct && currentChathead && formData) {
+    console.log(rating, review);
+    if (
+      currentProduct &&
+      currentChathead &&
+      rating &&
+      review &&
+      currentTransaction
+    ) {
       createUserReview(
         currentProduct.productId,
         currentChathead.userId,
         userDetails.userId,
-        Math.floor(formData.rating),
-        formData.review
+        currentTransaction.transactionId,
+        rating,
+        review
       );
+      updateTransactionReview(currentTransaction.transactionId);
+      setCurrentTransaction({
+        transactionId: currentTransaction.transactionId,
+        productId: currentTransaction.productId,
+        buyerId: currentTransaction.buyerId,
+        sellerId: currentTransaction.sellerId,
+        transactionStatus: currentTransaction.transactionStatus,
+        voucherApplied: currentTransaction.voucherApplied,
+        isReviewed: true,
+        dateUpdated: new Date(),
+        dateCreated: currentTransaction.dateCreated,
+      });
+      handleClose();
     }
+    alert("Review submitted");
   };
 
   const completeTransaction = async () => {
     if (currentTransaction && currentProduct && currentChathead) {
-      const updateSuccess = await updateTransaction(
+      const updateSuccess = await updateTransactionStatus(
         currentTransaction.transactionId,
         "SUCCESS"
       );
@@ -253,6 +282,7 @@ export default function Chats() {
         sellerId: currentTransaction.sellerId,
         transactionStatus: "SUCCESS",
         voucherApplied: currentTransaction.voucherApplied,
+        isReviewed: currentTransaction.isReviewed,
         dateUpdated: new Date(),
         dateCreated: currentTransaction.dateCreated,
       });
@@ -434,14 +464,27 @@ export default function Chats() {
                             userDetails.userId ? (
                               currentTransaction.transactionStatus ===
                               "SUCCESS" ? (
-                                <div>
-                                  <Button
-                                    className="btn-trans"
-                                    onClick={handleShow}
-                                  >
-                                    Leave a review
-                                  </Button>
-                                </div>
+                                <>
+                                  {currentTransaction.isReviewed ? (
+                                    <div>
+                                      <Button
+                                        className="btn-secondary"
+                                        disabled
+                                      >
+                                        Leave a review
+                                      </Button>
+                                    </div>
+                                  ) : (
+                                    <div>
+                                      <Button
+                                        className="btn-trans"
+                                        onClick={handleShow}
+                                      >
+                                        Leave a review
+                                      </Button>
+                                    </div>
+                                  )}
+                                </>
                               ) : (
                                 <>
                                   {currentTransaction.voucherApplied ? (
@@ -602,7 +645,7 @@ export default function Chats() {
                     type="number"
                     min={1}
                     max={5}
-                    onChange={handleChange}
+                    onChange={handleRating}
                     placeholder="enter rating..."
                     autoFocus
                   />
@@ -616,7 +659,7 @@ export default function Chats() {
                     as="textarea"
                     rows={3}
                     placeholder="write a review..."
-                    onChange={handleChange}
+                    onChange={handleReview}
                   />
                 </Form.Group>
               </Form>

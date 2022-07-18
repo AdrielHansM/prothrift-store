@@ -14,6 +14,7 @@ export const createTransaction = async (productId: string, buyerId: string, sell
     sellerId : sellerId,
     transactionStatus: transactionStatus,
     voucherApplied: false,
+    isReviewed: false,
     dateUpdated: new Date(),
     dateCreated: new Date()
   }).then(()=> {
@@ -42,6 +43,7 @@ export const fetchTransaction = async (productId: string, buyerId: string, selle
       sellerId: transactionDoc.sellerId,
       transactionStatus: transactionDoc.transactionStatus,
       voucherApplied: transactionDoc.voucherApplied,
+      isReviewed: transactionDoc.isReviewed,
       voucherId: transactionDoc.voucherId,
       dateUpdated: transactionDoc.dateUpdated,
       dateCreated: transactionDoc.dateCreated
@@ -67,6 +69,7 @@ export const fetchTransactionsSeller =async (sellerId: string) => {
         sellerId: transactionSnapshot.data().sellerId,
         transactionStatus: transactionSnapshot.data().transactionStatus,
         voucherApplied: transactionSnapshot.data().voucherId,
+        isReviewed: transactionSnapshot.data().isReviewed,
         dateUpdated: transactionSnapshot.data().dateUpdated,
         dateCreated: transactionSnapshot.data().dateCreated
       }
@@ -96,6 +99,7 @@ export const fetchTransactionsBuyer =async (buyerId: string) => {
         sellerId: transactionSnapshot.data().sellerId,
         transactionStatus: transactionSnapshot.data().transactionStatus,
         voucherApplied: transactionSnapshot.data().voucherId,
+        isReviewed: transactionSnapshot.data().isReviewed,
         dateUpdated: transactionSnapshot.data().dateUpdated,
         dateCreated: transactionSnapshot.data().dateCreated
       }
@@ -125,13 +129,31 @@ export const updateRelatedTransaction =async (productId: string, buyerId: string
   })
 }
 
-export const updateTransaction = async (transactionId: string, status: string) => {
+export const updateTransactionStatus = async (transactionId: string, status: string) => {
   return await database
   .collection('transactions')
   .doc(transactionId)
   .update(
     {
       transactionStatus: status,
+      dateUpdated: new Date()
+    }
+  ).then(() => {
+    return true;
+  }).catch ((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorCode + " : " + errorMessage)
+  })
+}
+
+export const updateTransactionReview = async (transactionId : string) => {
+  return await database
+  .collection('transactions')
+  .doc(transactionId)
+  .update(
+    {
+      isReviewed: true,
       dateUpdated: new Date()
     }
   ).then(() => {
@@ -162,12 +184,13 @@ export const applyVoucherToTransaction = async (voucherId: string, transactionId
   })
 }
 
-export const createUserReview = async(productId: string, sellerId: string, userId: string, rating: Number, review: string) => {
+export const createUserReview = async(productId: string, sellerId: string, userId: string, transactionId: string, rating: Number, review: string) => {
   return await database
   .collection('reviews')
   .add({
     productId: productId,
     sellerId: sellerId, 
+    transactionId: transactionId,
     userId: userId,
     rating: rating,
     review: review,
