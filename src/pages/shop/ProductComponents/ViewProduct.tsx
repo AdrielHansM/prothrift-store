@@ -26,6 +26,7 @@ interface stateType {
 
 export default function ViewProduct() {
   const userDetails = useLocation().state as stateType;
+
   const [productDetails, setProductDetails] = useState<Product>();
   const [sellerDetails, setSellerDetails] = useState<UserData>();
 
@@ -45,6 +46,10 @@ export default function ViewProduct() {
   const [validated, setValidated] = useState(false);
   const [like, setLike] = useState(false);
   const handleLike = async () => {
+    if (!userDetails.user.userId) {
+      return setShow(true);
+    }
+
     if (validated) {
       addUserFavorite(userDetails.product, userDetails.user.userId);
       setLike(!like);
@@ -92,8 +97,8 @@ export default function ViewProduct() {
     const isValidated = await validateIfFavorite(userId, productId);
     if (isValidated) {
       setLike(isValidated);
+      setValidated(true);
     }
-    setValidated(true);
   }
 
   async function fetchProductData(productId: string) {
@@ -116,6 +121,9 @@ export default function ViewProduct() {
   }
 
   async function createOffer() {
+    if (!userDetails.user.userId) {
+      return setShow(true);
+    }
     setLoading(true);
     if (sellerDetails && userDetails.user && productDetails) {
       const message = {
@@ -247,26 +255,6 @@ export default function ViewProduct() {
                       />
                     </p>
                   </Col>
-                  <Col className="voucher">
-                    <button onClick={handleShow}>Voucher</button>
-
-                    <Modal show={show} centered>
-                      <Modal.Body
-                        style={{
-                          textAlign: "center",
-                          fontSize: "30px",
-                          padding: "20% 5%",
-                        }}
-                      >
-                        You don't have any vouchers.
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                          Close
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </Col>
                   <Col className="makeoffer-btn">
                     <button onClick={() => createOffer()}>Make Offer</button>
                   </Col>
@@ -280,6 +268,41 @@ export default function ViewProduct() {
               </>
             )}
           </div>
+          <Modal show={show} centered>
+            <Modal.Header>
+              <h3>Login an account</h3>
+            </Modal.Header>
+            <Modal.Body
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                padding: "5% 5%",
+              }}
+            >
+              <Button
+                className="m-lg-2 btn-info"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                className="m-lg-2 btn-primary"
+                onClick={() => {
+                  navigate("/register");
+                }}
+              >
+                {" "}
+                Register{" "}
+              </Button>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </>
       )}
     </>
