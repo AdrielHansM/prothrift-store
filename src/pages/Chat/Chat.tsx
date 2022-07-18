@@ -6,7 +6,6 @@ import Message from "../../models/Message";
 import MessageContainer from "../../models/MessageContainer";
 import MessageThread from "../../models/MessageThread";
 import Product from "../../models/Product";
-import Review from "../../models/Review";
 import Transaction from "../../models/Transaction";
 import UserData from "../../models/User";
 import Voucher from "../../models/Voucher";
@@ -37,17 +36,6 @@ import { convertWeight } from "../../utils/productUtils";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Navigation from "../Components/NavBar";
-
-const initialReview = {
-  reviewId: "",
-  productId: "",
-  sellerId: "",
-  userId: "",
-  rating: 0,
-  review: "",
-  dateUpdated: new Date(),
-  dateCreated: new Date(),
-};
 
 export default function Chats() {
   const userDetails = useLocation().state as UserData;
@@ -236,7 +224,6 @@ export default function Chats() {
   };
 
   const writeUserReviews = async () => {
-    console.log(rating, review);
     if (
       currentProduct &&
       currentChathead &&
