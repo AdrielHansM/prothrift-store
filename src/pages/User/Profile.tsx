@@ -9,6 +9,7 @@ import { Tabs, Tab, Card, Badge, Row, Accordion, Table } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
+  fetchTotalSaved
 } from "../../services/Firebase/productService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
@@ -20,10 +21,12 @@ import {
   fetchUserReviews,
   fetchVouchers,
 } from "../../services/Firebase/transactionService";
+import { convertWeight } from "../../utils/productUtils";
 
 export default function Profile() {
   const navigate = useNavigate();
   const userDetails = useLocation().state as UserData;
+  const [totalSaved, setTotalSaved] = useState(0);
 
   const [transactionsSeller, setTransactionsSeller] = useState<Transaction[]>(
     []
@@ -33,6 +36,17 @@ export default function Profile() {
   const [vouchers, setVouchers] = useState<Voucher[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchTotal();
+  });
+
+  async function fetchTotal() {
+    const total = await fetchTotalSaved();
+    if (total) {
+      setTotalSaved(convertWeight("lbs", total));
+    }
+  }
 
   useEffect(() => {
     if (
@@ -263,16 +277,18 @@ export default function Profile() {
                               return (
                                 <>
                                   <img
-                                    className="g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    src={require("../../assets/images/user.png")}
                                     alt=""
+                                    style={{width:'45px', height:'45px', marginBottom:'-55px'}}
                                   />
                                   <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                                     <div className="g-mb-15">
                                       <h5>Rating: {review.rating}</h5>
                                     </div>
 
-                                    <p>{review.review}</p>
+                                    <p style={{textTransform:'none'}}>
+                                      {review.review}
+                                    </p>
                                   </div>
                                 </>
                               );
@@ -327,6 +343,16 @@ export default function Profile() {
                         </p>
                       </>
                     )}
+                  </div>
+                </Tab>
+                <Tab eventKey="progress" title="PROGRESS">
+                  <div className="user-prog">
+                    <p>You potentially saved</p>
+                      {totalSaved.toFixed(2)}
+                      <div className="pounds-text">
+                        <div>Pounds</div>
+                        <div>of Clothes</div>
+                      </div>
                   </div>
                 </Tab>
               </Tabs>

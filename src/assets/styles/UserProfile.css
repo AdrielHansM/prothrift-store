@@ -143,3 +143,18 @@
     font-size: 50px;
     text-transform: none;
 }
+
+.user-prog{
+    font-size: 90px;
+    justify-content: center;
+    display: flex;
+    font-family: 'Familjen Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 30px 30px;
+    gap: 10px;
+}
+
+.user-prog p{
+    margin-right: 70px;
+    margin-top: 20px;
+}
