@@ -250,8 +250,8 @@ export const createMaterialsRecycled = async (productId: string, productName: st
 }
 
 export const fetchMaterialsRecycled = async (userId:string) => {
-  let totalMaterialsRecycled = 0;
-  let materialsRecycled: MaterialsRecycled[] = []
+  let totalMaterials = 0;
+  let materialsRecycledArray: MaterialsRecycled[] = []
   let materialsRecycledByUser: MaterialsRecycledByUser
 
   return await database
@@ -260,7 +260,7 @@ export const fetchMaterialsRecycled = async (userId:string) => {
   .get()
   .then(querySnapshots => {
     querySnapshots.forEach(doc => {
-      totalMaterialsRecycled += doc.data().weightRecycled
+      totalMaterials += doc.data().weightRecycled
       const materialRecycled = {
         materialId: doc.id,
         productId: doc.data().productId,
@@ -270,10 +270,12 @@ export const fetchMaterialsRecycled = async (userId:string) => {
         dateUpdated: doc.data().dateUpdated,
         dateCreated: doc.data().dateCreated
       }
-      materialsRecycled.push(materialRecycled)
+      materialsRecycledArray.push(materialRecycled)
     })
-    materialsRecycledByUser.totalMaterialsReycled = totalMaterialsRecycled
-    materialsRecycledByUser.materialsRecycled = materialsRecycled
+    materialsRecycledByUser = {
+      totalMaterialsReycled: totalMaterials,
+      materialsRecycled: materialsRecycledArray
+    }
     return materialsRecycledByUser
   })
 }

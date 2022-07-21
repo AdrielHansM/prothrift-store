@@ -1,7 +1,7 @@
 import MaterialsRecycled from "./MaterialsRecycled";
 
 interface MaterialsRecycledByUser{
-  totalMaterialsReycled: Number
+  totalMaterialsReycled: number
   materialsRecycled: MaterialsRecycled[]
 
 }

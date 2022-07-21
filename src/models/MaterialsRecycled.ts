@@ -2,7 +2,7 @@ interface MaterialsRecycled{
   materialId: string,
   productId: string,
   productName: string,
-  weightRecycled: Number,
+  weightRecycled: number,
   dateUpdated: Date,
   dateCreated: Date
 }

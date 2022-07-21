@@ -6,12 +6,9 @@ import Product from "../../models/Product";
 import Transaction from "../../models/Transaction";
 import "../../assets/styles/UserProfile.css";
 import { Tabs, Tab, Card, Badge, Row, Accordion, Table } from "react-bootstrap";
+import { fetchProductsByProfile } from "../../services/Firebase/productService";
 import {
-  fetchProducts,
-  fetchProductsByProfile,
-} from "../../services/Firebase/productService";
-import {
-  fetchTotalSaved,
+  fetchMaterialsRecycled,
   fetchUserTotalSaved,
 } from "../../services/Firebase/transactionService";
 import Footer from "../Components/Footer";
@@ -24,13 +21,11 @@ import {
   fetchUserReviews,
   fetchVouchers,
 } from "../../services/Firebase/transactionService";
-import { convertWeight } from "../../utils/productUtils";
 import MaterialsRecycledByUser from "../../models/MaterialsRecycledByUser";
 
 export default function Profile() {
   const navigate = useNavigate();
   const userDetails = useLocation().state as UserData;
-  const [totalSaved, setTotalSaved] = useState(0);
 
   const [transactionsSeller, setTransactionsSeller] = useState<Transaction[]>(
     []
@@ -44,31 +39,21 @@ export default function Profile() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchTotal();
-  });
-
-  useEffect(() => {
     if (
       products.length === 0 &&
       vouchers.length === 0 &&
       transactionsSeller.length === 0 &&
       transactionsBuyer.length === 0 &&
-      materialsRecycled
+      !materialsRecycled
     ) {
       getProducts();
       getVouchers();
       getTransactionSeller();
       getTransactionBuyer();
       getReviews();
+      getMaterialsSaved();
     }
   }, []);
-
-  async function fetchTotal() {
-    const total = await fetchUserTotalSaved(userDetails.userId);
-    if (total) {
-      setTotalSaved(total);
-    }
-  }
 
   const getProducts = async () => {
     setLoading(true);
@@ -108,6 +93,14 @@ export default function Profile() {
     if (reviewsArray) {
       setReviews(reviewsArray);
       setLoading(false);
+    }
+  };
+
+  const getMaterialsSaved = async () => {
+    const materialsSaved = await fetchMaterialsRecycled(userDetails.userId);
+    if (materialsSaved) {
+      console.log(materialsSaved);
+      setMaterialsRecycled(materialsSaved);
     }
   };
 
@@ -359,12 +352,50 @@ export default function Profile() {
                 <Tab eventKey="progress" title="PROGRESS">
                   <div className="user-prog">
                     <p>You potentially saved</p>
-                    {totalSaved.toFixed(2)}
+                    {materialsRecycled?.totalMaterialsReycled.toFixed(2)}
                     <div className="pounds-text">
                       <div>Pounds</div>
                       <div>of Clothes</div>
                     </div>
                   </div>
+                  <Accordion>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>
+                        Materials Recycled Breakdown
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <Table striped>
+                          <thead>
+                            <tr>
+                              <th>ID#</th>
+                              <th>Weight Recycled(lbs)</th>
+                              <th>Date of Transaction</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {materialsRecycled?.materialsRecycled.map(
+                              (breakdown, index) => {
+                                var formattedDate = new Date(1970, 0, 1); // Epoch
+                                const dateCreated =
+                                  //@ts-ignore
+                                  breakdown.dateCreated.seconds;
+                                formattedDate.setSeconds(dateCreated);
+                                return (
+                                  <tr key={index}>
+                                    <td>{breakdown.materialId}</td>
+                                    <td>
+                                      {breakdown.weightRecycled.toFixed(2)}
+                                    </td>
+                                    <td>{formattedDate.toDateString()}</td>
+                                  </tr>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </Table>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
                 </Tab>
               </Tabs>
             </div>
