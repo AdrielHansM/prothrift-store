@@ -50,7 +50,7 @@ export default function ViewProduct() {
       return setShow(true);
     }
 
-    if (validated) {
+    if (!validated) {
       addUserFavorite(userDetails.product, userDetails.user.userId);
       setLike(!like);
     }

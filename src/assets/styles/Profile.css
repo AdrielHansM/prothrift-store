@@ -124,6 +124,12 @@
     cursor: pointer;
   }
 
+.voucher-note{
+  text-transform: none;
+  margin-top: 20px;
+  padding: 0 30px;
+}
+
 /*------------Product section------------*/
 .product-category2{
   padding: 2% 10vw;

@@ -199,10 +199,12 @@ export default function Shop() {
               style={{
                 textAlign: "center",
                 fontSize: "30px",
-                padding: "10% 5%",
+                padding: "0 5%",
+                paddingTop:"7%"
               }}
             >
               Voucher conversion is 1 point equal to 1 Php
+              <p className="voucher-note">Note: You get a point every time a transaction is completed</p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseInfo}>
