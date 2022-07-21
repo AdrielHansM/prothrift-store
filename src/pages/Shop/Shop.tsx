@@ -95,13 +95,13 @@ export default function Shop() {
               onClick={handleShowInfo}
             />
             <Row>
-              <h4>Points: {userDetails.points}</h4>
+              <h4 style={{marginLeft:'50px'}}>Points: {userDetails.points}</h4>
               <Col>
                 <div className="coupon_box">
                   <div className="coupon-body">
                     <h2 className="how_much">
                       {" "}
-                      <b> 10 Peso </b>{" "}
+                      <b> 10 Pesos </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
@@ -119,7 +119,7 @@ export default function Shop() {
                   <div className="coupon-body2">
                     <h2 className="how_much">
                       {" "}
-                      <b> 20 Peso </b>{" "}
+                      <b> 20 Pesos </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
@@ -137,7 +137,7 @@ export default function Shop() {
                   <div className="coupon-body3">
                     <h2 className="how_much">
                       {" "}
-                      <b> 30 Peso </b>{" "}
+                      <b> 30 Pesos </b>{" "}
                     </h2>
                     <h3> OFF </h3>
                   </div>
