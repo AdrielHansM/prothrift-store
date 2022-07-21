@@ -473,17 +473,3 @@ export const fetchProductsByProfile = async(userId: string) =>{
   })
 }
 
-export const fetchTotalSaved = async() => {
-  return await database
-  .collection('products')
-  .where('isDeleted', '==', false)
-  .where('isSold', '==', false)
-  .get()
-  .then((docs) => {
-    let totalSaved = 0;
-    docs.forEach(productDoc => {
-      totalSaved += productDoc.data().productWeight
-    });
-    return totalSaved
-  })
-}

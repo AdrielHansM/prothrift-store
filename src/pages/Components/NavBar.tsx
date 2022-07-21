@@ -75,36 +75,11 @@ export default function Navigation() {
     navigate(url, { state: userDetails });
   };
 
-  const [pointsDropdown, setPointsDropdown] = useState(false);
-  const togglePointsDropdown = () => setPointsDropdown(!pointsDropdown);
-
   const [logoutDropdown, setLogoutDropdown] = useState(false);
   const toggleShowB = () => setLogoutDropdown(!logoutDropdown);
 
   const [showNotify, setShowNotify] = useState(false);
   const toggleShowNotify = () => setShowNotify(!showNotify);
-
-  function DailyPointsToast() {
-    return (
-      <Toast
-        show={pointsDropdown}
-        onClose={togglePointsDropdown}
-        className="toast"
-        delay={3000}
-        autohide
-      >
-        <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">ProThrift</strong>
-        </Toast.Header>
-        <Toast.Body className="toast-body">
-          Collect your daily points.
-        </Toast.Body>
-        ``
-        <button className="toast-btn">Get!</button>
-      </Toast>
-    );
-  }
 
   function Logout() {
     return (
@@ -239,13 +214,6 @@ export default function Navigation() {
               </NavDropdown.Item>
               <NavDropdown.Item
                 onClick={() => {
-                  setPointsDropdown(true);
-                }}
-              >
-                Points
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
                   setLogoutDropdown(true);
                 }}
               >
@@ -272,7 +240,6 @@ export default function Navigation() {
       </nav>
       <Notify />
       <Logout />
-      <DailyPointsToast />
     </>
   );
 }

@@ -1,6 +1,9 @@
 const GRAMS_TO_KILOGRAMS = 1000;
 const GRAMS_TO_POUNDS = 453.6;
 
+const WASTE_PER_PERSON = 33.53;
+const WASTE_PER_HOUSEHOLD = 215;
+
 //CLEARLY it returns grams(g) as its metric
 export function estimateWeight(category: string, clothingType: string): number {
     if (category === 'Mens') {
@@ -43,4 +46,13 @@ export function convertWeight(metric : string, weight: number): number {
   }
 
   return weight;
+}
+
+export function convertTotalWastePerHousehold(totalWaste: number) {
+  return (totalWaste / WASTE_PER_HOUSEHOLD)
+}
+
+
+export function convertTotalWastePerPerson(totalWaste: number) {
+  return (totalWaste / WASTE_PER_PERSON)
 }

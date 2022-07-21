@@ -40,7 +40,6 @@ export default function ViewProduct() {
   //Show Modal Voucher
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   //Handle like products
   const [validated, setValidated] = useState(false);

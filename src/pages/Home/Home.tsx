@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Row } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../assets/styles/Body.css";
-import UserData from "../../models/User";
-import { fetchTotalSaved } from "../../services/Firebase/productService";
+import { fetchTotalSaved } from "../../services/Firebase/transactionService";
+import {
+  convertTotalWastePerHousehold,
+  convertTotalWastePerPerson,
+} from "../../utils/productUtils";
 import Footer from "../Components/Footer";
-import Navigation from "../Components/NavBar";
 import { BarGraph } from "../Components/graphs/BarGraph";
-import { convertWeight } from "../../utils/productUtils";
+import Navigation from "../Components/NavBar";
 
 export default function Body() {
-  const state = useLocation().state as UserData;
   const [totalSaved, setTotalSaved] = useState(0);
 
   useEffect(() => {
@@ -19,8 +20,9 @@ export default function Body() {
 
   async function fetchTotal() {
     const total = await fetchTotalSaved();
+    console.log(total);
     if (total) {
-      setTotalSaved(convertWeight("lbs", total));
+      setTotalSaved(total);
     }
   }
 
@@ -55,7 +57,7 @@ export default function Body() {
               <div className="illustration">
                 <img
                   src="./images/house.png"
-                  alt=""
+                  alt="House"
                   className="img-illustrate"
                 />
                 <strong className="grid-text">
@@ -63,7 +65,7 @@ export default function Body() {
                     style={{ fontSize: "90px", color: "#FE7475" }}
                     className="numb"
                   >
-                    15
+                    {Math.ceil(convertTotalWastePerHousehold(totalSaved))}
                   </p>
                   <p className="numb">households</p>
                 </strong>
@@ -72,7 +74,7 @@ export default function Body() {
               <div className="illustration">
                 <img
                   src="./images/throwing-trash.png"
-                  alt=""
+                  alt="Trash"
                   className="img-illustrate2"
                 />
                 <strong className="grid-text">
@@ -80,7 +82,7 @@ export default function Body() {
                     style={{ fontSize: "90px", color: "#FE7475" }}
                     className="numb"
                   >
-                    121
+                    {Math.ceil(convertTotalWastePerPerson(totalSaved))}
                   </p>
                   <p className="numb">filipinos</p>
                 </strong>
@@ -111,7 +113,7 @@ export default function Body() {
           reusing, sharing and recycling. We need to do this more – as we are
           consuming too much, too fast today.
         </p>
-        <img src="./images/circular_economy.gif" />
+        <img src="./images/circular_economy.gif" alt="econ" />
       </div>
 
       <div className="UN-goals">
@@ -119,7 +121,7 @@ export default function Body() {
           UN’s sustainable development goals
         </h1>
         <div className="UN-text">
-          <img src="./images/RCP.gif" />
+          <img src="./images/RCP.gif" alt="UN" />
           <p>
             In 2015, the UN launched the 2030 agenda for sustainable development
             which sets 17 sustainable development goals. The Second Hand Effect

@@ -278,6 +278,33 @@ export const fetchMaterialsRecycled = async (userId:string) => {
   })
 }
 
+export const fetchTotalSaved = async() => {
+  return await database
+  .collection('materialsRecycled')
+  .get()
+  .then((docs) => {
+    let totalSaved = 0;
+    docs.forEach(materialDoc => {
+      totalSaved += materialDoc.data().weightRecycled
+    });
+    return totalSaved
+  })
+}
+
+export const fetchUserTotalSaved = async(userId: string) => {
+  return await database
+  .collection('materialsRecycled')
+  .where('userId', '==', userId)
+  .get()
+  .then((docs) => {
+    let totalSaved = 0;
+    docs.forEach(materialDoc => {
+      totalSaved += materialDoc.data().weightRecycled
+    });
+    return totalSaved
+  })
+}
+
 export const createVoucher = async (voucherValue: number, userId: string) => {
   return await database
   .collection('vouchers')

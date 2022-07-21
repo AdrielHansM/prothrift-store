@@ -9,8 +9,11 @@ import { Tabs, Tab, Card, Badge, Row, Accordion, Table } from "react-bootstrap";
 import {
   fetchProducts,
   fetchProductsByProfile,
-  fetchTotalSaved
 } from "../../services/Firebase/productService";
+import {
+  fetchTotalSaved,
+  fetchUserTotalSaved,
+} from "../../services/Firebase/transactionService";
 import Footer from "../Components/Footer";
 import Loading from "../Components/LoadingScreen";
 import Voucher from "../../models/Voucher";
@@ -22,6 +25,7 @@ import {
   fetchVouchers,
 } from "../../services/Firebase/transactionService";
 import { convertWeight } from "../../utils/productUtils";
+import MaterialsRecycledByUser from "../../models/MaterialsRecycledByUser";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -32,6 +36,8 @@ export default function Profile() {
     []
   );
   const [transactionsBuyer, setTransactionsBuyer] = useState<Transaction[]>([]);
+  const [materialsRecycled, setMaterialsRecycled] =
+    useState<MaterialsRecycledByUser>();
   const [products, setProducts] = useState<Product[]>([]);
   const [vouchers, setVouchers] = useState<Voucher[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -41,19 +47,13 @@ export default function Profile() {
     fetchTotal();
   });
 
-  async function fetchTotal() {
-    const total = await fetchTotalSaved();
-    if (total) {
-      setTotalSaved(convertWeight("lbs", total));
-    }
-  }
-
   useEffect(() => {
     if (
       products.length === 0 &&
       vouchers.length === 0 &&
       transactionsSeller.length === 0 &&
-      transactionsBuyer.length === 0
+      transactionsBuyer.length === 0 &&
+      materialsRecycled
     ) {
       getProducts();
       getVouchers();
@@ -62,6 +62,13 @@ export default function Profile() {
       getReviews();
     }
   }, []);
+
+  async function fetchTotal() {
+    const total = await fetchUserTotalSaved(userDetails.userId);
+    if (total) {
+      setTotalSaved(total);
+    }
+  }
 
   const getProducts = async () => {
     setLoading(true);
@@ -279,14 +286,18 @@ export default function Profile() {
                                   <img
                                     src={require("../../assets/images/user.png")}
                                     alt=""
-                                    style={{width:'45px', height:'45px', marginBottom:'-55px'}}
+                                    style={{
+                                      width: "45px",
+                                      height: "45px",
+                                      marginBottom: "-55px",
+                                    }}
                                   />
                                   <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                                     <div className="g-mb-15">
                                       <h5>Rating: {review.rating}</h5>
                                     </div>
 
-                                    <p style={{textTransform:'none'}}>
+                                    <p style={{ textTransform: "none" }}>
                                       {review.review}
                                     </p>
                                   </div>
@@ -348,11 +359,11 @@ export default function Profile() {
                 <Tab eventKey="progress" title="PROGRESS">
                   <div className="user-prog">
                     <p>You potentially saved</p>
-                      {totalSaved.toFixed(2)}
-                      <div className="pounds-text">
-                        <div>Pounds</div>
-                        <div>of Clothes</div>
-                      </div>
+                    {totalSaved.toFixed(2)}
+                    <div className="pounds-text">
+                      <div>Pounds</div>
+                      <div>of Clothes</div>
+                    </div>
                   </div>
                 </Tab>
               </Tabs>
